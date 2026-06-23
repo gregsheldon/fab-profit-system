@@ -101,6 +101,48 @@
     .grid-5 { grid-template-columns:repeat(5,minmax(0,1fr)); }
     .grid-6 { grid-template-columns:repeat(6,minmax(0,1fr)); }
 
+    .company-data-grid {
+      display:grid;
+      grid-template-columns:repeat(6,minmax(0,1fr));
+      gap:.9rem;
+      margin-top:1rem;
+    }
+    .company-data-grid .data-card {
+      grid-column:span 2;
+      min-height:150px;
+      padding:1.08rem;
+    }
+    .company-data-grid .data-card-wide {
+      grid-column:span 3;
+      min-height:160px;
+      background:linear-gradient(180deg,#ffffff 0%,var(--slate-50) 100%);
+      border:1px solid #d5dde8;
+    }
+    .company-data-grid .data-card-critical {
+      border-left:6px solid var(--orange-600);
+    }
+    .company-data-grid .metric {
+      font-size:clamp(1.55rem,2.35vw,2.25rem) !important;
+      line-height:.98 !important;
+      letter-spacing:-.07em !important;
+      white-space:nowrap;
+      overflow-wrap:normal !important;
+      word-break:normal;
+      max-width:100%;
+    }
+    .company-data-grid .data-card-wide .metric {
+      font-size:clamp(1.9rem,3.15vw,3rem) !important;
+    }
+    .company-data-grid .label {
+      min-height:2.2em;
+      display:flex !important;
+      align-items:flex-start;
+    }
+    .company-data-grid p {
+      font-size:.94rem;
+      line-height:1.42;
+    }
+
     .card { background:var(--slate-50); border:var(--line); padding:1rem; min-width:0; }
     .card.orange { background:var(--orange-50); border-color:#fed7aa; }
     .card.green { background:var(--green-100); border-color:#86efac; }
@@ -174,6 +216,9 @@
 
     @media (max-width:1040px) {
       .hero-report,.body-grid,.grid-2,.grid-3,.grid-4,.grid-5,.grid-6,.payback-band { grid-template-columns:1fr; }
+      .company-data-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .company-data-grid .data-card, .company-data-grid .data-card-wide { grid-column:auto; }
+      .company-data-grid .data-card-wide .metric { font-size:clamp(1.7rem,4vw,2.35rem) !important; }
       .driver-row,.metric-card { grid-template-columns:1fr; }
       .driver-value,.metric-card strong { text-align:left; }
       .sidebar { position:static; }
@@ -183,6 +228,8 @@
       .topbar-inner { align-items:flex-start; flex-direction:column; }
       .actions { width:100%; justify-content:stretch; }
       .btn { width:100%; white-space:normal; }
+      .company-data-grid { grid-template-columns:1fr; }
+      .company-data-grid .metric, .company-data-grid .data-card-wide .metric { font-size:clamp(1.85rem,8vw,2.4rem) !important; }
       .risk-top { flex-direction:column; }
     }
     @media print {
@@ -253,15 +300,15 @@
             <section class="section">
               <h2>What the submitted company data shows</h2>
               <p>The enhanced calculator now separates operating volume, quote load, revision friction, known bad-job losses, field exposure, outsourced-work exposure, and process maturity. That makes the report more accurate than a generic “leakage percentage” model.</p>
-              <div class="grid grid-4">
-                <div class="card"><span class="label">Annual revenue</span><strong class="metric" data-field="annual_revenue_formatted">$0</strong><p>Revenue base used to size the exposure model.</p></div>
-                <div class="card"><span class="label">Annual quoted value</span><strong class="metric" data-field="annual_quoted_revenue_formatted">$0</strong><p>Total work quoted, including won and lost opportunities.</p></div>
-                <div class="card"><span class="label">Annual quotes</span><strong class="metric" data-field="annual_quotes">0</strong><p>Total quoting cycles per year.</p></div>
-                <div class="card"><span class="label">Average quoted value</span><strong class="metric" data-field="average_quoted_value_formatted">$0</strong><p>Useful for understanding what a small miss on one average job can cost.</p></div>
-                <div class="card"><span class="label">Estimators / quote builders</span><strong class="metric" data-field="estimator_count">0</strong><p>Used to assess workload and key-person dependency.</p></div>
-                <div class="card"><span class="label">Quotes per estimator / month</span><strong class="metric" data-field="quotes_per_estimator_per_month">0</strong><p>Higher load increases the need for standards and final review.</p></div>
-                <div class="card"><span class="label">Revenue per estimator</span><strong class="metric" data-field="revenue_per_estimator_formatted">$0</strong><p>A rough leverage signal for the estimating function.</p></div>
-                <div class="card"><span class="label">Target gross margin</span><strong class="metric" data-field="target_gross_margin_formatted">0%</strong><p>Used to frame the scale of pricing discipline.</p></div>
+              <div class="company-data-grid">
+                <div class="card data-card data-card-wide data-card-critical"><span class="label">Annual revenue</span><strong class="metric" data-field="annual_revenue_formatted">$0</strong><p>Revenue base used to size the exposure model and understand the scale of quote-process risk.</p></div>
+                <div class="card data-card data-card-wide data-card-critical"><span class="label">Annual quoted value</span><strong class="metric" data-field="annual_quoted_revenue_formatted">$0</strong><p>Total work quoted, including won and lost opportunities. This shows how much pricing volume flows through estimating each year.</p></div>
+                <div class="card data-card"><span class="label">Annual quotes</span><strong class="metric" data-field="annual_quotes">0</strong><p>Total quoting cycles per year.</p></div>
+                <div class="card data-card"><span class="label">Average quoted value</span><strong class="metric" data-field="average_quoted_value_formatted">$0</strong><p>Useful for understanding what a small miss on one average job can cost.</p></div>
+                <div class="card data-card"><span class="label">Estimators / quote builders</span><strong class="metric" data-field="estimator_count">0</strong><p>Used to assess workload and key-person dependency.</p></div>
+                <div class="card data-card"><span class="label">Quotes per estimator / month</span><strong class="metric" data-field="quotes_per_estimator_per_month">0</strong><p>Higher load increases the need for standards and final review.</p></div>
+                <div class="card data-card"><span class="label">Revenue per estimator</span><strong class="metric" data-field="revenue_per_estimator_formatted">$0</strong><p>A rough leverage signal for the estimating function.</p></div>
+                <div class="card data-card"><span class="label">Target gross margin</span><strong class="metric" data-field="target_gross_margin_formatted">0%</strong><p>Used to frame the scale of pricing discipline.</p></div>
               </div>
             </section>
 
