@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>FabProfit System | Enterprise Estimating, Quoting & Margin Protection for Fabrication Companies</title>
-  <meta name="description" content="FabProfit System is a self-paced estimating, quoting, pricing, risk, and margin-protection system for medium and large metal fabrication companies." />
+  <meta name="description" content="FabProfit System helps your fabrication company standardize estimating, quoting, pricing, risk review, and margin protection before the job reaches the floor." />
 
   <meta property="og:title" content="FabProfit System | Stop Margin Leakage Before the Job Hits the Floor" />
-  <meta property="og:description" content="A company-level estimating and quote-protection system for fabrication operators, executives, and private equity teams that want fewer bad jobs and more disciplined quote governance." />
+  <meta property="og:description" content="A company-level estimating and quote-protection system to help your fabrication team prevent bad quotes, protect margin, and create cleaner handoffs." />
   <meta property="og:image" content="https://gregsheldon.github.io/metalfabexcel/social-share.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -789,11 +789,564 @@
       }
     }
 
+  
+
+    /* Evidence-backed objection handling */
+    .evidence-section {
+      padding:76px 0;
+      background:
+        radial-gradient(circle at 88% 0%, rgba(249,115,22,.13), transparent 30rem),
+        linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+    }
+    .evidence-intro-grid {
+      display:grid;
+      grid-template-columns:minmax(0,.9fr) minmax(460px,1.1fr);
+      gap:1.2rem;
+      align-items:stretch;
+      margin-bottom:1.15rem;
+    }
+    .proof-wall {
+      background:
+        radial-gradient(circle at top right, rgba(249,115,22,.22), transparent 22rem),
+        linear-gradient(135deg,#020617,#0f172a);
+      border:2px solid var(--orange-600);
+      box-shadow:0 28px 80px rgba(2,6,23,.22);
+      color:#fff;
+      padding:clamp(1.25rem,3vw,2rem);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:100%;
+    }
+    .proof-wall h2,
+    .proof-wall h3,
+    .proof-wall strong { color:#fff; }
+    .proof-wall p { color:var(--slate-300); }
+    .proof-stat-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:.75rem;
+      margin-top:1rem;
+    }
+    .proof-stat-card {
+      background:rgba(255,255,255,.085);
+      border:1px solid rgba(255,255,255,.12);
+      padding:1rem;
+      min-height:138px;
+    }
+    .proof-stat-card strong {
+      display:block;
+      font-size:clamp(1.95rem,3vw,3.15rem);
+      line-height:.9;
+      letter-spacing:-.075em;
+      color:#fff;
+      margin-bottom:.5rem;
+    }
+    .proof-stat-card span {
+      display:block;
+      color:var(--slate-300);
+      font-weight:760;
+      font-size:.9rem;
+      line-height:1.38;
+    }
+    .objection-grid {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1rem;
+      margin-top:1rem;
+    }
+    .objection-card {
+      background:#fff;
+      border:1px solid var(--slate-200);
+      box-shadow:var(--shadow-soft);
+      padding:1.2rem;
+      position:relative;
+      overflow:hidden;
+      min-height:330px;
+      display:flex;
+      flex-direction:column;
+    }
+    .objection-card:before {
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:5px;
+      background:linear-gradient(90deg,var(--orange-500),var(--orange-700));
+    }
+    .objection-label {
+      display:inline-flex;
+      width:fit-content;
+      background:var(--slate-950);
+      color:#fff;
+      font-size:.7rem;
+      text-transform:uppercase;
+      font-weight:950;
+      letter-spacing:.08em;
+      padding:.42rem .62rem;
+      margin-bottom:.85rem;
+    }
+    .objection-card h3 {
+      font-size:1.34rem;
+      margin-bottom:.65rem;
+    }
+    .objection-card p { font-size:.95rem; }
+    .answer-line {
+      border-left:5px solid var(--orange-600);
+      background:var(--orange-50);
+      padding:.85rem;
+      margin-top:auto;
+      color:var(--slate-800);
+      font-weight:800;
+      font-size:.92rem;
+      line-height:1.42;
+    }
+    .source-inline {
+      display:flex;
+      flex-wrap:wrap;
+      gap:.45rem;
+      margin-top:.85rem;
+    }
+    .source-inline a,
+    .source-link-grid a {
+      display:inline-flex;
+      align-items:center;
+      gap:.35rem;
+      color:var(--orange-700);
+      background:#fff;
+      border:1px solid #fed7aa;
+      padding:.45rem .58rem;
+      font-size:.76rem;
+      line-height:1.15;
+      font-weight:900;
+      text-decoration:none;
+    }
+    .source-inline a:hover,
+    .source-link-grid a:hover {
+      color:#fff;
+      background:var(--orange-700);
+      border-color:var(--orange-700);
+    }
+    .source-link-grid {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:.65rem;
+      margin-top:1rem;
+    }
+    .evidence-note {
+      margin-top:1rem;
+      background:#fff;
+      border:1px solid var(--slate-200);
+      border-left:8px solid var(--orange-600);
+      padding:1rem;
+      color:var(--slate-700);
+      font-weight:760;
+      box-shadow:var(--shadow-soft);
+    }
+    .objection-close {
+      margin-top:1.25rem;
+      background:linear-gradient(135deg,#fff7ed,#ffffff);
+      border:2px solid #fed7aa;
+      box-shadow:var(--shadow-soft);
+      padding:clamp(1.15rem,2.5vw,1.65rem);
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:1rem;
+      align-items:center;
+    }
+    .objection-close h3 { margin-bottom:.35rem; }
+    .objection-close p { margin-bottom:0; }
+
+    @media (max-width:1040px) {
+      .evidence-intro-grid,
+      .objection-close { grid-template-columns:1fr; }
+      .objection-grid,
+      .source-link-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width:760px) {
+      .proof-stat-grid,
+      .objection-grid,
+      .source-link-grid { grid-template-columns:1fr; }
+    }
+
+
+    /* Client-ready objection expansion */
+    .client-proof-banner {
+      background:linear-gradient(135deg,#fff7ed,#ffffff);
+      border:2px solid #fed7aa;
+      box-shadow:var(--shadow-soft);
+      padding:clamp(1.15rem,2.8vw,1.8rem);
+      margin:1.15rem 0;
+    }
+    .client-proof-banner h3 {
+      font-size:clamp(1.55rem,2.4vw,2.25rem);
+      line-height:1.02;
+      margin-bottom:.65rem;
+    }
+    .client-proof-banner p { margin-bottom:.65rem; }
+    .client-proof-banner p:last-child { margin-bottom:0; }
+    .market-grid {
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:1rem;
+      margin:1.2rem 0;
+    }
+    .market-card {
+      background:#fff;
+      border:1px solid var(--slate-200);
+      box-shadow:var(--shadow-soft);
+      padding:1.15rem;
+      min-height:250px;
+      display:flex;
+      flex-direction:column;
+      position:relative;
+      overflow:hidden;
+    }
+    .market-card:before {
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:5px;
+      background:linear-gradient(90deg,var(--orange-500),var(--orange-700));
+    }
+    .market-card > span {
+      display:inline-flex;
+      width:fit-content;
+      background:var(--slate-950);
+      color:#fff;
+      font-size:.68rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:950;
+      padding:.38rem .55rem;
+      margin-bottom:.8rem;
+    }
+    .market-card strong {
+      display:block;
+      color:var(--slate-950);
+      font-size:clamp(1.65rem,2.6vw,2.55rem);
+      line-height:.95;
+      letter-spacing:-.065em;
+      margin-bottom:.65rem;
+    }
+    .market-card p {
+      font-size:.93rem;
+      margin-bottom:.85rem;
+    }
+    .market-card .source-inline { margin-top:auto; }
+    .client-angle-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:1rem;
+      margin:1rem 0 1.35rem;
+    }
+    .client-angle-card {
+      background:#fff;
+      border:1px solid var(--slate-200);
+      box-shadow:var(--shadow-soft);
+      padding:1.2rem;
+    }
+    .client-angle-card h3 {
+      display:flex;
+      gap:.65rem;
+      align-items:flex-start;
+      font-size:1.28rem;
+      margin-bottom:.55rem;
+    }
+    .angle-num {
+      display:inline-grid;
+      place-items:center;
+      flex:0 0 34px;
+      width:34px;
+      height:34px;
+      background:var(--orange-600);
+      color:#fff;
+      font-size:.84rem;
+      font-weight:950;
+      letter-spacing:-.02em;
+    }
+    .client-angle-card p { margin-bottom:.75rem; }
+    .objection-card.client-ready { min-height:390px; }
+    .objection-card.client-ready h3 { font-size:1.23rem; }
+    .proof-disclaimer {
+      margin-top:.9rem;
+      color:var(--slate-400);
+      font-size:.82rem;
+      line-height:1.45;
+      font-weight:720;
+    }
+    .source-directory {
+      margin-top:1rem;
+      background:#fff;
+      border:1px solid var(--slate-200);
+      border-left:8px solid var(--orange-600);
+      box-shadow:var(--shadow-soft);
+      padding:1rem;
+    }
+    .source-directory h3 { margin-bottom:.35rem; }
+    .source-directory p { font-size:.92rem; margin-bottom:.65rem; }
+    .client-close-grid {
+      display:grid;
+      grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);
+      gap:1rem;
+      align-items:stretch;
+      margin-top:1.25rem;
+    }
+    .client-close-card {
+      background:linear-gradient(135deg,#020617,#0f172a);
+      color:#fff;
+      border:2px solid var(--orange-600);
+      box-shadow:0 28px 80px rgba(2,6,23,.22);
+      padding:clamp(1.2rem,3vw,1.9rem);
+    }
+    .client-close-card h2,
+    .client-close-card h3,
+    .client-close-card strong { color:#fff; }
+    .client-close-card p { color:var(--slate-300); }
+    .client-close-card .feature-list { color:var(--slate-200); }
+    .client-close-card .feature-list li:before { background:var(--orange-600); }
+    .client-side-note {
+      background:#fff;
+      border:2px solid var(--slate-950);
+      box-shadow:var(--shadow-soft);
+      padding:clamp(1.1rem,2.5vw,1.55rem);
+    }
+    .client-side-note p:last-child { margin-bottom:0; }
+    @media (max-width:1180px) {
+      .market-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width:1040px) {
+      .client-close-grid { grid-template-columns:1fr; }
+    }
+    @media (max-width:760px) {
+      .market-grid,
+      .client-angle-grid { grid-template-columns:1fr; }
+      .objection-card.client-ready { min-height:auto; }
+    }
+
+  
+
+    /* Uniform spacing polish pass */
+    :root {
+      --section-space-desktop: 78px;
+      --section-space-tablet: 64px;
+      --section-space-mobile: 52px;
+      --page-gap: 1.35rem;
+      --page-gap-lg: 1.75rem;
+      --card-space: clamp(1.2rem, 2.2vw, 1.55rem);
+    }
+
+    body { line-height: 1.58; }
+
+    section,
+    .baseline-section,
+    .evidence-section,
+    .about-section,
+    .roi-section,
+    .system-section {
+      padding-top: var(--section-space-desktop);
+      padding-bottom: var(--section-space-desktop);
+    }
+
+    .hero {
+      padding-top: calc(var(--section-space-desktop) + 10px);
+      padding-bottom: var(--section-space-desktop);
+    }
+
+    .section-heading {
+      margin-bottom: var(--page-gap-lg);
+    }
+
+    .section-heading p,
+    .hero-lede,
+    .client-proof-banner p,
+    .proof-wall p,
+    .story-card p,
+    .dark-card p,
+    .client-close-card p,
+    .client-side-note p {
+      max-width: 74ch;
+    }
+
+    .section-heading.center p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-grid,
+    .evidence-intro-grid,
+    .two-col,
+    .system-grid,
+    .pricing-grid,
+    .about-card {
+      gap: clamp(1.5rem, 3vw, 2.25rem);
+    }
+
+    .trust-row,
+    .micro-proof,
+    .panel-checks,
+    .mini-grid,
+    .list-stack,
+    .leak-grid,
+    .module-grid,
+    .tools-grid,
+    .role-grid,
+    .roi-grid,
+    .faq-grid,
+    .baseline-field-grid,
+    .baseline-note-grid,
+    .baseline-mini-grid,
+    .proof-stat-grid,
+    .market-grid,
+    .objection-grid,
+    .client-angle-grid,
+    .client-close-grid,
+    .source-link-grid,
+    .value-items-grid,
+    .step-list {
+      gap: var(--page-gap);
+    }
+
+    .market-grid,
+    .objection-grid,
+    .client-angle-grid,
+    .client-close-grid,
+    .source-directory,
+    .client-proof-banner,
+    .evidence-note,
+    .objection-close {
+      margin-top: var(--page-gap-lg);
+      margin-bottom: var(--page-gap-lg);
+    }
+
+    .evidence-section .section-heading {
+      margin-top: calc(var(--page-gap-lg) + .5rem);
+      margin-bottom: var(--page-gap-lg);
+    }
+
+    .story-card,
+    .dark-card,
+    .proof-wall,
+    .client-proof-banner,
+    .market-card,
+    .objection-card,
+    .client-angle-card,
+    .client-close-card,
+    .client-side-note,
+    .source-directory,
+    .leak-card,
+    .module-card,
+    .tool-card,
+    .role-card,
+    .roi-box,
+    .roi-card,
+    .price-card,
+    .faq-item,
+    .baseline-note-card,
+    .proof-stat-card,
+    .baseline-result-main,
+    .baseline-mini-result,
+    .baseline-optin-box,
+    .value-stack,
+    .step-card,
+    .trust-card,
+    .panel-check,
+    .mini-stat,
+    .diagnosis-card {
+      padding: var(--card-space);
+    }
+
+    .objection-card,
+    .market-card,
+    .client-angle-card,
+    .faq-item,
+    .tool-card,
+    .module-card,
+    .leak-card,
+    .role-card,
+    .roi-card,
+    .proof-stat-card,
+    .baseline-note-card {
+      height: 100%;
+    }
+
+    .market-card,
+    .objection-card,
+    .client-angle-card,
+    .proof-stat-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .source-inline {
+      gap: .55rem;
+      margin-top: auto;
+      padding-top: .9rem;
+    }
+
+    .answer-line {
+      margin-top: auto;
+      margin-bottom: .15rem;
+    }
+
+    .feature-list {
+      margin-top: var(--page-gap);
+      margin-bottom: var(--page-gap-lg);
+      gap: .75rem;
+    }
+
+    .cta-band,
+    .quote-band {
+      padding: clamp(1.6rem, 3.2vw, 2.4rem);
+    }
+
+    @media (max-width:1040px) {
+      section,
+      .baseline-section,
+      .evidence-section,
+      .about-section,
+      .roi-section,
+      .system-section,
+      .hero {
+        padding-top: var(--section-space-tablet);
+        padding-bottom: var(--section-space-tablet);
+      }
+    }
+
+    @media (max-width:760px) {
+      section,
+      .baseline-section,
+      .evidence-section,
+      .about-section,
+      .roi-section,
+      .system-section,
+      .hero {
+        padding-top: var(--section-space-mobile);
+        padding-bottom: var(--section-space-mobile);
+      }
+
+      .hero-grid,
+      .evidence-intro-grid,
+      .two-col,
+      .system-grid,
+      .pricing-grid,
+      .about-card,
+      .market-grid,
+      .objection-grid,
+      .client-angle-grid,
+      .client-close-grid {
+        gap: 1rem;
+      }
+    }
+
   </style>
 </head>
 
 <body>
-  <div class="top-strip"><strong>FabProfit System:</strong> build a company-level estimating standard before another bad quote becomes a production problem.</div>
+  <div class="top-strip"><strong>FabProfit System:</strong> build your estimating standard before another bad quote becomes a production problem.</div>
 
   <header class="site-header">
     <div class="container header-inner">
@@ -803,6 +1356,7 @@
       <nav aria-label="Main navigation" class="nav">
         <a href="#problem">Problem</a>
         <a href="#baseline-calculator">Calculator</a>
+        <a href="#evidence">Evidence</a>
         <a href="#system">System</a>
         <a href="#tools">Tools</a>
         <a href="#roi">ROI</a>
@@ -818,8 +1372,9 @@
         <div>
           <div class="eyebrow">Enterprise estimating and margin protection system</div>
           <h1>Most fabrication companies do not lose margin in the shop. They lose it when the quote becomes the job plan.</h1>
-          <p class="hero-lede">FabProfit System is a self-paced estimating, quoting, pricing, risk, and margin-protection system for medium and large fabrication companies that want disciplined quote governance without hiring a full-time consultant.</p>
-          <p>It is designed for operators, executives, estimating managers, project leaders, and private equity teams who know that EBITDA leakage rarely announces itself as a single dramatic failure. It appears as small misses repeated across drawings, labour assumptions, buy quantities, field access, outsourced work, payment terms, change-order language, and quote handoff. The tools are robust enough to govern complex structural steel packages, miscellaneous metals, heavy industrial assemblies, and multi-mobilization field installs.</p>
+          <p class="hero-lede">FabProfit System gives your fabrication company a practical estimating, quoting, pricing, risk, and margin-protection standard your team can actually use before another quote turns into a production problem.</p>
+          <p>You already know margin leakage rarely shows up as one dramatic failure. It usually appears as small misses repeated across drawings, labour assumptions, material buy quantities, field access, outsourced work, payment terms, change-order language, and quote handoff. FabProfit is built to help your team govern those decisions across structural steel, miscellaneous metals, heavy industrial assemblies, and multi-mobilization field installs.</p>
+          <p><strong>This is not anti-ERP.</strong> FabProfit helps protect your ERP, schedule, shop floor, and final quote from weak estimating inputs before those inputs become company-wide operating data.</p>
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20System%20Company%20License%20Inquiry">Discuss Your Estimating Process</a>
@@ -829,13 +1384,13 @@
 
           <div class="micro-proof">
             <span class="micro-pill">Built on 25 plus years of fabrication reality</span>
-            <span class="micro-pill">Self-paced company rollout</span>
+            <span class="micro-pill">Clear ERP and Excel answers for your team</span>
             <span class="micro-pill">Tools, templates, checklists, and implementation path</span>
           </div>
 
           <div class="trust-row" aria-label="Core value signals">
             <div class="trust-card"><strong>9 Phases</strong><span>from drawing review to final quote</span></div>
-            <div class="trust-card"><strong>5 Tool Suites</strong><span>BOM, labour, AFR, risk, quote builder</span></div>
+            <div class="trust-card"><strong>ERP Input Layer</strong><span>better quote data before system handoff</span></div>
             <div class="trust-card"><strong>Company License</strong><span>built for internal implementation</span></div>
           </div>
         </div>
@@ -850,14 +1405,14 @@
             </div>
             <div class="panel-checks">
               <div class="panel-check"><strong>Quote-to-production disconnect</strong><span>The sales number, BOM, work order, labour plan, and site assumptions are not always built from the same reality.</span></div>
-              <div class="panel-check"><strong>Tribal estimating dependency</strong><span>One senior estimator knows the shop's real failure points. The company does not have a transferable system.</span></div>
+              <div class="panel-check"><strong>Tribal estimating dependency</strong><span>One senior estimator knows the shop's real failure points. Your company does not yet have a transferable system.</span></div>
               <div class="panel-check"><strong>Margin protected by hope</strong><span>Risk lives inside profit until a late approval, field delay, coating issue, or second mobilization makes it visible.</span></div>
             </div>
             <div class="mini-grid">
               <div class="mini-stat"><span>Primary Goal</span><strong>Fewer bad jobs</strong></div>
               <div class="mini-stat"><span>Operating Impact</span><strong>Cleaner quotes</strong></div>
               <div class="mini-stat"><span>Management Impact</span><strong>Quote governance</strong></div>
-              <div class="mini-stat"><span>PE Impact</span><strong>Repeatability</strong></div>
+              <div class="mini-stat"><span>Ownership Impact</span><strong>Repeatability</strong></div>
             </div>
           </div>
         </aside>
@@ -869,7 +1424,7 @@
         <div class="section-heading center">
           <div class="eyebrow">Baseline Efficiency Calculator</div>
           <h2>Run the numbers before you review the system.</h2>
-          <p>This calculator gives executives, operators, estimating managers, and ownership groups a conservative baseline view of where quote capacity, revision work, and preventable margin leakage may be hiding inside the current estimating process.</p>
+          <p>This calculator gives your leadership team a conservative baseline view of where quote capacity, revision work, and preventable margin leakage may be hiding inside your current estimating process.</p>
         </div>
 
         <div class="baseline-calculator-card">
@@ -973,7 +1528,7 @@
                 <div class="baseline-field">
                   <label for="bfUnrecoveredExtras">Unrecovered extras / year</label>
                   <input id="bfUnrecoveredExtras" type="text" inputmode="decimal" autocomplete="off" min="0" step="5000" value="50000" />
-                  <small>Change orders, standby, scope creep, rework, or extras the company performs but does not recover.</small>
+                  <small>Change orders, standby, scope creep, rework, or extras your company performs but does not recover.</small>
                 </div>
 
                 <div class="baseline-field">
@@ -1002,7 +1557,7 @@
 
                 <div class="baseline-subhead">
                   <strong>Process maturity</strong>
-                  <span>These questions adjust the report based on how much quote control already exists inside the company.</span>
+                  <span>These questions adjust the report based on how much quote control already exists inside your company.</span>
                 </div>
 
                 <div class="baseline-field compact">
@@ -1093,17 +1648,17 @@
                     <option value="Quote revisions and rework consume too much capacity">Quote revisions and rework consume too much capacity</option>
                     <option value="Leadership wants a repeatable company standard">Leadership wants a repeatable company standard</option>
                   </select>
-                  <small>This helps the report point the reader toward the first place to install FabProfit.</small>
+                  <small>This helps show where FabProfit may have the fastest impact inside your estimating process.</small>
                 </div>
               </div>
 
               <div class="baseline-note-grid">
-                <div class="baseline-note-card"><span>1</span><strong>Capacity drag</strong><small>Measures estimating labour, review time, and quote revision effort currently absorbed by the company.</small></div>
+                <div class="baseline-note-card"><span>1</span><strong>Capacity drag</strong><small>Measures estimating labour, review time, and quote revision effort currently absorbed by your company.</small></div>
                 <div class="baseline-note-card"><span>2</span><strong>Margin exposure</strong><small>Models a conservative leakage factor against revenue to frame the cost of weak quote governance.</small></div>
-                <div class="baseline-note-card"><span>3</span><strong>Recoverable value</strong><small>Shows the business case for installing a more repeatable estimating, pricing, and quote-control system.</small></div>
+                <div class="baseline-note-card"><span>3</span><strong>Recoverable value</strong><small>Shows your business case for installing a more repeatable estimating, pricing, and quote-control system.</small></div>
               </div>
 
-              <div class="baseline-compliance-note">This is a planning calculator, not a guarantee. Its purpose is to create a baseline conversation around estimating governance, operating discipline, and the business case for FabProfit System.</div>
+              <div class="baseline-compliance-note">This is a planning calculator, not a guarantee. Its purpose is to create a baseline conversation around estimating governance, operating discipline, and your business case for FabProfit System.</div>
             </div>
 
             <aside class="baseline-calc-side">
@@ -1150,12 +1705,262 @@
       </div>
     </section>
 
+    <section id="evidence" class="evidence-section">
+      <div class="container">
+        <div class="evidence-intro-grid">
+          <div class="story-card">
+            <div class="eyebrow">Your Business Case</div>
+            <h2>You do not have to abandon ERP, Excel, or senior estimator judgment. You need to make those assets safer.</h2>
+            <p>You probably already have pieces of a system: an ERP, a quoting spreadsheet, experienced estimators, a purchasing process, and people on the floor who know what really happens after award.</p>
+            <p>The risk is that those pieces do not always speak the same language before the quote goes out. When scope, labour, material buy quantities, outsourced work, field conditions, and risk assumptions are not standardized at the estimating stage, your ERP, scheduler, PM, purchasing team, and shop floor inherit weak inputs.</p>
+            <p><strong>FabProfit is the quote discipline layer before the job becomes an operating commitment.</strong> It helps turn tribal estimating judgment into a repeatable company workflow that can be reviewed, trained, improved, and handed off.</p>
+            <div class="list-stack">
+              <div class="win-row"><span class="icon-badge">✓</span><div><strong>If you already have ERP:</strong> cleaner quote inputs before the ERP has to schedule, purchase, track, and report.</div></div>
+              <div class="win-row"><span class="icon-badge">✓</span><div><strong>If your team uses Excel:</strong> a governed spreadsheet architecture instead of disconnected estimator files and undocumented logic.</div></div>
+              <div class="win-row"><span class="icon-badge">✓</span><div><strong>If your company relies on senior estimators:</strong> a way to capture judgment before retirement, turnover, or growth exposes the dependency.</div></div>
+            </div>
+          </div>
+
+          <div class="proof-wall">
+            <div>
+              <div class="eyebrow dark-eyebrow">Market Reality</div>
+              <h2>The objections you may have are exactly why this matters.</h2>
+              <p>ERP adoption is growing. Spreadsheet dependence is still normal. Quoting is a revenue constraint. Labour knowledge is aging out. The companies that protect margin are the ones that turn estimating into an operating standard.</p>
+            </div>
+            <div class="proof-stat-grid">
+              <div class="proof-stat-card"><strong>45% / 58%</strong><span>reported ERP adoption/use signals for U.S. fabricated metal manufacturers and Canadian manufacturing firms.</span></div>
+              <div class="proof-stat-card"><strong>80%</strong><span>of custom job shops are reported to still rely on spreadsheets for critical scheduling or quoting workflows.</span></div>
+              <div class="proof-stat-card"><strong>70%+</strong><span>ERP implementation failure / missed-business-case risk is commonly cited when workflow, data, and adoption are weak.</span></div>
+              <div class="proof-stat-card"><strong>51% → 70%</strong><span>average quote-to-book versus top-performing win-rate benchmark used to frame quoting as a revenue lever.</span></div>
+            </div>
+            <p class="proof-disclaimer">Sources are linked below so you can inspect the data directly. These numbers are market context, not guaranteed result claims.</p>
+          </div>
+        </div>
+
+        <div class="client-proof-banner">
+          <h3>Why this matters to you</h3>
+          <p>If your estimate is wrong, every downstream department gets a cleaner-looking version of the wrong plan. Purchasing buys from it. Scheduling loads from it. Production builds from it. Project management defends it. Finance measures the job against it.</p>
+          <p>That is why FabProfit starts before ERP handoff and before the quote becomes a purchase order. It gives your team a practical operating standard for the point where profit, risk, customer expectation, and production reality first meet.</p>
+        </div>
+
+        <div class="market-grid" aria-label="Evidence-backed market proof">
+          <div class="market-card">
+            <span>ERP Adoption Gap</span>
+            <strong>Adopted does not mean fully utilized.</strong>
+            <p>Market data shows meaningful ERP adoption, but the deeper issue is utilization. A shop can have ERP in accounting and still run quoting, routing, scheduling, and job judgment through spreadsheets and memory.</p>
+            <div class="source-inline"><a href="https://www.aptean.com/en-US/insights/blog/unleash-full-potential-fabricated-metals-manufacturing-software" target="_blank" rel="noopener noreferrer">Aptean</a><a href="https://cme-mec.ca/wp-content/uploads/2023/05/2023-CME-Technology-Adoption-Survey-Report_final_web.pdf" target="_blank" rel="noopener noreferrer">CME Survey</a></div>
+          </div>
+
+          <div class="market-card">
+            <span>Excel Reality</span>
+            <strong>Excel is not the villain. Ungoverned Excel is.</strong>
+            <p>Custom fabrication is high-mix, low-volume, and full of exceptions. That is why shops keep using spreadsheets. The opportunity is to make the spreadsheet logic controlled, documented, linear, and hard to corrupt.</p>
+            <div class="source-inline"><a href="https://fsmdirect.com/nailing-the-quote/" target="_blank" rel="noopener noreferrer">FSM Direct</a><a href="https://www.velocityschedulingsystem.com/blog/job-shop-scheduling-software/" target="_blank" rel="noopener noreferrer">Velocity Scheduling</a><a href="https://usersolutions.com/blog/best-job-shop-scheduling-software" target="_blank" rel="noopener noreferrer">User Solutions</a></div>
+          </div>
+
+          <div class="market-card">
+            <span>Garbage In / Garbage Out</span>
+            <strong>Bad routing data becomes bad operating data.</strong>
+            <p>If estimated labour hours, machine times, outsourced lead times, and material assumptions are wrong, ERP does not remove the problem. It distributes the problem faster and more confidently.</p>
+            <div class="source-inline"><a href="https://usersolutions.com/blog/metal-fabrication-scheduling" target="_blank" rel="noopener noreferrer">Scheduling Data</a><a href="https://www.canadianmetalworking.com/canadianfabricatingandwelding/article/automationsoftware/understanding-erp-implementation-challenges" target="_blank" rel="noopener noreferrer">Canadian Metalworking</a><a href="https://www.ecisolutions.com/blog/the-2-million-mistake-why-70-of-erp-implementations-fail/" target="_blank" rel="noopener noreferrer">ECI</a></div>
+          </div>
+
+          <div class="market-card">
+            <span>Quoting Bottleneck</span>
+            <strong>The estimator’s desk is a revenue lever.</strong>
+            <p>Quote speed, quote accuracy, and quote confidence affect what work gets won, what work gets missed, and whether your company wins jobs that are actually worth producing.</p>
+            <div class="source-inline"><a href="https://www.cnccookbook.com/job-quote-cost-estimation-survey-results/" target="_blank" rel="noopener noreferrer">CNCCookbook</a><a href="https://www.oshcut.com/articles/metal-fabricators-prefer-the-wrong-kind-of-customer" target="_blank" rel="noopener noreferrer">OSH Cut</a><a href="https://www.tangle.io/resources/research/quoting-time-reduction-metal-fab" target="_blank" rel="noopener noreferrer">Tangle</a></div>
+          </div>
+
+          <div class="market-card">
+            <span>Labour & Tribal Knowledge</span>
+            <strong>Senior judgment has to become company memory.</strong>
+            <p>As experienced fabricators, estimators, and shop leaders age out, the risk is not just labour shortage. The risk is losing the undocumented rules that kept bad work from being bought in the first place.</p>
+            <div class="source-inline"><a href="https://wifitalents.com/metal-fabrication-industry-statistics/" target="_blank" rel="noopener noreferrer">Industry Stats</a><a href="https://podcasts.apple.com/us/podcast/next-gen-metal-fab/id1751559484" target="_blank" rel="noopener noreferrer">Next-Gen Metal Fab</a><a href="https://www.deloitte.com/us/en/insights/industry/manufacturing-industrial-products/manufacturing-industry-outlook.html" target="_blank" rel="noopener noreferrer">Deloitte</a></div>
+          </div>
+
+          <div class="market-card">
+            <span>Margin Compression</span>
+            <strong>Small misses repeat until they become EBITDA drag.</strong>
+            <p>Material volatility, field friction, underpriced labour, weak quote language, and unmanaged outsourced work do not always show up as one dramatic failure. They leak margin job by job.</p>
+            <div class="source-inline"><a href="https://www.tangle.io/resources/research/metal-fab-industry-benchmarks-2026" target="_blank" rel="noopener noreferrer">Tangle Benchmarks</a><a href="https://www.thefabricator.com/thefabricator/blog/shopmanagement/financial-survey-dives-deep-into-metal-fabrication-industry" target="_blank" rel="noopener noreferrer">The Fabricator</a></div>
+          </div>
+
+          <div class="market-card">
+            <span>ERP Failure Risk</span>
+            <strong>Implementation fails when workflow is not fixed.</strong>
+            <p>ERP is not just a software install. It is a workflow transformation. Estimating standards matter because the quote becomes the first operational dataset for the job.</p>
+            <div class="source-inline"><a href="https://www.prosci.com/blog/your-erp-adoption-rate-guide" target="_blank" rel="noopener noreferrer">Prosci</a><a href="https://www.ecisolutions.com/blog/the-2-million-mistake-why-70-of-erp-implementations-fail/" target="_blank" rel="noopener noreferrer">ECI</a><a href="https://www.erpsoftware.com/erp-insights" target="_blank" rel="noopener noreferrer">ERP Insights</a></div>
+          </div>
+
+          <div class="market-card">
+            <span>Field & Schedule Reality</span>
+            <strong>Production problems often start as quote assumptions.</strong>
+            <p>Field access, mobilizations, approvals, coatings, freight, and customer-controlled delays need a home in the estimate. Otherwise they hide inside profit until the job is already won.</p>
+            <div class="source-inline"><a href="https://usersolutions.com/blog/metal-fabrication-scheduling" target="_blank" rel="noopener noreferrer">User Solutions</a><a href="https://www.thefabricator.com/thefabricator/blog/shopmanagement/metal-fabricators-prefer-the-wrong-kind-of-customer" target="_blank" rel="noopener noreferrer">The Fabricator</a></div>
+          </div>
+        </div>
+
+        <div class="section-heading center">
+          <div class="eyebrow">Your Objections Answered</div>
+          <h2>These objections are normal. The stronger question is what they reveal about your estimating process.</h2>
+          <p>These are the questions a sophisticated operator, CFO, private equity partner, estimating manager, or plant leader is likely to raise before taking the next step.</p>
+        </div>
+
+        <div class="objection-grid">
+          <div class="objection-card client-ready">
+            <span class="objection-label">Objection 01</span>
+            <h3>“We already have an ERP.”</h3>
+            <p>That is exactly why quote discipline matters. ERP can schedule, purchase, route, and report only from the data it receives. If the estimate is built on weak labour assumptions, incomplete material buy quantities, unclear outsourced scope, or undocumented risk, ERP turns those weak assumptions into operating instructions.</p>
+            <div class="answer-line">FabProfit is not ERP replacement. It is ERP input protection.</div>
+            <div class="source-inline"><a href="https://usersolutions.com/blog/metal-fabrication-scheduling" target="_blank" rel="noopener noreferrer">Scheduling</a><a href="https://www.canadianmetalworking.com/canadianfabricatingandwelding/article/automationsoftware/understanding-erp-implementation-challenges" target="_blank" rel="noopener noreferrer">ERP Challenges</a><a href="https://www.ecisolutions.com/blog/the-2-million-mistake-why-70-of-erp-implementations-fail/" target="_blank" rel="noopener noreferrer">ERP Failure Risk</a></div>
+          </div>
+
+          <div class="objection-card client-ready">
+            <span class="objection-label">Objection 02</span>
+            <h3>“We already use Excel.”</h3>
+            <p>So do a lot of serious shops. The question is not whether Excel exists. The question is whether the workbook forces the right estimating sequence, protects formulas, documents assumptions, standardizes labour logic, and creates a clean handoff.</p>
+            <div class="answer-line">FabProfit turns spreadsheet dependence into a controlled estimating workflow.</div>
+            <div class="source-inline"><a href="https://fsmdirect.com/nailing-the-quote/" target="_blank" rel="noopener noreferrer">Quoting</a><a href="https://www.velocityschedulingsystem.com/blog/job-shop-scheduling-software/" target="_blank" rel="noopener noreferrer">Job Shop Scheduling</a><a href="https://usersolutions.com/blog/best-job-shop-scheduling-software" target="_blank" rel="noopener noreferrer">Job Shop Software</a></div>
+          </div>
+
+          <div class="objection-card client-ready">
+            <span class="objection-label">Objection 03</span>
+            <h3>“Our estimators already know this.”</h3>
+            <p>Your best estimator may know it. Your company may not. If the process lives in one person’s head, it is not yet a company asset. It cannot be trained consistently, reviewed consistently, improved consistently, or protected from turnover.</p>
+            <div class="answer-line">FabProfit captures senior judgment and turns it into company memory.</div>
+            <div class="source-inline"><a href="https://wifitalents.com/metal-fabrication-industry-statistics/" target="_blank" rel="noopener noreferrer">Workforce Data</a><a href="https://podcasts.apple.com/us/podcast/next-gen-metal-fab/id1751559484" target="_blank" rel="noopener noreferrer">Tribal Knowledge</a><a href="https://www.deloitte.com/us/en/insights/industry/manufacturing-industrial-products/manufacturing-industry-outlook.html" target="_blank" rel="noopener noreferrer">Manufacturing Outlook</a></div>
+          </div>
+
+          <div class="objection-card client-ready">
+            <span class="objection-label">Objection 04</span>
+            <h3>“We need faster quotes, not more process.”</h3>
+            <p>Speed without discipline is how bad work gets purchased faster. The goal is not to add bureaucracy. The goal is to remove rework from the estimating process by forcing the same high-value checks every time: scope, drawings, labour, buy quantity, outsourced work, risk, margin, and quote language.</p>
+            <div class="answer-line">A good system speeds up judgment because the estimator is not rebuilding the process from scratch.</div>
+            <div class="source-inline"><a href="https://www.cnccookbook.com/job-quote-cost-estimation-survey-results/" target="_blank" rel="noopener noreferrer">Quote Survey</a><a href="https://www.tangle.io/resources/research/quoting-time-reduction-metal-fab" target="_blank" rel="noopener noreferrer">Quoting Research</a></div>
+          </div>
+
+          <div class="objection-card client-ready">
+            <span class="objection-label">Objection 05</span>
+            <h3>“Our real problem is production, not estimating.”</h3>
+            <p>Sometimes production is the problem. But many production problems are quote problems wearing shop-floor clothing: underpriced handling, missing setup, bad field assumptions, unclear finish requirements, weak exclusions, or a schedule promise that was never realistic.</p>
+            <div class="answer-line">FabProfit helps separate true execution issues from jobs that were under-defined before they were won.</div>
+            <div class="source-inline"><a href="https://usersolutions.com/blog/metal-fabrication-scheduling" target="_blank" rel="noopener noreferrer">Scheduling</a><a href="https://www.thefabricator.com/thefabricator/blog/shopmanagement/metal-fabricators-prefer-the-wrong-kind-of-customer" target="_blank" rel="noopener noreferrer">Shop Management</a></div>
+          </div>
+
+          <div class="objection-card client-ready">
+            <span class="objection-label">Objection 06</span>
+            <h3>“We are implementing ERP already.”</h3>
+            <p>Then the estimating workflow needs to be cleaned before bad assumptions are migrated, automated, and trusted. ERP projects fail when companies treat them like software purchases instead of workflow transformations. Estimating is one of the first workflows that deserves discipline.</p>
+            <div class="answer-line">FabProfit can support pre-implementation cleanup, post-go-live rescue, or estimator-side workflow standardization.</div>
+            <div class="source-inline"><a href="https://www.prosci.com/blog/your-erp-adoption-rate-guide" target="_blank" rel="noopener noreferrer">Adoption</a><a href="https://www.ecisolutions.com/blog/the-2-million-mistake-why-70-of-erp-implementations-fail/" target="_blank" rel="noopener noreferrer">Implementation</a><a href="https://www.erpsoftware.com/erp-insights" target="_blank" rel="noopener noreferrer">ERP Insights</a></div>
+          </div>
+
+          <div class="objection-card client-ready">
+            <span class="objection-label">Objection 07</span>
+            <h3>“We cannot afford another initiative right now.”</h3>
+            <p>That is reasonable. But the hidden cost of not standardizing estimating is paid through underpriced jobs, missed extras, vague quote language, poor quote handoff, second mobilizations, excess PM time, and jobs that look good at award but collapse at closeout.</p>
+            <div class="answer-line">The question is not whether the system costs money. The question is what one preventable bad job already costs.</div>
+            <div class="source-inline"><a href="https://www.tangle.io/resources/research/erp-roi-metal-fabricators" target="_blank" rel="noopener noreferrer">ERP ROI</a><a href="https://www.tangle.io/resources/research/metal-fab-industry-benchmarks-2026" target="_blank" rel="noopener noreferrer">Benchmarks</a></div>
+          </div>
+
+          <div class="objection-card client-ready">
+            <span class="objection-label">Objection 08</span>
+            <h3>“We can build this ourselves.”</h3>
+            <p>You can. But internal builds often stall because the same people who need the system are already buried in quote volume, production problems, customer changes, and ERP cleanup. FabProfit gives your team a proven structure so they are not starting from a blank page.</p>
+            <div class="answer-line">This is a shortcut to standardization, not a replacement for your company knowledge.</div>
+            <div class="source-inline"><a href="https://fsmdirect.com/nailing-the-quote/" target="_blank" rel="noopener noreferrer">Quoting Structure</a><a href="https://www.tangle.io/resources/research/quoting-time-reduction-metal-fab" target="_blank" rel="noopener noreferrer">Quoting Time</a></div>
+          </div>
+
+          <div class="objection-card client-ready">
+            <span class="objection-label">Objection 09</span>
+            <h3>“Our data is messy.”</h3>
+            <p>That is not a reason to wait. It is a reason to start with estimating discipline. Clean ERP data starts with clean operating definitions: what counts as labour, what gets included in material buyout, how outsourced work is leveled, what risk is carried, and what assumptions are written into the quote.</p>
+            <div class="answer-line">FabProfit gives messy data a structure so your company can improve it one estimate at a time.</div>
+            <div class="source-inline"><a href="https://www.canadianmetalworking.com/canadianfabricatingandwelding/article/automationsoftware/understanding-erp-implementation-challenges" target="_blank" rel="noopener noreferrer">Data Challenges</a><a href="https://www.ecisolutions.com/blog/the-2-million-mistake-why-70-of-erp-implementations-fail/" target="_blank" rel="noopener noreferrer">Data Migration</a></div>
+          </div>
+        </div>
+
+        <div class="client-angle-grid">
+          <div class="client-angle-card">
+            <h3><span class="angle-num">1</span><span>Your Excel reality becomes a strength.</span></h3>
+            <p>You may ask why this is not a pure SaaS platform. The answer is simple: custom fabrication still relies heavily on spreadsheets because the work is variable, exception-driven, and fast-moving.</p>
+            <p><strong>Positioning:</strong> FabProfit is built where the work already happens, then adds structure, workflow, colour-coded inputs, review logic, and company standards.</p>
+          </div>
+          <div class="client-angle-card">
+            <h3><span class="angle-num">2</span><span>Your ERP investment becomes safer.</span></h3>
+            <p>If you already have ERP, you do not need another disconnected system. You need cleaner job logic before that job logic becomes ERP data.</p>
+            <p><strong>Positioning:</strong> FabProfit protects routing assumptions, buyout logic, quote language, risk ownership, and margin decisions before ERP handoff.</p>
+          </div>
+          <div class="client-angle-card">
+            <h3><span class="angle-num">3</span><span>Your quoting bottleneck becomes the revenue lever.</span></h3>
+            <p>If quoting capacity is limited, your company either quotes too slowly, quotes too loosely, or declines work it should have had a shot at winning.</p>
+            <p><strong>Positioning:</strong> FabProfit helps estimators move through a repeatable decision path instead of reinventing the estimate every time.</p>
+          </div>
+          <div class="client-angle-card">
+            <h3><span class="angle-num">4</span><span>Your labour challenge becomes a knowledge-capture problem.</span></h3>
+            <p>When experienced people leave, they take the unwritten rules with them. That is dangerous when those unwritten rules are what prevented bad quotes.</p>
+            <p><strong>Positioning:</strong> FabProfit creates an internal estimating language your team can train, audit, and improve.</p>
+          </div>
+        </div>
+
+        <div class="client-close-grid">
+          <div class="client-close-card">
+            <div class="eyebrow dark-eyebrow">Decision Summary for Your Team</div>
+            <h2>FabProfit strengthens your estimating judgment before your system of record takes over.</h2>
+            <p>Your ERP records the job. Scheduling sequences the job. Purchasing buys for the job. Production builds the job. Finance measures the job.</p>
+            <p><strong>But your estimate defines the first version of the job.</strong> That is why quote discipline is not a small training issue. It is an operating control.</p>
+            <ul class="feature-list">
+              <li>Cleaner scope before award</li>
+              <li>More complete labour and material logic</li>
+              <li>Better outsourced-work and field-risk controls</li>
+              <li>Clearer quote language before customer acceptance</li>
+              <li>Stronger handoff from estimating to production, PM, purchasing, and finance</li>
+            </ul>
+            <a class="btn btn-primary" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20System%20Company%20License%20Inquiry">Discuss Your Estimating Process</a>
+          </div>
+          <div class="client-side-note">
+            <div class="eyebrow">Plain-English Offer</div>
+            <h3>What you are really buying</h3>
+            <p>You are not buying a pile of videos. You are buying a practical estimating operating system your team can use to price work, protect margin, standardize review, and reduce dependency on undocumented estimator judgment.</p>
+            <p>The strongest starting point is a short estimating-process review: your current tools, ERP handoff, quote bottlenecks, field exposure, outsourced-work exposure, and where margin most often disappears after award.</p>
+          </div>
+        </div>
+
+        <div class="source-directory">
+          <h3>Data links used in this business case</h3>
+          <p>These links open in a new tab so you can review the supporting market data directly.</p>
+          <div class="source-link-grid">
+            <a href="https://fsmdirect.com/nailing-the-quote/" target="_blank" rel="noopener noreferrer">FSM Direct: Nailing the Quote</a>
+            <a href="https://www.velocityschedulingsystem.com/blog/job-shop-scheduling-software/" target="_blank" rel="noopener noreferrer">Velocity Scheduling: Job Shop Software</a>
+            <a href="https://usersolutions.com/blog/best-job-shop-scheduling-software" target="_blank" rel="noopener noreferrer">User Solutions: Job Shop Scheduling</a>
+            <a href="https://usersolutions.com/blog/metal-fabrication-scheduling" target="_blank" rel="noopener noreferrer">User Solutions: Metal Fabrication Scheduling</a>
+            <a href="https://www.canadianmetalworking.com/canadianfabricatingandwelding/article/automationsoftware/understanding-erp-implementation-challenges" target="_blank" rel="noopener noreferrer">Canadian Metalworking: ERP Challenges</a>
+            <a href="https://www.ecisolutions.com/blog/the-2-million-mistake-why-70-of-erp-implementations-fail/" target="_blank" rel="noopener noreferrer">ECI: ERP Implementation Failure</a>
+            <a href="https://www.prosci.com/blog/your-erp-adoption-rate-guide" target="_blank" rel="noopener noreferrer">Prosci: ERP Adoption</a>
+            <a href="https://www.erpsoftware.com/erp-insights" target="_blank" rel="noopener noreferrer">ERPSoftware.com: ERP Insights</a>
+            <a href="https://www.cnccookbook.com/job-quote-cost-estimation-survey-results/" target="_blank" rel="noopener noreferrer">CNCCookbook: Quote Survey</a>
+            <a href="https://www.oshcut.com/articles/metal-fabricators-prefer-the-wrong-kind-of-customer" target="_blank" rel="noopener noreferrer">OSH Cut: Quoting Economics</a>
+            <a href="https://www.thefabricator.com/thefabricator/blog/shopmanagement/metal-fabricators-prefer-the-wrong-kind-of-customer" target="_blank" rel="noopener noreferrer">The Fabricator: Customer Mix</a>
+            <a href="https://www.tangle.io/resources/research/quoting-time-reduction-metal-fab" target="_blank" rel="noopener noreferrer">Tangle: Quoting Time Reduction</a>
+            <a href="https://wifitalents.com/metal-fabrication-industry-statistics/" target="_blank" rel="noopener noreferrer">WiFi Talents: Industry Statistics</a>
+            <a href="https://podcasts.apple.com/us/podcast/next-gen-metal-fab/id1751559484" target="_blank" rel="noopener noreferrer">Next-Gen Metal Fab Podcast</a>
+            <a href="https://www.deloitte.com/us/en/insights/industry/manufacturing-industrial-products/manufacturing-industry-outlook.html" target="_blank" rel="noopener noreferrer">Deloitte: Manufacturing Outlook</a>
+            <a href="https://cme-mec.ca/wp-content/uploads/2023/05/2023-CME-Technology-Adoption-Survey-Report_final_web.pdf" target="_blank" rel="noopener noreferrer">CME Technology Adoption Survey</a>
+            <a href="https://www.aptean.com/en-US/insights/blog/unleash-full-potential-fabricated-metals-manufacturing-software" target="_blank" rel="noopener noreferrer">Aptean: Fabricated Metals Software</a>
+            <a href="https://www.tangle.io/resources/research/metal-fab-industry-benchmarks-2026" target="_blank" rel="noopener noreferrer">Tangle: Metal Fab Benchmarks</a>
+            <a href="https://www.tangle.io/resources/research/erp-roi-metal-fabricators" target="_blank" rel="noopener noreferrer">Tangle: ERP ROI for Fabricators</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="problem">
       <div class="container two-col">
         <div class="story-card">
           <div class="eyebrow">The real problem</div>
           <h2>A bad job is usually purchased before it is produced.</h2>
-          <p>Most companies investigate margin erosion downstream. They review labour overruns, rework, PM time, backcharges, field delays, quality problems, and production bottlenecks after the job closes.</p>
+          <p>Most fabrication companies investigate margin erosion downstream. They review labour overruns, rework, PM time, backcharges, field delays, quality problems, and production bottlenecks after the job closes.</p>
           <p>That review is useful, but it is late. By then, the quote has already converted assumptions into obligations. The shop is trying to rescue a commercial decision that was made before material was ordered and before the first cut was made.</p>
           <p>FabProfit System attacks the upstream decision point: the estimate, the quote, the price stack, the risk treatment, and the language that determines who owns what after award.</p>
         </div>
@@ -1163,10 +1968,10 @@
         <div class="dark-card">
           <div class="eyebrow dark-eyebrow">The executive question</div>
           <h2>Is your estimating process a controllable asset, or a collection of personalities?</h2>
-          <p>If the company depends on individual instinct, legacy spreadsheets, undocumented judgment, and post-award heroics, then the estimating function is not yet an institutional system.</p>
+          <p>If your company depends on individual instinct, legacy spreadsheets, undocumented judgment, and post-award heroics, then the estimating function is not yet an institutional system.</p>
           <div class="list-stack">
             <div class="pain-row"><span class="icon-badge">×</span><div>Sales wins a job. Production inherits the unknowns. Finance discovers the margin reality later.</div></div>
-            <div class="pain-row"><span class="icon-badge">×</span><div>The quote is written clearly enough to win, but not clearly enough to protect the company.</div></div>
+            <div class="pain-row"><span class="icon-badge">×</span><div>The quote is written clearly enough to win, but not clearly enough to protect your company.</div></div>
             <div class="win-row"><span class="icon-badge">✓</span><div>A professional estimating system turns drawings, shop reality, risk, and commercial judgment into a repeatable company process.</div></div>
           </div>
         </div>
@@ -1206,8 +2011,8 @@
         <div class="system-copy">
           <div class="eyebrow">The FabProfit implementation path</div>
           <h2>Install a repeatable estimating standard across your organization.</h2>
-          <p>FabProfit System is designed to be deployed to the people who influence quote quality: estimators, managers, project teams, purchasing, foremen, field leaders, and executives who approve pricing strategy.</p>
-          <p>The system gives your team an operating sequence that forces judgment into the quote before the quote becomes the company's obligation.</p>
+          <p>FabProfit System is designed for the people inside your company who influence quote quality: estimators, managers, project teams, purchasing, foremen, field leaders, and executives who approve pricing strategy.</p>
+          <p>The system gives your team an operating sequence that forces judgment into the quote before the quote becomes your company’s obligation.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20System%20Company%20License%20Inquiry">Discuss Your Estimating Process</a>
             <a class="btn btn-light" href="#tools">Review The Tool Suite</a>
@@ -1215,11 +2020,11 @@
         </div>
 
         <div class="step-list">
-          <div class="step-card"><div class="step-num">01</div><div><h3>Diagnose quote leakage</h3><p>Score the company's current estimating process against the common sources of margin erosion: scope, labour, material, risk, final price, proposal language, and post-job feedback.</p></div></div>
+          <div class="step-card"><div class="step-num">01</div><div><h3>Diagnose quote leakage</h3><p>Score your current estimating process against the common sources of margin erosion: scope, labour, material, risk, final price, proposal language, and post-job feedback.</p></div></div>
           <div class="step-card"><div class="step-num">02</div><div><h3>Standardize the estimating workflow</h3><p>Move every job through a consistent path: drawings, scope, material, labour, subs, risk, pricing, quote wording, handoff, follow-up, and actual-vs-estimate review.</p></div></div>
-          <div class="step-card"><div class="step-num">03</div><div><h3>Build the company's price stack</h3><p>Clarify true labour rates, burden, utilization, overhead, direct cost, support cost, business cost, risk, contingency, margin, and payment requirements.</p></div></div>
+          <div class="step-card"><div class="step-num">03</div><div><h3>Build your company’s price stack</h3><p>Clarify true labour rates, burden, utilization, overhead, direct cost, support cost, business cost, risk, contingency, margin, and payment requirements.</p></div></div>
           <div class="step-card"><div class="step-num">04</div><div><h3>Convert tribal knowledge into reusable standards</h3><p>Capture the shop realities senior people know: handling issues, field friction, finish risk, vendor problems, customer behaviours, and repeat estimating mistakes.</p></div></div>
-          <div class="step-card"><div class="step-num">05</div><div><h3>Govern the quote before release</h3><p>Use final review checklists, quote language banks, risk registers, and management checks so the company does not send naked numbers into the market.</p></div></div>
+          <div class="step-card"><div class="step-num">05</div><div><h3>Govern the quote before release</h3><p>Use final review checklists, quote language banks, risk registers, and management checks so your company does not send naked numbers into the market.</p></div></div>
         </div>
       </div>
     </section>
@@ -1252,7 +2057,7 @@
           <div class="eyebrow">The tool suite</div>
           <h2>The value is not just the implementation program. It is the operating infrastructure.</h2>
           <p>The tools turn the system into job-level behaviour. They give the estimator, manager, or owner a structured way to price real work, expose hidden cost, capture risk, and produce a quote that can survive production.</p>
-          <p>These custom tools are not sold as a replacement for professional judgment. They are designed to force better judgment into the process before the quote is sent.</p>
+          <p>These custom tools do not replace professional judgment. They help your team apply better judgment before the quote is sent.</p>
         </div>
 
         <div class="system-content-wrapper">
@@ -1289,7 +2094,7 @@
     <section>
       <div class="container">
         <div class="section-heading center">
-          <div class="eyebrow">Who uses it inside the company</div>
+          <div class="eyebrow">Who uses it inside your company</div>
           <h2>Different leaders see different leaks. FabProfit gives them one operating language.</h2>
         </div>
         <div class="role-grid">
@@ -1307,7 +2112,7 @@
         <div class="quote-band" style="background: linear-gradient(135deg,#7f1d1d,#450a0a); border-left: 8px solid var(--red-700);">
           <div class="eyebrow dark-eyebrow" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: #fecaca; margin-bottom: 1rem;">Case Study: The Cost of Undocumented Instinct</div>
           <h2 style="font-size: clamp(1.8rem, 3vw, 2.5rem);">A $40,000 margin failure driven by a simple field mobilization error.</h2>
-          <p style="color: #fecaca; max-width: 900px;">Consider a standard industrial fabrication package. A well-meaning estimator relies purely on memory to price the field installation. Because the company lacks a formalized Arc-to-Floor Ratio standard, they miss the crane setup friction and site safety standby time. The job wins based on a naked number, but the margin evaporates on day two of installation. FabProfit prevents this specific leakage by forcing a structured calculation before the quote is ever submitted to the client.</p>
+          <p style="color: #fecaca; max-width: 900px;">Consider a standard industrial fabrication package. A well-meaning estimator relies purely on memory to price the field installation. Because the your company lacks a formalized Arc-to-Floor Ratio standard, they miss the crane setup friction and site safety standby time. The job wins based on a naked number, but the margin evaporates on day two of installation. FabProfit helps prevent this leakage by forcing a structured calculation before the quote is ever submitted to your customer.</p>
         </div>
       </div>
     </section>
@@ -1322,12 +2127,12 @@
           <div class="roi-grid">
             <div class="roi-card"><strong>1% quote improvement</strong><span>Small improvements across awarded work can have meaningful EBITDA impact when repeated across the book.</span></div>
             <div class="roi-card"><strong>One bad job avoided</strong><span>The system can pay for itself if it prevents a single major underpriced scope, labour, material, or risk error.</span></div>
-            <div class="roi-card"><strong>Faster onboarding</strong><span>New team members learn the company's quoting standard faster when the system is written, structured, and measurable.</span></div>
+            <div class="roi-card"><strong>Faster onboarding</strong><span>New team members learn your company’s quoting standard faster when the system is written, structured, and measurable.</span></div>
             <div class="roi-card"><strong>Cleaner diligence</strong><span>For PE and acquisition teams, quote governance becomes easier to assess, improve, and standardize post-close.</span></div>
           </div>
 
           <div class="formula-box">
-            <p><strong>Simple boardroom math:</strong> Annual awarded fabrication revenue × avoidable margin leakage × reduction target = potential profit protection opportunity. FabProfit does not guarantee recovery. It gives leadership the structure to find, price, qualify, and prevent the leaks earlier.</p>
+            <p><strong>Simple boardroom math:</strong> Annual awarded fabrication revenue × avoidable margin leakage × reduction target = potential profit protection opportunity. FabProfit does not guarantee recovery. It gives your leadership team the structure to find, price, qualify, and prevent the leaks earlier.</p>
           </div>
           
           <div class="formula-box" style="margin-top: 1.5rem; background: #450a0a; border-left-color: var(--red-700);">
@@ -1342,8 +2147,8 @@
         <div class="story-card">
           <div class="eyebrow">For operating companies</div>
           <h2>Use FabProfit to build a quote standard that survives turnover, growth, and volume.</h2>
-          <p>As a fabrication company grows, estimation by personality becomes a structural risk. What worked when the owner or senior estimator reviewed every job becomes fragile when volume increases, people change, or the company adds locations.</p>
-          <p>FabProfit gives the business a way to institutionalize estimating discipline without pausing the company to rebuild its entire ERP, hire a consulting team, or ask every team member to reinvent the process.</p>
+          <p>As a fabrication company grows, estimation by personality becomes a structural risk. What worked when the owner or senior estimator reviewed every job becomes fragile when volume increases, people change, or your company adds locations.</p>
+          <p>FabProfit gives your business a way to institutionalize estimating discipline without pausing your company to rebuild its entire ERP, hire a consulting team, or ask every team member to reinvent the process.</p>
         </div>
         <div class="dark-card">
           <div class="eyebrow dark-eyebrow">For private equity</div>
@@ -1359,7 +2164,7 @@
         <div class="story-card">
           <div class="eyebrow">Company license</div>
           <h2>Built for internal company deployment, not individual casual consumption.</h2>
-          <p>This is a premium system for companies that understand the cost of bad estimating. It is not priced for hobbyists, apprentices, or one-off spreadsheet buyers.</p>
+          <p>This is a premium system for companies that understand the cost of bad estimating. It is built for teams that want a repeatable operating standard, not a one-off spreadsheet download.</p>
           <p>The company license gives your team access to the system rollout, tools, templates, quote language, implementation sequence, and updates so FabProfit can become part of your internal estimating standard.</p>
           <div class="list-stack">
             <div class="win-row"><span class="icon-badge">✓</span><div>Train multiple internal stakeholders on the same estimating language.</div></div>
@@ -1398,7 +2203,7 @@
       <div class="container">
         <div class="quote-band">
           <h2>The central promise is not that your team will never miss again. The promise is that fewer misses should remain invisible.</h2>
-          <p>A serious estimating system does not eliminate uncertainty. It exposes uncertainty earlier, assigns it an owner, gives it a cost, converts it into quote language, and forces a commercial decision before the company inherits the risk by default.</p>
+          <p>A serious estimating system does not eliminate uncertainty. It exposes uncertainty earlier, assigns it an owner, gives it a cost, converts it into quote language, and forces a commercial decision before your company inherits the risk by default.</p>
         </div>
       </div>
     </section>
@@ -1415,7 +2220,7 @@
           <div class="eyebrow">Created by Greg Sheldon</div>
           <h2>Built on 25 years of fabrication reality.</h2>
           <p>FabProfit System is backed by over two decades of hands-on experience in metal fabrication, welding, industrial design, and enterprise estimating. As a former college welding instructor and senior estimator, Greg built these exact tools to close the gap between classroom theory and shop floor profitability.</p>
-          <p>The system is written for people who already understand fabrication. It gives them a structured way to convert what experienced people know into an operating infrastructure the company can actually teach, repeat, and review.</p>
+          <p>The system is written for people who already understand fabrication. It gives them a structured way to convert what experienced people know into an operating infrastructure your company can actually teach, repeat, and review.</p>
           <div class="about-proof-grid">
             <div class="about-proof"><strong>Trade-grounded</strong><span>shop, field, and estimating perspective</span></div>
             <div class="about-proof"><strong>Operator-focused</strong><span>built around margin protection</span></div>
@@ -1429,15 +2234,18 @@
       <div class="container">
         <div class="section-heading center">
           <div class="eyebrow">FAQ</div>
-          <h2>Questions serious buyers usually ask.</h2>
+          <h2>Questions your team may ask before adopting FabProfit.</h2>
+          <p>These are the practical questions your team should ask before adopting an estimating standard across your company.</p>
         </div>
         <div class="faq-grid">
-          <div class="faq-item"><h3>Is this a consulting engagement?</h3><p>No. The core offer is built to be self-paced. The company gets the operating framework, tools, and implementation structure without needing Greg present for every session.</p></div>
-          <div class="faq-item"><h3>Is this a replacement for our ERP?</h3><p>No. FabProfit is an estimating and quote-protection system. It can support better inputs, standards, and review habits around whatever software the company already uses.</p></div>
-          <div class="faq-item"><h3>Who should complete it?</h3><p>Estimators should run the full system. Owners, executives, PMs, foremen, field leads, purchasing, and sales/admin can utilize role-specific portions that affect quote quality.</p></div>
-          <div class="faq-item"><h3>Is it only for small shops?</h3><p>No. The language, tools, and governance structure are written for companies that have enough volume for small quote errors to become material operating problems.</p></div>
-          <div class="faq-item"><h3>Can private equity use it?</h3><p>Yes. It can be used as a post-close operating improvement tool to standardize estimating process, reduce key-person dependency, and create more visible quote controls.</p></div>
-          <div class="faq-item"><h3>Does it guarantee profit improvement?</h3><p>No. Results depend on implementation, data quality, leadership, market conditions, job selection, and execution. FabProfit provides the structure and tools to improve decision quality.</p></div>
+          <div class="faq-item"><h3>Is FabProfit a replacement for ERP?</h3><p>No. It is the estimating control layer before ERP. The goal is better quote inputs, cleaner assumptions, clearer scope boundaries, and more reliable job data before the ERP is asked to schedule, purchase, track, or report.</p></div>
+          <div class="faq-item"><h3>Why build around spreadsheets if we want to be more advanced?</h3><p>Because many custom job shops still run critical quoting and scheduling logic through spreadsheets. FabProfit does not pretend that reality away. It makes the spreadsheet process guided, structured, reviewable, and harder to corrupt with undocumented judgment.</p></div>
+          <div class="faq-item"><h3>Does this slow down quoting?</h3><p>The wrong checklist slows people down. A good system speeds up judgment by forcing the same high-value questions every time: scope, drawings, labour, material buy quantity, outsourced work, risk, final margin, and quote protection.</p></div>
+          <div class="faq-item"><h3>What if our best estimator already knows this?</h3><p>Then FabProfit helps capture that estimator’s thinking so it can be taught, reviewed, improved, and transferred. The goal is not to replace senior judgment. The goal is to stop your business from depending on one person’s memory.</p></div>
+          <div class="faq-item"><h3>Can it support an ERP rollout?</h3><p>Yes. ERP implementations usually struggle when workflows and data standards are unclear. FabProfit gives the estimating side a practical standard before those numbers become work orders, production routes, schedules, purchase requirements, and job-cost reports.</p></div>
+          <div class="faq-item"><h3>Who should complete it?</h3><p>Estimators should run the full system. Owners, executives, PMs, foremen, field leads, purchasing, and sales/admin can use role-specific portions that affect quote quality, quote handoff, and post-award margin protection.</p></div>
+          <div class="faq-item"><h3>Is this only for small shops?</h3><p>No. The strongest use case is any company where quote volume, job complexity, field work, outsourced services, and senior-person dependency make small estimating misses large enough to become operating problems.</p></div>
+          <div class="faq-item"><h3>Does it guarantee profit improvement?</h3><p>No. Results depend on implementation, data quality, leadership, market conditions, job selection, execution, and whether your company actually uses the process. FabProfit provides the structure and tools to improve decision quality before the quote leaves the building.</p></div>
         </div>
       </div>
     </section>
