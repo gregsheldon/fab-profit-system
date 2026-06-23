@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Your FabProfit Baseline Margin Exposure Report</title>
-  <meta name="description" content="A personalized executive baseline report generated from the FabProfit System Baseline Efficiency Calculator." />
-
+  <title>Your FabProfit Company Baseline Report</title>
+  <meta name="description" content="A personalized executive baseline report generated from the FabProfit System Baseline Calculator." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-
   <style>
     :root {
       --slate-950:#020617;
@@ -35,19 +32,21 @@
       --green-100:#dcfce7;
       --amber-100:#fef3c7;
       --amber-50:#fffbeb;
+      --blue-100:#dbeafe;
+      --blue-900:#1e3a8a;
       --shadow:0 24px 60px rgba(15,23,42,.10);
       --line:1px solid var(--slate-200);
     }
 
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-
     body {
       margin:0;
       font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 10% 0%, rgba(249,115,22,.12), transparent 28rem),
-        linear-gradient(180deg, #ffffff 0%, var(--slate-50) 70%, #eef2f7 100%);
+        radial-gradient(circle at 8% 0%, rgba(249,115,22,.13), transparent 28rem),
+        radial-gradient(circle at 92% 18%, rgba(15,23,42,.08), transparent 30rem),
+        linear-gradient(180deg, #ffffff 0%, var(--slate-50) 68%, #eef2f7 100%);
       color:var(--slate-900);
       line-height:1.55;
     }
@@ -56,12 +55,9 @@
     p { color:var(--slate-600); margin-top:0; }
     ul, ol { color:var(--slate-700); font-weight:700; padding-left:1.15rem; }
     li { margin-bottom:.45rem; }
+    strong { color:var(--slate-950); }
 
-    .container {
-      width:min(1160px, calc(100% - 2rem));
-      margin:0 auto;
-    }
-
+    .container { width:min(1160px, calc(100% - 2rem)); margin:0 auto; }
     .topbar {
       position:sticky;
       top:0;
@@ -70,810 +66,141 @@
       backdrop-filter:blur(10px);
       border-bottom:var(--line);
     }
-
-    .topbar-inner {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:1rem;
-      padding:1rem 0;
-    }
-
-    .brand {
-      font-weight:950;
-      letter-spacing:-.035em;
-      color:var(--slate-950);
-      font-size:clamp(1rem, 2vw, 1.25rem);
-      line-height:1.05;
-    }
-
-    .actions {
-      display:flex;
-      flex-wrap:wrap;
-      gap:.6rem;
-      justify-content:flex-end;
-    }
-
-    .btn {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:.45rem;
-      min-height:44px;
-      padding:.75rem 1rem;
-      border:2px solid transparent;
-      font-weight:950;
-      cursor:pointer;
-      border-radius:0;
-      font-family:inherit;
-      line-height:1;
-      text-align:center;
-      white-space:nowrap;
-    }
-
-    .btn-primary {
-      background:linear-gradient(135deg, var(--orange-500), var(--orange-700));
-      color:#fff;
-    }
-
-    .btn-dark {
-      background:var(--slate-950);
-      color:#fff;
-    }
-
-    .btn-light {
-      background:#fff;
-      color:var(--slate-900);
-      border-color:var(--slate-200);
-    }
+    .topbar-inner { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1rem 0; }
+    .brand { font-weight:950; letter-spacing:-.035em; color:var(--slate-950); font-size:clamp(1rem, 2vw, 1.25rem); line-height:1.05; }
+    .actions { display:flex; flex-wrap:wrap; gap:.6rem; justify-content:flex-end; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; min-height:44px; padding:.75rem 1rem; border:2px solid transparent; font-weight:950; cursor:pointer; border-radius:0; font-family:inherit; line-height:1; text-align:center; white-space:nowrap; }
+    .btn-primary { background:linear-gradient(135deg, var(--orange-500), var(--orange-700)); color:#fff; }
+    .btn-dark { background:var(--slate-950); color:#fff; }
+    .btn-light { background:#fff; color:var(--slate-900); border-color:var(--slate-200); }
 
     main { padding:2rem 0 4rem; }
+    .report-shell { background:#fff; border:2px solid var(--slate-950); box-shadow:var(--shadow); }
+    .hero-report { display:grid; grid-template-columns:minmax(0, 1.04fr) minmax(300px, .96fr); gap:1.5rem; padding:clamp(1.2rem, 4vw, 2rem); background:radial-gradient(circle at 100% 0%, rgba(249,115,22,.16), transparent 28%), linear-gradient(135deg,#fff 0%,#fff 55%,var(--orange-50) 100%); border-bottom:var(--line); }
+    .eyebrow { display:inline-flex; width:fit-content; background:var(--orange-50); border:1px solid #fed7aa; color:var(--orange-700); padding:.55rem .8rem; font-size:.78rem; font-weight:950; letter-spacing:.08em; text-transform:uppercase; margin-bottom:1rem; }
+    h1,h2,h3 { margin:0; letter-spacing:-.05em; line-height:1; color:var(--slate-950); }
+    h1 { font-size:clamp(2.35rem, 5.8vw, 4.85rem); max-width:13ch; margin-bottom:1rem; }
+    h2 { font-size:clamp(1.7rem, 4vw, 2.6rem); margin-bottom:.85rem; }
+    h3 { font-size:1.17rem; letter-spacing:-.025em; margin-bottom:.55rem; }
+    .hero-intro { font-size:1.05rem; max-width:72ch; color:var(--slate-700); font-weight:650; }
+    .big-number { background:var(--red-900); color:#fff; padding:1.25rem; border:2px solid #ef4444; align-self:stretch; display:flex; flex-direction:column; justify-content:center; }
+    .big-number span { text-transform:uppercase; letter-spacing:.08em; font-size:.8rem; color:#fecaca; font-weight:950; margin-bottom:.4rem; }
+    .big-number strong { font-size:clamp(3rem, 7vw, 5.25rem); line-height:.9; letter-spacing:-.08em; color:#fff; overflow-wrap:anywhere; }
+    .big-number p { color:#fecaca; font-weight:800; margin:.8rem 0 0; }
 
-    .report-shell {
-      background:#fff;
-      border:2px solid var(--slate-950);
-      box-shadow:var(--shadow);
-    }
+    .body-grid { display:grid; grid-template-columns:minmax(0, 1fr) 320px; gap:1.25rem; padding:clamp(1.2rem, 4vw, 2rem); }
+    .section { border:var(--line); background:#fff; padding:1.15rem; margin-bottom:1rem; break-inside:avoid; }
+    .section.dark { background:var(--slate-950); color:#fff; border-color:var(--slate-800); }
+    .section.dark p,.section.dark li { color:var(--slate-300); }
+    .section.dark h2,.section.dark h3,.section.dark strong { color:#fff; }
 
-    .hero-report {
-      display:grid;
-      grid-template-columns:minmax(0, 1.05fr) minmax(300px, .95fr);
-      gap:1.5rem;
-      padding:clamp(1.2rem, 4vw, 2rem);
-      background:
-        radial-gradient(circle at 100% 0%, rgba(249,115,22,.16), transparent 28%),
-        linear-gradient(135deg, #fff 0%, #fff 55%, var(--orange-50) 100%);
-      border-bottom:var(--line);
-    }
+    .grid { display:grid; gap:.75rem; margin-top:1rem; }
+    .grid-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .grid-3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .grid-4 { grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .grid-5 { grid-template-columns:repeat(5,minmax(0,1fr)); }
+    .grid-6 { grid-template-columns:repeat(6,minmax(0,1fr)); }
 
-    .eyebrow {
-      display:inline-flex;
-      width:fit-content;
-      background:var(--orange-50);
-      border:1px solid #fed7aa;
-      color:var(--orange-700);
-      padding:.55rem .8rem;
-      font-size:.78rem;
-      font-weight:950;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      margin-bottom:1rem;
-    }
+    .card { background:var(--slate-50); border:var(--line); padding:1rem; min-width:0; }
+    .card.orange { background:var(--orange-50); border-color:#fed7aa; }
+    .card.green { background:var(--green-100); border-color:#86efac; }
+    .card.blue { background:var(--blue-100); border-color:#93c5fd; }
+    .card.red { background:var(--red-100); border-color:#fca5a5; }
+    .card.dark { background:linear-gradient(135deg,var(--slate-950),var(--slate-800)); color:#fff; border-color:var(--orange-600); }
+    .card.dark p,.card.dark span { color:var(--slate-300); }
+    .card.dark strong,.card.dark h3 { color:#fff; }
+    .card span.label, .metric-label { display:block; text-transform:uppercase; letter-spacing:.08em; color:var(--slate-500); font-size:.72rem; font-weight:950; margin-bottom:.45rem; }
+    .card strong.metric { display:block; color:var(--slate-950); font-size:1.55rem; line-height:1; letter-spacing:-.05em; margin-bottom:.45rem; overflow-wrap:anywhere; }
+    .card p { margin:0; font-size:.92rem; }
+    .large-metric { font-size:1.8rem !important; }
 
-    h1, h2, h3 {
-      margin:0;
-      letter-spacing:-.05em;
-      line-height:1;
-      color:var(--slate-950);
-    }
+    .audit-note { background:var(--orange-50); border-left:5px solid var(--orange-600); padding:1rem; margin-top:1rem; color:var(--slate-700); font-weight:760; }
+    .executive-callout { background:linear-gradient(135deg,var(--slate-950),var(--slate-800)); color:#fff; border-left:8px solid var(--orange-600); padding:1.2rem; margin-top:1rem; }
+    .executive-callout p { color:var(--slate-300); margin-bottom:0; }
+    .executive-callout strong { color:#fff; }
 
-    h1 {
-      font-size:clamp(2.45rem, 5.8vw, 4.9rem);
-      max-width:12ch;
-      margin-bottom:1rem;
-    }
+    .metric-card { display:grid; grid-template-columns:minmax(0, .72fr) minmax(150px, .28fr); gap:.85rem; align-items:start; background:var(--slate-50); border:var(--line); padding:1rem; }
+    .metric-card strong { font-size:1.22rem; text-align:right; margin-bottom:0; overflow-wrap:anywhere; }
+    .metric-card p { margin:.25rem 0 0; font-size:.92rem; }
 
-    h2 {
-      font-size:clamp(1.7rem, 4vw, 2.6rem);
-      margin-bottom:.85rem;
-    }
+    .score-card { background:linear-gradient(135deg,var(--slate-950),var(--slate-800)); color:#fff; padding:1.25rem; border:2px solid var(--orange-600); margin-top:1rem; }
+    .score-card strong { display:block; font-size:clamp(3rem,7vw,4.6rem); line-height:.9; letter-spacing:-.08em; margin:.3rem 0; color:#fff; }
+    .score-card p { color:var(--slate-300); margin-bottom:0; }
 
-    h3 {
-      font-size:1.2rem;
-      letter-spacing:-.025em;
-      margin-bottom:.55rem;
-    }
+    .risk-card { display:grid; gap:.5rem; min-height:142px; background:var(--slate-50); border:var(--line); padding:1rem; }
+    .risk-top { display:flex; align-items:flex-start; justify-content:space-between; gap:.75rem; }
+    .risk-card h3 { font-size:1.02rem; line-height:1.15; }
+    .risk-card p { margin:0; font-size:.92rem; }
+    .risk-badge { display:inline-flex; align-items:center; justify-content:center; min-width:84px; padding:.4rem .55rem; font-weight:950; font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; border:1px solid var(--slate-200); background:var(--slate-100); color:var(--slate-700); }
+    .risk-badge.low { background:var(--green-100); color:var(--green-900); border-color:#86efac; }
+    .risk-badge.medium { background:var(--amber-100); color:#92400e; border-color:#fcd34d; }
+    .risk-badge.high { background:var(--red-100); color:var(--red-900); border-color:#fca5a5; }
 
-    .hero-intro {
-      font-size:1.05rem;
-      max-width:72ch;
-      color:var(--slate-700);
-      font-weight:650;
-    }
+    .driver-card { display:grid; gap:.75rem; margin-top:1rem; background:var(--slate-50); border:var(--line); padding:1rem; }
+    .driver-row { display:grid; grid-template-columns:minmax(180px,.42fr) 1fr minmax(112px,.25fr); gap:.75rem; align-items:center; }
+    .driver-label { font-weight:950; color:var(--slate-950); line-height:1.1; }
+    .driver-bar { height:16px; background:var(--slate-200); overflow:hidden; border:1px solid var(--slate-200); }
+    .driver-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--orange-500),var(--orange-700)); transition:width .35s ease; }
+    .driver-value { text-align:right; font-weight:950; color:var(--slate-950); overflow-wrap:anywhere; }
 
-    .big-number {
-      background:var(--red-900);
-      color:#fff;
-      padding:1.25rem;
-      border:2px solid #ef4444;
-      align-self:stretch;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
+    .priority-signal-list { list-style:none; padding-left:0; display:grid; gap:.6rem; margin:1rem 0 0; }
+    .priority-signal-list li { display:grid; grid-template-columns:34px 1fr; gap:.7rem; align-items:start; background:var(--orange-50); border:1px solid #fed7aa; padding:.8rem; font-weight:760; color:var(--slate-700); }
+    .priority-signal-list li:before { content:"!"; width:28px; height:28px; display:grid; place-items:center; background:var(--orange-600); color:#fff; font-weight:950; }
 
-    .big-number span {
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      font-size:.8rem;
-      color:#fecaca;
-      font-weight:950;
-      margin-bottom:.4rem;
-    }
+    .status-pill { display:inline-flex; width:fit-content; align-items:center; justify-content:center; padding:.4rem .55rem; font-size:.72rem; font-weight:950; text-transform:uppercase; letter-spacing:.06em; border:1px solid var(--slate-200); background:var(--slate-100); color:var(--slate-700); margin-bottom:.55rem; }
+    .status-pill.no { background:var(--red-100); color:var(--red-900); border-color:#fca5a5; }
+    .status-pill.partial { background:var(--amber-100); color:#92400e; border-color:#fcd34d; }
+    .status-pill.yes { background:var(--green-100); color:var(--green-900); border-color:#86efac; }
 
-    .big-number strong {
-      font-size:clamp(3rem, 7vw, 5.25rem);
-      line-height:.9;
-      letter-spacing:-.08em;
-      color:#fff;
-      overflow-wrap:anywhere;
-    }
-
-    .big-number p {
-      color:#fecaca;
-      font-weight:800;
-      margin:.8rem 0 0;
-    }
-
-    .body-grid {
-      display:grid;
-      grid-template-columns:minmax(0, 1fr) 320px;
-      gap:1.25rem;
-      padding:clamp(1.2rem, 4vw, 2rem);
-    }
-
-    .section {
-      border:var(--line);
-      background:#fff;
-      padding:1.15rem;
-      margin-bottom:1rem;
-      break-inside:avoid;
-    }
-
-    .section.dark {
-      background:var(--slate-950);
-      color:#fff;
-      border-color:var(--slate-800);
-    }
-
-    .section.dark p,
-    .section.dark li {
-      color:var(--slate-300);
-    }
-
-    .section.dark h2,
-    .section.dark h3 {
-      color:#fff;
-    }
-
-    .summary-grid,
-    .kpi-grid,
-    .risk-grid,
-    .benefit-grid,
-    .assumption-grid,
-    .roadmap-grid,
-    .clarity-grid,
-    .interpretation-grid,
-    .driver-grid,
-    .scenario-grid,
-    .meeting-grid,
-    .sprint-grid,
-    .sensitivity-grid,
-    .metric-grid,
-    .scorecard-grid,
-    .asset-grid {
-      display:grid;
-      gap:.75rem;
-      margin-top:1rem;
-    }
-
-    .summary-grid { grid-template-columns:repeat(3, minmax(0, 1fr)); }
-    .kpi-grid { grid-template-columns:repeat(4, minmax(0, 1fr)); }
-    .risk-grid, .benefit-grid, .assumption-grid, .sprint-grid, .sensitivity-grid, .asset-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); }
-    .roadmap-grid, .interpretation-grid, .scenario-grid { grid-template-columns:repeat(3, minmax(0, 1fr)); }
-    .clarity-grid { grid-template-columns:repeat(4, minmax(0, 1fr)); }
-    .meeting-grid { grid-template-columns:repeat(5, minmax(0, 1fr)); }
-    .metric-grid { grid-template-columns:1fr; }
-    .scorecard-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); }
-
-    .summary-card,
-    .kpi,
-    .risk-card,
-    .benefit-card,
-    .assumption-card,
-    .roadmap-card,
-    .clarity-card,
-    .insight-card,
-    .driver-card,
-    .scenario-card,
-    .meeting-card,
-    .sprint-card,
-    .sensitivity-card,
-    .metric-card,
-    .scorecard-card,
-    .asset-card,
-    .side-card {
-      background:var(--slate-50);
-      border:var(--line);
-      padding:1rem;
-      min-width:0;
-    }
-
-    .summary-card,
-    .clarity-card,
-    .scenario-card {
-      min-height:145px;
-    }
-
-    .summary-card span,
-    .kpi span,
-    .clarity-card span,
-    .insight-card span,
-    .scenario-card span,
-    .sensitivity-card span,
-    .metric-card span,
-    .side-card small,
-    .asset-card span {
-      display:block;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      color:var(--slate-500);
-      font-size:.72rem;
-      font-weight:950;
-      margin-bottom:.45rem;
-    }
-
-    .summary-card strong,
-    .kpi strong,
-    .clarity-card strong,
-    .insight-card strong,
-    .scenario-card strong,
-    .sensitivity-card strong,
-    .metric-card strong {
-      display:block;
-      color:var(--slate-950);
-      font-size:1.45rem;
-      line-height:1;
-      letter-spacing:-.05em;
-      margin-bottom:.45rem;
-      overflow-wrap:anywhere;
-    }
-
-    .summary-card strong { font-size:1.7rem; }
-    .kpi { min-height:112px; }
-    .kpi strong { font-size:1.3rem; }
-
-    .summary-card p,
-    .clarity-card p,
-    .insight-card p,
-    .scenario-card p,
-    .meeting-card p,
-    .sprint-card p,
-    .sensitivity-card p,
-    .asset-card p,
-    .metric-card p,
-    .scorecard-card p {
-      margin:0;
-      font-size:.92rem;
-    }
-
-    .audit-note {
-      background:var(--orange-50);
-      border-left:5px solid var(--orange-600);
-      padding:1rem;
-      margin-top:1rem;
-      color:var(--slate-700);
-      font-weight:760;
-    }
-
-    .executive-callout {
-      background:linear-gradient(135deg, var(--slate-950), var(--slate-800));
-      color:#fff;
-      border-left:8px solid var(--orange-600);
-      padding:1.2rem;
-      margin-top:1rem;
-    }
-
-    .executive-callout p {
-      color:var(--slate-300);
-      margin-bottom:0;
-    }
-
-    .executive-callout strong {
-      color:#fff;
-    }
-
-    .metric-card {
-      display:grid;
-      grid-template-columns:minmax(0, .72fr) minmax(140px, .28fr);
-      gap:.85rem;
-      align-items:start;
-    }
-
-    .metric-card strong {
-      font-size:1.2rem;
-      text-align:right;
-      margin-bottom:0;
-    }
-
-    .metric-card p {
-      margin:.25rem 0 0;
-    }
-
-    .score-card {
-      background:linear-gradient(135deg, var(--slate-950), var(--slate-800));
-      color:#fff;
-      padding:1.25rem;
-      border:2px solid var(--orange-600);
-      margin-top:1rem;
-    }
-
-    .score-card strong {
-      display:block;
-      font-size:4rem;
-      line-height:.9;
-      letter-spacing:-.08em;
-      margin:.3rem 0;
-      color:#fff;
-    }
-
-    .score-card p {
-      color:var(--slate-300);
-      margin-bottom:0;
-    }
-
-    .risk-card {
-      display:grid;
-      gap:.5rem;
-      min-height:136px;
-    }
-
-    .risk-top {
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:.75rem;
-    }
-
-    .risk-card h3 {
-      font-size:1.02rem;
-      line-height:1.15;
-    }
-
-    .risk-card p {
-      margin:0;
-      font-size:.92rem;
-    }
-
-    .risk-badge {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:84px;
-      padding:.4rem .55rem;
-      font-weight:950;
-      font-size:.72rem;
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      border:1px solid var(--slate-200);
-      background:var(--slate-100);
-      color:var(--slate-700);
-    }
-
-    .risk-badge.low {
-      background:var(--green-100);
-      color:var(--green-900);
-      border-color:#86efac;
-    }
-
-    .risk-badge.medium {
-      background:var(--amber-100);
-      color:#92400e;
-      border-color:#fcd34d;
-    }
-
-    .risk-badge.high {
-      background:var(--red-100);
-      color:var(--red-900);
-      border-color:#fca5a5;
-    }
-
-    .driver-card {
-      display:grid;
-      gap:.75rem;
-      margin-top:1rem;
-    }
-
-    .driver-row {
-      display:grid;
-      grid-template-columns:minmax(180px,.45fr) 1fr minmax(110px,.25fr);
-      gap:.75rem;
-      align-items:center;
-    }
-
-    .driver-label {
-      font-weight:950;
-      color:var(--slate-950);
-      line-height:1.1;
-    }
-
-    .driver-bar {
-      height:16px;
-      background:var(--slate-200);
-      overflow:hidden;
-      border:1px solid var(--slate-200);
-    }
-
-    .driver-fill {
-      height:100%;
-      width:0%;
-      background:linear-gradient(90deg, var(--orange-500), var(--orange-700));
-      transition:width .35s ease;
-    }
-
-    .driver-value {
-      text-align:right;
-      font-weight:950;
-      color:var(--slate-950);
-      overflow-wrap:anywhere;
-    }
-
-    .priority-signal-list {
-      list-style:none;
-      padding-left:0;
-      display:grid;
-      gap:.6rem;
-      margin:1rem 0 0;
-    }
-
-    .priority-signal-list li {
-      display:grid;
-      grid-template-columns:34px 1fr;
-      gap:.7rem;
-      align-items:start;
-      background:var(--orange-50);
-      border:1px solid #fed7aa;
-      padding:.8rem;
-      font-weight:760;
-      color:var(--slate-700);
-    }
-
-    .priority-signal-list li:before {
-      content:"!";
-      width:28px;
-      height:28px;
-      display:grid;
-      place-items:center;
-      background:var(--orange-600);
-      color:#fff;
-      font-weight:950;
-    }
-
-    .payback-band {
-      display:grid;
-      grid-template-columns:minmax(0, 1fr) minmax(240px, .6fr);
-      gap:1rem;
-      align-items:stretch;
-      background:linear-gradient(135deg, var(--slate-950), var(--slate-800));
-      color:#fff;
-      border:2px solid var(--orange-600);
-      padding:1.15rem;
-      margin-top:1rem;
-    }
-
-    .payback-band h3 {
-      color:#fff;
-    }
-
-    .payback-band p {
-      color:var(--slate-300);
-    }
-
-    .payback-number {
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.18);
-      padding:1rem;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
-
-    .payback-number > span {
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      color:#fed7aa;
-      font-size:.72rem;
-      font-weight:950;
-    }
-
-    .payback-number strong {
-      display:block;
-      font-size:clamp(3.2rem, 6vw, 5rem);
-      line-height:.82;
-      letter-spacing:-.08em;
-      color:#fff;
-      margin-top:.25rem;
-      overflow-wrap:anywhere;
-    }
-
+    .payback-band { display:grid; grid-template-columns:minmax(0,1fr) minmax(240px,.6fr); gap:1rem; align-items:stretch; background:linear-gradient(135deg,var(--slate-950),var(--slate-800)); color:#fff; border:2px solid var(--orange-600); padding:1.15rem; margin-top:1rem; }
+    .payback-band h3 { color:#fff; }
+    .payback-band p { color:var(--slate-300); }
+    .payback-number { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); padding:1rem; display:flex; flex-direction:column; justify-content:center; }
+    .payback-number > span { text-transform:uppercase; letter-spacing:.08em; color:#fed7aa; font-size:.72rem; font-weight:950; }
+    .payback-number strong { display:block; font-size:clamp(3.2rem,6vw,5rem); line-height:.82; letter-spacing:-.08em; color:#fff; margin-top:.25rem; overflow-wrap:anywhere; }
     .payback-unit { font-size:.52em; }
 
-    .priority-list {
-      counter-reset:step;
-      list-style:none;
-      padding-left:0;
-      margin-top:1rem;
-    }
+    .number-list { counter-reset:step; list-style:none; padding-left:0; margin:1rem 0 0; }
+    .number-list li { counter-increment:step; display:grid; grid-template-columns:42px 1fr; gap:.75rem; background:var(--slate-50); border:var(--line); padding:.85rem; margin-bottom:.65rem; font-weight:700; }
+    .number-list li:before { content:counter(step); width:34px; height:34px; display:grid; place-items:center; background:var(--orange-600); color:#fff; font-weight:950; }
 
-    .priority-list li {
-      counter-increment:step;
-      display:grid;
-      grid-template-columns:42px 1fr;
-      gap:.75rem;
-      background:var(--slate-50);
-      border:var(--line);
-      padding:.85rem;
-      margin-bottom:.65rem;
-      font-weight:700;
-    }
-
-    .priority-list li:before {
-      content:counter(step);
-      width:34px;
-      height:34px;
-      display:grid;
-      place-items:center;
-      background:var(--orange-600);
-      color:#fff;
-      font-weight:950;
-    }
-
-    .meeting-card strong,
-    .sprint-card strong,
-    .asset-card strong,
-    .scorecard-card strong {
-      display:block;
-      color:var(--slate-950);
-      margin-bottom:.35rem;
-      line-height:1.1;
-    }
-
-    .meeting-card small,
-    .sprint-card small,
-    .scorecard-card small {
-      display:inline-flex;
-      background:var(--slate-950);
-      color:#fff;
-      padding:.3rem .5rem;
-      font-weight:950;
-      font-size:.7rem;
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      margin-bottom:.6rem;
-    }
-
-    .sensitivity-card {
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:.75rem;
-      align-items:start;
-    }
-
-    .sensitivity-card div strong {
-      font-size:1rem;
-      letter-spacing:-.02em;
-      margin-bottom:.2rem;
-    }
-
-    .sensitivity-card > strong {
-      color:var(--orange-700);
-      font-size:1.35rem;
-      white-space:nowrap;
-    }
-
-    .check-options {
-      display:flex;
-      gap:.45rem;
-      align-items:center;
-      flex-wrap:wrap;
-      margin-top:.75rem;
-    }
-
-    .check-box {
-      display:inline-block;
-      width:18px;
-      height:18px;
-      border:2px solid var(--slate-400);
-      vertical-align:middle;
-      background:#fff;
-    }
-
-    .check-label {
-      display:inline-flex;
-      align-items:center;
-      gap:.35rem;
-      margin-right:.8rem;
-      color:var(--slate-700);
-      font-weight:850;
-      font-size:.9rem;
-    }
-
-    .sidebar {
-      position:sticky;
-      top:82px;
-      align-self:start;
-      display:grid;
-      gap:1rem;
-    }
-
-    .cta-card {
-      background:var(--orange-50);
-      border:2px solid var(--orange-600);
-      padding:1rem;
-    }
-
-    .cta-card p {
-      margin-bottom:1rem;
-    }
-
-    .missing {
-      max-width:760px;
-      margin:3rem auto;
-      background:#fff;
-      border:2px solid var(--slate-950);
-      padding:2rem;
-      box-shadow:var(--shadow);
-    }
-
-    .footer {
-      border-top:var(--line);
-      padding:1.5rem 0;
-      color:var(--slate-500);
-      text-align:center;
-      font-weight:700;
-    }
-
-    .print-only-summary {
-      display:none;
-    }
+    .sidebar { position:sticky; top:82px; align-self:start; display:grid; gap:1rem; }
+    .cta-card { background:var(--orange-50); border:2px solid var(--orange-600); padding:1rem; }
+    .cta-card p { margin-bottom:1rem; }
+    .side-card { background:var(--slate-50); border:var(--line); padding:1rem; min-width:0; }
+    .side-card small { display:block; text-transform:uppercase; letter-spacing:.08em; color:var(--slate-500); font-size:.72rem; font-weight:950; margin-bottom:.45rem; }
+    .missing { max-width:760px; margin:3rem auto; background:#fff; border:2px solid var(--slate-950); padding:2rem; box-shadow:var(--shadow); }
+    .footer { border-top:var(--line); padding:1.5rem 0; color:var(--slate-500); text-align:center; font-weight:700; }
 
     @media (max-width:1040px) {
-      .hero-report,
-      .body-grid,
-      .summary-grid,
-      .risk-grid,
-      .benefit-grid,
-      .roadmap-grid,
-      .payback-band,
-      .assumption-grid,
-      .clarity-grid,
-      .interpretation-grid,
-      .scenario-grid,
-      .meeting-grid,
-      .sprint-grid,
-      .sensitivity-grid,
-      .asset-grid,
-      .scorecard-grid {
-        grid-template-columns:1fr;
-      }
-
-      .kpi-grid {
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-
-      .driver-row,
-      .metric-card {
-        grid-template-columns:1fr;
-      }
-
-      .driver-value,
-      .metric-card strong {
-        text-align:left;
-      }
-
-      .sidebar {
-        position:static;
-      }
-
-      h1 {
-        max-width:100%;
-      }
+      .hero-report,.body-grid,.grid-2,.grid-3,.grid-4,.grid-5,.grid-6,.payback-band { grid-template-columns:1fr; }
+      .driver-row,.metric-card { grid-template-columns:1fr; }
+      .driver-value,.metric-card strong { text-align:left; }
+      .sidebar { position:static; }
+      h1 { max-width:100%; }
     }
-
     @media (max-width:640px) {
-      .kpi-grid,
-      .clarity-grid {
-        grid-template-columns:1fr;
-      }
-
-      .topbar-inner {
-        align-items:flex-start;
-        flex-direction:column;
-      }
-
-      .actions {
-        width:100%;
-        justify-content:stretch;
-      }
-
-      .btn {
-        width:100%;
-        white-space:normal;
-      }
-
-      .risk-top {
-        flex-direction:column;
-      }
-
-      .sensitivity-card {
-        grid-template-columns:1fr;
-      }
-
-      .sensitivity-card > strong {
-        white-space:normal;
-      }
+      .topbar-inner { align-items:flex-start; flex-direction:column; }
+      .actions { width:100%; justify-content:stretch; }
+      .btn { width:100%; white-space:normal; }
+      .risk-top { flex-direction:column; }
     }
-
     @media print {
-      .topbar,
-      .actions,
-      .no-print,
-      .footer {
-        display:none !important;
-      }
-
-      body {
-        background:#fff;
-      }
-
-      main {
-        padding:0;
-      }
-
-      .container {
-        width:100%;
-      }
-
-      .report-shell {
-        border:0;
-        box-shadow:none;
-      }
-
-      .hero-report,
-      .body-grid {
-        padding:.65rem;
-      }
-
-      .section {
-        page-break-inside:avoid;
-      }
-
-      .print-only-summary {
-        display:block;
-      }
-
-      a {
-        color:inherit;
-        text-decoration:none;
-      }
+      .topbar,.actions,.no-print,.footer { display:none !important; }
+      body { background:#fff; }
+      main { padding:0; }
+      .container { width:100%; }
+      .report-shell { border:0; box-shadow:none; }
+      .hero-report,.body-grid { padding:.65rem; }
+      .section { page-break-inside:avoid; }
+      a { color:inherit; text-decoration:none; }
     }
   </style>
 </head>
-
 <body>
   <header class="topbar no-print">
     <div class="container topbar-inner">
-      <div class="brand" id="topbarBrand">FabProfit Baseline Margin Exposure Report</div>
+      <div class="brand" id="topbarBrand">FabProfit Company Baseline Report</div>
       <div class="actions">
         <a class="btn btn-light" href="index.html#baseline-calculator">Back To Calculator</a>
         <button class="btn btn-primary" id="printBtn" type="button">Print / Save PDF</button>
@@ -899,14 +226,13 @@
           <div>
             <div class="eyebrow">Private Executive Baseline Report</div>
             <h1><span data-field="first_name">Your</span>, here is the FabProfit baseline for <span data-field="company_name">your company</span>.</h1>
-            <p class="hero-intro" id="heroIntro">This report uses the numbers supplied for your company to create a conservative baseline for estimating efficiency, quote governance, and preventable margin exposure.</p>
-            <p><strong>Important:</strong> this is not a promise, guarantee, valuation opinion, or financial advice. It is a planning report designed to help leadership see the operating case for a repeatable estimating and quote-protection system.</p>
+            <p class="hero-intro" id="heroIntro">This report uses the numbers supplied for your company to create a conservative baseline for estimating efficiency, quote governance, and margin exposure.</p>
+            <p><strong>Important:</strong> this report is not a guarantee, valuation opinion, financial advice, or promise of profit. It is a planning report. Its job is to show where the company data suggests estimating discipline may create better visibility, better quote control, and better margin protection.</p>
           </div>
-
           <div class="big-number">
             <span>Annual Quote-Process Exposure</span>
             <strong data-field="annual_baseline_drag_formatted">$0</strong>
-            <p>Estimating labour investment, quote revision drag, and conservative margin exposure based on the inputs submitted for <span data-field="company_name">your company</span>.</p>
+            <p>Loaded estimating effort, review time, revision drag, known loss floor, modeled field exposure, outsourced-work exposure, and conservative margin exposure based on the submitted inputs.</p>
           </div>
         </section>
 
@@ -914,500 +240,207 @@
           <div>
             <section class="section">
               <h2>Executive summary for <span data-field="company_name">your company</span></h2>
-              <p id="executiveSummaryIntro">The main issue is not whether your estimators are working hard. The issue is whether the company has a repeatable estimating standard that turns drawings, labour assumptions, material buyout, outsourced scope, risk, margin, and quote language into a controlled business decision.</p>
-              <p>Based on the inputs submitted, this report estimates annual quote-process exposure of <strong data-field="annual_baseline_drag_formatted">$0</strong>. The conservative recoverable value is <strong data-field="conservative_recoverable_value_formatted">$0</strong> per year. That recoverable value is not based on fixing every problem. It assumes a 35% improvement in estimating labour and revision capacity, plus recovery of 25% of the conservative margin leakage factor.</p>
-
-              <div class="summary-grid">
-                <div class="summary-card">
-                  <span>Annual Quote-Process Exposure</span>
-                  <strong data-field="annual_baseline_drag_formatted">$0</strong>
-                  <p>Current estimating labour investment, revision drag, and conservative margin exposure.</p>
-                </div>
-                <div class="summary-card">
-                  <span>Recoverable Annual Value</span>
-                  <strong data-field="conservative_recoverable_value_formatted">$0</strong>
-                  <p>Conservative value if the process is standardized and the most obvious leakage is reduced.</p>
-                </div>
-                <div class="summary-card">
-                  <span>Estimated Payback</span>
-                  <strong><span data-field="payback_days">0</span> days</strong>
-                  <p>Estimated time for recoverable value to cover a <span data-field="system_price_formatted">$0</span> system investment.</p>
-                </div>
+              <p id="executiveSummaryIntro">The report interprets the submitted data against the FabProfit System logic: the estimate is the first version of the job plan, and the quote should define scope, labour, material buyout, outsourced work, risk ownership, final margin, and handoff before the shop inherits the job.</p>
+              <p id="executiveSummaryNumbers">Based on the inputs submitted, this report estimates annual quote-process exposure of <strong data-field="annual_baseline_drag_formatted">$0</strong> and conservative annual recoverable value of <strong data-field="conservative_recoverable_value_formatted">$0</strong>.</p>
+              <div class="grid grid-3">
+                <div class="card"><span class="label">Quote-Process Exposure</span><strong class="metric large-metric" data-field="annual_baseline_drag_formatted">$0</strong><p>Process load, known loss floor, field exposure, outsourced work exposure, and modeled margin exposure.</p></div>
+                <div class="card"><span class="label">Recoverable Annual Value</span><strong class="metric large-metric" data-field="conservative_recoverable_value_formatted">$0</strong><p>Conservative modeled value from partial process improvement and partial margin-exposure recovery.</p></div>
+                <div class="card"><span class="label">Process Maturity</span><strong class="metric large-metric" data-field="maturity_score_formatted">0%</strong><p>Internal controls across quote release, labour buckets, material buyout, risk register, quote language, and post-job review.</p></div>
               </div>
-
-              <div class="audit-note" id="summaryAuditNote">For a sophisticated operator or PE owner, this is not a software conversation first. It is an operating discipline conversation: where does quote quality vary, where do assumptions live, who controls risk, and how much margin leaves before production starts?</div>
+              <div class="audit-note" id="summaryAuditNote">This report is deliberately conservative. It does not claim FabProfit will recover every dollar. It shows where a repeatable estimating system can reduce invisible misses and give leadership a cleaner operating standard.</div>
             </section>
 
             <section class="section">
-              <h2>What this number actually means</h2>
-              <p>The number on the cover is not saying every estimating dollar is wasted. Estimating is necessary. The value is in separating necessary effort from avoidable friction and unmanaged quote risk.</p>
-
-              <div class="clarity-grid">
-                <div class="clarity-card">
-                  <span>Necessary process load</span>
-                  <strong data-field="estimating_labor_cost_formatted">$0</strong>
-                  <p>Loaded annual estimating labour. This should become more consistent, reviewed, and useful, not simply cut.</p>
-                </div>
-                <div class="clarity-card">
-                  <span>Avoidable friction</span>
-                  <strong data-field="revision_cost_formatted">$0</strong>
-                  <p>Revision and rework cost. This is where unclear inputs, missing standards, and repeated quote handling often show up.</p>
-                </div>
-                <div class="clarity-card">
-                  <span>Margin exposure</span>
-                  <strong data-field="conservative_margin_leakage_formatted">$0</strong>
-                  <p>A conservative exposure factor for missed scope, underpriced field reality, weak assumptions, and unpriced risk.</p>
-                </div>
-                <div class="clarity-card">
-                  <span>Recoverable value</span>
-                  <strong data-field="conservative_recoverable_value_formatted">$0</strong>
-                  <p>A modest improvement target, not a guarantee. This is the practical business case for installing discipline.</p>
-                </div>
-              </div>
-
-              <div class="executive-callout">
-                <p><strong>Plain-English takeaway for <span data-field="company_name">your company</span>:</strong> the opportunity is not to make estimators rush. The opportunity is to make every quoting hour produce a clearer cost basis, a cleaner scope boundary, a stronger risk decision, and a better handoff to operations.</p>
+              <h2>What the submitted company data shows</h2>
+              <p>The enhanced calculator now separates operating volume, quote load, revision friction, known bad-job losses, field exposure, outsourced-work exposure, and process maturity. That makes the report more accurate than a generic “leakage percentage” model.</p>
+              <div class="grid grid-4">
+                <div class="card"><span class="label">Annual revenue</span><strong class="metric" data-field="annual_revenue_formatted">$0</strong><p>Revenue base used to size the exposure model.</p></div>
+                <div class="card"><span class="label">Annual quoted value</span><strong class="metric" data-field="annual_quoted_revenue_formatted">$0</strong><p>Total work quoted, including won and lost opportunities.</p></div>
+                <div class="card"><span class="label">Annual quotes</span><strong class="metric" data-field="annual_quotes">0</strong><p>Total quoting cycles per year.</p></div>
+                <div class="card"><span class="label">Average quoted value</span><strong class="metric" data-field="average_quoted_value_formatted">$0</strong><p>Useful for understanding what a small miss on one average job can cost.</p></div>
+                <div class="card"><span class="label">Estimators / quote builders</span><strong class="metric" data-field="estimator_count">0</strong><p>Used to assess workload and key-person dependency.</p></div>
+                <div class="card"><span class="label">Quotes per estimator / month</span><strong class="metric" data-field="quotes_per_estimator_per_month">0</strong><p>Higher load increases the need for standards and final review.</p></div>
+                <div class="card"><span class="label">Revenue per estimator</span><strong class="metric" data-field="revenue_per_estimator_formatted">$0</strong><p>A rough leverage signal for the estimating function.</p></div>
+                <div class="card"><span class="label">Target gross margin</span><strong class="metric" data-field="target_gross_margin_formatted">0%</strong><p>Used to frame the scale of pricing discipline.</p></div>
               </div>
             </section>
 
             <section class="section">
-              <h2>Your entered operating baseline</h2>
-              <div class="kpi-grid">
-                <div class="kpi"><span>Company</span><strong data-field="company_name">Company</strong></div>
-                <div class="kpi"><span>Company Profile</span><strong data-field="company_type">Company</strong></div>
-                <div class="kpi"><span>Annual Revenue</span><strong data-field="annual_revenue_formatted">$0</strong></div>
-                <div class="kpi"><span>Quoted Revenue</span><strong data-field="annual_quoted_revenue_formatted">$0</strong></div>
-                <div class="kpi"><span>Quotes Per Month</span><strong data-field="quotes_per_month">0</strong></div>
-                <div class="kpi"><span>Annual Quotes</span><strong data-field="annual_quotes">0</strong></div>
-                <div class="kpi"><span>Hours Per Quote</span><strong data-field="average_hours_per_quote">0</strong></div>
-                <div class="kpi"><span>Loaded Estimating Cost</span><strong data-field="loaded_estimating_cost_per_hour_formatted">$0/hr</strong></div>
-                <div class="kpi"><span>Target Gross Margin</span><strong data-field="target_gross_margin_formatted">0%</strong></div>
-                <div class="kpi"><span>Report Contact</span><strong data-field="first_name">Name</strong></div>
-                <div class="kpi"><span>Email</span><strong data-field="email">Email</strong></div>
-                <div class="kpi"><span>Role</span><strong data-field="role">Role</strong></div>
+              <h2>Exposure breakdown</h2>
+              <p>The goal is not to label all estimating activity as waste. Estimating is necessary. The value is in separating normal process load from avoidable rework, known loss patterns, field/install exposure, outsourced-work exposure, and uncontrolled risk.</p>
+              <div class="driver-card">
+                <div class="driver-row"><div class="driver-label">Normal quote build and review investment</div><div class="driver-bar"><div class="driver-fill" id="laborDriverBar"></div></div><div class="driver-value" id="laborDriverValue">$0</div></div>
+                <div class="driver-row"><div class="driver-label">Revision and rework drag</div><div class="driver-bar"><div class="driver-fill" id="revisionDriverBar"></div></div><div class="driver-value" id="revisionDriverValue">$0</div></div>
+                <div class="driver-row"><div class="driver-label">Known loss floor</div><div class="driver-bar"><div class="driver-fill" id="knownLossDriverBar"></div></div><div class="driver-value" id="knownLossDriverValue">$0</div></div>
+                <div class="driver-row"><div class="driver-label">Field/install friction exposure</div><div class="driver-bar"><div class="driver-fill" id="fieldDriverBar"></div></div><div class="driver-value" id="fieldDriverValue">$0</div></div>
+                <div class="driver-row"><div class="driver-label">Outsourced/vendor risk exposure</div><div class="driver-bar"><div class="driver-fill" id="outsourcedDriverBar"></div></div><div class="driver-value" id="outsourcedDriverValue">$0</div></div>
+                <div class="driver-row"><div class="driver-label">Conservative margin exposure used in model</div><div class="driver-bar"><div class="driver-fill" id="marginDriverBar"></div></div><div class="driver-value" id="marginDriverValue">$0</div></div>
               </div>
+              <div class="executive-callout"><p><strong>Plain-English takeaway:</strong> FabProfit is not trying to make estimators rush. It is designed to make every quoting hour produce clearer scope, better labour logic, better material buyout, named risk, proper margin math, and a cleaner handoff.</p></div>
             </section>
 
             <section class="section">
               <h2>The baseline calculation</h2>
-              <p>These numbers are deliberately conservative. The calculator does not assume every estimate is wrong. It identifies where recurring estimating work, quote rework, and even a small leakage factor can create a meaningful annual operating issue.</p>
+              <p>These are the primary calculated outputs passed from the enhanced calculator. They are shown as planning indicators, not guarantees.</p>
+              <div class="grid">
+                <div class="metric-card"><div><span class="metric-label">Quote build hours</span><p>Annual estimator time spent building numbers before review and rework.</p></div><strong data-field="quote_build_hours">0</strong></div>
+                <div class="metric-card"><div><span class="metric-label">Quote review and coordination hours</span><p>Annual review, coordination, checking, and management time.</p></div><strong data-field="quote_review_hours">0</strong></div>
+                <div class="metric-card"><div><span class="metric-label">Revision and rework hours</span><p>Hours consumed by reruns, clarification loops, repeated handling, and estimate rework.</p></div><strong data-field="revision_hours">0</strong></div>
+                <div class="metric-card"><div><span class="metric-label">Annual estimating hours</span><p>Total quote build, review, and revision hours.</p></div><strong data-field="annual_estimating_hours">0</strong></div>
+                <div class="metric-card"><div><span class="metric-label">Estimating labour cost</span><p>Loaded cost of quote build and review time.</p></div><strong data-field="estimating_labor_cost_formatted">$0</strong></div>
+                <div class="metric-card"><div><span class="metric-label">Revision cost</span><p>Loaded cost of avoidable quote friction.</p></div><strong data-field="revision_cost_formatted">$0</strong></div>
+                <div class="metric-card"><div><span class="metric-label">Known bad-job loss</span><p>Submitted count of underpriced jobs multiplied by average estimated loss.</p></div><strong data-field="known_bad_job_loss_formatted">$0</strong></div>
+                <div class="metric-card"><div><span class="metric-label">Unrecovered extras / change orders</span><p>Submitted annual value of extras or changes that were not recovered.</p></div><strong data-field="unrecovered_extras_formatted">$0</strong></div>
+                <div class="metric-card"><div><span class="metric-label">Known loss floor</span><p>Known bad-job loss plus unrecovered extras. The model does not let exposure fall below this number.</p></div><strong data-field="known_loss_floor_formatted">$0</strong></div>
+                <div class="metric-card"><div><span class="metric-label">Modeled margin exposure</span><p>Base leakage plus field and outsourced exposure, adjusted by maturity gap.</p></div><strong data-field="modeled_margin_exposure_formatted">$0</strong></div>
+                <div class="metric-card"><div><span class="metric-label">Conservative margin exposure</span><p>The higher of modeled margin exposure and known loss floor.</p></div><strong data-field="conservative_margin_leakage_formatted">$0</strong></div>
+                <div class="metric-card"><div><span class="metric-label">Annual quote-process exposure</span><p>Estimating labour, revision drag, and conservative margin exposure combined.</p></div><strong data-field="annual_baseline_drag_formatted">$0</strong></div>
+              </div>
+            </section>
 
-              <div class="metric-grid">
-                <div class="metric-card">
-                  <div><span>Annual quoting hours</span><p>The estimated annual hours spent building, checking, revising, and processing quotes.</p></div>
-                  <strong data-field="annual_estimating_hours">0</strong>
-                </div>
-                <div class="metric-card">
-                  <div><span>Estimating labour cost</span><p>The loaded cost of the estimating effort under the current baseline.</p></div>
-                  <strong data-field="estimating_labor_cost_formatted">$0</strong>
-                </div>
-                <div class="metric-card">
-                  <div><span>Revision and rework hours</span><p>Estimated hours consumed by avoidable quote reruns, clarification loops, and repeated handling.</p></div>
-                  <strong data-field="revision_hours">0</strong>
-                </div>
-                <div class="metric-card">
-                  <div><span>Revision and rework cost</span><p>The loaded cost of avoidable estimating friction.</p></div>
-                  <strong data-field="revision_cost_formatted">$0</strong>
-                </div>
-                <div class="metric-card">
-                  <div><span>Conservative margin leakage</span><p>Your won revenue multiplied by the conservative leakage factor of <span data-field="leakage_rate_formatted">0%</span>.</p></div>
-                  <strong data-field="conservative_margin_leakage_formatted">$0</strong>
-                </div>
-                <div class="metric-card">
-                  <div><span>Annual quote-process exposure</span><p>Estimating labour investment plus revision drag plus conservative margin exposure. This is a process exposure number, not a claim that all estimating labour is waste.</p></div>
-                  <strong data-field="annual_baseline_drag_formatted">$0</strong>
-                </div>
-                <div class="metric-card">
-                  <div><span>Recoverable labour capacity</span><p>A 35% planning improvement applied to estimating labour and revision cost.</p></div>
-                  <strong data-field="recoverable_labor_capacity_formatted">$0</strong>
-                </div>
-                <div class="metric-card">
-                  <div><span>Recoverable margin protection</span><p>A 25% recovery applied to the conservative margin leakage estimate.</p></div>
-                  <strong data-field="recoverable_margin_protection_formatted">$0</strong>
-                </div>
-                <div class="metric-card">
-                  <div><span>Conservative annual recoverable value</span><p>The annual value used for the payback model.</p></div>
-                  <strong data-field="conservative_recoverable_value_formatted">$0</strong>
-                </div>
-                <div class="metric-card">
-                  <div><span>Three-year net opportunity</span><p>Three years of conservative recoverable value less the selected system investment.</p></div>
-                  <strong data-field="three_year_net_opportunity_formatted">$0</strong>
-                </div>
+            <section class="section dark">
+              <h2>Opportunity score and expected value</h2>
+              <div class="score-card">
+                <span class="metric-label" style="color:#fed7aa;">Score for <span data-field="company_name">your company</span></span>
+                <strong><span data-field="opportunity_score">0</span> / 100</strong>
+                <p><span data-field="opportunity_label">Standardization opportunity</span></p>
+              </div>
+              <p id="scoreExplanation">The score combines company scale, quote volume, quote hours, revision drag, known losses, maturity gap, modeled exposure, and payback. A higher score does not mean a worse company. It means estimating standardization has more leverage.</p>
+              <div class="grid grid-3">
+                <div class="card dark"><span class="label">Conservative recoverable value</span><strong class="metric" data-field="conservative_recoverable_value_formatted">$0</strong><p>Modeled annual value from partial capacity improvement and partial margin protection.</p></div>
+                <div class="card dark"><span class="label">3-year gross value</span><strong class="metric" data-field="three_year_gross_value_formatted">$0</strong><p>Recoverable annual value projected across three years.</p></div>
+                <div class="card dark"><span class="label">3-year net opportunity</span><strong class="metric" data-field="three_year_net_opportunity_formatted">$0</strong><p>Three-year gross value less the selected system investment.</p></div>
               </div>
             </section>
 
             <section class="section">
-              <h2>Executive interpretation for <span data-field="company_name">your company</span></h2>
-              <p id="executiveInterpretation">Your result will be interpreted here based on revenue scale, quote volume, revision rate, leakage exposure, and payback period.</p>
-
-              <div class="interpretation-grid">
-                <div class="insight-card">
-                  <span>Average quoted value</span>
-                  <strong id="avgQuotedValue">$0</strong>
-                  <p>One small miss on an average quote can become a meaningful margin event.</p>
-                </div>
-                <div class="insight-card">
-                  <span>Capacity reclaimed</span>
-                  <strong><span data-field="hours_reclaimed">0</span> hrs</strong>
-                  <p>Estimated quoting capacity that may be redirected toward review, alternates, RFIs, and quote protection.</p>
-                </div>
-                <div class="insight-card">
-                  <span>Workdays reclaimed</span>
-                  <strong><span data-field="workdays_reclaimed">0</span> days</strong>
-                  <p>Approximate estimator workdays that could be freed through tighter process and reduced rework.</p>
-                </div>
-              </div>
-
-              <div class="driver-card">
-                <h3>What is driving <span data-field="company_name">your company</span>'s number?</h3>
-                <div class="driver-row">
-                  <div class="driver-label">Estimating labour investment</div>
-                  <div class="driver-bar"><div class="driver-fill" id="laborDriverBar"></div></div>
-                  <div class="driver-value" id="laborDriverValue">$0</div>
-                </div>
-                <div class="driver-row">
-                  <div class="driver-label">Revision and rework drag</div>
-                  <div class="driver-bar"><div class="driver-fill" id="revisionDriverBar"></div></div>
-                  <div class="driver-value" id="revisionDriverValue">$0</div>
-                </div>
-                <div class="driver-row">
-                  <div class="driver-label">Conservative margin exposure</div>
-                  <div class="driver-bar"><div class="driver-fill" id="leakageDriverBar"></div></div>
-                  <div class="driver-value" id="leakageDriverValue">$0</div>
-                </div>
-              </div>
-
-              <h3 style="margin-top:1rem;">First places to look</h3>
-              <ul class="priority-signal-list" id="prioritySignals">
-                <li>Priority signals will appear here after the report loads.</li>
-              </ul>
-            </section>
-
-            <section class="section dark">
-              <h2>Baseline opportunity score</h2>
-              <div class="score-card">
-                <span style="text-transform:uppercase; letter-spacing:.08em; color:#fed7aa; font-weight:950;">Score for <span data-field="company_name">your company</span></span>
-                <strong><span data-field="opportunity_score">0</span> / 100</strong>
-                <p><span data-field="opportunity_label">Standardization opportunity</span></p>
-              </div>
-              <p><strong>What this means:</strong> the score combines revenue scale, quote volume, annual estimating hours, revision rate, leakage factor, and payback period. A higher score means the current process has more leverage for standardization, governance, and margin protection.</p>
+              <h2>Process maturity assessment</h2>
+              <p>The maturity score matters because the same revenue and quote volume can carry very different risk depending on whether the company has repeatable controls or relies on memory, habits, and individual judgment.</p>
+              <div class="grid grid-3" id="maturityCards"></div>
+              <div class="audit-note" id="maturityTakeaway">Maturity takeaway will load here.</div>
             </section>
 
             <section class="section">
               <h2>Risk map for leadership</h2>
-              <p>This is where the calculator becomes useful. The numbers expose which operational risks deserve management attention before another quoting cycle becomes production reality.</p>
-
-              <div class="risk-grid">
-                <div class="risk-card">
-                  <div class="risk-top"><h3>Quote capacity load</h3><span class="risk-badge" id="capacityRisk">Medium</span></div>
-                  <p id="capacityRiskText">How much annual estimating capacity is being consumed by the current process.</p>
-                </div>
-                <div class="risk-card">
-                  <div class="risk-top"><h3>Revision friction</h3><span class="risk-badge" id="revisionRisk">Medium</span></div>
-                  <p id="revisionRiskText">How much avoidable estimating effort may be caused by unclear inputs, rework, and reruns.</p>
-                </div>
-                <div class="risk-card">
-                  <div class="risk-top"><h3>Margin exposure</h3><span class="risk-badge" id="marginRisk">Medium</span></div>
-                  <p id="marginRiskText">How much conservative leakage may be tied to missed scope, weak assumptions, and unpriced risk.</p>
-                </div>
-                <div class="risk-card">
-                  <div class="risk-top"><h3>Key-person dependency</h3><span class="risk-badge" id="keyPersonRisk">Medium</span></div>
-                  <p id="keyPersonRiskText">How dependent the process may be on memory, senior estimators, and informal judgment.</p>
-                </div>
-                <div class="risk-card">
-                  <div class="risk-top"><h3>Quote governance</h3><span class="risk-badge" id="governanceRisk">Medium</span></div>
-                  <p id="governanceRiskText">Whether the business has a controlled quote release standard before numbers leave the building.</p>
-                </div>
-                <div class="risk-card">
-                  <div class="risk-top"><h3>Handoff risk</h3><span class="risk-badge" id="handoffRisk">Medium</span></div>
-                  <p id="handoffRiskText">Whether the accepted quote becomes a clear shop and project-management handoff.</p>
-                </div>
+              <p>The risk map translates the submitted data into operating attention points. These are the areas leadership should review before the next quoting cycle becomes production reality.</p>
+              <div class="grid grid-2">
+                <div class="risk-card"><div class="risk-top"><h3>Quote capacity load</h3><span class="risk-badge" id="capacityRisk">Medium</span></div><p id="capacityRiskText">How much annual estimating capacity is being consumed by quote build, review, and revision work.</p></div>
+                <div class="risk-card"><div class="risk-top"><h3>Revision friction</h3><span class="risk-badge" id="revisionRisk">Medium</span></div><p id="revisionRiskText">How much avoidable estimating effort may be caused by unclear inputs, reruns, or missing standards.</p></div>
+                <div class="risk-card"><div class="risk-top"><h3>Known loss floor</h3><span class="risk-badge" id="knownLossRisk">Medium</span></div><p id="knownLossRiskText">Submitted annual loss pattern from bad jobs and unrecovered extras.</p></div>
+                <div class="risk-card"><div class="risk-top"><h3>Field/install exposure</h3><span class="risk-badge" id="fieldRisk">Medium</span></div><p id="fieldRiskText">Risk from site access, standby, mobilization, field friction, remobilization, and install assumptions.</p></div>
+                <div class="risk-card"><div class="risk-top"><h3>Outsourced work exposure</h3><span class="risk-badge" id="outsourcedRisk">Medium</span></div><p id="outsourcedRiskText">Risk from treating finish, coating, machining, galvanizing, and vendor work like pass-through costs.</p></div>
+                <div class="risk-card"><div class="risk-top"><h3>Quote governance</h3><span class="risk-badge" id="governanceRisk">Medium</span></div><p id="governanceRiskText">Whether the business has a controlled release standard before the quote leaves the building.</p></div>
+                <div class="risk-card"><div class="risk-top"><h3>Margin math and final price</h3><span class="risk-badge" id="pricingRisk">Medium</span></div><p id="pricingRiskText">Whether final price is built from complete cost, true labour cost, risk, overhead, and target margin.</p></div>
+                <div class="risk-card"><div class="risk-top"><h3>Quote-to-shop handoff</h3><span class="risk-badge" id="handoffRisk">Medium</span></div><p id="handoffRiskText">Whether accepted quotes become useful production and PM handoffs, not just customer-facing PDFs.</p></div>
               </div>
             </section>
 
             <section class="section">
-              <h2>How FabProfit System benefits <span data-field="company_name">your company</span></h2>
-
-              <div class="benefit-grid">
-                <div class="benefit-card">
-                  <h3>1. Protects EBITDA before production</h3>
-                  <p>Margin leakage often becomes visible in the shop, but the economic decision was usually made earlier. FabProfit gives the company a structured way to identify scope, risk, labour, material, subcontractor, and quote-language exposure before award.</p>
-                </div>
-                <div class="benefit-card">
-                  <h3>2. Standardizes quote governance</h3>
-                  <p>The system creates a repeatable path for scope breakdown, labour build-up, material costing, outsourced work, risk treatment, final price, and proposal language. That reduces variation between estimators and business units.</p>
-                </div>
-                <div class="benefit-card">
-                  <h3>3. Increases useful estimating capacity</h3>
-                  <p>Faster estimating is not just speed. It gives leadership more time for review, customers faster responses, and estimators more time to catch the few issues that decide whether the job is worth winning.</p>
-                </div>
-                <div class="benefit-card">
-                  <h3>4. Reduces key-person dependency</h3>
-                  <p>When the estimating process lives in a senior estimator's head, the business carries hidden continuity risk. FabProfit turns that judgment into tools, checklists, quote language, examples, and a repeatable company standard.</p>
-                </div>
-                <div class="benefit-card">
-                  <h3>5. Improves quote-to-shop handoff</h3>
-                  <p>The quote should not die as a PDF in the customer's inbox. A strong estimate becomes the first production plan, with assumptions, exclusions, risk notes, material logic, and labour basis visible to the team that must build it.</p>
-                </div>
-                <div class="benefit-card">
-                  <h3>6. Gives ownership a practical operating lever</h3>
-                  <p>For ownership groups, this targets margin leakage, process variation, estimator onboarding, pricing discipline, and quote standardization without forcing a full ERP replacement.</p>
-                </div>
+              <h2>What FabProfit is expected to change</h2>
+              <p>These are realistic operational outcomes. They are not guaranteed financial results. They are the kinds of controls FabProfit is designed to install so leadership can see, price, qualify, and manage risk earlier.</p>
+              <div class="grid grid-2">
+                <div class="card"><h3>1. Cleaner scope boundaries</h3><p>The system pushes each job away from one lump sum and toward deliverables, inclusions, exclusions, assumptions, and controlled quote language.</p></div>
+                <div class="card"><h3>2. More accurate labour logic</h3><p>Labour is broken into build, review, setup, movement, control, friction, field event time, standby, and revision work instead of one optimistic hour number.</p></div>
+                <div class="card"><h3>3. Better material buyout discipline</h3><p>The report and system focus on what the job forces the shop to buy, including stock lengths, drops, waste, freight, coating moves, and supplier validity.</p></div>
+                <div class="card"><h3>4. Outsourced work treated as managed scope</h3><p>Vendor quotes are not treated as the full cost. FabProfit forces prep, freight, receiving, inspection, coordination, risk reserve, and margin into the review.</p></div>
+                <div class="card"><h3>5. Risk named before award</h3><p>The risk register approach gives each risk a cause, trigger, owner, cost, schedule impact, response, and quote treatment.</p></div>
+                <div class="card"><h3>6. Final price tested before release</h3><p>The final price is checked against complete cost, burdened labour, overhead, contingency, margin target, quote validity, and discount pressure.</p></div>
+                <div class="card"><h3>7. Stronger quote trust</h3><p>The quote becomes more than a number. It sells competence by showing scope, assumptions, exclusions, alternates, schedule, validity, and change rules.</p></div>
+                <div class="card"><h3>8. Better learning loop</h3><p>Estimate-vs-actual review turns closeout pain into updated standards, labour logic, risk notes, quote language, and future pricing discipline.</p></div>
               </div>
             </section>
 
             <section class="section">
-              <h2>Estimated payback logic</h2>
-              <div class="payback-band">
-                <div>
-                  <h3>One meaningful quote-control improvement can change the economics.</h3>
-                  <p>The report compares a system investment of <strong data-field="system_price_formatted">$0</strong> against a conservative annual recoverable value of <strong data-field="conservative_recoverable_value_formatted">$0</strong>. That produces an estimated payback period of <strong><span data-field="payback_days">0</span> days</strong>.</p>
-                  <p>This model does not require FabProfit to fix every estimating problem inside <span data-field="company_name">your company</span>. It only assumes modest efficiency improvement and partial recovery of conservative margin leakage.</p>
-                </div>
-                <div class="payback-number">
-                  <span>Estimated Payback</span>
-                  <strong><span data-field="payback_days">0</span> <span class="payback-unit">days</span></strong>
-                </div>
+              <h2>Course-aligned diagnosis</h2>
+              <p>This report is aligned with the actual FabProfit training sequence, so the recommendations match what the system teaches.</p>
+              <div class="grid grid-3">
+                <div class="card orange"><span class="label">Modules 1 and 7</span><h3>Estimate as operating decision</h3><p>The quote is treated as the first version of the job plan and a risk decision, not just a price.</p></div>
+                <div class="card orange"><span class="label">Modules 2 and 3</span><h3>Drawings and scope breakdown</h3><p>The company learns to read beyond the finished object and bucket every deliverable before totaling the job.</p></div>
+                <div class="card orange"><span class="label">Module 4</span><h3>Labour estimating</h3><p>Labour is estimated as the full work path, not only arc time or task time.</p></div>
+                <div class="card orange"><span class="label">Module 5</span><h3>Material costing</h3><p>The estimate prices the buy quantity, waste, drops, freight, finish separation, and supplier movement.</p></div>
+                <div class="card orange"><span class="label">Module 6</span><h3>Outsourced work</h3><p>Subcontractors, coating, galvanizing, machining, and finishing are priced as managed scope with touches and risk.</p></div>
+                <div class="card orange"><span class="label">Modules 8 and 9</span><h3>Final price and winning quote</h3><p>Final price is built to cover true cost, risk, and margin, then written in a quote that sells and protects the number.</p></div>
               </div>
             </section>
 
             <section class="section">
               <h2>What one bad quote can cost</h2>
-              <p>This section translates the report into practical boardroom math. <span data-field="company_name">Your company</span> does not need a huge failure for quote discipline to matter. A small estimating miss on the wrong job can pay for the system by itself.</p>
-
-              <div class="scenario-grid">
-                <div class="scenario-card">
-                  <span>0.5% miss on average quote</span>
-                  <strong id="missHalf">$0</strong>
-                  <p>Typical source: understated material buy quantity, missing freight, underestimated field setup, or weak finish allowance.</p>
-                </div>
-                <div class="scenario-card">
-                  <span>1.0% miss on average quote</span>
-                  <strong id="missOne">$0</strong>
-                  <p>Typical source: missed mobilization, underpriced labour friction, poor handoff, unpriced vendor coordination, or bad access assumption.</p>
-                </div>
-                <div class="scenario-card">
-                  <span>2.0% miss on average quote</span>
-                  <strong id="missTwo">$0</strong>
-                  <p>Typical source: wrong margin math, scope ambiguity, schedule compression, second trip, material escalation, or post-award change confusion.</p>
-                </div>
+              <p><span data-field="company_name">Your company</span> does not need a massive failure for quote discipline to matter. A small miss on the wrong job can equal or exceed the investment in the system.</p>
+              <div class="grid grid-3">
+                <div class="card"><span class="label">0.5% miss on average quote</span><strong class="metric" id="missHalf">$0</strong><p>Typical source: underestimated buy quantity, missing freight, weak finish allowance, or field setup optimism.</p></div>
+                <div class="card"><span class="label">1.0% miss on average quote</span><strong class="metric" id="missOne">$0</strong><p>Typical source: missed mobilization, unpriced vendor coordination, access friction, or wrong labour assumption.</p></div>
+                <div class="card"><span class="label">2.0% miss on average quote</span><strong class="metric" id="missTwo">$0</strong><p>Typical source: scope ambiguity, schedule compression, second trip, material movement, or weak change rules.</p></div>
               </div>
-
-              <div class="audit-note">If <span data-field="company_name">your company</span>'s average quoted job value is <strong id="avgQuoteForMiss">$0</strong>, even a small percentage miss can be financially material. This is why the estimate must behave like the first operating plan, not just a bid number.</div>
+              <div class="audit-note">Average quoted value submitted: <strong data-field="average_quoted_value_formatted">$0</strong>. This is why the estimate should behave like an operating plan, not a naked bid number.</div>
             </section>
 
             <section class="section">
               <h2>ROI sensitivity model</h2>
-              <p>The core model uses conservative assumptions. This sensitivity view helps leadership see how different levels of improvement affect the business case.</p>
-
-              <div class="sensitivity-grid">
-                <div class="sensitivity-card">
-                  <div><span>Margin exposure recovery</span><strong>Recover 10% of exposure</strong><p>Low-case reduction in missed scope, risk leakage, and weak quote protection.</p></div>
-                  <strong id="sensitivityLeak10">$0</strong>
-                </div>
-                <div class="sensitivity-card">
-                  <div><span>Margin exposure recovery</span><strong>Recover 25% of exposure</strong><p>The baseline model used for conservative recoverable margin protection.</p></div>
-                  <strong id="sensitivityLeak25">$0</strong>
-                </div>
-                <div class="sensitivity-card">
-                  <div><span>Margin exposure recovery</span><strong>Recover 50% of exposure</strong><p>Higher-case opportunity if quote governance becomes a strong operating control.</p></div>
-                  <strong id="sensitivityLeak50">$0</strong>
-                </div>
-                <div class="sensitivity-card">
-                  <div><span>Process efficiency</span><strong>Recover 20% of quote process load</strong><p>Useful capacity reclaimed from cleaner quote intake, fewer reruns, and better standards.</p></div>
-                  <strong id="sensitivityEff20">$0</strong>
-                </div>
+              <p>This model is intentionally framed as a range. It shows what happens if the company recovers only part of the submitted exposure. It does not promise those results.</p>
+              <div class="grid grid-3">
+                <div class="card"><span class="label">Low-case improvement</span><strong class="metric" id="scenarioLow">$0</strong><p>50% of the conservative recoverable annual value.</p></div>
+                <div class="card"><span class="label">Baseline improvement</span><strong class="metric" data-field="conservative_recoverable_value_formatted">$0</strong><p>Calculator's conservative recoverable annual value.</p></div>
+                <div class="card"><span class="label">High-case planning view</span><strong class="metric" id="scenarioHigh">$0</strong><p>150% of the conservative recoverable annual value. Useful for sensitivity, not a guarantee.</p></div>
+                <div class="card"><span class="label">10% of margin exposure</span><strong class="metric" id="sensitivityLeak10">$0</strong><p>Small recovery from stronger scope and risk control.</p></div>
+                <div class="card"><span class="label">25% of margin exposure</span><strong class="metric" id="sensitivityLeak25">$0</strong><p>Baseline recovery used in many conservative models.</p></div>
+                <div class="card"><span class="label">20% of process load</span><strong class="metric" id="sensitivityEff20">$0</strong><p>Useful capacity reclaimed from cleaner quote intake, fewer reruns, and better standards.</p></div>
               </div>
             </section>
 
             <section class="section">
-              <h2>Tool-to-business-problem map</h2>
-              <p>The value of FabProfit is that the training and tools connect. <span data-field="company_name">Your company</span> is not just watching lessons. It is installing a controlled way to build and protect the number.</p>
-
-              <div class="asset-grid">
-                <div class="asset-card">
-                  <span>FabProfit Asset</span>
-                  <strong>Scope Breakdown System</strong>
-                  <p><strong>Problem:</strong> Quotes built from drawings without fully mapping deliverables, responsibilities, finish, logistics, and field readiness.</p>
-                  <p><strong>Expected benefit:</strong> Fewer missed scope categories and cleaner internal review.</p>
-                </div>
-                <div class="asset-card">
-                  <span>FabProfit Asset</span>
-                  <strong>Job-Ready Winning Quote Builder</strong>
-                  <p><strong>Problem:</strong> Different estimators building numbers in different ways with inconsistent checks.</p>
-                  <p><strong>Expected benefit:</strong> A repeatable quote workflow from job setup to proposal and shop handoff.</p>
-                </div>
-                <div class="asset-card">
-                  <span>FabProfit Asset</span>
-                  <strong>BOM Template With Pricing</strong>
-                  <p><strong>Problem:</strong> Material cost based on drawing quantities instead of what the shop actually has to buy.</p>
-                  <p><strong>Expected benefit:</strong> Better buy quantity logic, waste visibility, material pricing discipline, and verification flags.</p>
-                </div>
-                <div class="asset-card">
-                  <span>FabProfit Asset</span>
-                  <strong>Labour Rate Calculator</strong>
-                  <p><strong>Problem:</strong> Labour sold below true cost because burden, overhead, non-billable time, and utilization are not visible.</p>
-                  <p><strong>Expected benefit:</strong> Clearer labour cost floor and pricing discipline.</p>
-                </div>
-                <div class="asset-card">
-                  <span>FabProfit Asset</span>
-                  <strong>AFR Labour Converter</strong>
-                  <p><strong>Problem:</strong> Arc time confused with real floor time.</p>
-                  <p><strong>Expected benefit:</strong> Better conversion from welding activity into realistic shop-floor labour.</p>
-                </div>
-                <div class="asset-card">
-                  <span>FabProfit Asset</span>
-                  <strong>Risk Calculator Suite</strong>
-                  <p><strong>Problem:</strong> Standby, RFI drag, acceleration, subcontractor risk, and material escalation absorbed inside margin.</p>
-                  <p><strong>Expected benefit:</strong> Risk gets priced, clarified, qualified, excluded, or transferred instead of ignored.</p>
-                </div>
-              </div>
+              <h2>Best first installation point</h2>
+              <p>The calculator asks for the biggest current estimating problem so this report can point toward the first place FabProfit should be installed.</p>
+              <div class="executive-callout"><p><strong id="firstInstallPointTitle">First installation point loading...</strong><br><span id="firstInstallPointText">Recommendation will load here.</span></p></div>
+              <ol class="number-list" id="priorityActions"></ol>
             </section>
 
             <section class="section">
               <h2>90-day implementation path for <span data-field="company_name">your company</span></h2>
-              <div class="roadmap-grid">
-                <div class="roadmap-card">
-                  <h3>Days 1 to 30: Diagnose and standardize</h3>
-                  <p>Map the current quote process, identify the highest-leak job types, set labour and material baselines, and define what must be checked before quote release.</p>
-                </div>
-                <div class="roadmap-card">
-                  <h3>Days 31 to 60: Install the quote workflow</h3>
-                  <p>Roll out the scope, material, labour, subcontractor, risk, pricing, and proposal workflow. Start using the system on selected live quotes and compare output to the current process.</p>
-                </div>
-                <div class="roadmap-card">
-                  <h3>Days 61 to 90: Govern and calibrate</h3>
-                  <p>Create a quote review rhythm, capture actual-vs-estimate feedback, standardize quote language, and define the management dashboard for ongoing quote quality.</p>
-                </div>
-              </div>
-            </section>
-
-            <section class="section">
-              <h2>45-minute leadership review agenda</h2>
-              <p>Use this agenda with ownership, estimating, operations, purchasing, project management, and finance. It turns the report into an internal operating conversation.</p>
-
-              <div class="meeting-grid">
-                <div class="meeting-card"><small>0 to 5 min</small><strong>Review exposure</strong><p>Confirm the numbers and decide whether they are conservative, aggressive, or close enough to start.</p></div>
-                <div class="meeting-card"><small>5 to 15 min</small><strong>Find repeat misses</strong><p>Name the job types where the company most often loses hours, margin, or control.</p></div>
-                <div class="meeting-card"><small>15 to 25 min</small><strong>Audit handoff</strong><p>Ask whether PMs and foremen can see the assumptions behind accepted quotes.</p></div>
-                <div class="meeting-card"><small>25 to 35 min</small><strong>Review risk ownership</strong><p>Decide which risks are priced, qualified, excluded, transferred, reserved, or ignored.</p></div>
-                <div class="meeting-card"><small>35 to 45 min</small><strong>Choose pilot</strong><p>Pick one job type and run the next 10 quotes through a controlled FabProfit workflow.</p></div>
+              <div class="grid grid-3">
+                <div class="card"><h3>Days 1 to 30: Diagnose and standardize</h3><p>Confirm the highest-leak job types, lock the quote-release checklist, review actual-vs-estimate data, and define the required scope/labour/material/risk checks.</p></div>
+                <div class="card"><h3>Days 31 to 60: Install the workflow</h3><p>Use FabProfit on selected live quotes. Force scope breakdown, labour buckets, material buyout logic, outsourced-work leveling, risk treatment, and quote language.</p></div>
+                <div class="card"><h3>Days 61 to 90: Govern and calibrate</h3><p>Review estimate vs actual, update standards, identify recurring misses, and turn the process into a repeatable company operating standard.</p></div>
               </div>
             </section>
 
             <section class="section">
               <h2>Before the next 10 quotes leave the building</h2>
               <p>This is the fastest practical sprint. It does not require rebuilding the whole company. It requires applying tighter quote discipline to the next live quoting cycle.</p>
-
-              <div class="sprint-grid">
-                <div class="sprint-card"><small>Quote sprint check</small><strong>1. Separate deliverables</strong><p>Break the job into actual deliverables before pricing one lump sum.</p></div>
-                <div class="sprint-card"><small>Quote sprint check</small><strong>2. Separate labour buckets</strong><p>Do not allow one blended labour guess to hide setup, movement, control, friction, field access, and standby.</p></div>
-                <div class="sprint-card"><small>Quote sprint check</small><strong>3. Convert drawing quantity to buy quantity</strong><p>Confirm stock lengths, waste, drops, minimum orders, freight, coating moves, and supplier validity.</p></div>
-                <div class="sprint-card"><small>Quote sprint check</small><strong>4. Level outsourced quotes</strong><p>Carry prep, freight, receiving, inspection, admin, vendor risk, and your margin, not just the vendor invoice.</p></div>
-                <div class="sprint-card"><small>Quote sprint check</small><strong>5. Name the top three risks</strong><p>For each risk, decide whether to price it, qualify it, exclude it, transfer it, reserve for it, or negotiate it.</p></div>
-                <div class="sprint-card"><small>Quote sprint check</small><strong>6. Create a shop handoff</strong><p>The accepted quote should give operations the assumptions and logic behind the number, not just a sell price.</p></div>
+              <div class="grid grid-2">
+                <div class="card"><h3>1. Separate deliverables</h3><p>Break the job into actual deliverables before pricing one lump sum.</p></div>
+                <div class="card"><h3>2. Separate labour buckets</h3><p>Do not allow one blended labour guess to hide setup, movement, control, friction, field access, fire watch, or standby.</p></div>
+                <div class="card"><h3>3. Convert drawing quantity to buy quantity</h3><p>Confirm stock lengths, waste, drops, minimum orders, freight, coating moves, and supplier validity.</p></div>
+                <div class="card"><h3>4. Level outsourced quotes</h3><p>Carry prep, freight, receiving, inspection, admin, vendor risk, and margin, not just the vendor invoice.</p></div>
+                <div class="card"><h3>5. Name the top three risks</h3><p>For each risk, decide whether to price it, qualify it, exclude it, transfer it, reserve for it, or negotiate it.</p></div>
+                <div class="card"><h3>6. Create a shop handoff</h3><p>The accepted quote should give operations the assumptions and logic behind the number, not just a sell price.</p></div>
               </div>
             </section>
 
             <section class="section">
-              <h2>Highest-value fixes to prioritize</h2>
-              <ol class="priority-list">
-                <li>Define a company-wide quote release checklist so pricing, risk, assumptions, exclusions, and scope boundaries are reviewed before submission.</li>
-                <li>Separate shop labour, field labour, setup, movement, control time, friction time, fire watch, and site standby instead of hiding them inside one labour number.</li>
-                <li>Standardize material buyout logic so the estimate reflects stock lengths, waste, drops, freight, coating, hardware, and price movement.</li>
-                <li>Force a subcontractor and outsourced-work review that includes freight, prep, receiving, coordination, vendor risk, and your margin.</li>
-                <li>Use a risk treatment method so uncertainty is priced, qualified, excluded, transferred, or reserved, rather than silently absorbed in profit.</li>
-                <li>Turn every accepted quote into a shop handoff with assumptions, inclusions, exclusions, labour logic, material logic, and risk notes visible to operations.</li>
-              </ol>
-            </section>
-
-            <section class="section">
-              <h2>Leadership discussion questions</h2>
-              <p><span data-field="first_name">You</span> can use these questions with ownership, the estimating manager, operations, purchasing, project management, and finance. The answers usually reveal the first places FabProfit should be installed inside <span data-field="company_name">your company</span>.</p>
-
-              <div class="benefit-grid">
-                <div class="benefit-card">
-                  <h3>Commercial and estimating</h3>
-                  <ul>
-                    <li>Which job types are we fastest at quoting, and which ones create the most rework?</li>
-                    <li>Are we tracking quote revisions as a real cost?</li>
-                    <li>Do all estimators use the same scope breakdown and quote review process?</li>
-                    <li>Where do we most often get pressured into discounting without deleting scope?</li>
-                  </ul>
-                </div>
-                <div class="benefit-card">
-                  <h3>Operations and margin</h3>
-                  <ul>
-                    <li>Where do jobs most often run out of hours?</li>
-                    <li>Do PMs and foremen see the estimate assumptions after award?</li>
-                    <li>Are material waste, finish, freight, install access, rentals, and risk visible before submission?</li>
-                    <li>Do we know our true labour cost and margin before every quote leaves?</li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-
-            <section class="section">
-              <h2>Owner and PE scorecard</h2>
-              <p>Print this page and use it as a quick internal audit. Every “No” is a possible margin-control improvement.</p>
-
-              <div class="scorecard-grid">
-                <div class="scorecard-card">
-                  <small>Internal audit</small>
-                  <strong>Do we have one controlled estimating workflow across the company?</strong>
-                  <div class="check-options"><span class="check-label"><span class="check-box"></span>Yes</span><span class="check-label"><span class="check-box"></span>No</span><span class="check-label"><span class="check-box"></span>Notes</span></div>
-                </div>
-                <div class="scorecard-card">
-                  <small>Internal audit</small>
-                  <strong>Do all estimates separate labour into meaningful shop and field buckets?</strong>
-                  <div class="check-options"><span class="check-label"><span class="check-box"></span>Yes</span><span class="check-label"><span class="check-box"></span>No</span><span class="check-label"><span class="check-box"></span>Notes</span></div>
-                </div>
-                <div class="scorecard-card">
-                  <small>Internal audit</small>
-                  <strong>Do we have a required missed-scope check before quote release?</strong>
-                  <div class="check-options"><span class="check-label"><span class="check-box"></span>Yes</span><span class="check-label"><span class="check-box"></span>No</span><span class="check-label"><span class="check-box"></span>Notes</span></div>
-                </div>
-                <div class="scorecard-card">
-                  <small>Internal audit</small>
-                  <strong>Do we price material based on actual buy quantity, not only drawing quantity?</strong>
-                  <div class="check-options"><span class="check-label"><span class="check-box"></span>Yes</span><span class="check-label"><span class="check-box"></span>No</span><span class="check-label"><span class="check-box"></span>Notes</span></div>
-                </div>
-                <div class="scorecard-card">
-                  <small>Internal audit</small>
-                  <strong>Do we have standard language for assumptions, exclusions, alternates, validity, and change orders?</strong>
-                  <div class="check-options"><span class="check-label"><span class="check-box"></span>Yes</span><span class="check-label"><span class="check-box"></span>No</span><span class="check-label"><span class="check-box"></span>Notes</span></div>
-                </div>
-                <div class="scorecard-card">
-                  <small>Internal audit</small>
-                  <strong>Do accepted quotes create a clean shop and PM handoff?</strong>
-                  <div class="check-options"><span class="check-label"><span class="check-box"></span>Yes</span><span class="check-label"><span class="check-box"></span>No</span><span class="check-label"><span class="check-box"></span>Notes</span></div>
-                </div>
-                <div class="scorecard-card">
-                  <small>Internal audit</small>
-                  <strong>Do we review estimate vs actual after the job closes?</strong>
-                  <div class="check-options"><span class="check-label"><span class="check-box"></span>Yes</span><span class="check-label"><span class="check-box"></span>No</span><span class="check-label"><span class="check-box"></span>Notes</span></div>
-                </div>
-                <div class="scorecard-card">
-                  <small>Internal audit</small>
-                  <strong>Could a new estimator follow our process without relying on one senior person?</strong>
-                  <div class="check-options"><span class="check-label"><span class="check-box"></span>Yes</span><span class="check-label"><span class="check-box"></span>No</span><span class="check-label"><span class="check-box"></span>Notes</span></div>
-                </div>
+              <h2>Leadership review agenda</h2>
+              <p>Use this report with ownership, estimating, operations, purchasing, project management, and finance.</p>
+              <div class="grid grid-5">
+                <div class="card"><span class="label">0 to 5 min</span><h3>Confirm inputs</h3><p>Decide whether the submitted numbers are conservative, aggressive, or close enough to start.</p></div>
+                <div class="card"><span class="label">5 to 15 min</span><h3>Find repeat misses</h3><p>Name the job types where the company most often loses hours, margin, or control.</p></div>
+                <div class="card"><span class="label">15 to 25 min</span><h3>Audit handoff</h3><p>Ask whether PMs and foremen can see the assumptions behind accepted quotes.</p></div>
+                <div class="card"><span class="label">25 to 35 min</span><h3>Review risk ownership</h3><p>Decide which risks are priced, qualified, excluded, transferred, reserved, or ignored.</p></div>
+                <div class="card"><span class="label">35 to 45 min</span><h3>Choose pilot</h3><p>Pick one job type and run the next 10 quotes through a controlled FabProfit workflow.</p></div>
               </div>
             </section>
 
             <section class="section">
               <h2>Assumptions and limits</h2>
-              <div class="assumption-grid">
-                <div class="assumption-card">This report uses the inputs submitted by <span data-field="first_name">the user</span> for <span data-field="company_name">the company</span>. If those inputs are rough, the output is a rough planning model.</div>
-                <div class="assumption-card">The leakage factor is deliberately conservative. It does not attempt to capture every loss from rework, delay, disputes, customer friction, or schedule damage.</div>
-                <div class="assumption-card">The recoverable value assumes partial improvement only: 35% on estimating and revision capacity, plus 25% of conservative margin exposure.</div>
-                <div class="assumption-card">The purpose is not to prove a guaranteed ROI. The purpose is to help leadership identify whether the estimating process deserves a disciplined operating improvement initiative.</div>
+              <div class="grid grid-2">
+                <div class="card">This report uses the inputs submitted by <span data-field="first_name">the user</span> for <span data-field="company_name">the company</span>. If those inputs are rough, the output is a rough planning model.</div>
+                <div class="card">The exposure and recoverable value models are planning tools. They do not promise job awards, profit improvement, error-free estimates, or actual savings.</div>
+                <div class="card">FabProfit is valuable when the company uses the system to change behaviour: quote review, risk treatment, labour logic, material buyout, outsourced-work leveling, margin math, and quote language.</div>
+                <div class="card">The report is most useful when leadership uses it to start an internal process review, not as a final financial conclusion.</div>
               </div>
             </section>
 
             <section class="section dark">
               <h2>The business case in one sentence</h2>
-              <p>FabProfit System is valuable when the cost of inconsistent quoting, missed scope, weak assumptions, labour underpricing, material buyout errors, unpriced risk, and poor quote handoff is greater than the cost of installing a repeatable estimating standard.</p>
+              <p>FabProfit System is valuable when the cost of inconsistent quoting, missed scope, weak assumptions, labour underpricing, material buyout errors, unpriced risk, outsourced-work gaps, and poor quote handoff is greater than the cost of installing a repeatable estimating standard.</p>
               <p>Based on this baseline for <strong data-field="company_name">your company</strong>, conservative annual recoverable value is <strong data-field="conservative_recoverable_value_formatted">$0</strong>.</p>
             </section>
           </div>
@@ -1419,31 +452,29 @@
               <small>Generated</small>
               <p data-field="generated_at">Today</p>
             </div>
-
             <div class="cta-card">
               <h3>Want Greg to review <span data-field="company_name">your company</span>'s report?</h3>
               <p id="sidebarCtaCopy">Send the report summary and ask where FabProfit should be installed first inside your estimating process.</p>
               <a class="btn btn-primary" id="emailGreg" href="#">Email Greg My Numbers</a>
               <a class="btn btn-light" href="index.html#baseline-calculator">Run Again</a>
             </div>
-
+            <div class="side-card">
+              <h3>Fast read</h3>
+              <p><strong>Exposure:</strong><br><span data-field="annual_baseline_drag_formatted">$0</span></p>
+              <p><strong>Known loss floor:</strong><br><span data-field="known_loss_floor_formatted">$0</span></p>
+              <p><strong>Maturity score:</strong><br><span data-field="maturity_score_formatted">0%</span></p>
+              <p><strong>Recoverable value:</strong><br><span data-field="conservative_recoverable_value_formatted">$0</span></p>
+              <p><strong>Opportunity score:</strong><br><span data-field="opportunity_score">0</span>/100</p>
+            </div>
+            <div class="side-card">
+              <h3>Board brief</h3>
+              <p id="sideTakeaway">The report will summarize the main takeaway here.</p>
+              <p><strong>First action:</strong><br><span id="sideFirstAction">Use the next 10 quotes as a controlled pilot.</span></p>
+            </div>
             <div class="side-card">
               <h3>Save this report</h3>
               <p>Use the print button and choose “Save as PDF” to share this with leadership, ownership, or an operating partner.</p>
               <button class="btn btn-dark" type="button" onclick="window.print()">Print / Save PDF</button>
-            </div>
-
-            <div class="side-card">
-              <h3>Fast read</h3>
-              <p><strong>Quote-process exposure:</strong><br><span data-field="annual_baseline_drag_formatted">$0</span></p>
-              <p><strong>Recoverable value:</strong><br><span data-field="conservative_recoverable_value_formatted">$0</span></p>
-              <p><strong>Opportunity score:</strong><br><span data-field="opportunity_score">0</span>/100</p>
-            </div>
-
-            <div class="side-card">
-              <h3>Board brief for <span data-field="company_name">your company</span></h3>
-              <p id="sideTakeaway">The report will summarize the main takeaway here.</p>
-              <p><strong>First action:</strong><br>Use the next 10 quotes as a controlled pilot for missed scope, labour buckets, risk treatment, and quote handoff.</p>
             </div>
           </aside>
         </div>
@@ -1472,7 +503,6 @@
       const hash = window.location.hash || "";
       const match = hash.match(/report=([^&]+)/);
       const fromHash = match ? decodeReportPayload(match[1]) : null;
-
       if (fromHash) {
         try {
           sessionStorage.setItem("fabprofit_baseline_report", JSON.stringify(fromHash));
@@ -1480,329 +510,350 @@
         } catch (error) {}
         return fromHash;
       }
-
       const raw = sessionStorage.getItem("fabprofit_baseline_report") || localStorage.getItem("fabprofit_baseline_report");
       if (!raw) return null;
-
-      try {
-        return JSON.parse(raw);
-      } catch (error) {
-        return null;
-      }
+      try { return JSON.parse(raw); } catch (error) { return null; }
     }
 
     function fallback(value, fallbackValue) {
       const text = String(value ?? "").trim();
       return text || fallbackValue;
     }
-
-    function setText(field, value) {
-      document.querySelectorAll(`[data-field="${field}"]`).forEach(el => {
-        el.textContent = value ?? "";
-      });
-    }
-
-    function setIdText(id, value) {
-      const el = document.getElementById(id);
-      if (el) el.textContent = value;
-    }
-
-    function moneyFormat(value) {
-      const number = Number(value || 0) || 0;
-      return new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-        maximumFractionDigits: 0
-      }).format(number);
-    }
+    function num(value) { return Number(value || 0) || 0; }
+    function setText(field, value) { document.querySelectorAll(`[data-field="${field}"]`).forEach(el => { el.textContent = value ?? ""; }); }
+    function setIdText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
+    function moneyFormat(value) { return new Intl.NumberFormat("en-US", { style:"currency", currency:"USD", maximumFractionDigits:0 }).format(num(value)); }
+    function pctFormat(value) { return `${Number(value || 0).toFixed(2).replace(/\.00$/, "")}%`; }
+    function wholeFormat(value) { return new Intl.NumberFormat("en-US", { maximumFractionDigits:0 }).format(num(value)); }
 
     function setBar(id, part, total) {
       const el = document.getElementById(id);
       if (!el) return;
-      const percent = total > 0 ? Math.max(3, Math.min(100, Math.round((part / total) * 100))) : 0;
+      const percent = total > 0 ? Math.max(3, Math.min(100, Math.round((num(part) / total) * 100))) : 0;
       el.style.width = percent + "%";
+    }
+
+    function maturityValue(value) {
+      const v = String(value || "partial").toLowerCase();
+      if (v === "yes" || v === "strong" || v === "standardized" || v === "required") return 1;
+      if (v === "no" || v === "none") return 0;
+      return 0.5;
+    }
+    function maturityLabel(value) {
+      const v = String(value || "partial").toLowerCase();
+      if (v === "yes" || v === "strong" || v === "standardized" || v === "required") return "Standardized";
+      if (v === "no" || v === "none") return "Not controlled";
+      return "Partial";
+    }
+    function maturityClass(value) {
+      const v = String(value || "partial").toLowerCase();
+      if (v === "yes" || v === "strong" || v === "standardized" || v === "required") return "yes";
+      if (v === "no" || v === "none") return "no";
+      return "partial";
+    }
+
+    function normalizeData(data) {
+      const annualRevenue = num(data.annual_revenue);
+      const annualQuotedRevenue = num(data.annual_quoted_revenue);
+      const annualQuotes = num(data.annual_quotes) || num(data.quotes_per_month) * 12;
+      const estimatorCount = Math.max(1, num(data.estimator_count) || 1);
+      const avgQuotedValue = num(data.average_quoted_value) || (annualQuotes > 0 ? annualQuotedRevenue / annualQuotes : 0);
+      const quoteBuildHours = num(data.quote_build_hours) || Math.round(annualQuotes * num(data.average_hours_per_quote));
+      const quoteReviewHours = num(data.quote_review_hours) || Math.round(annualQuotes * num(data.review_hours_per_quote));
+      const revisionHours = num(data.revision_hours) || Math.round(annualQuotes * (num(data.revision_rate) / 100) * num(data.average_revision_hours));
+      const annualEstimatingHours = num(data.annual_estimating_hours) || quoteBuildHours + quoteReviewHours + revisionHours;
+      const estimatorRate = num(data.loaded_estimating_cost_per_hour);
+      const estimatingLaborCost = num(data.estimating_labor_cost) || ((quoteBuildHours + quoteReviewHours) * estimatorRate);
+      const revisionCost = num(data.revision_cost) || (revisionHours * estimatorRate);
+      const knownBadJobLoss = num(data.known_bad_job_loss) || (num(data.bad_jobs_per_year) * num(data.average_bad_job_loss));
+      const unrecoveredExtras = num(data.unrecovered_extras);
+      const knownLossFloor = num(data.known_loss_floor) || knownBadJobLoss + unrecoveredExtras;
+      const fieldRevenue = num(data.field_revenue) || annualRevenue * (num(data.field_revenue_percent) / 100);
+      const fieldFrictionExposure = num(data.field_friction_exposure) || fieldRevenue * (num(data.field_friction_rate) / 100);
+      const outsourcedRiskExposure = num(data.outsourced_risk_exposure) || num(data.outsourced_spend) * (num(data.outsourced_risk_rate) / 100);
+      const baseMarginLeakage = num(data.base_margin_leakage) || annualRevenue * (num(data.leakage_rate) / 100);
+
+      const maturityFields = [data.quote_checklist, data.labour_buckets, data.material_buyout_standard, data.risk_register, data.quote_language_standard, data.post_job_review];
+      const maturityScore = num(data.maturity_score) || Math.round((maturityFields.reduce((sum, item) => sum + maturityValue(item), 0) / maturityFields.length) * 100) || 50;
+      const maturityGap = num(data.maturity_gap) || Math.max(0, 100 - maturityScore);
+      const modeledMarginExposure = num(data.modeled_margin_exposure) || (baseMarginLeakage + fieldFrictionExposure + outsourcedRiskExposure) * (1 + (maturityGap / 100) * 0.5);
+      const conservativeMarginLeakage = num(data.conservative_margin_leakage) || Math.max(modeledMarginExposure, knownLossFloor);
+      const annualBaselineDrag = num(data.annual_baseline_drag) || estimatingLaborCost + revisionCost + conservativeMarginLeakage;
+      const efficiencyImprovementRate = num(data.efficiency_improvement_rate) || Math.min(0.40, Math.max(0.15, 0.15 + (maturityGap / 100) * 0.25));
+      const marginRecoveryRate = num(data.margin_recovery_rate) || Math.min(0.35, Math.max(0.15, 0.15 + (maturityGap / 100) * 0.20));
+      const recoverableLaborCapacity = num(data.recoverable_labor_capacity) || (estimatingLaborCost + revisionCost) * efficiencyImprovementRate;
+      const recoverableMarginProtection = num(data.recoverable_margin_protection) || conservativeMarginLeakage * marginRecoveryRate;
+      const conservativeRecoverableValue = num(data.conservative_recoverable_value) || recoverableLaborCapacity + recoverableMarginProtection;
+      const systemPrice = num(data.system_price) || 19997;
+      const paybackDays = num(data.payback_days) || (conservativeRecoverableValue > 0 ? Math.max(1, Math.round((systemPrice / conservativeRecoverableValue) * 365)) : 0);
+      const threeYearGrossValue = num(data.three_year_gross_value) || conservativeRecoverableValue * 3;
+      const threeYearNetOpportunity = num(data.three_year_net_opportunity) || threeYearGrossValue - systemPrice;
+      const hoursReclaimed = num(data.hours_reclaimed) || Math.round(annualEstimatingHours * efficiencyImprovementRate);
+      const workdaysReclaimed = num(data.workdays_reclaimed) || Math.round(hoursReclaimed / 8);
+      const revenuePerEstimator = num(data.revenue_per_estimator) || annualRevenue / estimatorCount;
+      const quotesPerEstimatorPerMonth = num(data.quotes_per_estimator_per_month) || (num(data.quotes_per_month) / estimatorCount);
+
+      return {
+        ...data,
+        first_name: fallback(data.first_name, "there"),
+        email: fallback(data.email, "No email entered"),
+        company_name: fallback(data.company_name, "your company"),
+        role: fallback(data.role, "Role not entered"),
+        company_type: fallback(data.company_type, "Fabrication company"),
+        biggest_problem: fallback(data.biggest_problem, "Leadership wants a repeatable company standard"),
+        annual_quotes: Math.round(annualQuotes),
+        average_quoted_value: avgQuotedValue,
+        average_quoted_value_formatted: data.average_quoted_value_formatted || moneyFormat(avgQuotedValue),
+        quote_build_hours: Math.round(quoteBuildHours),
+        quote_review_hours: Math.round(quoteReviewHours),
+        revision_hours: Math.round(revisionHours),
+        annual_estimating_hours: Math.round(annualEstimatingHours),
+        estimating_labor_cost: estimatingLaborCost,
+        estimating_labor_cost_formatted: data.estimating_labor_cost_formatted || moneyFormat(estimatingLaborCost),
+        revision_cost: revisionCost,
+        revision_cost_formatted: data.revision_cost_formatted || moneyFormat(revisionCost),
+        known_bad_job_loss: knownBadJobLoss,
+        known_bad_job_loss_formatted: data.known_bad_job_loss_formatted || moneyFormat(knownBadJobLoss),
+        unrecovered_extras: unrecoveredExtras,
+        unrecovered_extras_formatted: data.unrecovered_extras_formatted || moneyFormat(unrecoveredExtras),
+        known_loss_floor: knownLossFloor,
+        known_loss_floor_formatted: data.known_loss_floor_formatted || moneyFormat(knownLossFloor),
+        field_revenue: fieldRevenue,
+        field_revenue_formatted: data.field_revenue_formatted || moneyFormat(fieldRevenue),
+        field_friction_exposure: fieldFrictionExposure,
+        field_friction_exposure_formatted: data.field_friction_exposure_formatted || moneyFormat(fieldFrictionExposure),
+        outsourced_risk_exposure: outsourcedRiskExposure,
+        outsourced_risk_exposure_formatted: data.outsourced_risk_exposure_formatted || moneyFormat(outsourcedRiskExposure),
+        base_margin_leakage: baseMarginLeakage,
+        base_margin_leakage_formatted: data.base_margin_leakage_formatted || moneyFormat(baseMarginLeakage),
+        modeled_margin_exposure: modeledMarginExposure,
+        modeled_margin_exposure_formatted: data.modeled_margin_exposure_formatted || moneyFormat(modeledMarginExposure),
+        maturity_score: Math.round(maturityScore),
+        maturity_score_formatted: data.maturity_score_formatted || `${Math.round(maturityScore)}%`,
+        maturity_gap: Math.round(maturityGap),
+        conservative_margin_leakage: conservativeMarginLeakage,
+        conservative_margin_leakage_formatted: data.conservative_margin_leakage_formatted || moneyFormat(conservativeMarginLeakage),
+        annual_baseline_drag: annualBaselineDrag,
+        annual_baseline_drag_formatted: data.annual_baseline_drag_formatted || moneyFormat(annualBaselineDrag),
+        conservative_recoverable_value: conservativeRecoverableValue,
+        conservative_recoverable_value_formatted: data.conservative_recoverable_value_formatted || moneyFormat(conservativeRecoverableValue),
+        recoverable_labor_capacity: recoverableLaborCapacity,
+        recoverable_labor_capacity_formatted: data.recoverable_labor_capacity_formatted || moneyFormat(recoverableLaborCapacity),
+        recoverable_margin_protection: recoverableMarginProtection,
+        recoverable_margin_protection_formatted: data.recoverable_margin_protection_formatted || moneyFormat(recoverableMarginProtection),
+        efficiency_improvement_rate: efficiencyImprovementRate,
+        efficiency_improvement_rate_formatted: data.efficiency_improvement_rate_formatted || pctFormat(efficiencyImprovementRate * 100),
+        margin_recovery_rate: marginRecoveryRate,
+        margin_recovery_rate_formatted: data.margin_recovery_rate_formatted || pctFormat(marginRecoveryRate * 100),
+        system_price: systemPrice,
+        system_price_formatted: data.system_price_formatted || moneyFormat(systemPrice),
+        payback_days: paybackDays,
+        three_year_gross_value: threeYearGrossValue,
+        three_year_gross_value_formatted: data.three_year_gross_value_formatted || moneyFormat(threeYearGrossValue),
+        three_year_net_opportunity: threeYearNetOpportunity,
+        three_year_net_opportunity_formatted: data.three_year_net_opportunity_formatted || moneyFormat(threeYearNetOpportunity),
+        hours_reclaimed: Math.round(hoursReclaimed),
+        workdays_reclaimed: Math.round(workdaysReclaimed),
+        revenue_per_estimator: revenuePerEstimator,
+        revenue_per_estimator_formatted: data.revenue_per_estimator_formatted || moneyFormat(revenuePerEstimator),
+        quotes_per_estimator_per_month: Number(quotesPerEstimatorPerMonth.toFixed(1)),
+        generated_at: fallback(data.generated_at, new Date().toLocaleString()),
+        opportunity_score: num(data.opportunity_score) || 0,
+        opportunity_label: fallback(data.opportunity_label, "Standardization opportunity"),
+        quote_checklist: fallback(data.quote_checklist, "partial"),
+        labour_buckets: fallback(data.labour_buckets, "partial"),
+        material_buyout_standard: fallback(data.material_buyout_standard, "partial"),
+        risk_register: fallback(data.risk_register, "partial"),
+        quote_language_standard: fallback(data.quote_language_standard, "partial"),
+        post_job_review: fallback(data.post_job_review, "partial"),
+        annual_revenue_formatted: data.annual_revenue_formatted || moneyFormat(annualRevenue),
+        annual_quoted_revenue_formatted: data.annual_quoted_revenue_formatted || moneyFormat(annualQuotedRevenue),
+        target_gross_margin_formatted: data.target_gross_margin_formatted || pctFormat(data.target_gross_margin),
+        field_revenue_percent_formatted: data.field_revenue_percent_formatted || pctFormat(data.field_revenue_percent),
+        field_friction_rate_formatted: data.field_friction_rate_formatted || pctFormat(data.field_friction_rate),
+        outsourced_spend_formatted: data.outsourced_spend_formatted || moneyFormat(data.outsourced_spend),
+        outsourced_risk_rate_formatted: data.outsourced_risk_rate_formatted || pctFormat(data.outsourced_risk_rate),
+        revision_rate_formatted: data.revision_rate_formatted || pctFormat(data.revision_rate),
+        loaded_estimating_cost_per_hour_formatted: data.loaded_estimating_cost_per_hour_formatted || moneyFormat(data.loaded_estimating_cost_per_hour) + "/hr"
+      };
     }
 
     function setRiskBadge(id, level, textId, text) {
       const badge = document.getElementById(id);
       if (!badge) return;
-
       const normalized = String(level || "medium").toLowerCase();
       badge.textContent = level;
       badge.classList.remove("low", "medium", "high");
-      badge.classList.add(
-        normalized.includes("high") ? "high" :
-        normalized.includes("low") ? "low" :
-        "medium"
-      );
-
+      badge.classList.add(normalized.includes("high") ? "high" : normalized.includes("low") ? "low" : "medium");
       const paragraph = document.getElementById(textId);
       if (paragraph && text) paragraph.textContent = text;
     }
 
-    function renderRisks(data) {
-      const hours = Number(data.annual_estimating_hours || 0);
-      const revision = Number(data.revision_rate || 0);
-      const leakage = Number(data.conservative_margin_leakage || 0);
-      const score = Number(data.opportunity_score || 0);
-      const annualQuotes = Number(data.annual_quotes || 0);
-      const company = fallback(data.company_name, "the company");
-
-      setRiskBadge(
-        "capacityRisk",
-        hours >= 4500 ? "High" : hours >= 1800 ? "Medium" : "Low",
-        "capacityRiskText",
-        hours >= 4500
-          ? `${company} appears to have a major annual estimating capacity block. Standardization should be treated as an operating priority.`
-          : hours >= 1800
-          ? `${company} consumes meaningful annual estimating capacity. A controlled workflow can create more review time and less avoidable handling.`
-          : `${company}'s quoting hours are lower, but standardization can still protect consistency on complex work.`
-      );
-
-      setRiskBadge(
-        "revisionRisk",
-        revision >= 25 ? "High" : revision >= 12 ? "Medium" : "Low",
-        "revisionRiskText",
-        revision >= 25
-          ? `The revision rate suggests avoidable loops may be consuming management and estimating time inside ${company}.`
-          : revision >= 12
-          ? `The revision rate is meaningful enough to justify tighter inputs, clearer assumptions, and better handoff controls.`
-          : `Revision drag appears lower, but even low rework rates matter when quote volume or job value is high.`
-      );
-
-      setRiskBadge(
-        "marginRisk",
-        leakage >= 250000 ? "High" : leakage >= 75000 ? "Medium" : "Low",
-        "marginRiskText",
-        leakage >= 250000
-          ? `The conservative margin exposure is large enough to become a leadership-level operating issue for ${company}.`
-          : leakage >= 75000
-          ? `The conservative margin exposure is material enough to justify stronger missed-scope and risk controls.`
-          : `The margin exposure is lower, but a repeatable review process still protects downside.`
-      );
-
-      setRiskBadge(
-        "keyPersonRisk",
-        annualQuotes >= 900 ? "High" : annualQuotes >= 350 ? "Medium" : "Low",
-        "keyPersonRiskText",
-        annualQuotes >= 900
-          ? `High quote volume usually increases dependence on experienced people unless the process is documented and teachable.`
-          : annualQuotes >= 350
-          ? `Moderate to high quote volume benefits from a consistent internal standard that more than one person can follow.`
-          : `Lower volume may still carry key-person risk when work is complex or estimates rely on memory.`
-      );
-
-      setRiskBadge(
-        "governanceRisk",
-        score >= 70 ? "High" : score >= 45 ? "Medium" : "Low",
-        "governanceRiskText",
-        score >= 70
-          ? `${company}'s opportunity score suggests quote governance should be tightened before the next high-risk quoting cycle.`
-          : score >= 45
-          ? `The score suggests a stronger quote-release standard could improve control and confidence.`
-          : `The score is lower, but governance still matters if job complexity or customer risk is high.`
-      );
-
-      setRiskBadge(
-        "handoffRisk",
-        score >= 60 ? "High" : hours >= 1000 ? "Medium" : "Low",
-        "handoffRiskText",
-        score >= 60
-          ? `The larger the estimating exposure, the more important it is that accepted quotes become clear production handoffs.`
-          : hours >= 1000
-          ? `The process should still create a clean handoff so operations inherit assumptions, not just a price.`
-          : `The handoff risk may be lower, but every accepted quote should still carry assumptions into operations.`
-      );
+    function renderMaturity(data) {
+      const items = [
+        {key:"quote_checklist", title:"Quote release checklist", problem:"Scope, risk, margin, assumptions, exclusions, and handoff are not consistently checked before release.", improvement:"Install a required quote release checklist."},
+        {key:"labour_buckets", title:"Labour bucket standard", problem:"Shop, field, setup, movement, control, friction, standby, and fire watch can disappear inside one labour number.", improvement:"Use a required labour bucket structure."},
+        {key:"material_buyout_standard", title:"Material buyout standard", problem:"Finished drawing quantity can be confused with actual buy quantity, waste, freight, drops, coating, and supplier validity.", improvement:"Standardize buyout logic and material verification."},
+        {key:"risk_register", title:"Risk register before quote", problem:"Known unknowns are not always named, priced, qualified, excluded, transferred, or reserved.", improvement:"Use a risk register before quote release."},
+        {key:"quote_language_standard", title:"Quote language standard", problem:"Assumptions, exclusions, alternates, validity, premium time, and change-order rules can vary by estimator.", improvement:"Use a standard quote language bank."},
+        {key:"post_job_review", title:"Estimate vs actual review", problem:"Jobs do not consistently update future estimating standards after closeout.", improvement:"Create a routine estimate-vs-actual review loop."}
+      ];
+      const wrap = document.getElementById("maturityCards");
+      if (!wrap) return;
+      wrap.innerHTML = "";
+      items.forEach(item => {
+        const value = data[item.key];
+        const card = document.createElement("div");
+        card.className = "card";
+        const pill = document.createElement("span");
+        pill.className = `status-pill ${maturityClass(value)}`;
+        pill.textContent = maturityLabel(value);
+        const h3 = document.createElement("h3");
+        h3.textContent = item.title;
+        const p = document.createElement("p");
+        p.textContent = maturityClass(value) === "yes" ? `This appears controlled. Keep it consistent and connect it to post-job feedback.` : `${item.problem} ${item.improvement}`;
+        card.appendChild(pill); card.appendChild(h3); card.appendChild(p);
+        wrap.appendChild(card);
+      });
+      let takeaway = `${data.company_name} has a ${data.maturity_score_formatted} process maturity score. `;
+      if (data.maturity_score < 40) takeaway += "That suggests the biggest value is not only better formulas. It is installing a basic operating standard so the same risks are reviewed on every meaningful quote.";
+      else if (data.maturity_score < 70) takeaway += "That suggests the company has some controls, but they may still depend on individual discipline. The best value is tightening consistency and making the process transferable.";
+      else takeaway += "That suggests the company already has useful controls. The best value is calibration, post-job feedback, and making the strongest estimator habits teachable across the team.";
+      setIdText("maturityTakeaway", takeaway);
     }
 
-    function renderAdditionalInsights(data) {
-      const firstName = fallback(data.first_name, "there");
-      const company = fallback(data.company_name, "your company");
+    function renderRisks(data) {
+      const company = data.company_name;
+      const annualHours = num(data.annual_estimating_hours);
+      const revisionRate = num(data.revision_rate);
+      const knownLoss = num(data.known_loss_floor);
+      const fieldExposure = num(data.field_friction_exposure);
+      const outsourcedExposure = num(data.outsourced_risk_exposure);
+      const maturity = num(data.maturity_score);
+      const score = num(data.opportunity_score);
+      const marginExposure = num(data.conservative_margin_leakage);
 
-      const annualQuotes = Number(data.annual_quotes || 0);
-      const annualHours = Number(data.annual_estimating_hours || 0);
-      const revisionRate = Number(data.revision_rate || 0);
-      const leakageRate = Number(data.leakage_rate || 0);
-      const leakage = Number(data.conservative_margin_leakage || 0);
-      const estimatingCost = Number(data.estimating_labor_cost || 0);
-      const revisionCost = Number(data.revision_cost || 0);
-      const baseline = Number(data.annual_baseline_drag || 0);
-      const score = Number(data.opportunity_score || 0);
-      const paybackDays = Number(data.payback_days || 0);
-      const avgQuote = Number(data.average_quoted_value || 0);
-      const processLoad = estimatingCost + revisionCost;
+      setRiskBadge("capacityRisk", annualHours >= 4500 ? "High" : annualHours >= 1800 ? "Medium" : "Low", "capacityRiskText", annualHours >= 4500 ? `${company} has a major annual quote workload. The higher the load, the more dangerous it is to rely on memory and informal review.` : annualHours >= 1800 ? `${company} has meaningful estimating workload. Better standards can create more review time and reduce avoidable handling.` : `${company}'s quote-hour load is lower, but complex work still needs a repeatable review path.`);
+      setRiskBadge("revisionRisk", revisionRate >= 25 ? "High" : revisionRate >= 12 ? "Medium" : "Low", "revisionRiskText", revisionRate >= 25 ? `Revision friction is high. This points to unclear intake, weak standards, repeated reruns, or missed questions before pricing.` : revisionRate >= 12 ? `Revision friction is material enough to justify tighter quote intake, assumptions, and review gates.` : `Revision friction appears lower, but even a low rate matters when quote volume or average job value is high.`);
+      setRiskBadge("knownLossRisk", knownLoss >= 150000 ? "High" : knownLoss >= 50000 ? "Medium" : "Low", "knownLossRiskText", knownLoss >= 150000 ? `The submitted known loss floor is large enough to justify leadership action now.` : knownLoss >= 50000 ? `Known bad-job losses and unrecovered extras are material enough to warrant a controlled quote pilot.` : `Known losses are lower or not fully tracked. The priority may be measurement and post-job review.`);
+      setRiskBadge("fieldRisk", fieldExposure >= 150000 ? "High" : fieldExposure >= 40000 ? "Medium" : "Low", "fieldRiskText", fieldExposure >= 150000 ? `Field exposure is high. Site readiness, access, standby, mobilization, and remobilization should be explicit quote conditions.` : fieldExposure >= 40000 ? `Field exposure is meaningful. The quote should estimate the full site event, not just the installation task.` : `Field exposure is lower, but site assumptions should still be written clearly.`);
+      setRiskBadge("outsourcedRisk", outsourcedExposure >= 100000 ? "High" : outsourcedExposure >= 25000 ? "Medium" : "Low", "outsourcedRiskText", outsourcedExposure >= 100000 ? `Outsourced-work exposure is high. Vendor quotes should be leveled with prep, freight, receiving, inspection, coordination, risk reserve, and margin.` : outsourcedExposure >= 25000 ? `Outsourced-work exposure is meaningful. Treat vendor work as managed scope, not pass-through cost.` : `Outsourced exposure appears lower, but finish and vendor work still need a clear touch-and-freight review.`);
+      setRiskBadge("governanceRisk", maturity <= 40 || score >= 70 ? "High" : maturity <= 70 ? "Medium" : "Low", "governanceRiskText", maturity <= 40 ? `${company}'s maturity score suggests quote governance needs to become a formal operating control.` : maturity <= 70 ? `Some controls exist, but consistency may still depend on individual estimators.` : `Governance appears stronger. The next value is calibration and continuous improvement.`);
+      setRiskBadge("pricingRisk", marginExposure >= 250000 ? "High" : marginExposure >= 75000 ? "Medium" : "Low", "pricingRiskText", marginExposure >= 250000 ? `Margin exposure is high enough that final price should be tested against complete cost, risk, overhead, and margin before release.` : marginExposure >= 75000 ? `Margin exposure is material. Final price review should catch markup-vs-margin errors, missing overhead, and unpriced risk.` : `Margin exposure is lower, but pricing discipline still protects the company from bad work.`);
+      setRiskBadge("handoffRisk", score >= 60 || maturity <= 50 ? "High" : annualHours >= 1000 ? "Medium" : "Low", "handoffRiskText", score >= 60 || maturity <= 50 ? `Accepted quotes should become clear shop and PM handoffs. Otherwise operations inherit assumptions nobody can see.` : annualHours >= 1000 ? `A handoff standard can prevent hidden assumptions from becoming production confusion.` : `Handoff risk appears lower, but every accepted quote should still carry assumptions into operations.`);
+    }
 
+    function renderDrivers(data) {
+      const exposureTotal = Math.max(1, num(data.annual_baseline_drag));
+      const processLoad = num(data.estimating_labor_cost) + num(data.revision_cost);
+      setIdText("laborDriverValue", data.estimating_labor_cost_formatted);
+      setIdText("revisionDriverValue", data.revision_cost_formatted);
+      setIdText("knownLossDriverValue", data.known_loss_floor_formatted);
+      setIdText("fieldDriverValue", data.field_friction_exposure_formatted);
+      setIdText("outsourcedDriverValue", data.outsourced_risk_exposure_formatted);
+      setIdText("marginDriverValue", data.conservative_margin_leakage_formatted);
+      setBar("laborDriverBar", data.estimating_labor_cost, exposureTotal);
+      setBar("revisionDriverBar", data.revision_cost, exposureTotal);
+      setBar("knownLossDriverBar", data.known_loss_floor, exposureTotal);
+      setBar("fieldDriverBar", data.field_friction_exposure, exposureTotal);
+      setBar("outsourcedDriverBar", data.outsourced_risk_exposure, exposureTotal);
+      setBar("marginDriverBar", data.conservative_margin_leakage, exposureTotal);
+      setIdText("missHalf", moneyFormat(num(data.average_quoted_value) * 0.005));
+      setIdText("missOne", moneyFormat(num(data.average_quoted_value) * 0.01));
+      setIdText("missTwo", moneyFormat(num(data.average_quoted_value) * 0.02));
+      setIdText("scenarioLow", moneyFormat(num(data.conservative_recoverable_value) * 0.5));
+      setIdText("scenarioHigh", moneyFormat(num(data.conservative_recoverable_value) * 1.5));
+      setIdText("sensitivityLeak10", moneyFormat(num(data.conservative_margin_leakage) * 0.10));
+      setIdText("sensitivityLeak25", moneyFormat(num(data.conservative_margin_leakage) * 0.25));
+      setIdText("sensitivityEff20", moneyFormat(processLoad * 0.20));
+    }
+
+    function renderPriorities(data) {
+      const company = data.company_name;
+      const problem = data.biggest_problem;
+      const priorityMap = {
+        "Labour hours are too optimistic": ["Install the labour bucket standard first.", "Run the next 10 quotes through touch time, setup time, movement time, control time, friction time, and field event time before release."],
+        "Scope gaps and exclusions are weak": ["Install the scope and quote-language standard first.", "Use the five-bucket scope breakdown and require clear inclusions, exclusions, assumptions, alternates, validity, and change-order rules."],
+        "Field install and access are underpriced": ["Install field event estimating first.", "Separate travel, mobilization, access, layout, install, control, friction, demobilization, standby, fire watch, and additional trips."],
+        "Material buyout, waste, and supplier movement are inconsistent": ["Install material buyout discipline first.", "Convert drawing quantity to buy quantity. Review stock lengths, waste, drops, freight, finish moves, supplier validity, and escalation language."],
+        "Outsourced work and finish are treated like pass-through cost": ["Install outsourced-work leveling first.", "Level vendor quotes with prep labour, outbound freight, return freight, special fabrication, receiving, inspection, coordination, risk reserve, and margin."],
+        "Quote revisions and rework consume too much capacity": ["Install quote intake and review gates first.", "Reduce reruns by forcing complete inputs, clear assumptions, required review, and controlled revision handling."],
+        "Leadership wants a repeatable company standard": ["Install the company quote-release standard first.", "Use FabProfit to turn senior estimator judgment into a repeatable workflow, checklist, template set, and handoff routine."]
+      };
+      const selected = priorityMap[problem] || priorityMap["Leadership wants a repeatable company standard"];
+      setIdText("firstInstallPointTitle", selected[0]);
+      setIdText("firstInstallPointText", `${selected[1]} This is the highest-fit starting point based on the selected problem for ${company}.`);
+      setIdText("sideFirstAction", selected[0]);
+      const actions = [
+        selected[1],
+        `Pick one live job type at ${company} and run it through the FabProfit workflow before quoting the next 10 opportunities.`,
+        "Compare the FabProfit output against the current estimating method and document the differences before releasing the quote.",
+        "After award or closeout, compare estimate vs actual and update the standard immediately."
+      ];
+      const list = document.getElementById("priorityActions");
+      if (list) {
+        list.innerHTML = "";
+        actions.forEach(action => {
+          const li = document.createElement("li");
+          li.textContent = action;
+          list.appendChild(li);
+        });
+      }
+    }
+
+    function renderInterpretation(data) {
+      const firstName = data.first_name;
+      const company = data.company_name;
       document.title = `FabProfit Baseline Report for ${company}`;
       setIdText("topbarBrand", `FabProfit Baseline Report for ${company}`);
+      setIdText("heroIntro", `Hey ${firstName}, this report uses the numbers submitted for ${company} to create a conservative baseline for estimating efficiency, quote governance, field/install exposure, outsourced-work exposure, known bad-job losses, and preventable margin exposure.`);
+      setIdText("executiveSummaryIntro", `For ${company}, the main issue is not whether estimators are working hard. The issue is whether the business has a repeatable estimating standard that turns drawings, labour assumptions, material buyout, outsourced scope, risk, margin, and quote language into a controlled business decision.`);
+      setIdText("executiveSummaryNumbers", `Based on the inputs submitted, this report estimates annual quote-process exposure of ${data.annual_baseline_drag_formatted}. Conservative annual recoverable value is ${data.conservative_recoverable_value_formatted}, using a modeled improvement rate of ${data.efficiency_improvement_rate_formatted} on process capacity and ${data.margin_recovery_rate_formatted} on conservative margin exposure.`);
+      setIdText("summaryAuditNote", `For ${company}, this is not a software conversation first. It is an operating discipline conversation: where does quote quality vary, where do assumptions live, who controls risk, where does field or outsourced work change the cost, and how much margin leaves before production starts?`);
+      setIdText("sidebarCtaCopy", `${firstName}, send this report summary and ask where FabProfit should be installed first inside ${company}'s estimating process.`);
 
-      setIdText(
-        "heroIntro",
-        `Hey ${firstName}, this report uses the numbers submitted for ${company} to create a conservative baseline for estimating efficiency, quote governance, and preventable margin exposure.`
-      );
-
-      setIdText(
-        "executiveSummaryIntro",
-        `For ${company}, the main issue is not whether estimators are working hard. The issue is whether the business has a repeatable estimating standard that turns drawings, labour assumptions, material buyout, outsourced scope, risk, margin, and quote language into a controlled business decision.`
-      );
-
-      setIdText(
-        "summaryAuditNote",
-        `For ${company}, this is not a software conversation first. It is an operating discipline conversation: where does quote quality vary, where do assumptions live, who controls risk, and how much margin leaves before production starts?`
-      );
-
-      setIdText(
-        "sidebarCtaCopy",
-        `${firstName}, send this report summary and ask where FabProfit should be installed first inside ${company}'s estimating process.`
-      );
-
-      setIdText("avgQuotedValue", data.average_quoted_value_formatted || moneyFormat(avgQuote));
-      setIdText("avgQuoteForMiss", data.average_quoted_value_formatted || moneyFormat(avgQuote));
-      setIdText("missHalf", moneyFormat(avgQuote * 0.005));
-      setIdText("missOne", moneyFormat(avgQuote * 0.01));
-      setIdText("missTwo", moneyFormat(avgQuote * 0.02));
-
-      setIdText("laborDriverValue", data.estimating_labor_cost_formatted || moneyFormat(estimatingCost));
-      setIdText("revisionDriverValue", data.revision_cost_formatted || moneyFormat(revisionCost));
-      setIdText("leakageDriverValue", data.conservative_margin_leakage_formatted || moneyFormat(leakage));
-
-      setBar("laborDriverBar", estimatingCost, baseline);
-      setBar("revisionDriverBar", revisionCost, baseline);
-      setBar("leakageDriverBar", leakage, baseline);
-
-      setIdText("sensitivityLeak10", moneyFormat(leakage * 0.10));
-      setIdText("sensitivityLeak25", moneyFormat(leakage * 0.25));
-      setIdText("sensitivityLeak50", moneyFormat(leakage * 0.50));
-      setIdText("sensitivityEff20", moneyFormat(processLoad * 0.20));
-
-      let interpretation = `This baseline suggests a focused improvement opportunity for ${company}. The most valuable next step is to use the next quoting cycle to test whether assumptions, risk, labour buckets, and handoff notes are being captured consistently.`;
-
-      if (score >= 80) {
-        interpretation = `This baseline suggests a very high standardization opportunity for ${company}. At this scale, estimating is not just a support function. It is a material operating control. The immediate leadership question is whether the current quote process is strong enough to protect margin across people, job types, locations, and customer pressure.`;
-      } else if (score >= 60) {
-        interpretation = `This baseline suggests a high standardization opportunity for ${company}. The company is likely large enough, busy enough, or exposed enough that small quote improvements can create meaningful financial impact. The first priority should be quote-release governance and risk ownership before award.`;
-      } else if (score >= 40) {
-        interpretation = `This baseline suggests a moderate standardization opportunity for ${company}. The current process may not be broken, but the numbers indicate that revision friction, quote consistency, or margin exposure could justify a structured pilot on the highest-risk job types.`;
-      }
-
-      if (paybackDays && paybackDays <= 90) {
-        interpretation += ` The payback model is especially strong because the conservative recoverable value covers the system investment quickly under the assumptions submitted by ${company}.`;
-      }
-
-      setIdText("executiveInterpretation", interpretation);
-      setIdText("sideTakeaway", interpretation.length > 230 ? interpretation.slice(0, 230) + "..." : interpretation);
-
-      const signals = [];
-
-      if (leakage >= 250000 || leakageRate >= 1.25) {
-        signals.push(`${company}'s margin exposure is large enough to justify immediate review of quote assumptions, exclusions, risk treatment, and final margin math.`);
-      }
-
-      if (revisionRate >= 20) {
-        signals.push(`Revision friction is high. ${company} should tighten front-end inputs, standardize quote intake, and track quote reruns as a real cost.`);
-      }
-
-      if (annualHours >= 3000) {
-        signals.push(`Annual estimating hours are large enough that process standardization can free meaningful review capacity for ${company}.`);
-      }
-
-      if (annualQuotes >= 900) {
-        signals.push(`Quote volume is high. Key-person dependency and inconsistent quote review are likely larger risks than they appear.`);
-      }
-
-      if (avgQuote >= 250000) {
-        signals.push(`Average quoted value is high. Even a 0.5% to 1% miss on a single average quote can be material.`);
-      }
-
-      if (signals.length === 0) {
-        signals.push(`Start with one controlled pilot inside ${company}: choose a job type with repeated misses and force the full FabProfit workflow through the next 10 quotes.`);
-      }
-
-      const list = document.getElementById("prioritySignals");
-      if (list) {
-        list.innerHTML = signals.slice(0, 5).map(item => `<li>${item}</li>`).join("");
-      }
+      let takeaway = `${company}'s report shows ${data.annual_baseline_drag_formatted} of quote-process exposure, a ${data.maturity_score_formatted} maturity score, and ${data.conservative_recoverable_value_formatted} of conservative annual recoverable value.`;
+      if (data.maturity_score < 45) takeaway += " The primary value is installing a repeatable standard, not just improving a formula.";
+      else if (data.known_loss_floor > 0) takeaway += " The known loss floor gives leadership a grounded reason to act, because this is not purely theoretical exposure.";
+      else takeaway += " The next move is to pilot the system on live quotes and compare results to the current process.";
+      setIdText("sideTakeaway", takeaway);
+      setIdText("scoreExplanation", `The score combines scale, quote volume, quote hours, revision friction, known losses, maturity gap, modeled exposure, and payback. A higher score does not mean ${company} is a bad company. It means estimating standardization has more financial leverage.`);
     }
 
     function buildEmailBody(data) {
-      return `Hey Greg,
-
-I generated a FabProfit Baseline Margin Exposure Report and would like you to review the numbers.
-
-Name: ${data.first_name || ""}
-Email: ${data.email || ""}
-Company: ${data.company_name || ""}
-Role: ${data.role || ""}
-Company profile: ${data.company_type || ""}
-
-Annual revenue: ${data.annual_revenue_formatted || ""}
-Annual quoted revenue: ${data.annual_quoted_revenue_formatted || ""}
-Quotes per month: ${data.quotes_per_month || ""}
-Annual quotes: ${data.annual_quotes || ""}
-Average hours per quote: ${data.average_hours_per_quote || ""}
-Loaded estimating cost per hour: ${data.loaded_estimating_cost_per_hour_formatted || ""}
-Revision and rework rate: ${data.revision_rate_formatted || ""}
-Conservative margin leakage rate: ${data.leakage_rate_formatted || ""}
-Target gross margin: ${data.target_gross_margin_formatted || ""}
-
-Annual quote-process exposure: ${data.annual_baseline_drag_formatted || ""}
-Estimating labour cost: ${data.estimating_labor_cost_formatted || ""}
-Revision cost: ${data.revision_cost_formatted || ""}
-Conservative margin leakage: ${data.conservative_margin_leakage_formatted || ""}
-Conservative recoverable annual value: ${data.conservative_recoverable_value_formatted || ""}
-Average quoted value: ${data.average_quoted_value_formatted || ""}
-Three-year net opportunity: ${data.three_year_net_opportunity_formatted || ""}
-Estimated payback: ${data.payback_days || ""} days
-Opportunity score: ${data.opportunity_score || ""}/100 - ${data.opportunity_label || ""}
-
-Please tell me where you think FabProfit should be installed first in our estimating process.
-
-Thanks.`;
+      return `Hey Greg,\n\nI generated a FabProfit Company Baseline Report and would like you to review the numbers.\n\nName: ${data.first_name}\nEmail: ${data.email}\nCompany: ${data.company_name}\nRole: ${data.role}\nCompany profile: ${data.company_type}\nBiggest estimating problem: ${data.biggest_problem}\n\nAnnual revenue: ${data.annual_revenue_formatted}\nAnnual quoted revenue: ${data.annual_quoted_revenue_formatted}\nAnnual quotes: ${data.annual_quotes}\nAverage quoted value: ${data.average_quoted_value_formatted}\nEstimator count: ${data.estimator_count}\nQuotes per estimator per month: ${data.quotes_per_estimator_per_month}\nAnnual estimating hours: ${data.annual_estimating_hours}\nRevision rate: ${data.revision_rate_formatted}\nKnown loss floor: ${data.known_loss_floor_formatted}\nField friction exposure: ${data.field_friction_exposure_formatted}\nOutsourced risk exposure: ${data.outsourced_risk_exposure_formatted}\nMaturity score: ${data.maturity_score_formatted}\n\nAnnual quote-process exposure: ${data.annual_baseline_drag_formatted}\nConservative margin exposure: ${data.conservative_margin_leakage_formatted}\nConservative recoverable annual value: ${data.conservative_recoverable_value_formatted}\nThree-year net opportunity: ${data.three_year_net_opportunity_formatted}\nEstimated payback: ${data.payback_days} days\nOpportunity score: ${data.opportunity_score}/100 - ${data.opportunity_label}\n\nPlease tell me where FabProfit should be installed first in our estimating process.\n\nThanks.`;
     }
 
-    const data = getReportData();
-
-    if (!data) {
+    const rawData = getReportData();
+    if (!rawData) {
       document.getElementById("missing").hidden = false;
     } else {
-      const normalizedData = {
-        ...data,
-        first_name: fallback(data.first_name, "there"),
-        company_name: fallback(data.company_name, "your company"),
-        email: fallback(data.email, "No email entered"),
-        role: fallback(data.role, "Role not entered")
-      };
-
+      const data = normalizeData(rawData);
       document.getElementById("reportPage").hidden = false;
+      Object.keys(data).forEach(key => setText(key, data[key]));
+      renderInterpretation(data);
+      renderDrivers(data);
+      renderMaturity(data);
+      renderRisks(data);
+      renderPriorities(data);
 
-      Object.keys(normalizedData).forEach(key => {
-        setText(key, normalizedData[key]);
-      });
-
-      renderRisks(normalizedData);
-      renderAdditionalInsights(normalizedData);
-
-      const emailBody = encodeURIComponent(buildEmailBody(normalizedData));
-      const subject = encodeURIComponent(`FabProfit Baseline Report Review - ${normalizedData.company_name || "Company"}`);
+      const emailBody = encodeURIComponent(buildEmailBody(data));
+      const subject = encodeURIComponent(`FabProfit Company Baseline Report Review - ${data.company_name}`);
       const mailto = `mailto:gregwsheldon@gmail.com?subject=${subject}&body=${emailBody}`;
-
       const emailGreg = document.getElementById("emailGreg");
       const emailGregTop = document.getElementById("emailGregTop");
-
       if (emailGreg) emailGreg.setAttribute("href", mailto);
       if (emailGregTop) emailGregTop.setAttribute("href", mailto);
     }
 
     const printBtn = document.getElementById("printBtn");
-    if (printBtn) {
-      printBtn.addEventListener("click", () => window.print());
-    }
+    if (printBtn) printBtn.addEventListener("click", () => window.print());
 
     const copyBtn = document.getElementById("copyBtn");
     if (copyBtn) {
       copyBtn.addEventListener("click", async () => {
         const report = document.getElementById("reportBody");
         const text = report ? report.innerText : document.body.innerText;
-
         try {
           await navigator.clipboard.writeText(text);
           copyBtn.textContent = "Copied";
