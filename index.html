@@ -2047,6 +2047,283 @@
       }
     }
 
+
+    /* Three license options + expanded transformation section */
+    .transformation-detail-section {
+      background:
+        radial-gradient(circle at 10% 0%, rgba(249,115,22,.10), transparent 28rem),
+        linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+    }
+
+    .transformation-executive-box {
+      background:
+        radial-gradient(circle at top right, rgba(249,115,22,.16), transparent 24rem),
+        linear-gradient(135deg,#020617,#0f172a);
+      color:#fff;
+      border:2px solid var(--orange-600);
+      box-shadow:0 28px 80px rgba(2,6,23,.22);
+      padding:clamp(1.35rem,3vw,2.2rem);
+      margin-bottom:var(--page-gap-lg);
+    }
+
+    .transformation-executive-box h2,
+    .transformation-executive-box h3,
+    .transformation-executive-box strong { color:#fff; }
+    .transformation-executive-box p { color:var(--slate-300); max-width:980px; }
+
+    .transformation-pipeline {
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:1rem;
+      margin-top:1.2rem;
+    }
+
+    .pipeline-step {
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      padding:1rem;
+      min-height:170px;
+    }
+
+    .pipeline-step span {
+      display:inline-grid;
+      place-items:center;
+      width:34px;
+      height:34px;
+      background:var(--orange-600);
+      color:#fff;
+      font-weight:950;
+      margin-bottom:.72rem;
+    }
+
+    .pipeline-step strong {
+      display:block;
+      line-height:1.08;
+      margin-bottom:.42rem;
+    }
+
+    .pipeline-step small {
+      display:block;
+      color:var(--slate-300);
+      font-size:.86rem;
+      line-height:1.4;
+      font-weight:720;
+    }
+
+    .transformation-outcome-grid {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1rem;
+      margin-top:var(--page-gap-lg);
+    }
+
+    .transformation-outcome-card {
+      background:#fff;
+      border:1px solid var(--slate-200);
+      border-top:5px solid var(--orange-600);
+      box-shadow:var(--shadow-soft);
+      padding:var(--card-space);
+      min-height:245px;
+    }
+
+    .transformation-outcome-card span {
+      display:inline-flex;
+      width:fit-content;
+      background:var(--slate-950);
+      color:#fff;
+      font-size:.7rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:950;
+      padding:.4rem .58rem;
+      margin-bottom:.85rem;
+    }
+
+    .transformation-outcome-card h3 {
+      font-size:1.22rem;
+      line-height:1.08;
+      margin-bottom:.55rem;
+    }
+
+    .transformation-outcome-card p {
+      font-size:.94rem;
+      margin-bottom:0;
+    }
+
+    .license-section {
+      background:
+        radial-gradient(circle at 90% 8%, rgba(249,115,22,.12), transparent 30rem),
+        linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+    }
+
+    .license-intro {
+      background:#fff;
+      border:2px solid var(--slate-950);
+      box-shadow:var(--shadow);
+      padding:clamp(1.25rem,3vw,2rem);
+      margin-bottom:var(--page-gap-lg);
+    }
+
+    .license-intro-grid {
+      display:grid;
+      grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);
+      gap:1.25rem;
+      align-items:center;
+    }
+
+    .license-intro-note {
+      background:var(--orange-50);
+      border:1px solid #fed7aa;
+      border-left:7px solid var(--orange-600);
+      padding:1.05rem;
+      color:var(--slate-800);
+      font-weight:780;
+      line-height:1.46;
+    }
+
+    .license-options-grid {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1rem;
+      align-items:stretch;
+    }
+
+    .license-card {
+      background:#fff;
+      border:2px solid var(--slate-200);
+      box-shadow:var(--shadow-soft);
+      padding:clamp(1.2rem,2.4vw,1.55rem);
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .license-card:before {
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:6px;
+      background:linear-gradient(90deg,var(--orange-500),var(--orange-700));
+    }
+
+    .license-card.featured {
+      border-color:var(--orange-600);
+      box-shadow:0 26px 80px rgba(234,88,12,.18);
+      transform:translateY(-8px);
+    }
+
+    .license-card.premium {
+      background:
+        radial-gradient(circle at top right, rgba(249,115,22,.18), transparent 18rem),
+        linear-gradient(135deg,#020617,#0f172a);
+      border-color:var(--orange-600);
+      color:#fff;
+    }
+
+    .license-card.premium h3,
+    .license-card.premium strong,
+    .license-card.premium .license-price { color:#fff; }
+    .license-card.premium p,
+    .license-card.premium .license-fit,
+    .license-card.premium .feature-list { color:var(--slate-300); }
+    .license-card.premium .fine-print { color:var(--slate-400); }
+
+    .license-tag {
+      display:inline-flex;
+      width:fit-content;
+      background:var(--slate-950);
+      color:#fff;
+      font-size:.72rem;
+      font-weight:950;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      padding:.45rem .62rem;
+      margin-bottom:1rem;
+    }
+
+    .license-card.premium .license-tag,
+    .license-card.featured .license-tag {
+      background:var(--orange-600);
+      color:#fff;
+    }
+
+    .license-card h3 {
+      font-size:clamp(1.45rem,2.4vw,2rem);
+      line-height:1;
+      margin-bottom:.65rem;
+    }
+
+    .license-price {
+      color:var(--slate-950);
+      font-size:clamp(2.65rem,5vw,4.25rem);
+      line-height:.9;
+      letter-spacing:-.08em;
+      font-weight:950;
+      margin:.45rem 0 .8rem;
+    }
+
+    .license-price small {
+      font-size:1rem;
+      color:var(--slate-500);
+      letter-spacing:-.02em;
+    }
+
+    .license-card.premium .license-price small { color:var(--slate-300); }
+
+    .license-fit {
+      background:var(--slate-50);
+      border-left:5px solid var(--orange-600);
+      padding:.85rem;
+      color:var(--slate-700);
+      font-weight:780;
+      font-size:.92rem;
+      line-height:1.42;
+      margin:.45rem 0 1rem;
+    }
+
+    .license-card.premium .license-fit {
+      background:rgba(255,255,255,.08);
+      border-color:var(--orange-600);
+    }
+
+    .license-card .feature-list {
+      margin-top:.25rem;
+      margin-bottom:1.25rem;
+      font-size:.92rem;
+    }
+
+    .license-card .btn { margin-top:auto; width:100%; }
+
+    .license-terms-box {
+      margin-top:var(--page-gap-lg);
+      background:#fff;
+      border:1px solid var(--slate-200);
+      border-left:8px solid var(--orange-600);
+      box-shadow:var(--shadow-soft);
+      padding:1.1rem;
+    }
+
+    .license-terms-box p { margin-bottom:.55rem; font-size:.93rem; }
+    .license-terms-box p:last-child { margin-bottom:0; }
+
+    @media (max-width:1180px) {
+      .transformation-pipeline,
+      .license-options-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .transformation-outcome-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .license-card.featured { transform:none; }
+    }
+
+    @media (max-width:1040px) {
+      .license-intro-grid { grid-template-columns:1fr; }
+      .transformation-pipeline,
+      .transformation-outcome-grid,
+      .license-options-grid { grid-template-columns:1fr; }
+    }
+
   </style>
 </head>
 
@@ -2907,13 +3184,26 @@
 
 
 
-    <section id="transformation" class="transformation-section">
+    <section id="transformation" class="transformation-section transformation-detail-section">
       <div class="container">
         <div class="section-heading center">
-          <div class="eyebrow">The transformation</div>
-          <h2>Before FabProfit, estimating depends on memory. After FabProfit, estimating becomes a company standard.</h2>
-          <p>The point is not more paperwork. The point is a repeatable decision path your team can use before the quote becomes a production obligation.</p>
+          <div class="eyebrow">What the transformation looks like</div>
+          <h2>Your company does not just get training. It gets a cleaner way to turn a quote into an operating plan.</h2>
+          <p>The real change is not that your estimator watches videos. The real change is that your company starts making the same estimating decisions the same way, with fewer assumptions hiding inside margin.</p>
         </div>
+
+        <div class="transformation-executive-box">
+          <h2>FabProfit turns estimating from person-dependent judgement into a repeatable company standard.</h2>
+          <p>Before FabProfit, a quote can depend heavily on who opened the drawings, how busy they were, what they remembered from the last similar job, and how much risk they quietly buried in the number. After FabProfit, the estimate moves through a visible sequence your team can review, challenge, improve, and hand off.</p>
+          <div class="transformation-pipeline" aria-label="FabProfit transformation pipeline">
+            <div class="pipeline-step"><span>1</span><strong>Drawings become scope.</strong><small>Your team identifies deliverables, missing information, assumptions, exclusions, alternates, and quote risks before pricing starts.</small></div>
+            <div class="pipeline-step"><span>2</span><strong>Scope becomes labour.</strong><small>Labour is split into real buckets: layout, handling, cutting, fitting, welding, cleaning, finishing, QC, and field work.</small></div>
+            <div class="pipeline-step"><span>3</span><strong>Materials become strategy.</strong><small>Material is priced with yield, stock lengths, freight, handling, buy quantities, waste, timing, and supplier exposure in mind.</small></div>
+            <div class="pipeline-step"><span>4</span><strong>Risk becomes visible.</strong><small>Unknowns are priced, qualified, excluded, transferred, or carried intentionally instead of quietly eating the margin later.</small></div>
+            <div class="pipeline-step"><span>5</span><strong>The quote becomes a handoff.</strong><small>The final proposal protects the number, and the internal summary gives PMs, purchasing, shop, and field a clearer starting point.</small></div>
+          </div>
+        </div>
+
         <div class="transformation-grid">
           <div class="before-card">
             <h3>Before FabProfit</h3>
@@ -2922,6 +3212,8 @@
               <li>Quote logic changes by person.</li>
               <li>Risk is buried in margin.</li>
               <li>Subs are carried as pass-through costs.</li>
+              <li>Install is treated too much like shop labour.</li>
+              <li>ERP receives weak routing, BOM, and scope assumptions.</li>
               <li>Job closeout does not improve the next quote.</li>
             </ul>
           </div>
@@ -2929,12 +3221,23 @@
             <h3>After FabProfit</h3>
             <ul class="standard-list">
               <li>Scope is broken down by deliverable.</li>
-              <li>Labour is separated into real buckets.</li>
+              <li>Labour is separated into real production buckets.</li>
               <li>Outsourced work is priced as managed scope.</li>
               <li>Risk is named, priced, qualified, or excluded.</li>
+              <li>Install assumptions are separated from fabrication assumptions.</li>
+              <li>ERP and scheduling receive cleaner estimating inputs.</li>
               <li>Closeout data improves future estimates.</li>
             </ul>
           </div>
+        </div>
+
+        <div class="transformation-outcome-grid">
+          <div class="transformation-outcome-card"><span>Management</span><h3>You can review the estimate before it becomes a company problem.</h3><p>Managers get a clearer way to see what was included, excluded, assumed, carried as risk, and handed off to production.</p></div>
+          <div class="transformation-outcome-card"><span>Estimator</span><h3>Your estimator gets structure, not replacement.</h3><p>The system supports the estimator's judgement with repeatable questions, worksheets, quote checks, and risk language.</p></div>
+          <div class="transformation-outcome-card"><span>Operations</span><h3>The shop gets fewer mystery jobs.</h3><p>Production and PMs inherit clearer labour assumptions, material logic, outsourced work notes, field risks, and change-order boundaries.</p></div>
+          <div class="transformation-outcome-card"><span>Finance</span><h3>Margin stops being the junk drawer.</h3><p>Labour rate, overhead recovery, markup, true margin, risk reserve, contingency, and final sell price are treated as separate decisions.</p></div>
+          <div class="transformation-outcome-card"><span>ERP</span><h3>Your software gets better inputs.</h3><p>FabProfit does not replace ERP. It helps improve the estimating logic that feeds ERP, scheduling, buyout, and reporting.</p></div>
+          <div class="transformation-outcome-card"><span>Ownership</span><h3>The company becomes less dependent on one person's head.</h3><p>Quote logic becomes documented, teachable, transferable, and improvable instead of living as undocumented tribal knowledge.</p></div>
         </div>
       </div>
     </section>
@@ -3080,42 +3383,91 @@
       </div>
     </section>
 
-    <section id="pricing">
-      <div class="container pricing-grid">
-        <div class="story-card">
-          <div class="eyebrow">Company license</div>
-          <h2>Built for internal company deployment, not individual casual consumption.</h2>
-          <p>This is a premium system for companies that understand the cost of bad estimating. It is built for teams that want a repeatable operating standard, not a one-off spreadsheet download.</p>
-          <p>The company license gives your team access to the system rollout, tools, templates, quote language, implementation sequence, and updates so FabProfit can become part of your internal estimating standard.</p>
-          <div class="list-stack">
-            <div class="win-row"><span class="icon-badge">✓</span><div>Train multiple internal stakeholders on the same estimating language.</div></div>
-            <div class="win-row"><span class="icon-badge">✓</span><div>Use the spreadsheets and templates to standardize quoting behaviour.</div></div>
-            <div class="win-row"><span class="icon-badge">✓</span><div>Reduce reliance on one senior person's undocumented memory.</div></div>
+    <section id="pricing" class="license-section">
+      <div class="container">
+        <div class="license-intro">
+          <div class="license-intro-grid">
+            <div>
+              <div class="eyebrow">Company implementation options</div>
+              <h2>Choose the level of implementation your company needs.</h2>
+              <p>Some companies only need the system and can roll it out internally. Some want Greg involved every month while they install the standard. Others want the system implemented in person with live training, quote review, and company-specific adoption support.</p>
+              <p>FabProfit is priced by implementation depth, not by how many videos are inside the training library.</p>
+            </div>
+            <div class="license-intro-note">
+              <strong>This is not positioned as a casual course purchase.</strong><br />
+              It is a company estimating standardization system for fabrication businesses that want cleaner quote logic before bad assumptions become jobs, ERP data, schedules, and margin losses.
+            </div>
           </div>
         </div>
 
-        <div class="price-card">
-          <span class="price-label">FabProfit System Company License</span>
-          <h2>Install quote discipline before the next underpriced job is accepted.</h2>
-          <div class="price">$19,997 <small>USD</small></div>
-          <p>Company license includes the system infrastructure, spreadsheets, calculators, workbooks, implementation assets, quote language, and internal use rights for a defined team.</p>
-          <ul class="feature-list">
-            <li>Private executive strategy session to map your specific shop bottlenecks</li>
-            <li>Self-paced implementation program for your estimating team</li>
-            <li>9-phase FabProfit estimating protocol</li>
-            <li>Bonus sales and quote follow-up protocol</li>
-            <li>All team rollout workbooks and documentation</li>
-            <li>Job-Ready Winning Quote Builder</li>
-            <li>BOM pricing template for drawing-assisted takeoff workflows</li>
-            <li>True Labour Rate Calculator</li>
-            <li>Risk Calculator Suite</li>
-            <li>Arc-to-Floor Ratio Calculator</li>
-            <li>Quote language bank and final review checklists</li>
-            <li>Company rollout guide and estimator onboarding structure</li>
-            <li>One year of system updates</li>
-          </ul>
-          <a class="btn btn-primary" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20System%20Company%20License%20Inquiry">Discuss Your Estimating Process</a>
-          <p class="fine-print">Pricing, access limits, licensing terms, and included seats can be adjusted by written agreement. The system is educational and operational support. It does not guarantee job awards, profit, or error-free estimates.</p>
+        <div class="license-options-grid">
+          <article class="license-card">
+            <span class="license-tag">Self-paced company license</span>
+            <h3>FabProfit System License</h3>
+            <div class="license-price">$19,997 <small>USD</small></div>
+            <p>For fabrication companies that want to install the FabProfit estimating standard at their own pace.</p>
+            <div class="license-fit"><strong>Best fit:</strong> your company already has a capable estimator, manager, or internal leader who can drive implementation.</div>
+            <ul class="feature-list">
+              <li>Full FabProfit System access</li>
+              <li>Self-paced company implementation path</li>
+              <li>Scope breakdown system</li>
+              <li>Labour estimating system</li>
+              <li>Material and costing strategy</li>
+              <li>Subcontractor and outsourced work pricing system</li>
+              <li>Risk, unknowns, and margin protection system</li>
+              <li>Final price build-up system</li>
+              <li>Winning quote structure and wording bank</li>
+              <li>Worksheets, templates, calculators, checklists, and rollout roadmap</li>
+              <li>Internal use by your estimating and management team</li>
+            </ul>
+            <a class="btn btn-dark" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20System%20License%20Inquiry">Request System License</a>
+          </article>
+
+          <article class="license-card featured">
+            <span class="license-tag">Most practical rollout</span>
+            <h3>FabProfit Advisory License</h3>
+            <div class="license-price">$49,997 <small>USD</small></div>
+            <p>For companies that want the system plus direct access to Greg once a month for a full year.</p>
+            <div class="license-fit"><strong>Best fit:</strong> your company wants accountability, outside guidance, and help applying the system to real estimating decisions.</div>
+            <ul class="feature-list">
+              <li>Everything in the FabProfit System License</li>
+              <li>Monthly private implementation call with Greg for 12 months</li>
+              <li>Rollout progress review and next-step guidance</li>
+              <li>Help applying the system to real quoting problems</li>
+              <li>Support with estimator adoption and internal buy-in</li>
+              <li>Guidance on scope breakdown, risk language, quote structure, and pricing discipline</li>
+              <li>Help turning FabProfit into your company estimating standard</li>
+              <li>Better fit for shops that want the system actually used, not just purchased</li>
+            </ul>
+            <a class="btn btn-primary" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20Advisory%20License%20Inquiry">Apply for Advisory License</a>
+          </article>
+
+          <article class="license-card premium">
+            <span class="license-tag">Application only</span>
+            <h3>FabProfit On-Site Implementation</h3>
+            <div class="license-price">$197,997 <small>USD</small></div>
+            <p>For serious fabrication companies that want Greg on site to help install the system inside the business.</p>
+            <div class="license-fit"><strong>Best fit:</strong> estimating affects major revenue, margin, ERP data, scheduling accuracy, handoff quality, and company valuation.</div>
+            <ul class="feature-list">
+              <li>Everything in the Advisory License</li>
+              <li>Greg comes to your business in person</li>
+              <li>One-month live implementation period</li>
+              <li>Live training with estimating, management, operations, PM, purchasing, and project teams</li>
+              <li>Review of your current estimating process</li>
+              <li>Company-specific estimating workflow setup</li>
+              <li>Scope, labour, material, subcontractor, risk, and pricing standards built into your process</li>
+              <li>Quote review discipline installed with your team</li>
+              <li>Practical training using real jobs, real quotes, and your actual shop environment</li>
+              <li>Internal handoff structure so the system keeps being used after implementation</li>
+            </ul>
+            <a class="btn btn-primary" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20On-Site%20Implementation%20Inquiry">Request On-Site Implementation</a>
+          </article>
+        </div>
+
+        <div class="license-terms-box">
+          <p><strong>Important:</strong> On-site implementation is limited and requires approval based on company size, location, schedule, project fit, and implementation readiness.</p>
+          <p>Travel, lodging, meals, and related expenses for on-site implementation may be billed separately unless otherwise agreed in writing.</p>
+          <p>Pricing, access limits, licensing terms, included seats, scope of support, and implementation details can be adjusted by written agreement. FabProfit provides educational and operational support. It does not guarantee job awards, profit, or error-free estimates.</p>
         </div>
       </div>
     </section>
