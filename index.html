@@ -487,6 +487,60 @@
       gap: 1rem;
     }
 
+    .baseline-subhead {
+      grid-column: 1 / -1;
+      margin-top: .65rem;
+      padding: .85rem 1rem;
+      background: var(--slate-950);
+      color: #ffffff;
+      border-left: 6px solid var(--orange-600);
+    }
+
+    .baseline-subhead strong {
+      display: block;
+      color: #ffffff;
+      font-size: 1.02rem;
+      line-height: 1.15;
+      letter-spacing: -.025em;
+      margin-bottom: .25rem;
+    }
+
+    .baseline-subhead span {
+      display: block;
+      color: var(--slate-300);
+      font-size: .86rem;
+      font-weight: 720;
+      line-height: 1.35;
+    }
+
+    .baseline-field select {
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--slate-500) 50%),
+        linear-gradient(135deg, var(--slate-500) 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) calc(50% - 3px),
+        calc(100% - 13px) calc(50% - 3px);
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      padding-right: 2.25rem;
+    }
+
+    .baseline-field.compact small {
+      font-size: .76rem;
+    }
+
+    .baseline-live-note {
+      background: rgba(255,255,255,.075);
+      border-left: 5px solid var(--orange-600);
+      padding: .95rem;
+      color: var(--slate-300);
+      font-weight: 720;
+      font-size: .88rem;
+      line-height: 1.45;
+      margin-top: 1rem;
+    }
+
     .baseline-field {
       display: grid;
       gap: .45rem;
@@ -730,6 +784,9 @@
       .baseline-mini-grid {
         grid-template-columns: 1fr;
       }
+      .baseline-subhead {
+        padding: .8rem;
+      }
     }
 
   </style>
@@ -820,51 +877,200 @@
             <div class="baseline-calc-main">
               <span class="baseline-step-tag">Step 1: Enter your current baseline</span>
               <div class="baseline-field-grid">
+                <div class="baseline-subhead">
+                  <strong>Company size and quote volume</strong>
+                  <span>These numbers establish the scale of revenue, quote activity, win rate, and average quote value.</span>
+                </div>
+
                 <div class="baseline-field">
                   <label for="bfRevenue">Annual fabrication revenue</label>
                   <input id="bfRevenue" type="text" inputmode="decimal" autocomplete="off" min="0" step="100000" value="25000000" />
-                  <small>Annual revenue from fabrication, install, service, or related work.</small>
+                  <small>Annual awarded revenue from fabrication, install, service, or related work.</small>
                 </div>
+
                 <div class="baseline-field">
                   <label for="bfQuotedRevenue">Annual quoted value</label>
                   <input id="bfQuotedRevenue" type="text" inputmode="decimal" autocomplete="off" min="0" step="100000" value="60000000" />
                   <small>Total value of jobs quoted per year, including won and lost opportunities.</small>
                 </div>
+
                 <div class="baseline-field">
                   <label for="bfQuotesMonth">Quotes per month</label>
                   <input id="bfQuotesMonth" type="text" inputmode="decimal" autocomplete="off" min="0" step="1" value="80" />
                   <small>Average count of estimates, bids, budget numbers, and formal quotes.</small>
                 </div>
-                <div class="baseline-field">
-                  <label for="bfHoursQuote">Average hours per quote</label>
-                  <input id="bfHoursQuote" type="text" inputmode="decimal" autocomplete="off" min="0" step="0.25" value="4.5" />
-                  <small>Include estimator time, review time, revisions, and coordination.</small>
-                </div>
-                <div class="baseline-field">
-                  <label for="bfEstimatorRate">Loaded estimating cost per hour</label>
-                  <input id="bfEstimatorRate" type="text" inputmode="decimal" autocomplete="off" min="0" step="5" value="115" />
-                  <small>Use a loaded cost with wage, burden, overhead, management, and support.</small>
-                </div>
-                <div class="baseline-field">
-                  <label for="bfRevisionRate">Revision / rework rate %</label>
-                  <input id="bfRevisionRate" type="text" inputmode="decimal" autocomplete="off" min="0" max="100" step="1" value="18" />
-                  <small>Percent of quote effort repeated because of revisions, misses, or clarification.</small>
-                </div>
-                <div class="baseline-field">
-                  <label for="bfLeakageRate">Conservative margin leakage %</label>
-                  <input id="bfLeakageRate" type="text" inputmode="decimal" autocomplete="off" min="0" max="10" step="0.05" value="0.75" />
-                  <small>A planning factor for missed scope, underpriced risk, and quote-to-production gaps.</small>
-                </div>
+
                 <div class="baseline-field">
                   <label for="bfGrossMargin">Target gross margin %</label>
                   <input id="bfGrossMargin" type="text" inputmode="decimal" autocomplete="off" min="0" max="80" step="0.5" value="24" />
                   <small>Used to frame the scale of margin control and pricing discipline.</small>
                 </div>
+
+                <div class="baseline-subhead">
+                  <strong>Estimating workload and revision friction</strong>
+                  <span>These inputs separate normal quote-building effort from review time and avoidable rerun work.</span>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfHoursQuote">Estimator build hours per quote</label>
+                  <input id="bfHoursQuote" type="text" inputmode="decimal" autocomplete="off" min="0" step="0.25" value="4.5" />
+                  <small>Estimator time to build the first workable number. Do not include revision reruns here.</small>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfReviewHoursQuote">Review / coordination hours per quote</label>
+                  <input id="bfReviewHoursQuote" type="text" inputmode="decimal" autocomplete="off" min="0" step="0.25" value="1" />
+                  <small>Manager review, PM input, purchasing checks, sales coordination, or quote approval time.</small>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfEstimatorRate">Loaded estimating cost per hour</label>
+                  <input id="bfEstimatorRate" type="text" inputmode="decimal" autocomplete="off" min="0" step="5" value="115" />
+                  <small>Use a loaded cost with wage, burden, overhead, management, and support.</small>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfRevisionRate">Quotes needing revision %</label>
+                  <input id="bfRevisionRate" type="text" inputmode="decimal" autocomplete="off" min="0" max="100" step="1" value="18" />
+                  <small>Percent of quotes that require a meaningful rerun, reprice, correction, or clarification loop.</small>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfAvgRevisionHours">Average revision hours</label>
+                  <input id="bfAvgRevisionHours" type="text" inputmode="decimal" autocomplete="off" min="0" step="0.25" value="2.5" />
+                  <small>Average extra internal hours each revised quote consumes.</small>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfEstimatorCount">Estimators / quote builders</label>
+                  <input id="bfEstimatorCount" type="text" inputmode="decimal" autocomplete="off" min="0" step="1" value="3" />
+                  <small>Used to estimate capacity pressure and key-person dependency.</small>
+                </div>
+
+                <div class="baseline-subhead">
+                  <strong>Known margin losses and exposure areas</strong>
+                  <span>These questions improve accuracy by grounding the report in actual failure patterns, not just a generic leakage percentage.</span>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfLeakageRate">Base margin leakage %</label>
+                  <input id="bfLeakageRate" type="text" inputmode="decimal" autocomplete="off" min="0" max="10" step="0.05" value="0.75" />
+                  <small>Conservative planning factor for missed scope, underpriced risk, and quote-to-production gaps.</small>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfBadJobsYear">Underpriced jobs per year</label>
+                  <input id="bfBadJobsYear" type="text" inputmode="decimal" autocomplete="off" min="0" step="1" value="3" />
+                  <small>Jobs that look good at award but later show obvious quote, scope, labour, or risk misses.</small>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfAvgBadJobLoss">Average loss per underpriced job</label>
+                  <input id="bfAvgBadJobLoss" type="text" inputmode="decimal" autocomplete="off" min="0" step="1000" value="25000" />
+                  <small>Use margin shortfall, unrecovered hours, missed scope, or avoidable overrun cost.</small>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfUnrecoveredExtras">Unrecovered extras / year</label>
+                  <input id="bfUnrecoveredExtras" type="text" inputmode="decimal" autocomplete="off" min="0" step="5000" value="50000" />
+                  <small>Change orders, standby, scope creep, rework, or extras the company performs but does not recover.</small>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfFieldRevenuePercent">Revenue with field / install %</label>
+                  <input id="bfFieldRevenuePercent" type="text" inputmode="decimal" autocomplete="off" min="0" max="100" step="1" value="35" />
+                  <small>Percent of annual revenue that carries site access, mobilization, safety, travel, or field productivity risk.</small>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfFieldFrictionRate">Field friction exposure %</label>
+                  <input id="bfFieldFrictionRate" type="text" inputmode="decimal" autocomplete="off" min="0" max="10" step="0.05" value="0.5" />
+                  <small>Planning factor applied only to field/install revenue for standby, access, remobilization, and site drag.</small>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfOutsourcedSpend">Annual outsourced / coating spend</label>
+                  <input id="bfOutsourcedSpend" type="text" inputmode="decimal" autocomplete="off" min="0" step="50000" value="1000000" />
+                  <small>Galvanizing, paint, powder coat, machining, detailing, engineering, trucking, or specialty vendors.</small>
+                </div>
+
+                <div class="baseline-field">
+                  <label for="bfOutsourcedRiskRate">Outsourced risk exposure %</label>
+                  <input id="bfOutsourcedRiskRate" type="text" inputmode="decimal" autocomplete="off" min="0" max="15" step="0.05" value="1" />
+                  <small>Planning factor for missed prep, freight, vendor coordination, inspection, remake risk, and margin.</small>
+                </div>
+
+                <div class="baseline-subhead">
+                  <strong>Process maturity</strong>
+                  <span>These questions adjust the report based on how much quote control already exists inside the company.</span>
+                </div>
+
+                <div class="baseline-field compact">
+                  <label for="bfQuoteChecklist">Quote release checklist</label>
+                  <select id="bfQuoteChecklist">
+                    <option value="partial">Partial / informal</option>
+                    <option value="yes">Yes / required</option>
+                    <option value="no">No consistent checklist</option>
+                  </select>
+                  <small>Required checklist for scope, risk, margin, assumptions, exclusions, and handoff.</small>
+                </div>
+
+                <div class="baseline-field compact">
+                  <label for="bfLabourBuckets">Labour bucket standard</label>
+                  <select id="bfLabourBuckets">
+                    <option value="partial">Partial / estimator dependent</option>
+                    <option value="yes">Yes / standardized</option>
+                    <option value="no">No clear standard</option>
+                  </select>
+                  <small>Separate shop, field, setup, movement, control, friction, standby, and fire watch.</small>
+                </div>
+
+                <div class="baseline-field compact">
+                  <label for="bfMaterialBuyoutStandard">Material buyout standard</label>
+                  <select id="bfMaterialBuyoutStandard">
+                    <option value="partial">Partial / inconsistent</option>
+                    <option value="yes">Yes / standardized</option>
+                    <option value="no">No clear standard</option>
+                  </select>
+                  <small>Actual buy quantity, stock length, waste, drops, freight, coating, and price validity.</small>
+                </div>
+
+                <div class="baseline-field compact">
+                  <label for="bfRiskRegister">Risk register before quote</label>
+                  <select id="bfRiskRegister">
+                    <option value="partial">Partial / only on big jobs</option>
+                    <option value="yes">Yes / required</option>
+                    <option value="no">No formal risk register</option>
+                  </select>
+                  <small>Known unknowns are priced, qualified, excluded, transferred, reserved, or negotiated.</small>
+                </div>
+
+                <div class="baseline-field compact">
+                  <label for="bfQuoteLanguageStandard">Quote language standard</label>
+                  <select id="bfQuoteLanguageStandard">
+                    <option value="partial">Partial / varies by estimator</option>
+                    <option value="yes">Yes / standardized</option>
+                    <option value="no">No standard language bank</option>
+                  </select>
+                  <small>Assumptions, exclusions, alternates, validity, premium time, and change-order rules.</small>
+                </div>
+
+                <div class="baseline-field compact">
+                  <label for="bfPostJobReview">Estimate vs actual review</label>
+                  <select id="bfPostJobReview">
+                    <option value="partial">Partial / occasional</option>
+                    <option value="yes">Yes / routine</option>
+                    <option value="no">No consistent review</option>
+                  </select>
+                  <small>Closed jobs are compared against estimated labour, material, risk, and quote assumptions.</small>
+                </div>
+
                 <div class="baseline-field">
                   <label for="bfSystemPrice">FabProfit system investment</label>
                   <input id="bfSystemPrice" type="text" inputmode="decimal" autocomplete="off" min="0" step="1000" value="19997" />
                   <small>Default is $19,997. Adjust for the offer or license level being reviewed.</small>
                 </div>
+
                 <div class="baseline-field">
                   <label for="bfCompanyType">Company profile</label>
                   <select id="bfCompanyType">
@@ -873,7 +1079,21 @@
                     <option value="Multi-location fabrication group">Multi-location fabrication group</option>
                     <option value="Specialty welding or industrial contractor">Specialty welding or industrial contractor</option>
                   </select>
-                  <small>Used only to personalize the report language.</small>
+                  <small>Used to personalize the report language.</small>
+                </div>
+
+                <div class="baseline-field full">
+                  <label for="bfBiggestProblem">Biggest current estimating problem</label>
+                  <select id="bfBiggestProblem">
+                    <option value="Labour hours are too optimistic">Labour hours are too optimistic</option>
+                    <option value="Scope gaps and exclusions are weak">Scope gaps and exclusions are weak</option>
+                    <option value="Field install and access are underpriced">Field install and access are underpriced</option>
+                    <option value="Material buyout, waste, and supplier movement are inconsistent">Material buyout, waste, and supplier movement are inconsistent</option>
+                    <option value="Outsourced work and finish are treated like pass-through cost">Outsourced work and finish are treated like pass-through cost</option>
+                    <option value="Quote revisions and rework consume too much capacity">Quote revisions and rework consume too much capacity</option>
+                    <option value="Leadership wants a repeatable company standard">Leadership wants a repeatable company standard</option>
+                  </select>
+                  <small>This helps the report point the reader toward the first place to install FabProfit.</small>
                 </div>
               </div>
 
@@ -889,17 +1109,21 @@
             <aside class="baseline-calc-side">
               <span class="baseline-step-tag">Step 2: Review live baseline</span>
               <div class="baseline-result-main">
-                <span>Annual baseline drag</span>
+                <span>Annual quote-process exposure</span>
                 <strong id="bfAnnualDrag">$0</strong>
-                <p>Estimated yearly cost of manual estimating labour, revision effort, and conservative margin leakage.</p>
+                <p>Estimated yearly exposure from estimating labour investment, revision effort, known loss patterns, field/outsourced risk, and conservative margin leakage.</p>
               </div>
 
               <div class="baseline-mini-grid">
                 <div class="baseline-mini-result"><span>Annual estimating hours</span><strong id="bfAnnualHours">0</strong></div>
+                <div class="baseline-mini-result"><span>Known loss floor</span><strong id="bfKnownLoss">$0</strong></div>
+                <div class="baseline-mini-result"><span>Maturity score</span><strong id="bfMaturityScore">0%</strong></div>
                 <div class="baseline-mini-result"><span>Recoverable value / year</span><strong id="bfRecoverableValue">$0</strong></div>
                 <div class="baseline-mini-result"><span>3-year net opportunity</span><strong id="bfThreeYearNet">$0</strong></div>
                 <div class="baseline-mini-result"><span>Payback estimate</span><strong id="bfPayback">0 days</strong></div>
               </div>
+
+              <div class="baseline-live-note" id="bfLiveNote">The live report will become more accurate as the inputs reflect real known losses, field exposure, outsourced spend, and quote-process maturity.</div>
 
               <p id="bfScoreText" style="color:#cbd5e1;font-weight:800;margin-bottom:1rem;">Opportunity score will update here.</p>
 
@@ -918,7 +1142,7 @@
                   <input id="bfRole" type="text" placeholder="Role or title" />
                   <button class="btn btn-primary" type="submit">Generate My Baseline Report</button>
                 </form>
-                <p class="baseline-privacy">Your report is generated in the browser and passed to the report page. Connect the opt-in endpoint in the code when your email platform is ready.</p>
+                <p class="baseline-privacy">Your report is generated in your browser and passed securely to the report page. No guarantee is implied; the numbers are a planning baseline for discussion.</p>
               </div>
             </aside>
           </div>
@@ -1252,12 +1476,29 @@
         quotedRevenue: document.getElementById("bfQuotedRevenue"),
         quotesMonth: document.getElementById("bfQuotesMonth"),
         hoursQuote: document.getElementById("bfHoursQuote"),
+        reviewHoursQuote: document.getElementById("bfReviewHoursQuote"),
         estimatorRate: document.getElementById("bfEstimatorRate"),
         revisionRate: document.getElementById("bfRevisionRate"),
+        avgRevisionHours: document.getElementById("bfAvgRevisionHours"),
+        estimatorCount: document.getElementById("bfEstimatorCount"),
         leakageRate: document.getElementById("bfLeakageRate"),
+        badJobsYear: document.getElementById("bfBadJobsYear"),
+        avgBadJobLoss: document.getElementById("bfAvgBadJobLoss"),
+        unrecoveredExtras: document.getElementById("bfUnrecoveredExtras"),
+        fieldRevenuePercent: document.getElementById("bfFieldRevenuePercent"),
+        fieldFrictionRate: document.getElementById("bfFieldFrictionRate"),
+        outsourcedSpend: document.getElementById("bfOutsourcedSpend"),
+        outsourcedRiskRate: document.getElementById("bfOutsourcedRiskRate"),
+        quoteChecklist: document.getElementById("bfQuoteChecklist"),
+        labourBuckets: document.getElementById("bfLabourBuckets"),
+        materialBuyoutStandard: document.getElementById("bfMaterialBuyoutStandard"),
+        riskRegister: document.getElementById("bfRiskRegister"),
+        quoteLanguageStandard: document.getElementById("bfQuoteLanguageStandard"),
+        postJobReview: document.getElementById("bfPostJobReview"),
         grossMargin: document.getElementById("bfGrossMargin"),
         systemPrice: document.getElementById("bfSystemPrice"),
-        companyType: document.getElementById("bfCompanyType")
+        companyType: document.getElementById("bfCompanyType"),
+        biggestProblem: document.getElementById("bfBiggestProblem")
       };
 
       if (!fields.revenue) return;
@@ -1324,28 +1565,76 @@
         return "Focused improvement opportunity";
       }
 
+      function maturityValue(value) {
+        if (value === "yes") return 1;
+        if (value === "partial") return 0.5;
+        return 0;
+      }
+
+      function safeValue(field, fallbackValue) {
+        return field ? field.value : fallbackValue;
+      }
+
       function calculateBaseline() {
         const annualRevenue = readNumber(fields.revenue);
         const annualQuotedRevenue = readNumber(fields.quotedRevenue);
         const quotesPerMonth = readNumber(fields.quotesMonth);
         const hoursPerQuote = readNumber(fields.hoursQuote);
+        const reviewHoursQuote = readNumber(fields.reviewHoursQuote);
         const estimatorRate = readNumber(fields.estimatorRate);
         const revisionRate = readNumber(fields.revisionRate);
+        const avgRevisionHours = readNumber(fields.avgRevisionHours);
+        const estimatorCount = Math.max(1, readNumber(fields.estimatorCount) || 1);
         const leakageRate = readNumber(fields.leakageRate);
+        const badJobsYear = readNumber(fields.badJobsYear);
+        const avgBadJobLoss = readNumber(fields.avgBadJobLoss);
+        const unrecoveredExtras = readNumber(fields.unrecoveredExtras);
+        const fieldRevenuePercent = readNumber(fields.fieldRevenuePercent);
+        const fieldFrictionRate = readNumber(fields.fieldFrictionRate);
+        const outsourcedSpend = readNumber(fields.outsourcedSpend);
+        const outsourcedRiskRate = readNumber(fields.outsourcedRiskRate);
         const grossMargin = readNumber(fields.grossMargin);
         const systemPrice = readNumber(fields.systemPrice) || 19997;
-        const companyType = fields.companyType.value;
+        const companyType = safeValue(fields.companyType, "Medium / large fabrication company");
+        const biggestProblem = safeValue(fields.biggestProblem, "Leadership wants a repeatable company standard");
+
+        const maturityItems = [
+          safeValue(fields.quoteChecklist, "partial"),
+          safeValue(fields.labourBuckets, "partial"),
+          safeValue(fields.materialBuyoutStandard, "partial"),
+          safeValue(fields.riskRegister, "partial"),
+          safeValue(fields.quoteLanguageStandard, "partial"),
+          safeValue(fields.postJobReview, "partial")
+        ];
+
+        const maturityScore = Math.round((maturityItems.reduce((sum, item) => sum + maturityValue(item), 0) / maturityItems.length) * 100);
+        const maturityGap = Math.max(0, 100 - maturityScore);
+        const maturityRiskMultiplier = 1 + (maturityGap / 100) * 0.5;
 
         const annualQuotes = quotesPerMonth * 12;
-        const annualEstimatingHours = annualQuotes * hoursPerQuote;
-        const estimatingLaborCost = annualEstimatingHours * estimatorRate;
-        const revisionHours = annualEstimatingHours * (revisionRate / 100);
+        const quoteBuildHours = annualQuotes * hoursPerQuote;
+        const quoteReviewHours = annualQuotes * reviewHoursQuote;
+        const revisionHours = annualQuotes * (revisionRate / 100) * avgRevisionHours;
+        const annualEstimatingHours = quoteBuildHours + quoteReviewHours + revisionHours;
+
+        const estimatingLaborCost = (quoteBuildHours + quoteReviewHours) * estimatorRate;
         const revisionCost = revisionHours * estimatorRate;
-        const conservativeMarginLeakage = annualRevenue * (leakageRate / 100);
+
+        const baseMarginLeakage = annualRevenue * (leakageRate / 100);
+        const knownBadJobLoss = badJobsYear * avgBadJobLoss;
+        const knownLossFloor = knownBadJobLoss + unrecoveredExtras;
+
+        const fieldRevenue = annualRevenue * (fieldRevenuePercent / 100);
+        const fieldFrictionExposure = fieldRevenue * (fieldFrictionRate / 100);
+        const outsourcedRiskExposure = outsourcedSpend * (outsourcedRiskRate / 100);
+
+        const modeledMarginExposure = (baseMarginLeakage + fieldFrictionExposure + outsourcedRiskExposure) * maturityRiskMultiplier;
+        const conservativeMarginLeakage = Math.max(modeledMarginExposure, knownLossFloor);
         const annualBaselineDrag = estimatingLaborCost + revisionCost + conservativeMarginLeakage;
 
-        const efficiencyImprovementRate = 0.35;
-        const marginRecoveryRate = 0.25;
+        const efficiencyImprovementRate = Math.min(0.40, Math.max(0.15, 0.15 + (maturityGap / 100) * 0.25));
+        const marginRecoveryRate = Math.min(0.35, Math.max(0.15, 0.15 + (maturityGap / 100) * 0.20));
+
         const recoverableLaborCapacity = (estimatingLaborCost + revisionCost) * efficiencyImprovementRate;
         const recoverableMarginProtection = conservativeMarginLeakage * marginRecoveryRate;
         const conservativeRecoverableValue = recoverableLaborCapacity + recoverableMarginProtection;
@@ -1355,18 +1644,22 @@
         const workdaysReclaimed = (annualEstimatingHours * efficiencyImprovementRate) / 8;
         const hoursReclaimed = annualEstimatingHours * efficiencyImprovementRate;
 
-        const revenueScore = annualRevenue >= 50000000 ? 22 : annualRevenue >= 15000000 ? 17 : annualRevenue >= 5000000 ? 11 : 6;
-        const quoteScore = annualQuotes >= 1200 ? 22 : annualQuotes >= 600 ? 17 : annualQuotes >= 240 ? 11 : 6;
-        const hourScore = annualEstimatingHours >= 4500 ? 20 : annualEstimatingHours >= 1800 ? 15 : annualEstimatingHours >= 650 ? 9 : 5;
-        const revisionScore = revisionRate >= 25 ? 14 : revisionRate >= 12 ? 10 : revisionRate >= 5 ? 6 : 2;
-        const leakageScore = leakageRate >= 1.25 ? 14 : leakageRate >= 0.75 ? 10 : leakageRate >= 0.25 ? 6 : 2;
+        const revenueScore = annualRevenue >= 50000000 ? 18 : annualRevenue >= 15000000 ? 14 : annualRevenue >= 5000000 ? 9 : 5;
+        const quoteScore = annualQuotes >= 1200 ? 16 : annualQuotes >= 600 ? 12 : annualQuotes >= 240 ? 8 : 4;
+        const hourScore = annualEstimatingHours >= 4500 ? 14 : annualEstimatingHours >= 1800 ? 10 : annualEstimatingHours >= 650 ? 6 : 3;
+        const revisionScore = revisionRate >= 25 ? 10 : revisionRate >= 12 ? 7 : revisionRate >= 5 ? 4 : 1;
+        const leakageScore = conservativeMarginLeakage >= 250000 ? 12 : conservativeMarginLeakage >= 75000 ? 8 : conservativeMarginLeakage >= 25000 ? 5 : 2;
+        const maturityScoreContribution = maturityScore <= 35 ? 14 : maturityScore <= 65 ? 9 : 4;
+        const knownLossScore = knownLossFloor >= 150000 ? 8 : knownLossFloor >= 50000 ? 5 : knownLossFloor > 0 ? 3 : 0;
         const payoffScore = paybackDays && paybackDays <= 60 ? 8 : paybackDays <= 120 ? 6 : paybackDays <= 365 ? 4 : 1;
-        const opportunityScore = Math.min(100, Math.round(revenueScore + quoteScore + hourScore + revisionScore + leakageScore + payoffScore));
+        const opportunityScore = Math.min(100, Math.round(revenueScore + quoteScore + hourScore + revisionScore + leakageScore + maturityScoreContribution + knownLossScore + payoffScore));
 
         const avgQuotedValue = annualQuotes > 0 ? annualQuotedRevenue / annualQuotes : 0;
         const revenueToQuoteRatio = annualQuotedRevenue > 0 ? annualRevenue / annualQuotedRevenue : 0;
         const impliedWinRate = revenueToQuoteRatio * 100;
         const targetGrossProfit = annualRevenue * (grossMargin / 100);
+        const revenuePerEstimator = annualRevenue / estimatorCount;
+        const quotesPerEstimatorPerMonth = estimatorCount > 0 ? quotesPerMonth / estimatorCount : 0;
 
         return {
           report_type: "FabProfit Baseline Efficiency Report",
@@ -1378,17 +1671,59 @@
           quotes_per_month: quotesPerMonth,
           annual_quotes: Math.round(annualQuotes),
           average_hours_per_quote: hoursPerQuote,
+          review_hours_per_quote: reviewHoursQuote,
+          average_revision_hours: avgRevisionHours,
+          estimator_count: estimatorCount,
           loaded_estimating_cost_per_hour: estimatorRate,
           loaded_estimating_cost_per_hour_formatted: money.format(estimatorRate) + "/hr",
           revision_rate: revisionRate,
           revision_rate_formatted: pct(revisionRate),
           leakage_rate: leakageRate,
           leakage_rate_formatted: pct(leakageRate),
+          bad_jobs_per_year: badJobsYear,
+          average_bad_job_loss: avgBadJobLoss,
+          average_bad_job_loss_formatted: money.format(avgBadJobLoss),
+          known_bad_job_loss: knownBadJobLoss,
+          known_bad_job_loss_formatted: money.format(knownBadJobLoss),
+          unrecovered_extras: unrecoveredExtras,
+          unrecovered_extras_formatted: money.format(unrecoveredExtras),
+          known_loss_floor: knownLossFloor,
+          known_loss_floor_formatted: money.format(knownLossFloor),
+          field_revenue_percent: fieldRevenuePercent,
+          field_revenue_percent_formatted: pct(fieldRevenuePercent),
+          field_revenue: fieldRevenue,
+          field_revenue_formatted: money.format(fieldRevenue),
+          field_friction_rate: fieldFrictionRate,
+          field_friction_rate_formatted: pct(fieldFrictionRate),
+          field_friction_exposure: fieldFrictionExposure,
+          field_friction_exposure_formatted: money.format(fieldFrictionExposure),
+          outsourced_spend: outsourcedSpend,
+          outsourced_spend_formatted: money.format(outsourcedSpend),
+          outsourced_risk_rate: outsourcedRiskRate,
+          outsourced_risk_rate_formatted: pct(outsourcedRiskRate),
+          outsourced_risk_exposure: outsourcedRiskExposure,
+          outsourced_risk_exposure_formatted: money.format(outsourcedRiskExposure),
+          base_margin_leakage: baseMarginLeakage,
+          base_margin_leakage_formatted: money.format(baseMarginLeakage),
+          modeled_margin_exposure: modeledMarginExposure,
+          modeled_margin_exposure_formatted: money.format(modeledMarginExposure),
+          maturity_score: maturityScore,
+          maturity_score_formatted: `${maturityScore}%`,
+          maturity_gap: maturityGap,
+          quote_checklist: safeValue(fields.quoteChecklist, "partial"),
+          labour_buckets: safeValue(fields.labourBuckets, "partial"),
+          material_buyout_standard: safeValue(fields.materialBuyoutStandard, "partial"),
+          risk_register: safeValue(fields.riskRegister, "partial"),
+          quote_language_standard: safeValue(fields.quoteLanguageStandard, "partial"),
+          post_job_review: safeValue(fields.postJobReview, "partial"),
+          biggest_problem: biggestProblem,
           target_gross_margin: grossMargin,
           target_gross_margin_formatted: pct(grossMargin),
           system_price: systemPrice,
           system_price_formatted: money.format(systemPrice),
           company_type: companyType,
+          quote_build_hours: Math.round(quoteBuildHours),
+          quote_review_hours: Math.round(quoteReviewHours),
           annual_estimating_hours: Math.round(annualEstimatingHours),
           estimating_labor_cost: estimatingLaborCost,
           estimating_labor_cost_formatted: money.format(estimatingLaborCost),
@@ -1405,6 +1740,10 @@
           recoverable_labor_capacity_formatted: money.format(recoverableLaborCapacity),
           recoverable_margin_protection: recoverableMarginProtection,
           recoverable_margin_protection_formatted: money.format(recoverableMarginProtection),
+          efficiency_improvement_rate: efficiencyImprovementRate,
+          efficiency_improvement_rate_formatted: pct(efficiencyImprovementRate * 100),
+          margin_recovery_rate: marginRecoveryRate,
+          margin_recovery_rate_formatted: pct(marginRecoveryRate * 100),
           three_year_gross_value: threeYearGrossValue,
           three_year_gross_value_formatted: money.format(threeYearGrossValue),
           three_year_net_opportunity: threeYearNetOpportunity,
@@ -1415,8 +1754,12 @@
           average_quoted_value: avgQuotedValue,
           average_quoted_value_formatted: money.format(avgQuotedValue),
           implied_win_rate: Math.round(impliedWinRate),
+          implied_win_rate_formatted: pct(impliedWinRate),
           target_gross_profit: targetGrossProfit,
           target_gross_profit_formatted: money.format(targetGrossProfit),
+          revenue_per_estimator: revenuePerEstimator,
+          revenue_per_estimator_formatted: money.format(revenuePerEstimator),
+          quotes_per_estimator_per_month: Number(quotesPerEstimatorPerMonth.toFixed(1)),
           opportunity_score: opportunityScore,
           opportunity_label: opportunityLabel(opportunityScore)
         };
@@ -1426,10 +1769,16 @@
         const data = calculateBaseline();
         document.getElementById("bfAnnualDrag").textContent = data.annual_baseline_drag_formatted;
         document.getElementById("bfAnnualHours").textContent = num.format(data.annual_estimating_hours);
+        document.getElementById("bfKnownLoss").textContent = data.known_loss_floor_formatted;
+        document.getElementById("bfMaturityScore").textContent = data.maturity_score_formatted;
         document.getElementById("bfRecoverableValue").textContent = data.conservative_recoverable_value_formatted;
         document.getElementById("bfThreeYearNet").textContent = data.three_year_net_opportunity_formatted;
         document.getElementById("bfPayback").textContent = data.payback_days ? `${data.payback_days} days` : "Review";
         document.getElementById("bfScoreText").textContent = `${data.opportunity_label}. Opportunity score: ${data.opportunity_score}/100. This is a conservative baseline, not a guaranteed result.`;
+        const liveNote = document.getElementById("bfLiveNote");
+        if (liveNote) {
+          liveNote.textContent = `This model now includes ${data.annual_quotes} annual quotes, ${data.annual_estimating_hours} estimating hours, ${data.known_loss_floor_formatted} of known loss floor, a ${data.maturity_score_formatted} process maturity score, and ${data.conservative_margin_leakage_formatted} of modeled margin exposure.`;
+        }
       }
 
       function encodePayload(payload) {
@@ -1445,9 +1794,19 @@
         fields.quotedRevenue,
         fields.quotesMonth,
         fields.hoursQuote,
+        fields.reviewHoursQuote,
         fields.estimatorRate,
         fields.revisionRate,
+        fields.avgRevisionHours,
+        fields.estimatorCount,
         fields.leakageRate,
+        fields.badJobsYear,
+        fields.avgBadJobLoss,
+        fields.unrecoveredExtras,
+        fields.fieldRevenuePercent,
+        fields.fieldFrictionRate,
+        fields.outsourcedSpend,
+        fields.outsourcedRiskRate,
         fields.grossMargin,
         fields.systemPrice
       ].filter(Boolean);
@@ -1465,10 +1824,19 @@
         el.addEventListener("blur", () => formatNumericInput(el));
       });
 
-      if (fields.companyType) {
-        fields.companyType.addEventListener("input", updateBaselineDisplay);
-        fields.companyType.addEventListener("change", updateBaselineDisplay);
-      }
+      [
+        fields.companyType,
+        fields.biggestProblem,
+        fields.quoteChecklist,
+        fields.labourBuckets,
+        fields.materialBuyoutStandard,
+        fields.riskRegister,
+        fields.quoteLanguageStandard,
+        fields.postJobReview
+      ].filter(Boolean).forEach(el => {
+        el.addEventListener("input", updateBaselineDisplay);
+        el.addEventListener("change", updateBaselineDisplay);
+      });
 
       updateBaselineDisplay();
 
