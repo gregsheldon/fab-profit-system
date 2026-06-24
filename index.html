@@ -2685,6 +2685,237 @@
     }
 
 
+
+    /* Video diagnosis section */
+    .video-section {
+      padding: var(--section-space-desktop) 0;
+      background:
+        radial-gradient(circle at 12% 4%, rgba(249,115,22,.11), transparent 30rem),
+        linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+    }
+
+    .video-shell {
+      background:#fff;
+      border:2px solid var(--slate-950);
+      box-shadow:var(--shadow);
+      padding:clamp(1.25rem,3vw,2.2rem);
+      overflow:hidden;
+    }
+
+    .video-grid {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:var(--page-gap-lg);
+      align-items:stretch;
+      margin-top:var(--page-gap-lg);
+    }
+
+    .video-embed-card {
+      background:
+        radial-gradient(circle at top right, rgba(249,115,22,.18), transparent 20rem),
+        linear-gradient(135deg,#020617,#0f172a);
+      border:2px solid var(--orange-600);
+      box-shadow:0 25px 80px rgba(2,6,23,.22);
+      overflow:hidden;
+      min-height:100%;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .video-placeholder {
+      position:relative;
+      aspect-ratio:16 / 9;
+      min-height:clamp(360px, 52vw, 640px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:clamp(1.25rem,3vw,2rem);
+      color:#fff;
+      background:
+        radial-gradient(circle at center, rgba(249,115,22,.22), transparent 18rem),
+        linear-gradient(135deg,#020617,#0f172a);
+    }
+
+    .video-placeholder-content {
+      max-width:620px;
+      margin:0 auto;
+    }
+
+    .video-play-circle {
+      width:82px;
+      height:82px;
+      display:grid;
+      place-items:center;
+      margin:0 auto 1rem;
+      background:linear-gradient(135deg,var(--orange-500),var(--orange-700));
+      color:#fff;
+      font-size:2rem;
+      font-weight:950;
+      border-radius:999px;
+      box-shadow:0 18px 44px rgba(234,88,12,.34);
+    }
+
+    .video-placeholder strong {
+      display:block;
+      color:#fff;
+      font-size:clamp(1.65rem,3vw,2.55rem);
+      line-height:1;
+      letter-spacing:-.06em;
+      margin-bottom:.65rem;
+    }
+
+    .video-placeholder span {
+      display:block;
+      color:var(--slate-300);
+      font-weight:760;
+      line-height:1.45;
+    }
+
+    .video-embed-note {
+      border-top:1px solid rgba(255,255,255,.12);
+      color:var(--slate-300);
+      font-size:.82rem;
+      line-height:1.45;
+      font-weight:720;
+      padding:.9rem 1rem;
+      background:rgba(255,255,255,.06);
+    }
+
+    .video-embed-card iframe {
+      display:block;
+      width:100%;
+      aspect-ratio:16 / 9;
+      min-height:clamp(360px, 52vw, 640px);
+      border:0;
+    }
+
+    .video-side-card {
+      background:linear-gradient(135deg,#fff7ed,#ffffff);
+      border:1px solid #fed7aa;
+      border-left:8px solid var(--orange-600);
+      box-shadow:var(--shadow-soft);
+      padding:clamp(1.15rem,2.5vw,1.55rem);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .video-side-card h3 {
+      font-size:clamp(1.45rem,2.4vw,2.1rem);
+      line-height:1;
+      margin-bottom:.7rem;
+    }
+
+    .video-side-card .feature-list {
+      margin-bottom:0;
+      color:var(--slate-700);
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .video-cta-panel {
+      margin-top:var(--page-gap-lg);
+      background:var(--slate-950);
+      color:#fff;
+      border-left:8px solid var(--orange-600);
+      padding:clamp(1.15rem,2.5vw,1.6rem);
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:1rem;
+      align-items:center;
+    }
+
+    .video-cta-panel h3,
+    .video-cta-panel strong { color:#fff; }
+    .video-cta-panel p { color:var(--slate-300); margin-bottom:0; }
+
+    .video-actions {
+      display:flex;
+      flex-wrap:wrap;
+      gap:.75rem;
+      justify-content:flex-end;
+      align-items:center;
+    }
+
+    .video-deadline-note {
+      margin-top:1rem;
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+      border-left:7px solid var(--orange-600);
+      padding:.95rem 1rem;
+      color:var(--slate-800);
+      font-weight:800;
+      line-height:1.45;
+      text-align:center;
+    }
+
+    .video-transcript {
+      margin-top:1rem;
+      background:#fff;
+      border:1px solid var(--slate-200);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .video-transcript summary {
+      cursor:pointer;
+      padding:1rem 1.1rem;
+      color:var(--slate-950);
+      font-weight:950;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+
+    .video-transcript summary::-webkit-details-marker { display:none; }
+    .video-transcript summary:after {
+      content:"+";
+      display:inline-grid;
+      place-items:center;
+      width:30px;
+      height:30px;
+      background:var(--orange-600);
+      color:#fff;
+      font-weight:950;
+      flex:0 0 30px;
+    }
+
+    .video-transcript[open] summary:after { content:"–"; }
+
+    .video-transcript-body {
+      border-top:1px solid var(--slate-200);
+      padding:clamp(1.05rem,2.4vw,1.55rem);
+      max-height:620px;
+      overflow:auto;
+      background:linear-gradient(180deg,#ffffff,#f8fafc);
+    }
+
+    .video-transcript-body p {
+      color:var(--slate-700);
+      font-size:.96rem;
+      line-height:1.62;
+      margin-bottom:1rem;
+    }
+
+    .video-transcript-body p:last-child { margin-bottom:0; }
+
+    @media (max-width:1040px) {
+      .video-section { padding:var(--section-space-tablet) 0; }
+      .video-cta-panel { grid-template-columns:1fr; }
+      .video-actions { justify-content:flex-start; }
+    }
+
+    @media (max-width:760px) {
+      .video-section { padding:var(--section-space-mobile) 0; }
+      .video-placeholder,
+      .video-embed-card iframe { min-height:240px; }
+      .video-side-card .feature-list { grid-template-columns:1fr; }
+      .video-actions .btn { width:100%; }
+      .video-cta-panel { text-align:left; }
+    }
+
+
   </style>
 </head>
 
@@ -2699,6 +2930,7 @@
       <nav aria-label="Main navigation" class="nav">
         <a href="#business-decision">Business Case</a>
         <a href="#charter-program">Charter</a>
+        <a href="#video">Video</a>
         <a href="#baseline-calculator">Calculator</a>
         <a href="#erp-insurance">ERP</a>
         <a href="#tools">Tools</a>
@@ -2822,8 +3054,96 @@
 
 
     <div class="client-logo-disclaimer">
-      Representative organizations from Greg's fabrication, estimating, management, or project experience. Logos do not imply endorsement or sponsorship.
+      Representative organizations from Greg's fabrication, estimating, or project experience. Logos are shown for credibility context only and do not imply endorsement, sponsorship, or current client relationship.
     </div>
+
+
+    <section class="video-section" id="video">
+      <div class="container">
+        <div class="video-shell">
+          <div class="section-heading center">
+            <div class="eyebrow">Watch this first</div>
+            <h2>Your Estimate Becomes Your Operating Plan.</h2>
+            <p>And if the estimate is weak, your shop, PMs, purchasing, ERP, schedule, and margin inherit the mistake. This video explains why fabrication companies often lose margin before the steel ever reaches the floor.</p>
+          </div>
+
+          <div class="video-grid">
+            <div class="video-embed-card" aria-label="FabProfit video placeholder">
+              <!-- Replace this placeholder with the final video embed after the video link is available. -->
+              <!-- Example YouTube iframe format:
+              <iframe width="100%" height="100%" src="VIDEO_EMBED_URL_HERE" title="FabProfit System video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              -->
+              <div class="video-placeholder" id="fabprofit-video-placeholder">
+                <div class="video-placeholder-content">
+                  <div class="video-play-circle">▶</div>
+                  <strong>Video placeholder</strong>
+                  <span>Send the video link and this block can be replaced with the final embed without changing the rest of the page.</span>
+                </div>
+              </div>
+              <div class="video-embed-note">Suggested title: <strong>Your Estimate Becomes Your Operating Plan</strong>. Recommended placement: directly after the credibility logos and before the rest of the business case.</div>
+            </div>
+
+            <aside class="video-side-card">
+              <h3>What your leadership team will understand in this video</h3>
+              <ul class="feature-list">
+                <li>Why margin is usually lost before production starts</li>
+                <li>The three estimating failures that create bad jobs</li>
+                <li>Why ERP needs better estimating inputs before it can protect operations</li>
+                <li>How FabProfit acts as the pre-processor before ERP, scheduling, purchasing, and job handoff</li>
+                <li>Why the Charter Group is capped at 25 approved fabrication companies</li>
+                <li>What to do next: apply for the Charter License or run the Baseline Efficiency Calculator</li>
+              </ul>
+            </aside>
+          </div>
+
+          <div class="video-cta-panel">
+            <div>
+              <h3>Choose your next step after the video.</h3>
+              <p>Apply for the Charter License if your company is ready to evaluate a spot, or run the calculator first to see what your current estimating process may be costing you.</p>
+            </div>
+            <div class="video-actions">
+              <a class="btn btn-primary" href="#charter-application">Apply for a Charter License</a>
+              <a class="btn btn-light" href="#baseline-calculator">Run the Baseline Efficiency Calculator</a>
+            </div>
+          </div>
+
+          <div class="video-deadline-note">
+            Charter License applications close July 31, 2026, or when 25 approved companies are accepted, whichever comes first.
+          </div>
+
+          <details class="video-transcript">
+            <summary>Read Full Video Transcript</summary>
+            <div class="video-transcript-body">
+              <p>Most fabrication companies spend hundreds of thousands of dollars trying to optimize their shop floor. They buy faster fiber lasers, they install massive new ERP systems, and they hold weekly meetings to track labor overruns.</p>
+              <p>But here is the hard truth that nobody in the software industry wants to tell you: You almost never lose your margin on the shop floor.</p>
+              <p>You lose it the exact second a weak quote becomes your production plan. A bad job is usually purchased before the steel is even ordered, and long before the first cut is ever made.</p>
+              <p>Before we talk about how to fix that, you should probably know exactly who you are listening to. I am not a software developer who decided to launch a tech startup, and I am definitely not a theoretical business consultant. I am a metal guy who figured out the math.</p>
+              <p>I have spent over 50,000 hours in this trade. Over the last twenty-five years, I have lived in just about every corner of this industry. I’ve been under the welding hood and fit steel on the shop floor. I’ve done the heavy 3D CAD design. I’ve run operations, handled mergers and acquisitions, and directed estimating departments for complex structural and industrial fabrication projects.</p>
+              <p>I know what it smells like when a job goes sideways on the floor. I know exactly what it costs when a clean PDF drawing collides with the messy reality of the shop.</p>
+              <p>I built the FabProfit System because I simply got tired of watching incredibly talented fabrication shops lose their shirts on jobs they never should have bid, or give away their hard-earned margin simply because of a few undocumented blind spots at the estimating desk.</p>
+              <p>If your company is bleeding EBITDA right now, it is usually happening because of three major estimating failures.</p>
+              <p>First, your team is misunderstanding labour. In fabrication, material is math, but labour is weather. A weld might take 20 minutes of pure arc time, but what about the crane setup? The forklift movement? The site standby? If your estimators are treating arc time like floor time, they aren&#x27;t predicting human work, they are just guessing. And you are giving your labor away for free.</p>
+              <p>Second, they are treating risk like a feeling instead of a structure. Hope is not a business strategy. An estimate is not just a cost calculation; it is a risk decision. If your team isn&#x27;t naming the risk, deciding who owns it, and explicitly pricing it, qualifying it, or excluding it before the quote goes out, the shop will end up absorbing the cost when reality shows up.</p>
+              <p>And third, they are confusing markup with margin and sending naked numbers. A quote is not just a price tag; it is a risk-control document. If your proposal is vague, the customer can only compare you on price. But if you define the fence around the job with clear assumptions and exclusions, they compare you on competence.</p>
+              <p>Now, your senior estimator probably knows all of this. But when that knowledge is locked inside one guy&#x27;s head, you don’t have a company estimating system. You have a massive key-person dependency.</p>
+              <p>That is what the FabProfit System fixes. But this isn&#x27;t just a pile of training videos. It is a complete operating infrastructure.</p>
+              <p>Along with the core training modules, you are getting my proprietary Master Estimating Spreadsheet suite. This is an absolute beast of an engine. It includes automated Takeoff Imports, a live Material Database, a Quote Health Score that warns you if your bid is too risky, and an Auto-RFI Generator that automatically drafts questions for your customer based on missing scope. It even auto-builds the legal language for your proposal letters.</p>
+              <p>Because of this specific toolset, companies running this system are actually cutting their total quoting time in half. You save 50 percent of your actual quote time because the spreadsheets do the heavy lifting, allowing your estimators to focus on strategy instead of data entry.</p>
+              <p>To back that up, your team also gets two physical desk manuals. The first is the Estimator&#x27;s Profit Protection Field Guide, which gives your team instant access to steel sizing, buyout math, and risk treatment formulas right at their desk. The second is the Fabricator&#x27;s Sales Cheat Sheet, which trains your estimators on how to follow up, ask better questions, and close more quotes without ever having to act like a pushy salesperson.</p>
+              <p>And if you are sitting there thinking, &quot;Greg, we just spent $200,000 on a new ERP system to handle this,&quot; you need to hear this reality check: An ERP is a database, not a crystal ball. If your estimator feeds your new ERP bad routing times or misses the field mobilization costs, your expensive software is just going to schedule your mistakes faster.</p>
+              <p>The FabProfit System doesn&#x27;t replace your ERP. It acts as the intelligent pre-processor. It gives your entire team the tools to handle the messy risk analysis, the handling logic, and the true labor calculations before that data ever hits your final system.</p>
+              <p>Right now, I am opening up the FabProfit System to a Charter Group of just 25 forward-thinking fabrication companies. Because I am going to be working closely with this initial cohort to ensure their teams adopt the system and map their takeoff data flawlessly, I have to cap it at exactly 25 spots.</p>
+              <p>This Charter License window is closing soon—you can see the exact deadline date right below this video. After that deadline passes, or the 25 spots are filled, the price permanently shifts to our standard enterprise rate.</p>
+              <p>Right below this video, you will see two buttons.</p>
+              <p>If you are ready to claim your spot in this cohort before it fills up, click the button to apply for the Charter License right now.</p>
+              <p>But if you want to look at your own math first, click the other button to run the Baseline Efficiency Calculator. It takes about three minutes to fill out. I want you to put in your annual fabrication revenue, your quote volume, and your current win rate. Let the math show you exactly what your current, undocumented quoting process is costing you in capacity drag and margin exposure.</p>
+              <p>Either way, the window to get in on this Charter Group is closing. Check the date below, pick a button, and let&#x27;s get to work fixing your estimating process.</p>
+              <p>I will see you on the inside.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
 
 
 
