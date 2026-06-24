@@ -2324,6 +2324,114 @@
       .license-options-grid { grid-template-columns:1fr; }
     }
 
+
+    /* Real tool preview screenshots */
+    .tool-preview-section {
+      background:
+        radial-gradient(circle at 10% 0%, rgba(249,115,22,.09), transparent 28rem),
+        linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+    }
+
+    .tool-preview-grid.real-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--page-gap);
+      align-items: stretch;
+    }
+
+    .tool-preview-card.real-preview-card {
+      min-height: auto;
+      background: #fff;
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .tool-preview-card.real-preview-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+      border-color: rgba(249,115,22,.45);
+    }
+
+    .tool-preview-image-link {
+      display: block;
+      background:
+        linear-gradient(135deg, rgba(15,23,42,.06), rgba(249,115,22,.06));
+      border-bottom: 1px solid var(--slate-200);
+      padding: .8rem;
+    }
+
+    .tool-preview-image-wrap {
+      background: #ffffff;
+      border: 1px solid var(--slate-200);
+      aspect-ratio: 16 / 10.5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.75);
+    }
+
+    .tool-preview-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      filter: saturate(.98) contrast(1.01);
+    }
+
+    .tool-preview-body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .tool-preview-body p {
+      padding: 0;
+      margin: 0;
+      font-size: .92rem;
+      line-height: 1.45;
+    }
+
+    .preview-open-note {
+      margin-top: .85rem;
+      color: var(--orange-700);
+      font-size: .78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .tool-preview-note {
+      margin-top: 1.25rem;
+      background: #fff;
+      border: 1px solid var(--slate-200);
+      border-left: 8px solid var(--orange-600);
+      box-shadow: var(--shadow-soft);
+      padding: 1rem;
+      color: var(--slate-700);
+      font-weight: 760;
+    }
+
+    @media (max-width: 1180px) {
+      .tool-preview-grid.real-preview-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .tool-preview-grid.real-preview-grid {
+        grid-template-columns: 1fr;
+      }
+      .tool-preview-image-wrap {
+        aspect-ratio: 16 / 11;
+      }
+    }
+
   </style>
 </head>
 
@@ -2461,7 +2569,7 @@
 
 
     <div class="client-logo-disclaimer">
-      Representative organizations from Greg's fabrication, estimating, management, or project experience. Logos shown do not imply endorsement and/or sponsorship.
+      Representative organizations from Greg's fabrication, estimating, or project experience. Logos are shown for credibility context only and do not imply endorsement, sponsorship, or current client relationship.
     </div>
 
     <section id="business-decision" class="business-standard-section">
@@ -3262,17 +3370,79 @@
       <div class="container">
         <div class="section-heading center">
           <div class="eyebrow">Tool previews</div>
-          <h2>People trust what they can visualize. These are the kinds of working assets inside the system.</h2>
-          <p>The previews below show the operating logic: break the work down, price the full story, name the risk, build the price correctly, and protect the number in the quote.</p>
+          <h2>These are real working assets your team can see, use, and standardize around.</h2>
+          <p>The screenshots below show the operating logic inside FabProfit: executive visibility, labour bucket discipline, risk and unknowns, scope breakdown, quote review, and final price build-up.</p>
         </div>
-        <div class="tool-preview-grid">
-          <div class="tool-preview-card"><div class="tool-preview-head"><span>Worksheet</span><strong>Scope Breakdown</strong></div><div class="mock-sheet"><div class="mock-row"><div class="mock-cell"></div><div class="mock-cell"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell warn"></div><div class="mock-cell"></div><div class="mock-cell good"></div></div><div class="mock-row"><div class="mock-cell"></div><div class="mock-cell warn"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell good"></div><div class="mock-cell"></div><div class="mock-cell warn"></div></div><div class="mock-row"><div class="mock-cell"></div><div class="mock-cell"></div><div class="mock-cell red"></div></div></div><p>Break each deliverable into preparation, fabrication, finishing, assembly/QC, logistics, and field readiness.</p></div>
-          <div class="tool-preview-card"><div class="tool-preview-head"><span>Worksheet</span><strong>Labour Bucket</strong></div><div class="mock-sheet"><div class="mock-row"><div class="mock-cell"></div><div class="mock-cell"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell good"></div><div class="mock-cell warn"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell warn"></div><div class="mock-cell"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell"></div><div class="mock-cell red"></div><div class="mock-cell warn"></div></div><div class="mock-row"><div class="mock-cell good"></div><div class="mock-cell good"></div><div class="mock-cell"></div></div></div><p>Separate touch time, setup, movement, control, friction, field reality, utilization, and loaded labour rate logic.</p></div>
-          <div class="tool-preview-card"><div class="tool-preview-head"><span>Register</span><strong>Risk & Unknowns</strong></div><div class="mock-sheet"><div class="mock-row"><div class="mock-cell"></div><div class="mock-cell"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell red"></div><div class="mock-cell warn"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell warn"></div><div class="mock-cell good"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell"></div><div class="mock-cell red"></div><div class="mock-cell warn"></div></div><div class="mock-row"><div class="mock-cell good"></div><div class="mock-cell"></div><div class="mock-cell good"></div></div></div><p>Name who controls each risk, what it can cost, and whether to price, clarify, qualify, exclude, transfer, reserve, or negotiate.</p></div>
-          <div class="tool-preview-card"><div class="tool-preview-head"><span>Pricing</span><strong>Final Price Stack</strong></div><div class="mock-sheet"><div class="mock-row"><div class="mock-cell"></div><div class="mock-cell"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell good"></div><div class="mock-cell good"></div><div class="mock-cell warn"></div></div><div class="mock-row"><div class="mock-cell"></div><div class="mock-cell warn"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell red"></div><div class="mock-cell"></div><div class="mock-cell warn"></div></div><div class="mock-row"><div class="mock-cell good"></div><div class="mock-cell"></div><div class="mock-cell good"></div></div></div><p>Build final price from true cost, burden, overhead, risk, contingency, reserve, target margin, taxes, and commercial reality.</p></div>
-          <div class="tool-preview-card"><div class="tool-preview-head"><span>Checklist</span><strong>Quote Review</strong></div><div class="mock-sheet"><div class="mock-row"><div class="mock-cell"></div><div class="mock-cell"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell good"></div><div class="mock-cell"></div><div class="mock-cell good"></div></div><div class="mock-row"><div class="mock-cell warn"></div><div class="mock-cell warn"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell"></div><div class="mock-cell good"></div><div class="mock-cell red"></div></div><div class="mock-row"><div class="mock-cell good"></div><div class="mock-cell"></div><div class="mock-cell"></div></div></div><p>Review inclusions, exclusions, assumptions, alternates, validity, change-order wording, payment terms, and handoff notes.</p></div>
-          <div class="tool-preview-card"><div class="tool-preview-head"><span>Dashboard</span><strong>Executive Output</strong></div><div class="mock-sheet"><div class="mock-row"><div class="mock-cell"></div><div class="mock-cell"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell good"></div><div class="mock-cell warn"></div><div class="mock-cell red"></div></div><div class="mock-row"><div class="mock-cell good"></div><div class="mock-cell"></div><div class="mock-cell warn"></div></div><div class="mock-row"><div class="mock-cell"></div><div class="mock-cell good"></div><div class="mock-cell"></div></div><div class="mock-row"><div class="mock-cell warn"></div><div class="mock-cell"></div><div class="mock-cell good"></div></div></div><p>Surface pricing health, risk exposure, quote readiness, labour assumptions, margin target, and gaps before release.</p></div>
+
+        <div class="tool-preview-grid real-preview-grid">
+          <div class="tool-preview-card real-preview-card">
+            <div class="tool-preview-head"><span>Dashboard</span><strong>Executive Management Dashboard</strong></div>
+            <a class="tool-preview-image-link" href="https://gregsheldon.github.io/fab-profit-system/exec-manag-dash.png" target="_blank" rel="noopener">
+              <div class="tool-preview-image-wrap"><img src="https://gregsheldon.github.io/fab-profit-system/exec-manag-dash.png" alt="FabProfit executive management dashboard preview" loading="lazy" /></div>
+            </a>
+            <div class="tool-preview-body">
+              <p>Gives ownership and management a clearer view of quote health, pricing exposure, risk signals, margin targets, and decision points before release.</p>
+              <div class="preview-open-note">Click to view full size</div>
+            </div>
+          </div>
+
+          <div class="tool-preview-card real-preview-card">
+            <div class="tool-preview-head"><span>Labour</span><strong>Labour Bucket Worksheet</strong></div>
+            <a class="tool-preview-image-link" href="https://gregsheldon.github.io/fab-profit-system/fabprofit-labor-bucket.png" target="_blank" rel="noopener">
+              <div class="tool-preview-image-wrap"><img src="https://gregsheldon.github.io/fab-profit-system/fabprofit-labor-bucket.png" alt="FabProfit labour bucket worksheet preview" loading="lazy" /></div>
+            </a>
+            <div class="tool-preview-body">
+              <p>Separates labour into real estimating buckets so your team is not hiding setup, handling, fit-up, weld time, QC, install friction, and support time inside one rough number.</p>
+              <div class="preview-open-note">Click to view full size</div>
+            </div>
+          </div>
+
+          <div class="tool-preview-card real-preview-card">
+            <div class="tool-preview-head"><span>Risk</span><strong>Risk & Unknowns Register</strong></div>
+            <a class="tool-preview-image-link" href="https://gregsheldon.github.io/fab-profit-system/fabprofit-risk-unknown.png" target="_blank" rel="noopener">
+              <div class="tool-preview-image-wrap"><img src="https://gregsheldon.github.io/fab-profit-system/fabprofit-risk-unknown.png" alt="FabProfit risk and unknowns register preview" loading="lazy" /></div>
+            </a>
+            <div class="tool-preview-body">
+              <p>Forces the team to name risk, decide who controls it, estimate possible impact, and choose whether to price, qualify, exclude, transfer, reserve, or clarify it.</p>
+              <div class="preview-open-note">Click to view full size</div>
+            </div>
+          </div>
+
+          <div class="tool-preview-card real-preview-card">
+            <div class="tool-preview-head"><span>Scope</span><strong>Scope Breakdown Worksheet</strong></div>
+            <a class="tool-preview-image-link" href="https://gregsheldon.github.io/fab-profit-system/fabprofit-scope-breakdown.png" target="_blank" rel="noopener">
+              <div class="tool-preview-image-wrap"><img src="https://gregsheldon.github.io/fab-profit-system/fabprofit-scope-breakdown.png" alt="FabProfit scope breakdown worksheet preview" loading="lazy" /></div>
+            </a>
+            <div class="tool-preview-body">
+              <p>Breaks the job into deliverables, inclusions, exclusions, drawing assumptions, labour drivers, field conditions, coating, freight, and handoff details.</p>
+              <div class="preview-open-note">Click to view full size</div>
+            </div>
+          </div>
+
+          <div class="tool-preview-card real-preview-card">
+            <div class="tool-preview-head"><span>Review</span><strong>Quote Review Checklist</strong></div>
+            <a class="tool-preview-image-link" href="https://gregsheldon.github.io/fab-profit-system/fabproft-quote-review.png" target="_blank" rel="noopener">
+              <div class="tool-preview-image-wrap"><img src="https://gregsheldon.github.io/fab-profit-system/fabproft-quote-review.png" alt="FabProfit quote review checklist preview" loading="lazy" /></div>
+            </a>
+            <div class="tool-preview-body">
+              <p>Creates a pre-release review rhythm so pricing, exclusions, alternates, validity, commercial terms, change-order language, and handoff notes are checked before the quote leaves.</p>
+              <div class="preview-open-note">Click to view full size</div>
+            </div>
+          </div>
+
+          <div class="tool-preview-card real-preview-card">
+            <div class="tool-preview-head"><span>Pricing</span><strong>Final Price Stack</strong></div>
+            <a class="tool-preview-image-link" href="https://gregsheldon.github.io/fab-profit-system/final-price-stack.png" target="_blank" rel="noopener">
+              <div class="tool-preview-image-wrap"><img src="https://gregsheldon.github.io/fab-profit-system/final-price-stack.png" alt="FabProfit final price stack preview" loading="lazy" /></div>
+            </a>
+            <div class="tool-preview-body">
+              <p>Builds the final number from real cost, labour burden, material, outsourced work, equipment, overhead, risk, contingency, markup, margin, and commercial reality.</p>
+              <div class="preview-open-note">Click to view full size</div>
+            </div>
+          </div>
         </div>
+
+        <div class="tool-preview-note">These previews are meant to show the decision structure, not turn estimating into button-clicking. FabProfit gives your estimator and leadership team a more disciplined way to build, review, and defend the number before it becomes the job plan.</div>
       </div>
     </section>
 
