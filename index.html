@@ -2432,11 +2432,264 @@
       }
     }
 
+
+    /* Charter License Program update */
+    .charter-section,
+    .charter-application-section {
+      padding: var(--section-space-desktop) 0;
+      background:
+        radial-gradient(circle at 84% 6%, rgba(249,115,22,.13), transparent 30rem),
+        linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+    }
+
+    .charter-panel {
+      background:
+        radial-gradient(circle at top right, rgba(249,115,22,.18), transparent 25rem),
+        linear-gradient(135deg,#020617,#0f172a);
+      color:#fff;
+      border:2px solid var(--orange-600);
+      box-shadow:0 28px 90px rgba(2,6,23,.24);
+      padding:clamp(1.35rem,3vw,2.35rem);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .charter-panel:before {
+      content:"";
+      position:absolute;
+      width:280px;
+      height:280px;
+      right:-110px;
+      top:-110px;
+      background:rgba(249,115,22,.26);
+      pointer-events:none;
+      filter:blur(4px);
+    }
+
+    .charter-panel > * { position:relative; z-index:1; }
+    .charter-panel h2,
+    .charter-panel h3,
+    .charter-panel strong { color:#fff; }
+    .charter-panel p { color:var(--slate-300); }
+
+    .charter-top-grid {
+      display:grid;
+      grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);
+      gap:1.4rem;
+      align-items:stretch;
+    }
+
+    .charter-stat-box {
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.13);
+      padding:clamp(1.15rem,2.5vw,1.55rem);
+      display:grid;
+      gap:.85rem;
+    }
+
+    .charter-deadline {
+      background:linear-gradient(135deg,rgba(249,115,22,.28),rgba(249,115,22,.08));
+      border:1px solid rgba(249,115,22,.46);
+      padding:1rem;
+    }
+
+    .charter-deadline span {
+      display:block;
+      color:#fed7aa;
+      font-size:.72rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-weight:950;
+      margin-bottom:.3rem;
+    }
+
+    .charter-deadline strong {
+      display:block;
+      font-size:clamp(2.25rem,4.5vw,3.7rem);
+      line-height:.9;
+      letter-spacing:-.08em;
+      color:#fff;
+    }
+
+    .charter-stat-grid {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1rem;
+      margin-top:1.25rem;
+    }
+
+    .charter-stat-card {
+      background:#fff;
+      border:1px solid var(--slate-200);
+      border-top:5px solid var(--orange-600);
+      box-shadow:var(--shadow-soft);
+      padding:1.05rem;
+      min-height:150px;
+    }
+
+    .charter-stat-card strong {
+      display:block;
+      color:var(--slate-950);
+      font-size:1.15rem;
+      line-height:1.08;
+      letter-spacing:-.03em;
+      margin-bottom:.45rem;
+    }
+
+    .charter-stat-card p {
+      color:var(--slate-600);
+      font-size:.93rem;
+      line-height:1.45;
+      margin:0;
+    }
+
+    .charter-note-box {
+      margin-top:1.15rem;
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+      border-left:8px solid var(--orange-600);
+      box-shadow:var(--shadow-soft);
+      padding:1.05rem;
+      color:var(--slate-800);
+      font-weight:780;
+      line-height:1.48;
+    }
+
+    .charter-pricing-note {
+      margin:.95rem 0 1.1rem;
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+      border-left:7px solid var(--orange-600);
+      color:var(--slate-800);
+      padding:.95rem;
+      font-size:.92rem;
+      font-weight:780;
+      line-height:1.45;
+    }
+
+    .license-card.charter-base {
+      border-color:var(--orange-600);
+      box-shadow:0 24px 70px rgba(234,88,12,.16);
+    }
+
+    .application-grid {
+      display:grid;
+      grid-template-columns:minmax(0,.9fr) minmax(520px,1.1fr);
+      gap:1.25rem;
+      align-items:stretch;
+    }
+
+    .application-copy-card,
+    .application-form-card {
+      background:#fff;
+      border:2px solid var(--slate-950);
+      box-shadow:var(--shadow);
+      padding:clamp(1.25rem,3vw,2rem);
+    }
+
+    .application-copy-card {
+      background:
+        radial-gradient(circle at top right, rgba(249,115,22,.12), transparent 22rem),
+        linear-gradient(135deg,#ffffff,#f8fafc);
+    }
+
+    .application-form-card {
+      border-color:var(--orange-600);
+    }
+
+    .application-form {
+      display:grid;
+      gap:1rem;
+      margin-top:1rem;
+    }
+
+    .application-field-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:1rem;
+    }
+
+    .application-field {
+      display:grid;
+      gap:.45rem;
+    }
+
+    .application-field.full {
+      grid-column:1 / -1;
+    }
+
+    .application-field label {
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--slate-600);
+      font-weight:950;
+    }
+
+    .application-field input,
+    .application-field select,
+    .application-field textarea {
+      width:100%;
+      border:1px solid var(--slate-200);
+      background:#fff;
+      color:var(--slate-950);
+      padding:.95rem 1rem;
+      outline:none;
+      border-radius:0;
+      font-family:inherit;
+      font-weight:820;
+    }
+
+    .application-field textarea {
+      min-height:126px;
+      resize:vertical;
+      line-height:1.45;
+    }
+
+    .application-field input:focus,
+    .application-field select:focus,
+    .application-field textarea:focus {
+      border-color:var(--orange-500);
+      box-shadow:0 0 0 4px rgba(249,115,22,.14);
+    }
+
+    .application-privacy {
+      color:var(--slate-500);
+      font-size:.82rem;
+      line-height:1.5;
+      font-weight:720;
+      margin:.35rem 0 0;
+    }
+
+    @media (max-width:1040px) {
+      .charter-section,
+      .charter-application-section {
+        padding:var(--section-space-tablet) 0;
+      }
+      .charter-top-grid,
+      .application-grid {
+        grid-template-columns:1fr;
+      }
+      .charter-stat-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+
+    @media (max-width:760px) {
+      .charter-section,
+      .charter-application-section {
+        padding:var(--section-space-mobile) 0;
+      }
+      .charter-stat-grid,
+      .application-field-grid {
+        grid-template-columns:1fr;
+      }
+    }
+
+
   </style>
 </head>
 
 <body>
-  <div class="top-strip"><strong>FabProfit System:</strong> standardize how your company estimates before bad assumptions become jobs, ERP data, schedules, and margin losses.</div>
+  <div class="top-strip"><strong>Q3 Charter Cohort:</strong> accepting applications for 25 approved fabrication companies until July 31, 2026.</div>
 
   <header class="site-header">
     <div class="container header-inner">
@@ -2445,13 +2698,13 @@
       </a>
       <nav aria-label="Main navigation" class="nav">
         <a href="#business-decision">Business Case</a>
+        <a href="#charter-program">Charter</a>
         <a href="#baseline-calculator">Calculator</a>
         <a href="#erp-insurance">ERP</a>
         <a href="#tools">Tools</a>
-        <a href="#roadmap">Roadmap</a>
         <a href="#pricing">License</a>
       </nav>
-      <a class="btn btn-primary" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20System%20Company%20License%20Inquiry">Discuss Your Estimating Process</a>
+      <a class="btn btn-primary" href="#charter-application">Apply for Charter License</a>
     </div>
   </header>
 
@@ -2459,22 +2712,22 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow">Enterprise estimating and margin protection system</div>
+          <div class="eyebrow">Accepting applications for the Q3 Charter Cohort. Closing July 31, 2026.</div>
           <h1>Standardize how your company estimates before bad assumptions become jobs, ERP data, schedules, and margin losses.</h1>
-          <p class="hero-lede">FabProfit System gives your fabrication company a practical estimating, quoting, pricing, risk, and margin-protection standard that makes the page less about buying training and more about making a stronger business decision.</p>
+          <p class="hero-lede">FabProfit is opening a limited Charter License Program for 25 approved fabrication companies that want to install a stronger estimating, quoting, pricing, risk, and margin-protection standard before bad assumptions become jobs.</p>
           <p>You already know margin leakage rarely shows up as one dramatic failure. It usually appears as small misses repeated across drawings, labour assumptions, material buy quantities, field access, outsourced work, payment terms, change-order language, and quote handoff. FabProfit is built to help your team govern those decisions across structural steel, miscellaneous metals, heavy industrial assemblies, and multi-mobilization field installs.</p>
           <p><strong>This is not anti-ERP.</strong> FabProfit helps protect your ERP, schedule, shop floor, and final quote from weak estimating inputs before those inputs become company-wide operating data.</p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20System%20Company%20License%20Inquiry">Discuss Your Estimating Process</a>
+            <a class="btn btn-primary" href="#charter-application">Apply for Charter License</a>
             <a class="btn btn-light" href="#baseline-calculator">Run Baseline Calculator</a>
             <a class="btn btn-light" href="#system">See The System</a>
           </div>
 
           <div class="micro-proof">
-            <span class="micro-pill">Built on 25 plus years of fabrication reality</span>
-            <span class="micro-pill">Clear ERP and Excel answers for your team</span>
-            <span class="micro-pill">Tools, templates, checklists, and implementation path</span>
+            <span class="micro-pill">25 approved Charter companies</span>
+            <span class="micro-pill">Applications close July 31, 2026</span>
+            <span class="micro-pill">Charter pricing before standard enterprise pricing</span>
           </div>
 
           <div class="trust-row" aria-label="Core value signals">
@@ -2571,6 +2824,45 @@
     <div class="client-logo-disclaimer">
       Representative organizations from Greg's fabrication, estimating, or project experience. Logos are shown for credibility context only and do not imply endorsement, sponsorship, or current client relationship.
     </div>
+
+
+
+    <section id="charter-program" class="charter-section">
+      <div class="container">
+        <div class="charter-panel">
+          <div class="charter-top-grid">
+            <div>
+              <div class="eyebrow dark-eyebrow">Q3 Charter License Program</div>
+              <h2>A limited release for 25 fabrication companies that want to standardize estimating before the next growth cycle.</h2>
+              <p>This is not a countdown-timer launch or a discount promotion. It is a controlled Charter License Program for companies that want early access to the FabProfit System while the implementation path, worksheets, dashboards, and company rollout process are being refined with serious operators.</p>
+              <p>The reason for the cap is simple: the first group needs enough attention to make sure the system is adopted properly inside real estimating environments, not just purchased and left unused.</p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#charter-application">Apply for a Charter License</a>
+                <a class="btn btn-light" href="#baseline-calculator">Run the Baseline Calculator First</a>
+              </div>
+            </div>
+            <aside class="charter-stat-box" aria-label="Charter cohort availability">
+              <div class="charter-deadline">
+                <span>Applications close</span>
+                <strong>July 31, 2026</strong>
+              </div>
+              <p><strong>25 approved companies only.</strong> Once the 25 spots are filled, or on August 1, 2026, the Charter License window closes and standard enterprise pricing applies.</p>
+              <p>This is meant to attract companies that will assign an internal champion, use the worksheets on real quotes, and help validate the implementation path with practical feedback.</p>
+            </aside>
+          </div>
+        </div>
+
+        <div class="charter-stat-grid">
+          <div class="charter-stat-card"><strong>Why it is limited</strong><p>FabProfit is a company standard, not a passive video library. The first cohort is capped so adoption support and feedback can stay practical.</p></div>
+          <div class="charter-stat-card"><strong>Who it is for</strong><p>Fabrication companies that want cleaner quote logic, less estimator dependency, stronger handoffs, and better ERP-ready estimating inputs.</p></div>
+          <div class="charter-stat-card"><strong>What happens after</strong><p>After July 31, 2026, Charter pricing closes. Standard enterprise pricing, access terms, and implementation packaging apply thereafter.</p></div>
+        </div>
+
+        <div class="charter-note-box">
+          <strong>Charter positioning:</strong> early adopters receive the first-company pricing opportunity in exchange for implementation feedback, practical use, and the willingness to test the system against real fabrication estimating problems.
+        </div>
+      </div>
+    </section>
 
     <section id="business-decision" class="business-standard-section">
       <div class="container">
@@ -3558,24 +3850,25 @@
         <div class="license-intro">
           <div class="license-intro-grid">
             <div>
-              <div class="eyebrow">Company implementation options</div>
-              <h2>Choose the level of implementation your company needs.</h2>
-              <p>Some companies only need the system and can roll it out internally. Some want Greg involved every month while they install the standard. Others want the system implemented in person with live training, quote review, and company-specific adoption support.</p>
+              <div class="eyebrow">Charter license options</div>
+              <h2>Choose the level of implementation your company needs during the Q3 Charter window.</h2>
+              <p>The Charter Program is limited to 25 approved fabrication companies through July 31, 2026. Some companies only need the self-paced system. Some want Greg involved every month for a year. Others want Greg on site for one month to install the standard directly with the team.</p>
               <p>FabProfit is priced by implementation depth, not by how many videos are inside the training library.</p>
             </div>
             <div class="license-intro-note">
-              <strong>This is not positioned as a casual course purchase.</strong><br />
-              It is a company estimating standardization system for fabrication businesses that want cleaner quote logic before bad assumptions become jobs, ERP data, schedules, and margin losses.
+              <strong>The $19,997 Charter License is limited to the first 25 approved companies.</strong><br />
+              Applications close July 31, 2026. Once the 25 spots are filled, or on August 1, 2026, the Charter License window closes and standard enterprise pricing applies.
             </div>
           </div>
         </div>
 
         <div class="license-options-grid">
-          <article class="license-card">
-            <span class="license-tag">Self-paced company license</span>
-            <h3>FabProfit System License</h3>
+          <article class="license-card charter-base">
+            <span class="license-tag">Charter self-paced license</span>
+            <h3>FabProfit System Charter License</h3>
             <div class="license-price">$19,997 <small>USD</small></div>
             <p>For fabrication companies that want to install the FabProfit estimating standard at their own pace.</p>
+            <div class="charter-pricing-note"><strong>Charter window:</strong> limited to the first 25 approved companies. Applications close July 31, 2026. Standard enterprise pricing applies after the Charter window closes.</div>
             <div class="license-fit"><strong>Best fit:</strong> your company already has a capable estimator, manager, or internal leader who can drive implementation.</div>
             <ul class="feature-list">
               <li>Full FabProfit System access</li>
@@ -3590,17 +3883,17 @@
               <li>Worksheets, templates, calculators, checklists, and rollout roadmap</li>
               <li>Internal use by your estimating and management team</li>
             </ul>
-            <a class="btn btn-dark" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20System%20License%20Inquiry">Request System License</a>
+            <a class="btn btn-dark" href="#charter-application">Apply for Charter License</a>
           </article>
 
           <article class="license-card featured">
-            <span class="license-tag">Most practical rollout</span>
+            <span class="license-tag">Charter advisory rollout</span>
             <h3>FabProfit Advisory License</h3>
             <div class="license-price">$49,997 <small>USD</small></div>
             <p>For companies that want the system plus direct access to Greg once a month for a full year.</p>
             <div class="license-fit"><strong>Best fit:</strong> your company wants accountability, outside guidance, and help applying the system to real estimating decisions.</div>
             <ul class="feature-list">
-              <li>Everything in the FabProfit System License</li>
+              <li>Everything in the FabProfit System Charter License</li>
               <li>Monthly private implementation call with Greg for 12 months</li>
               <li>Rollout progress review and next-step guidance</li>
               <li>Help applying the system to real quoting problems</li>
@@ -3609,7 +3902,7 @@
               <li>Help turning FabProfit into your company estimating standard</li>
               <li>Better fit for shops that want the system actually used, not just purchased</li>
             </ul>
-            <a class="btn btn-primary" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20Advisory%20License%20Inquiry">Apply for Advisory License</a>
+            <a class="btn btn-primary" href="#charter-application">Apply for Advisory License</a>
           </article>
 
           <article class="license-card premium">
@@ -3630,14 +3923,99 @@
               <li>Practical training using real jobs, real quotes, and your actual shop environment</li>
               <li>Internal handoff structure so the system keeps being used after implementation</li>
             </ul>
-            <a class="btn btn-primary" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20On-Site%20Implementation%20Inquiry">Request On-Site Implementation</a>
+            <a class="btn btn-primary" href="#charter-application">Request On-Site Implementation Review</a>
           </article>
         </div>
 
         <div class="license-terms-box">
-          <p><strong>Important:</strong> On-site implementation is limited and requires approval based on company size, location, schedule, project fit, and implementation readiness.</p>
-          <p>Travel, lodging, meals, and related expenses for on-site implementation may be billed separately unless otherwise agreed in writing.</p>
+          <p><strong>Charter License terms:</strong> the $19,997 Charter License is limited to the first 25 approved companies and applications close July 31, 2026. Standard enterprise pricing applies after the Charter window closes.</p>
+          <p><strong>Approval required:</strong> companies should have a real estimating process to improve, a clear margin or handoff problem to solve, and an internal champion prepared to help roll the system out within 90 days.</p>
+          <p><strong>On-site implementation:</strong> travel, lodging, meals, and related expenses may be billed separately unless otherwise agreed in writing. On-site implementation is limited and requires approval based on company size, location, schedule, project fit, and implementation readiness.</p>
           <p>Pricing, access limits, licensing terms, included seats, scope of support, and implementation details can be adjusted by written agreement. FabProfit provides educational and operational support. It does not guarantee job awards, profit, or error-free estimates.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="charter-application" class="charter-application-section">
+      <div class="container application-grid">
+        <div class="application-copy-card">
+          <div class="eyebrow">Apply for a Charter License</div>
+          <h2>This application is intentionally higher friction.</h2>
+          <p>A $19,997 plus company system should not be sold like a low-ticket download. The application helps determine whether your company is a fit for one of the 25 Charter spots and which implementation level makes the most sense.</p>
+          <div class="list-stack">
+            <div class="win-row"><span class="icon-badge">1</span><div><strong>Company fit</strong><br />Your estimating volume, team size, and margin exposure need to justify installing a company standard.</div></div>
+            <div class="win-row"><span class="icon-badge">2</span><div><strong>Implementation readiness</strong><br />Your company should be willing to assign an internal champion and use the tools on real quotes within 90 days.</div></div>
+            <div class="win-row"><span class="icon-badge">3</span><div><strong>Strategic feedback</strong><br />The Charter group helps sharpen the system by testing it against real fabrication quoting, ERP, handoff, and margin-protection problems.</div></div>
+          </div>
+        </div>
+
+        <div class="application-form-card">
+          <h3>Charter License Application</h3>
+          <p>Complete the fields below. Submitting this form opens an email to Greg with your application details.</p>
+          <form class="application-form" id="charterApplicationForm">
+            <div class="application-field-grid">
+              <div class="application-field">
+                <label for="charterName">Your name</label>
+                <input id="charterName" name="name" type="text" placeholder="First and last name" required />
+              </div>
+              <div class="application-field">
+                <label for="charterEmail">Email</label>
+                <input id="charterEmail" name="email" type="email" placeholder="you@company.com" required />
+              </div>
+              <div class="application-field">
+                <label for="charterCompany">Company name</label>
+                <input id="charterCompany" name="company" type="text" placeholder="Company name" required />
+              </div>
+              <div class="application-field">
+                <label for="charterRevenue">Revenue bracket</label>
+                <select id="charterRevenue" name="revenue" required>
+                  <option value="">Select one</option>
+                  <option>Under $5M</option>
+                  <option>$5M to $10M</option>
+                  <option>$10M to $25M</option>
+                  <option>$25M to $50M</option>
+                  <option>$50M to $100M</option>
+                  <option>$100M plus</option>
+                </select>
+              </div>
+              <div class="application-field">
+                <label for="charterTeamSize">Estimating team size</label>
+                <select id="charterTeamSize" name="estimating_team_size" required>
+                  <option value="">Select one</option>
+                  <option>1 estimator</option>
+                  <option>2 to 3 estimators</option>
+                  <option>4 to 6 estimators</option>
+                  <option>7 plus estimators</option>
+                  <option>No dedicated estimator yet</option>
+                </select>
+              </div>
+              <div class="application-field">
+                <label for="charterLicenseInterest">License interest</label>
+                <select id="charterLicenseInterest" name="license_interest" required>
+                  <option value="">Select one</option>
+                  <option>System Charter License - $19,997</option>
+                  <option>Advisory License - $49,997</option>
+                  <option>On-Site Implementation - $197,997</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+              <div class="application-field full">
+                <label for="charterLeak">What is the primary margin leak you are trying to solve this quarter?</label>
+                <textarea id="charterLeak" name="primary_margin_leak" placeholder="Example: blown labour hours, install assumptions, subcontractor pass-throughs, quote handoff, ERP routing inputs, change-order language, material buyout, or estimator dependency." required></textarea>
+              </div>
+              <div class="application-field full">
+                <label for="charterChampion">Are you prepared to assign an internal champion to roll this out within the next 90 days?</label>
+                <select id="charterChampion" name="internal_champion" required>
+                  <option value="">Select one</option>
+                  <option>Yes, we can assign an internal champion</option>
+                  <option>Not yet, but we are evaluating who would own it</option>
+                  <option>No, we are not ready for internal rollout</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit Charter Application</button>
+            <p class="application-privacy">This does not obligate your company to buy. It starts the fit conversation for one of the 25 Charter spots.</p>
+          </form>
         </div>
       </div>
     </section>
@@ -4121,6 +4499,35 @@
           window.location.href = `${REPORT_PAGE}#report=${encoded}`;
         });
       }
+    })();
+  </script>
+
+
+  <script>
+    (function () {
+      const form = document.getElementById("charterApplicationForm");
+      if (!form) return;
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const value = id => (document.getElementById(id)?.value || "").trim();
+        const subject = "FabProfit Charter License Application";
+        const body = [
+          "FabProfit Charter License Application",
+          "",
+          `Name: ${value("charterName")}`,
+          `Email: ${value("charterEmail")}`,
+          `Company: ${value("charterCompany")}`,
+          `Revenue Bracket: ${value("charterRevenue")}`,
+          `Estimating Team Size: ${value("charterTeamSize")}`,
+          `License Interest: ${value("charterLicenseInterest")}`,
+          "",
+          "Primary margin leak this quarter:",
+          value("charterLeak"),
+          "",
+          `Internal champion within 90 days: ${value("charterChampion")}`
+        ].join("\n");
+        window.location.href = `mailto:gregwsheldon@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      });
     })();
   </script>
 
