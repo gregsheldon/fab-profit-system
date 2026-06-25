@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your FabProfit Company Baseline Report</title>
-  <meta name="description" content="A personalized executive baseline report generated from the FabProfit System Baseline Calculator." />
+  <title>Your FabProfit Company Baseline Report | Estimating, Quoting, and Margin Protection Review</title>
+  <meta name="description" content="A personalized executive baseline report generated from the FabProfit System Baseline Calculator with estimating, quoting, labour, material, outsourced-work, risk, and margin-protection insights." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -232,6 +232,319 @@
       .company-data-grid .metric, .company-data-grid .data-card-wide .metric { font-size:clamp(1.85rem,8vw,2.4rem) !important; }
       .risk-top { flex-direction:column; }
     }
+
+    /* Expanded calculator-driven report value sections */
+    .value-section-note {
+      background:linear-gradient(135deg,#fff7ed,#ffffff);
+      border:1px solid #fed7aa;
+      border-left:8px solid var(--orange-600);
+      padding:1rem;
+      color:var(--slate-700);
+      font-weight:760;
+      margin-top:1rem;
+    }
+
+    .ratio-grid {
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:.85rem;
+      margin-top:1rem;
+    }
+
+    .ratio-card {
+      background:#fff;
+      border:1px solid var(--slate-200);
+      border-top:5px solid var(--orange-600);
+      padding:1rem;
+      min-height:150px;
+    }
+
+    .ratio-card span {
+      display:block;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--slate-500);
+      font-size:.7rem;
+      font-weight:950;
+      margin-bottom:.45rem;
+    }
+
+    .ratio-card strong {
+      display:block;
+      color:var(--slate-950);
+      font-size:clamp(1.55rem,2.45vw,2.2rem);
+      line-height:.95;
+      letter-spacing:-.06em;
+      margin-bottom:.45rem;
+      overflow-wrap:anywhere;
+    }
+
+    .ratio-card p {
+      margin:0;
+      font-size:.9rem;
+      line-height:1.42;
+    }
+
+    .audit-table {
+      width:100%;
+      border-collapse:collapse;
+      margin-top:1rem;
+      border:1px solid var(--slate-200);
+      font-size:.91rem;
+    }
+
+    .audit-table th {
+      background:var(--slate-950);
+      color:#fff;
+      text-align:left;
+      padding:.8rem;
+      font-size:.72rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      border-right:1px solid var(--slate-700);
+    }
+
+    .audit-table td {
+      padding:.82rem;
+      border-top:1px solid var(--slate-200);
+      border-right:1px solid var(--slate-200);
+      vertical-align:top;
+      color:var(--slate-700);
+      font-weight:700;
+      line-height:1.42;
+    }
+
+    .audit-table td strong { color:var(--slate-950); }
+
+    .formula-grid {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:.85rem;
+      margin-top:1rem;
+    }
+
+    .formula-card {
+      background:var(--slate-50);
+      border:1px solid var(--slate-200);
+      border-left:6px solid var(--orange-600);
+      padding:1rem;
+      min-height:185px;
+    }
+
+    .formula-card span {
+      display:inline-flex;
+      background:var(--slate-950);
+      color:#fff;
+      font-size:.68rem;
+      text-transform:uppercase;
+      font-weight:950;
+      letter-spacing:.08em;
+      padding:.38rem .55rem;
+      margin-bottom:.65rem;
+    }
+
+    .formula-card code {
+      display:block;
+      background:#fff;
+      border:1px solid var(--slate-200);
+      padding:.65rem;
+      color:var(--slate-800);
+      font-weight:850;
+      font-family:Inter, ui-sans-serif, system-ui, sans-serif;
+      white-space:normal;
+      margin:.65rem 0;
+    }
+
+    .ranked-list {
+      display:grid;
+      gap:.75rem;
+      margin-top:1rem;
+    }
+
+    .ranked-item {
+      display:grid;
+      grid-template-columns:54px minmax(0,1fr) minmax(125px,.22fr);
+      gap:.85rem;
+      align-items:start;
+      border:1px solid var(--slate-200);
+      background:#fff;
+      padding:1rem;
+    }
+
+    .ranked-num {
+      width:54px;
+      height:54px;
+      display:grid;
+      place-items:center;
+      background:var(--orange-600);
+      color:#fff;
+      font-weight:950;
+      font-size:1.15rem;
+    }
+
+    .ranked-item h3 { margin-bottom:.35rem; }
+    .ranked-item p { margin:0; font-size:.92rem; }
+    .ranked-value {
+      text-align:right;
+      color:var(--slate-950);
+      font-size:1.2rem;
+      font-weight:950;
+      line-height:1.05;
+      letter-spacing:-.04em;
+      overflow-wrap:anywhere;
+    }
+
+    .control-plan {
+      display:grid;
+      gap:.75rem;
+      margin-top:1rem;
+    }
+
+    .control-item {
+      background:#fff;
+      border:1px solid var(--slate-200);
+      border-left:7px solid var(--orange-600);
+      padding:1rem;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(160px,.3fr);
+      gap:1rem;
+      align-items:start;
+    }
+
+    .control-item h3 { margin-bottom:.35rem; }
+    .control-item p { margin:0; font-size:.92rem; }
+    .control-owner {
+      background:var(--slate-50);
+      border:1px solid var(--slate-200);
+      padding:.75rem;
+      font-size:.82rem;
+      font-weight:850;
+      color:var(--slate-700);
+    }
+
+    .department-grid {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:.85rem;
+      margin-top:1rem;
+    }
+
+    .department-card {
+      background:#fff;
+      border:1px solid var(--slate-200);
+      padding:1rem;
+      min-height:210px;
+    }
+
+    .department-card h3 {
+      display:flex;
+      gap:.55rem;
+      align-items:flex-start;
+      margin-bottom:.55rem;
+    }
+
+    .department-card h3 span {
+      display:inline-grid;
+      place-items:center;
+      width:30px;
+      height:30px;
+      flex:0 0 30px;
+      background:var(--slate-950);
+      color:#fff;
+      font-size:.82rem;
+      font-weight:950;
+    }
+
+    .department-card p {
+      font-size:.92rem;
+      margin-bottom:.6rem;
+    }
+
+    .department-card small {
+      display:block;
+      color:var(--slate-500);
+      font-weight:800;
+      line-height:1.4;
+    }
+
+    .board-lens {
+      background:
+        radial-gradient(circle at top right, rgba(249,115,22,.16), transparent 22rem),
+        linear-gradient(135deg,var(--slate-950),var(--slate-800));
+      color:#fff;
+      border:2px solid var(--orange-600);
+      padding:1.2rem;
+      margin-top:1rem;
+    }
+
+    .board-lens h3,
+    .board-lens strong { color:#fff; }
+    .board-lens p { color:var(--slate-300); }
+
+    .board-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:.85rem;
+      margin-top:.9rem;
+    }
+
+    .board-card {
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.13);
+      padding:.95rem;
+    }
+
+    .board-card strong {
+      display:block;
+      margin-bottom:.35rem;
+      line-height:1.08;
+    }
+
+    .board-card span {
+      color:var(--slate-300);
+      font-size:.9rem;
+      line-height:1.4;
+      font-weight:720;
+    }
+
+    .handoff-package {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:.85rem;
+      margin-top:1rem;
+    }
+
+    .handoff-card {
+      background:var(--slate-50);
+      border:1px solid var(--slate-200);
+      padding:1rem;
+      min-height:160px;
+    }
+
+    .handoff-card strong {
+      display:block;
+      color:var(--slate-950);
+      margin-bottom:.45rem;
+      line-height:1.1;
+      font-size:1.05rem;
+    }
+
+    .handoff-card p {
+      font-size:.91rem;
+      margin:0;
+    }
+
+    @media (max-width:1040px) {
+      .ratio-grid,.formula-grid,.department-grid,.board-grid,.handoff-package { grid-template-columns:1fr 1fr; }
+      .ranked-item,.control-item { grid-template-columns:1fr; }
+      .ranked-value { text-align:left; }
+    }
+
+    @media (max-width:640px) {
+      .ratio-grid,.formula-grid,.department-grid,.board-grid,.handoff-package { grid-template-columns:1fr; }
+      .audit-table { display:block; overflow-x:auto; white-space:nowrap; }
+    }
+
     @media print {
       .topbar,.actions,.no-print,.footer { display:none !important; }
       body { background:#fff; }
@@ -312,6 +625,57 @@
               </div>
             </section>
 
+
+            <section class="section">
+              <h2>Calculator input audit</h2>
+              <p>This section explains what the numbers from the front-page calculator actually control inside this report. It helps leadership separate revenue scale, quote volume, estimator workload, known losses, field friction, outsourced-work exposure, process maturity, and system investment.</p>
+              <table class="audit-table">
+                <thead>
+                  <tr>
+                    <th>Calculator input</th>
+                    <th>Submitted value</th>
+                    <th>What it changes in the report</th>
+                  </tr>
+                </thead>
+                <tbody id="inputAuditRows"></tbody>
+              </table>
+              <div class="value-section-note">The calculator is most useful when the inputs are directionally honest. Conservative numbers are fine. The goal is not a perfect financial model. The goal is to make hidden estimating exposure visible enough that leadership can act.</div>
+            </section>
+
+            <section class="section">
+              <h2>Executive operating ratios</h2>
+              <p>These ratios translate the calculator into boardroom language: workload, leverage, pricing exposure, and process drag. They help show whether estimating is merely an office function or a high-leverage operating control.</p>
+              <div class="ratio-grid">
+                <div class="ratio-card"><span>Implied win-rate proxy</span><strong data-field="implied_win_rate_formatted">0%</strong><p>Annual revenue divided by annual quoted value. This is only a directional proxy, but it shows how much quoted work converts into revenue.</p></div>
+                <div class="ratio-card"><span>Process load per quote</span><strong data-field="estimating_cost_per_quote_formatted">$0</strong><p>Loaded quote-build, review, and revision cost divided by annual quote count.</p></div>
+                <div class="ratio-card"><span>Exposure as % of revenue</span><strong data-field="exposure_percent_revenue_formatted">0%</strong><p>Annual quote-process exposure divided by annual revenue. Useful for sizing the problem against company scale.</p></div>
+                <div class="ratio-card"><span>Recoverable value as % of revenue</span><strong data-field="recoverable_percent_revenue_formatted">0%</strong><p>Conservative annual recoverable value divided by annual revenue.</p></div>
+                <div class="ratio-card"><span>Margin exposure per quote</span><strong data-field="margin_exposure_per_quote_formatted">$0</strong><p>Conservative margin exposure divided by annual quote count.</p></div>
+                <div class="ratio-card"><span>Known loss per quote</span><strong data-field="known_loss_per_quote_formatted">$0</strong><p>Known bad-job losses and unrecovered extras spread across all annual quotes.</p></div>
+                <div class="ratio-card"><span>Target gross profit</span><strong data-field="target_gross_profit_formatted">$0</strong><p>Annual revenue multiplied by target gross margin. This is the profit pool that weak quoting can quietly attack.</p></div>
+                <div class="ratio-card"><span>Process load as % of revenue</span><strong data-field="process_load_percent_revenue_formatted">0%</strong><p>Loaded estimating and revision cost compared with annual revenue.</p></div>
+              </div>
+            </section>
+
+            <section class="section">
+              <h2>Formula trail from calculator to report</h2>
+              <p>This is the plain-English math path so a CFO, owner, general manager, or operating partner can understand how the report was built.</p>
+              <div class="formula-grid">
+                <div class="formula-card"><span>Step 1</span><h3>Annual estimating load</h3><code>Annual quotes × quote hours + review hours + revision hours</code><p>For <strong data-field="company_name">your company</strong>, this equals <strong data-field="annual_estimating_hours">0</strong> annual estimating hours.</p></div>
+                <div class="formula-card"><span>Step 2</span><h3>Known loss floor</h3><code>Bad jobs × average loss + unrecovered extras</code><p>The submitted known loss floor is <strong data-field="known_loss_floor_formatted">$0</strong>.</p></div>
+                <div class="formula-card"><span>Step 3</span><h3>Field and outsourced exposure</h3><code>Field revenue × friction rate + outsourced spend × risk rate</code><p>Field exposure is <strong data-field="field_friction_exposure_formatted">$0</strong>. Outsourced exposure is <strong data-field="outsourced_risk_exposure_formatted">$0</strong>.</p></div>
+                <div class="formula-card"><span>Step 4</span><h3>Maturity adjustment</h3><code>Lower process maturity increases modeled risk exposure</code><p>The submitted maturity score is <strong data-field="maturity_score_formatted">0%</strong>, leaving a <strong data-field="maturity_gap">0</strong>-point maturity gap.</p></div>
+                <div class="formula-card"><span>Step 5</span><h3>Annual quote-process exposure</h3><code>Estimating labour + revision cost + conservative margin exposure</code><p>The report baseline is <strong data-field="annual_baseline_drag_formatted">$0</strong>.</p></div>
+                <div class="formula-card"><span>Step 6</span><h3>Conservative recoverable value</h3><code>Partial process recovery + partial margin-exposure recovery</code><p>The conservative annual recoverable value is <strong data-field="conservative_recoverable_value_formatted">$0</strong>.</p></div>
+              </div>
+            </section>
+
+            <section class="section">
+              <h2>Ranked attention list</h2>
+              <p>This ranks the largest calculator-driven pressure points so leadership knows what to inspect first. Some categories overlap inside the model, so this should be used for operating priority, not as a second total.</p>
+              <div class="ranked-list" id="rankedLeakList"></div>
+            </section>
+
             <section class="section">
               <h2>Exposure breakdown</h2>
               <p>The goal is not to label all estimating activity as waste. Estimating is necessary. The value is in separating normal process load from avoidable rework, known loss patterns, field/install exposure, outsourced-work exposure, and uncontrolled risk.</p>
@@ -379,6 +743,51 @@
                 <div class="risk-card"><div class="risk-top"><h3>Quote governance</h3><span class="risk-badge" id="governanceRisk">Medium</span></div><p id="governanceRiskText">Whether the business has a controlled release standard before the quote leaves the building.</p></div>
                 <div class="risk-card"><div class="risk-top"><h3>Margin math and final price</h3><span class="risk-badge" id="pricingRisk">Medium</span></div><p id="pricingRiskText">Whether final price is built from complete cost, true labour cost, risk, overhead, and target margin.</p></div>
                 <div class="risk-card"><div class="risk-top"><h3>Quote-to-shop handoff</h3><span class="risk-badge" id="handoffRisk">Medium</span></div><p id="handoffRiskText">Whether accepted quotes become useful production and PM handoffs, not just customer-facing PDFs.</p></div>
+              </div>
+            </section>
+
+
+            <section class="section">
+              <h2>Quote-release control plan</h2>
+              <p>This turns the maturity answers from the calculator into a practical release standard. The purpose is to make the next quote safer before it becomes the shop plan.</p>
+              <div class="control-plan" id="quoteControlPlan"></div>
+              <div class="value-section-note">A quote should not leave because the number feels done. It should leave because scope, labour, material, outsourced work, risk, final price, and quote wording have been checked on purpose.</div>
+            </section>
+
+            <section class="section">
+              <h2>Executive and private-equity lens</h2>
+              <p>For a larger fabrication company, quote quality is not just an estimating issue. It affects margin quality, management dependency, forecasting confidence, working capital, and how repeatable the business looks to leadership or investors.</p>
+              <div class="board-lens">
+                <h3>What this report is really testing</h3>
+                <div class="board-grid">
+                  <div class="board-card"><strong>Repeatability</strong><span>Can the company produce similar estimating decisions when the senior estimator is unavailable?</span></div>
+                  <div class="board-card"><strong>Margin quality</strong><span>Does the quoted margin survive scope changes, field reality, vendor work, and final price pressure?</span></div>
+                  <div class="board-card"><strong>Risk visibility</strong><span>Are known unknowns named before award, or do they hide inside production and PM firefighting?</span></div>
+                  <div class="board-card"><strong>Handoff quality</strong><span>Can operations see the assumptions behind the number after the purchase order is received?</span></div>
+                  <div class="board-card"><strong>Sales discipline</strong><span>Can the company negotiate scope, alternates, assumptions, and value instead of donating margin to close the job?</span></div>
+                  <div class="board-card"><strong>Learning loop</strong><span>Does actual job performance update future estimates, or does every bad job become a one-off story?</span></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <h2>Department-by-department action map</h2>
+              <p>FabProfit has more value when it is not treated as an estimator-only tool. The strongest implementation connects estimating, operations, purchasing, PM, finance, and leadership.</p>
+              <div class="department-grid" id="departmentActionMap"></div>
+            </section>
+
+            <section class="section">
+              <h2>What the award handoff should contain</h2>
+              <p>A strong estimate should become a usable production and PM handoff. These are the minimum fields that should travel with every awarded quote.</p>
+              <div class="handoff-package">
+                <div class="handoff-card"><strong>Scope fence</strong><p>Included scope, excluded scope, alternates, allowances, and customer responsibilities.</p></div>
+                <div class="handoff-card"><strong>Drawing and revision basis</strong><p>Drawing numbers, revision dates, spec references, and any missing information priced by assumption.</p></div>
+                <div class="handoff-card"><strong>Labour logic</strong><p>Touch time, setup time, movement time, control time, friction time, field event time, mobilization, and standby assumptions.</p></div>
+                <div class="handoff-card"><strong>Material buyout basis</strong><p>Actual buy quantity, stock lengths, grade, finish, waste, drops, freight, quote validity, escalation, and supplier lead time.</p></div>
+                <div class="handoff-card"><strong>Vendor and outsourced scope</strong><p>Vendor quote basis, prep, freight both ways, inspection, coordination, expected lead time, exclusions, and reserve.</p></div>
+                <div class="handoff-card"><strong>Risk register</strong><p>Top known unknowns, who controls each one, price treatment, qualification, exclusion, transfer, reserve, or negotiation path.</p></div>
+                <div class="handoff-card"><strong>Final price logic</strong><p>Base cost, contingency, reserve, overhead, target margin, markup versus margin check, and discount boundaries.</p></div>
+                <div class="handoff-card"><strong>Change-order triggers</strong><p>What causes extra cost: drawing revision, site not ready, extra mobilization, access change, premium time, freight change, or customer delay.</p></div>
               </div>
             </section>
 
@@ -639,6 +1048,17 @@
       const workdaysReclaimed = num(data.workdays_reclaimed) || Math.round(hoursReclaimed / 8);
       const revenuePerEstimator = num(data.revenue_per_estimator) || annualRevenue / estimatorCount;
       const quotesPerEstimatorPerMonth = num(data.quotes_per_estimator_per_month) || (num(data.quotes_per_month) / estimatorCount);
+      const processLoad = estimatingLaborCost + revisionCost;
+      const estimatingCostPerQuote = annualQuotes > 0 ? processLoad / annualQuotes : 0;
+      const quoteBuildCostPerQuote = annualQuotes > 0 ? estimatingLaborCost / annualQuotes : 0;
+      const revisionCostPerQuote = annualQuotes > 0 ? revisionCost / annualQuotes : 0;
+      const marginExposurePerQuote = annualQuotes > 0 ? conservativeMarginLeakage / annualQuotes : 0;
+      const knownLossPerQuote = annualQuotes > 0 ? knownLossFloor / annualQuotes : 0;
+      const exposurePercentRevenue = annualRevenue > 0 ? (annualBaselineDrag / annualRevenue) * 100 : 0;
+      const recoverablePercentRevenue = annualRevenue > 0 ? (conservativeRecoverableValue / annualRevenue) * 100 : 0;
+      const processLoadPercentRevenue = annualRevenue > 0 ? (processLoad / annualRevenue) * 100 : 0;
+      const impliedWinRate = num(data.implied_win_rate) || (annualQuotedRevenue > 0 ? (annualRevenue / annualQuotedRevenue) * 100 : 0);
+      const targetGrossProfit = num(data.target_gross_profit) || annualRevenue * (num(data.target_gross_margin) / 100);
 
       return {
         ...data,
@@ -704,6 +1124,28 @@
         revenue_per_estimator: revenuePerEstimator,
         revenue_per_estimator_formatted: data.revenue_per_estimator_formatted || moneyFormat(revenuePerEstimator),
         quotes_per_estimator_per_month: Number(quotesPerEstimatorPerMonth.toFixed(1)),
+        process_load: processLoad,
+        process_load_formatted: moneyFormat(processLoad),
+        estimating_cost_per_quote: estimatingCostPerQuote,
+        estimating_cost_per_quote_formatted: moneyFormat(estimatingCostPerQuote),
+        quote_build_cost_per_quote: quoteBuildCostPerQuote,
+        quote_build_cost_per_quote_formatted: moneyFormat(quoteBuildCostPerQuote),
+        revision_cost_per_quote: revisionCostPerQuote,
+        revision_cost_per_quote_formatted: moneyFormat(revisionCostPerQuote),
+        margin_exposure_per_quote: marginExposurePerQuote,
+        margin_exposure_per_quote_formatted: moneyFormat(marginExposurePerQuote),
+        known_loss_per_quote: knownLossPerQuote,
+        known_loss_per_quote_formatted: moneyFormat(knownLossPerQuote),
+        exposure_percent_revenue: exposurePercentRevenue,
+        exposure_percent_revenue_formatted: pctFormat(exposurePercentRevenue),
+        recoverable_percent_revenue: recoverablePercentRevenue,
+        recoverable_percent_revenue_formatted: pctFormat(recoverablePercentRevenue),
+        process_load_percent_revenue: processLoadPercentRevenue,
+        process_load_percent_revenue_formatted: pctFormat(processLoadPercentRevenue),
+        implied_win_rate: impliedWinRate,
+        implied_win_rate_formatted: data.implied_win_rate_formatted || pctFormat(impliedWinRate),
+        target_gross_profit: targetGrossProfit,
+        target_gross_profit_formatted: data.target_gross_profit_formatted || moneyFormat(targetGrossProfit),
         generated_at: fallback(data.generated_at, new Date().toLocaleString()),
         opportunity_score: num(data.opportunity_score) || 0,
         opportunity_label: fallback(data.opportunity_label, "Standardization opportunity"),
@@ -713,6 +1155,22 @@
         risk_register: fallback(data.risk_register, "partial"),
         quote_language_standard: fallback(data.quote_language_standard, "partial"),
         post_job_review: fallback(data.post_job_review, "partial"),
+        annual_revenue: annualRevenue,
+        annual_quoted_revenue: annualQuotedRevenue,
+        quotes_per_month: num(data.quotes_per_month),
+        average_hours_per_quote: num(data.average_hours_per_quote),
+        review_hours_per_quote: num(data.review_hours_per_quote),
+        loaded_estimating_cost_per_hour: estimatorRate,
+        revision_rate: num(data.revision_rate),
+        average_revision_hours: num(data.average_revision_hours),
+        bad_jobs_per_year: num(data.bad_jobs_per_year),
+        average_bad_job_loss: num(data.average_bad_job_loss),
+        leakage_rate: num(data.leakage_rate),
+        field_revenue_percent: num(data.field_revenue_percent),
+        field_friction_rate: num(data.field_friction_rate),
+        outsourced_spend: num(data.outsourced_spend),
+        outsourced_risk_rate: num(data.outsourced_risk_rate),
+        target_gross_margin: num(data.target_gross_margin),
         annual_revenue_formatted: data.annual_revenue_formatted || moneyFormat(annualRevenue),
         annual_quoted_revenue_formatted: data.annual_quoted_revenue_formatted || moneyFormat(annualQuotedRevenue),
         target_gross_margin_formatted: data.target_gross_margin_formatted || pctFormat(data.target_gross_margin),
@@ -815,6 +1273,225 @@
       setIdText("sensitivityEff20", moneyFormat(processLoad * 0.20));
     }
 
+
+    function renderInputAudit(data) {
+      const rows = [
+        ["Annual revenue", data.annual_revenue_formatted, "Sizes the business and the revenue base used to calculate modeled margin leakage and exposure as a percentage of revenue."],
+        ["Annual quoted value", data.annual_quoted_revenue_formatted, "Shows how much opportunity volume passes through estimating. It also creates the average quoted value and implied win-rate proxy."],
+        ["Quotes per month", `${data.quotes_per_month || 0}`, "Controls annual quote count, quote build hours, review hours, revision hours, cost per quote, and capacity pressure."],
+        ["Average hours per quote", `${data.average_hours_per_quote || 0} hours`, "Controls quote build workload and helps expose how much estimator capacity is tied up before review or revision."],
+        ["Review hours per quote", `${data.review_hours_per_quote || 0} hours`, "Captures leadership, senior estimator, or management review time that should be part of the quoting cost."],
+        ["Loaded estimating cost per hour", data.loaded_estimating_cost_per_hour_formatted, "Turns estimating and revision hours into a real loaded process cost instead of treating office time as free."],
+        ["Revision rate and revision hours", `${data.revision_rate_formatted} at ${data.average_revision_hours || 0} hours each`, "Models reruns, rework, unclear intake, quote churn, missing information, and repeated handling."],
+        ["Bad jobs and average loss", `${data.bad_jobs_per_year || 0} jobs at ${data.average_bad_job_loss_formatted}`, "Creates the known bad-job loss number, which grounds the report in actual or estimated history."],
+        ["Unrecovered extras", data.unrecovered_extras_formatted, "Captures change orders, extras, delays, or scope issues the company performed but did not recover."],
+        ["Field revenue and friction", `${data.field_revenue_percent_formatted} of revenue at ${data.field_friction_rate_formatted} friction`, "Models site readiness, access, standby, mobilization, remobilization, and install-event risk."],
+        ["Outsourced spend and risk", `${data.outsourced_spend_formatted} at ${data.outsourced_risk_rate_formatted} risk`, "Models exposure from finish, galvanizing, painting, machining, outside vendors, freight, inspection, and coordination."],
+        ["Process maturity answers", data.maturity_score_formatted, "Adjusts the exposure model based on whether quote checks, labour buckets, material buyout, risk, quote language, and post-job review are controlled."],
+        ["Target gross margin", data.target_gross_margin_formatted, "Frames the gross-profit pool that the final price must protect."],
+        ["System investment", data.system_price_formatted, "Used to calculate payback days and three-year net opportunity."]
+      ];
+      const tbody = document.getElementById("inputAuditRows");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+      rows.forEach(row => {
+        const tr = document.createElement("tr");
+        row.forEach((value, index) => {
+          const td = document.createElement("td");
+          if (index === 0) {
+            const strong = document.createElement("strong");
+            strong.textContent = value;
+            td.appendChild(strong);
+          } else {
+            td.textContent = value;
+          }
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderRankedLeaks(data) {
+      const items = [
+        {
+          title:"Conservative margin exposure",
+          value:num(data.conservative_margin_leakage),
+          formatted:data.conservative_margin_leakage_formatted,
+          text:"The report's main margin-risk number. It is the larger of modeled exposure and known loss floor.",
+          control:"Require final quote review for scope, risk, overhead, reserve, markup versus margin, and quote language."
+        },
+        {
+          title:"Quote build and review cost",
+          value:num(data.estimating_labor_cost),
+          formatted:data.estimating_labor_cost_formatted,
+          text:"This is not automatically waste. It is the loaded annual cost of producing and reviewing quotes.",
+          control:"Make every quote hour produce a clearer scope, labour basis, material basis, risk register, and handoff."
+        },
+        {
+          title:"Known loss floor",
+          value:num(data.known_loss_floor),
+          formatted:data.known_loss_floor_formatted,
+          text:"The submitted hard floor from underpriced jobs and unrecovered extras.",
+          control:"Review the last examples and identify which miss category repeated: scope, labour, material, field, outsourced work, price, or quote wording."
+        },
+        {
+          title:"Revision and rework drag",
+          value:num(data.revision_cost),
+          formatted:data.revision_cost_formatted,
+          text:"Loaded cost of quote revisions, reruns, and repeated estimating handling.",
+          control:"Improve quote intake and require missing information, assumptions, and decision points before the estimate is rebuilt."
+        },
+        {
+          title:"Field/install friction exposure",
+          value:num(data.field_friction_exposure),
+          formatted:data.field_friction_exposure_formatted,
+          text:"Exposure from site readiness, access, mobilization, standby, other trades, layout, and field-event assumptions.",
+          control:"Estimate the site event, not only the installation task. Quote clear assumptions for access, readiness, mobilization, and standby."
+        },
+        {
+          title:"Outsourced/vendor risk exposure",
+          value:num(data.outsourced_risk_exposure),
+          formatted:data.outsourced_risk_exposure_formatted,
+          text:"Exposure from treating vendor work like a pass-through instead of managed scope.",
+          control:"Level vendor quotes with prep, freight, receiving, inspection, coordination, risk reserve, lead time, and margin."
+        }
+      ].sort((a,b) => b.value - a.value).slice(0,5);
+
+      const wrap = document.getElementById("rankedLeakList");
+      if (!wrap) return;
+      wrap.innerHTML = "";
+      items.forEach((item, index) => {
+        const row = document.createElement("div");
+        row.className = "ranked-item";
+
+        const numBox = document.createElement("div");
+        numBox.className = "ranked-num";
+        numBox.textContent = index + 1;
+
+        const copy = document.createElement("div");
+        const h3 = document.createElement("h3");
+        h3.textContent = item.title;
+        const p = document.createElement("p");
+        p.textContent = `${item.text} First control: ${item.control}`;
+        copy.appendChild(h3);
+        copy.appendChild(p);
+
+        const value = document.createElement("div");
+        value.className = "ranked-value";
+        value.textContent = item.formatted;
+
+        row.appendChild(numBox);
+        row.appendChild(copy);
+        row.appendChild(value);
+        wrap.appendChild(row);
+      });
+    }
+
+    function renderControlPlan(data) {
+      const controls = [
+        {
+          key:"quote_checklist",
+          title:"Quote release checklist",
+          stage:"Before quote leaves",
+          owner:"Estimator + reviewer",
+          required:"No meaningful quote leaves until scope, risk, inclusions, exclusions, assumptions, margin, and handoff are checked."
+        },
+        {
+          key:"labour_buckets",
+          title:"Labour bucket standard",
+          stage:"During labour build",
+          owner:"Estimator + shop input",
+          required:"Labour must be separated into touch time, setup time, movement time, control time, friction time, and field event time."
+        },
+        {
+          key:"material_buyout_standard",
+          title:"Material buyout standard",
+          stage:"Before material number is trusted",
+          owner:"Estimator + purchasing",
+          required:"Drawing quantity must be converted to actual buy quantity with stock length, drops, waste, freight, supplier validity, and lead time."
+        },
+        {
+          key:"risk_register",
+          title:"Risk register before award",
+          stage:"Before final price",
+          owner:"Estimator + PM/operations",
+          required:"Top known unknowns must have an owner and treatment: price it, qualify it, exclude it, transfer it, reserve it, or negotiate it."
+        },
+        {
+          key:"quote_language_standard",
+          title:"Quote language bank",
+          stage:"During proposal writing",
+          owner:"Estimator + sales/leadership",
+          required:"Assumptions, exclusions, alternates, schedule, validity, change rules, access, premium time, and customer responsibilities must be written clearly."
+        },
+        {
+          key:"post_job_review",
+          title:"Estimate-vs-actual feedback",
+          stage:"After closeout",
+          owner:"Estimator + operations + finance",
+          required:"Actual hours, material issues, vendor misses, field friction, extras, and margin outcome must update the next estimate."
+        }
+      ];
+
+      const wrap = document.getElementById("quoteControlPlan");
+      if (!wrap) return;
+      wrap.innerHTML = "";
+      controls.forEach(control => {
+        const status = maturityLabel(data[control.key]);
+        const isStrong = maturityClass(data[control.key]) === "yes";
+        const item = document.createElement("div");
+        item.className = "control-item";
+
+        const copy = document.createElement("div");
+        const h3 = document.createElement("h3");
+        h3.textContent = `${control.title}: ${status}`;
+        const p = document.createElement("p");
+        p.textContent = isStrong ? `Keep this control active and connect it to the award handoff and post-job review.` : control.required;
+        copy.appendChild(h3);
+        copy.appendChild(p);
+
+        const owner = document.createElement("div");
+        owner.className = "control-owner";
+        owner.textContent = `${control.stage} | ${control.owner}`;
+
+        item.appendChild(copy);
+        item.appendChild(owner);
+        wrap.appendChild(item);
+      });
+    }
+
+    function renderDepartmentMap(data) {
+      const problem = data.biggest_problem;
+      const rows = [
+        ["01", "Ownership / CEO", `Use this report to decide whether estimating is a controlled operating system or still dependent on individual habits. First lens: ${problem}.`, "Decision: choose the first job family to standardize."],
+        ["02", "Finance / CFO", `Review ${data.annual_baseline_drag_formatted} of quote-process exposure, ${data.conservative_recoverable_value_formatted} recoverable value, and payback of ${data.payback_days} days.`, "Decision: define the financial approval gate for quote release."],
+        ["03", "Estimating", "Install the scope, labour, material, outsourced-work, risk, final-price, and quote-language checks before release.", "Decision: turn best estimator judgment into a repeatable workflow."],
+        ["04", "Operations / Shop", "Review whether the estimate reflects how the work will actually move, flip, fit, weld, inspect, finish, load, and install.", "Decision: add shop reality before the quote becomes the production plan."],
+        ["05", "Purchasing / Vendor Management", "Verify buy quantity, stock length, waste, supplier validity, outsourced scope, freight, lead time, and risk before the price is trusted.", "Decision: stop vendor quotes from being carried as the full cost."],
+        ["06", "Project Management / Field", "Confirm site readiness, access, mobilization, lift plan, standby, change triggers, and handoff assumptions before award.", "Decision: make the handoff usable before the job starts."]
+      ];
+      const wrap = document.getElementById("departmentActionMap");
+      if (!wrap) return;
+      wrap.innerHTML = "";
+      rows.forEach(row => {
+        const card = document.createElement("div");
+        card.className = "department-card";
+        const h3 = document.createElement("h3");
+        const badge = document.createElement("span");
+        badge.textContent = row[0];
+        h3.appendChild(badge);
+        h3.appendChild(document.createTextNode(row[1]));
+        const p = document.createElement("p");
+        p.textContent = row[2];
+        const small = document.createElement("small");
+        small.textContent = row[3];
+        card.appendChild(h3);
+        card.appendChild(p);
+        card.appendChild(small);
+        wrap.appendChild(card);
+      });
+    }
+
     function renderPriorities(data) {
       const company = data.company_name;
       const problem = data.biggest_problem;
@@ -880,6 +1557,10 @@
       Object.keys(data).forEach(key => setText(key, data[key]));
       renderInterpretation(data);
       renderDrivers(data);
+      renderInputAudit(data);
+      renderRankedLeaks(data);
+      renderControlPlan(data);
+      renderDepartmentMap(data);
       renderMaturity(data);
       renderRisks(data);
       renderPriorities(data);
