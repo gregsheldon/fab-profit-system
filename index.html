@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="#020617" name="theme-color"/>
 <title>FabProfit System | Enterprise Estimating Governance for Fabrication Companies</title>
 <meta content="FabProfit helps your fabrication company standardize estimating, pricing, quote review, ERP-ready inputs, and margin protection before weak assumptions become jobs." name="description"/>
 <meta content="FabProfit System | Stop Margin Leakage Before the Job Hits the Floor" property="og:title"/>
@@ -2986,6 +2987,520 @@
         font-size: .82rem;
       }
     }
+
+
+    /* Mobile experience optimization pass */
+    .mobile-sticky-cta {
+      display: none;
+    }
+
+    @media (max-width: 1180px) and (min-width: 761px) {
+      .header-inner {
+        gap: .75rem;
+      }
+      .nav {
+        gap: .72rem;
+        font-size: .82rem;
+      }
+      .site-header .btn {
+        padding: .78rem .9rem;
+        font-size: .84rem;
+      }
+      .brand-logo {
+        max-width: 250px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      html {
+        scroll-padding-top: 86px;
+      }
+      body {
+        overflow-x: hidden;
+        padding-bottom: calc(74px + env(safe-area-inset-bottom));
+        background:
+          radial-gradient(circle at 8% 0%, rgba(249,115,22,.12), transparent 18rem),
+          linear-gradient(180deg,#ffffff 0%,#f8fafc 44%,#f1f5f9 100%);
+      }
+      body * {
+        min-width: 0;
+      }
+      .container,
+      .credibility-section .container {
+        width: min(100% - 24px, 640px);
+      }
+      .top-strip {
+        padding: .52rem .75rem;
+        font-size: .72rem;
+        line-height: 1.32;
+      }
+      .site-header {
+        box-shadow: 0 10px 26px rgba(15,23,42,.08);
+      }
+      .header-inner {
+        min-height: auto;
+        padding: .58rem 0;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: .7rem;
+      }
+      .brand-logo {
+        height: 34px;
+        max-width: 188px;
+      }
+      .site-header .btn {
+        width: auto;
+        max-width: 146px;
+        white-space: normal;
+        padding: .62rem .72rem;
+        font-size: .72rem;
+        line-height: 1.05;
+        box-shadow: none;
+      }
+      section,
+      .baseline-section,
+      .evidence-section,
+      .about-section,
+      .roi-section,
+      .system-section,
+      .business-standard-section,
+      .erp-estimator-section,
+      .transformation-section,
+      .roadmap-section,
+      .tool-preview-section,
+      .qualification-section,
+      .charter-section,
+      .charter-application-section,
+      .video-section {
+        padding-top: 46px;
+        padding-bottom: 46px;
+      }
+      .hero {
+        padding-top: 34px !important;
+        padding-bottom: 44px !important;
+      }
+      .hero-grid,
+      .video-grid,
+      .erp-estimator-grid,
+      .transformation-grid,
+      .system-grid,
+      .pricing-grid,
+      .application-grid,
+      .charter-top-grid,
+      .about-card,
+      .two-col,
+      .evidence-intro-grid,
+      .client-close-grid {
+        gap: 1rem;
+      }
+      h1 {
+        font-size: clamp(2.18rem, 11.5vw, 3.05rem);
+        line-height: .96;
+        letter-spacing: -.064em;
+        margin-bottom: .9rem;
+      }
+      h2 {
+        font-size: clamp(1.72rem, 8.7vw, 2.36rem);
+        line-height: 1;
+        letter-spacing: -.055em;
+      }
+      h3 {
+        font-size: 1.15rem;
+        line-height: 1.1;
+        letter-spacing: -.035em;
+      }
+      p,
+      .hero-lede,
+      .decision-lede,
+      .section-heading p {
+        font-size: .96rem;
+        line-height: 1.52;
+      }
+      .eyebrow,
+      .dark-eyebrow {
+        padding: .48rem .58rem;
+        font-size: .65rem;
+        line-height: 1.22;
+        letter-spacing: .065em;
+        margin-bottom: .85rem;
+      }
+      .hero-actions,
+      .video-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: .58rem;
+        margin: 1.05rem 0;
+      }
+      .btn {
+        width: 100%;
+        padding: .88rem .95rem;
+        font-size: .94rem;
+        line-height: 1.16;
+        white-space: normal;
+      }
+      .micro-proof {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: .5rem;
+        margin-top: .85rem;
+      }
+      .micro-pill {
+        text-align: center;
+        font-size: .78rem;
+        line-height: 1.24;
+        padding: .55rem .65rem;
+      }
+      .trust-row,
+      .decision-grid,
+      .charter-stat-grid,
+      .transformation-pipeline,
+      .transformation-outcome-grid,
+      .license-options-grid,
+      .roadmap-grid,
+      .role-detail-grid,
+      .prevent-grid,
+      .qualification-grid,
+      .market-grid,
+      .objection-grid,
+      .client-angle-grid,
+      .source-link-grid,
+      .module-grid,
+      .leak-grid,
+      .tools-grid,
+      .role-grid,
+      .roi-grid,
+      .faq-grid,
+      .baseline-field-grid,
+      .baseline-note-grid,
+      .baseline-mini-grid,
+      .proof-stat-grid,
+      .about-proof-grid,
+      .value-items-grid,
+      .application-field-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .mini-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: .58rem;
+      }
+      .story-card,
+      .dark-card,
+      .decision-panel,
+      .erp-insurance-card,
+      .estimator-card,
+      .charter-panel,
+      .video-shell,
+      .baseline-calculator-card,
+      .application-copy-card,
+      .application-form-card,
+      .license-intro,
+      .roi-box,
+      .about-card {
+        border-width: 1px;
+        box-shadow: 0 14px 38px rgba(15,23,42,.10);
+      }
+      .panel-top,
+      .panel-body,
+      .story-card,
+      .dark-card,
+      .decision-panel,
+      .erp-insurance-card,
+      .estimator-card,
+      .charter-panel,
+      .video-shell,
+      .application-copy-card,
+      .application-form-card,
+      .license-intro,
+      .roi-box,
+      .about-card,
+      .baseline-calc-main,
+      .baseline-calc-side {
+        padding: 1rem;
+      }
+      .hero-panel {
+        margin-top: .25rem;
+      }
+      .diagnosis-card strong {
+        font-size: clamp(1.85rem, 10vw, 2.45rem);
+      }
+      .panel-check,
+      .mini-stat,
+      .trust-card,
+      .decision-card,
+      .charter-stat-card,
+      .roadmap-card,
+      .role-detail-card,
+      .prevent-card,
+      .qualification-card,
+      .transformation-outcome-card,
+      .license-card,
+      .faq-item,
+      .module-card,
+      .leak-card,
+      .tool-card,
+      .role-card,
+      .roi-card,
+      .baseline-note-card,
+      .proof-stat-card,
+      .market-card,
+      .objection-card,
+      .client-angle-card {
+        min-height: auto;
+        padding: .95rem;
+      }
+      .mini-stat strong {
+        font-size: 1.02rem;
+      }
+      .trust-card strong {
+        font-size: 1.12rem;
+      }
+      .credibility-section {
+        padding-top: 8px !important;
+        padding-bottom: 26px !important;
+      }
+      .credibility-band {
+        padding: .8rem .45rem .9rem;
+      }
+      .credibility-header h2 {
+        font-size: .72rem;
+        line-height: 1.25;
+        letter-spacing: .08em;
+        white-space: normal;
+      }
+      .credibility-logo-grid {
+        gap: .2rem .25rem;
+      }
+      .credibility-logo-card {
+        flex: 1 1 30%;
+        min-width: 88px;
+        max-width: 128px;
+        min-height: 52px;
+        padding: .18rem;
+      }
+      .credibility-logo-card img {
+        max-width: 118px;
+        max-height: 42px;
+      }
+      .client-logo-disclaimer {
+        width: calc(100% - 24px);
+        margin: -10px auto 20px;
+        font-size: .67rem;
+        line-height: 1.38;
+        padding: .62rem .7rem;
+      }
+      .video-embed-card iframe,
+      .video-placeholder {
+        min-height: auto;
+        aspect-ratio: 16 / 9;
+      }
+      .video-side-card {
+        padding: .95rem;
+      }
+      .video-side-card .feature-list {
+        grid-template-columns: 1fr !important;
+        gap: .55rem;
+      }
+      .video-cta-panel {
+        display: block;
+        padding: 1rem;
+      }
+      .video-actions {
+        justify-content: stretch;
+      }
+      .video-deadline-note {
+        text-align: left;
+        font-size: .84rem;
+        padding: .82rem;
+      }
+      .video-transcript summary {
+        padding: .9rem;
+        font-size: .92rem;
+      }
+      .video-transcript-body {
+        max-height: 420px;
+        padding: .95rem;
+      }
+      .video-transcript-body p {
+        font-size: .9rem;
+        line-height: 1.58;
+      }
+      .strategic-visual-section {
+        padding-top: 24px !important;
+        padding-bottom: 24px !important;
+      }
+      .strategic-visual-frame,
+      .strategic-visual-inline {
+        padding: .42rem;
+        border-width: 1px;
+        box-shadow: 0 14px 38px rgba(15,23,42,.10);
+      }
+      .strategic-visual-link {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .strategic-visual-img {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        object-fit: contain;
+      }
+      .strategic-visual-caption {
+        padding: .65rem .3rem .2rem;
+        font-size: .78rem;
+        line-height: 1.36;
+      }
+      .logic-node,
+      .step-card {
+        grid-template-columns: 1fr;
+      }
+      .license-card.featured {
+        transform: none;
+      }
+      .license-price,
+      .price {
+        font-size: clamp(2.35rem, 14vw, 3.2rem);
+      }
+      .charter-deadline strong {
+        font-size: clamp(2rem, 12vw, 3rem);
+      }
+      .baseline-result-main strong {
+        font-size: clamp(2rem, 13vw, 3rem);
+      }
+      .baseline-note-card,
+      .baseline-mini-result,
+      .proof-stat-card {
+        min-height: auto;
+      }
+      .source-inline,
+      .source-link-grid {
+        gap: .45rem;
+      }
+      .source-inline a,
+      .source-link-grid a {
+        width: 100%;
+        justify-content: center;
+        font-size: .7rem;
+        line-height: 1.25;
+      }
+      .tool-preview-grid.real-preview-grid,
+      .tool-preview-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .tool-preview-image-link {
+        padding: .45rem;
+      }
+      .tool-preview-image-wrap {
+        aspect-ratio: 4 / 3;
+      }
+      .tool-preview-body {
+        padding: .88rem;
+      }
+      .about-media {
+        min-height: 210px;
+      }
+      .about-media .brand-logo {
+        max-width: 190px;
+        height: auto;
+      }
+      .value-stack-head {
+        display: block;
+      }
+      .value-stack-head p {
+        text-align: left;
+        max-width: none;
+      }
+      .value-row {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .value-row > strong {
+        justify-self: start;
+      }
+      .objection-close,
+      .cta-band {
+        display: block;
+        padding: 1rem;
+      }
+      .cta-band .btn,
+      .objection-close .btn {
+        margin-top: .75rem;
+      }
+      .application-field textarea {
+        min-height: 112px;
+      }
+      .site-footer {
+        padding: 2rem 1rem calc(2rem + env(safe-area-inset-bottom));
+        margin-top: 1.5rem;
+      }
+      .mobile-sticky-cta {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 80;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .55rem;
+        padding: .62rem .75rem calc(.62rem + env(safe-area-inset-bottom));
+        background: rgba(255,255,255,.94);
+        border-top: 1px solid rgba(226,232,240,.98);
+        box-shadow: 0 -16px 36px rgba(15,23,42,.14);
+        backdrop-filter: blur(16px);
+      }
+      .mobile-sticky-cta a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: .72rem .65rem;
+        font-size: .82rem;
+        line-height: 1.08;
+        font-weight: 950;
+        text-align: center;
+      }
+      .mobile-sticky-cta a:first-child {
+        background: linear-gradient(135deg,var(--orange-500),var(--orange-700));
+        color: #fff;
+      }
+      .mobile-sticky-cta a:last-child {
+        background: var(--slate-950);
+        color: #fff;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container,
+      .credibility-section .container {
+        width: min(100% - 20px, 640px);
+      }
+      .brand-logo {
+        height: 31px;
+        max-width: 165px;
+      }
+      .site-header .btn {
+        max-width: 128px;
+        padding: .58rem .62rem;
+        font-size: .68rem;
+      }
+      h1 {
+        font-size: clamp(2.05rem, 11.8vw, 2.75rem);
+      }
+      h2 {
+        font-size: clamp(1.58rem, 8.8vw, 2.1rem);
+      }
+      .mini-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .mobile-sticky-cta {
+        gap: .45rem;
+        padding-left: .58rem;
+        padding-right: .58rem;
+      }
+      .mobile-sticky-cta a {
+        font-size: .78rem;
+      }
+    }
+
 </style>
 </head>
 <body>
@@ -3007,6 +3522,10 @@
 <a class="btn btn-primary" href="#charter-application">Apply for Charter License</a>
 </div>
 </header>
+<div aria-label="Mobile quick actions" class="mobile-sticky-cta">
+<a href="#charter-application">Apply for Charter License</a>
+<a href="#baseline-calculator">Run Calculator</a>
+</div>
 <main id="top">
 <section class="hero">
 <div class="container hero-grid">
@@ -3192,7 +3711,6 @@
 </figure>
 </div>
 </section>
-
 <section class="charter-section" id="charter-program">
 <div class="container">
 <div class="charter-panel">
@@ -3254,7 +3772,6 @@
 </a>
 <figcaption class="strategic-visual-caption">FabProfit sits upstream of ERP so your team can clean up scope, labour logic, risk treatment, and quote language before weak assumptions become operating data.</figcaption>
 </figure>
-
 <p>Medium and large fabrication companies often already have ERP, are implementing ERP, or are comparing ERP options. FabProfit is not positioned against that. It is positioned before it.</p>
 <p>Your ERP can only work with the quality of the assumptions, routings, labour logic, BOMs, risk decisions, and scope boundaries your team gives it.</p>
 <div class="logic-chain">
@@ -3781,7 +4298,6 @@
 </figure>
 </div>
 </section>
-
 <section>
 <div class="container">
 <div class="quote-band">
@@ -3859,7 +4375,6 @@
 </a>
 <figcaption class="strategic-visual-caption">FabProfit gives your team a connected operating infrastructure for estimating, reviewing, pricing, and handing off fabrication work with more discipline.</figcaption>
 </figure>
-
 <p>The tools turn the system into job-level behaviour. They give the estimator, manager, or owner a structured way to price real work, expose hidden cost, capture risk, and produce a quote that can survive production.</p>
 <p>These custom tools do not replace professional judgment. They help your team apply better judgment before the quote is sent.</p>
 </div>
@@ -3905,7 +4420,6 @@
 </a>
 <figcaption class="strategic-visual-caption">The goal is a repeatable estimating standard your team can teach, review, challenge, improve, and use across people, projects, and departments.</figcaption>
 </figure>
-
 <div class="transformation-executive-box">
 <h2>FabProfit turns estimating from person-dependent judgement into a repeatable company standard.</h2>
 <p>Before FabProfit, a quote can depend heavily on who opened the drawings, how busy they were, what they remembered from the last similar job, and how much risk they quietly buried in the number. After FabProfit, the estimate moves through a visible sequence your team can review, challenge, improve, and hand off.</p>
