@@ -4448,7 +4448,178 @@
   }
 }
 
-</style>
+
+
+    /* Mobile navigation menu */
+    .mobile-nav-toggle,
+    .mobile-nav-only {
+      display: none;
+    }
+
+    @media (max-width: 760px) {
+      .site-header {
+        z-index: 120;
+      }
+
+      .header-inner {
+        position: relative;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+      }
+
+      .header-inner .brand {
+        min-width: 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .header-cta {
+        display: none !important;
+      }
+
+      .mobile-nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: .48rem;
+        min-height: 42px;
+        padding: .62rem .78rem;
+        border: 1px solid rgba(15,23,42,.14);
+        background: var(--slate-950);
+        color: #fff;
+        font-family: inherit;
+        font-size: .78rem;
+        line-height: 1;
+        font-weight: 950;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        cursor: pointer;
+        box-shadow: 0 10px 24px rgba(15,23,42,.12);
+      }
+
+      .mobile-nav-icon {
+        width: 16px;
+        display: grid;
+        gap: 3px;
+      }
+
+      .mobile-nav-icon span {
+        display: block;
+        height: 2px;
+        background: currentColor;
+      }
+
+      .mobile-nav-toggle[aria-expanded="true"] {
+        background: linear-gradient(135deg,var(--orange-600),var(--orange-700));
+        border-color: rgba(249,115,22,.42);
+      }
+
+      .mobile-nav-toggle[aria-expanded="true"] .mobile-nav-icon span:nth-child(1) {
+        transform: translateY(5px) rotate(45deg);
+      }
+
+      .mobile-nav-toggle[aria-expanded="true"] .mobile-nav-icon span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .mobile-nav-toggle[aria-expanded="true"] .mobile-nav-icon span:nth-child(3) {
+        transform: translateY(-5px) rotate(-45deg);
+      }
+
+      .mobile-nav-icon span {
+        transition: transform .18s ease, opacity .18s ease;
+      }
+
+      .nav {
+        position: absolute;
+        top: calc(100% + .5rem);
+        left: 0;
+        right: 0;
+        display: none !important;
+        grid-template-columns: 1fr;
+        gap: .45rem;
+        padding: .7rem;
+        background: rgba(255,255,255,.98);
+        border: 1px solid rgba(226,232,240,.98);
+        border-top: 4px solid var(--orange-600);
+        box-shadow: 0 24px 56px rgba(15,23,42,.18);
+        backdrop-filter: blur(18px);
+      }
+
+      .nav.is-open {
+        display: grid !important;
+      }
+
+      .nav a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 44px;
+        padding: .78rem .86rem;
+        background: #fff;
+        border: 1px solid var(--slate-200);
+        color: var(--slate-800);
+        font-size: .88rem;
+        line-height: 1.12;
+        font-weight: 900;
+        box-shadow: 0 8px 18px rgba(15,23,42,.04);
+      }
+
+      .nav a:after {
+        content: "›";
+        color: var(--orange-700);
+        font-size: 1.15rem;
+        line-height: 1;
+      }
+
+      .mobile-nav-only {
+        display: flex !important;
+      }
+
+      .nav a.mobile-nav-cta {
+        justify-content: center;
+        margin-top: .2rem;
+        color: #fff;
+        background: linear-gradient(135deg,var(--orange-500),var(--orange-700));
+        border-color: rgba(234,88,12,.34);
+        text-align: center;
+      }
+
+      .nav a.mobile-nav-cta.secondary {
+        background: var(--slate-950);
+        border-color: var(--slate-950);
+      }
+
+      .nav a.mobile-nav-cta:after {
+        display: none;
+      }
+
+      body.mobile-nav-open {
+        overflow-x: hidden;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .mobile-nav-toggle {
+        min-height: 39px;
+        padding: .56rem .64rem;
+        font-size: .7rem;
+      }
+
+      .nav {
+        top: calc(100% + .42rem);
+        padding: .58rem;
+        gap: .38rem;
+      }
+
+      .nav a {
+        min-height: 42px;
+        padding: .72rem .76rem;
+        font-size: .82rem;
+      }
+    }
+
+  </style>
 </head>
 <body>
 <div class="top-strip"><strong>Q3 Charter Cohort:</strong> accepting applications for 25 approved fabrication companies until July 31, 2026.</div>
@@ -4457,7 +4628,11 @@
 <a aria-label="Metal Fabrication Power Tools home" class="brand" href="#top">
 <img alt="FabProfit System" class="brand-logo" src="https://gregsheldon.github.io/fab-profit-system/fabprofit-logo-tb.png"/>
 </a>
-<nav aria-label="Main navigation" class="nav">
+<button aria-controls="main-nav" aria-expanded="false" aria-label="Open site navigation" class="mobile-nav-toggle" type="button">
+<span class="mobile-nav-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+<span>Menu</span>
+</button>
+<nav aria-label="Main navigation" class="nav" id="main-nav">
 <a href="#business-decision">Business Case</a><a href="#why-fabprofit">Why FabProfit</a>
 <a href="#charter-program">Charter</a>
 <a href="#video">Video</a>
@@ -4465,8 +4640,10 @@
 <a href="#erp-insurance">ERP</a>
 <a href="#tools">Tools</a>
 <a href="#pricing">License</a>
+<a class="mobile-nav-only mobile-nav-cta" href="#charter-application">Apply for Charter License</a>
+<a class="mobile-nav-only mobile-nav-cta secondary" href="#baseline-calculator">Run Baseline Calculator</a>
 </nav>
-<a class="btn btn-primary" href="#charter-application">Apply for Charter License</a>
+<a class="btn btn-primary header-cta" href="#charter-application">Apply for Charter License</a>
 </div>
 </header>
 <div aria-label="Mobile quick actions" class="mobile-sticky-cta">
@@ -5871,7 +6048,7 @@
 <span>Built for companies that need estimating discipline grounded in real fabrication, not generic theory.</span>
 </div>
 <div aria-label="Greg Sheldon top authority metrics" class="creator-topline-stats">
-<div><strong>$16M</strong><span>Awarded contracts secured in one fiscal year</span></div>
+<div><strong>$16.04M</strong><span>Awarded contracts secured in one fiscal year</span></div>
 <div><strong>64.7%</strong><span>Of total company bookings represented by those awards</span></div>
 <div><strong>$1.6M</strong><span>Estimated gross profit contribution at 10% margin</span></div>
 </div>
@@ -6380,5 +6557,41 @@
       });
     })();
   </script>
+
+<script>
+  (function () {
+    const toggle = document.querySelector('.mobile-nav-toggle');
+    const nav = document.getElementById('main-nav');
+
+    if (!toggle || !nav) return;
+
+    function closeMobileNav() {
+      nav.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open site navigation');
+      document.body.classList.remove('mobile-nav-open');
+    }
+
+    toggle.addEventListener('click', function () {
+      const isOpen = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      toggle.setAttribute('aria-label', isOpen ? 'Close site navigation' : 'Open site navigation');
+      document.body.classList.toggle('mobile-nav-open', isOpen);
+    });
+
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', closeMobileNav);
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') closeMobileNav();
+    });
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 760) closeMobileNav();
+    });
+  })();
+</script>
+
 </body>
 </html>
