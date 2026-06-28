@@ -4420,6 +4420,34 @@
   }
 }
 
+
+
+/* About Creator hosted image polish */
+.creator-image-shell img {
+  display: block;
+}
+@media (max-width: 820px) {
+  .creator-authority-hero {
+    grid-template-columns: 1fr !important;
+  }
+  .creator-media-column {
+    order: 1;
+  }
+  .creator-story-column {
+    order: 2;
+  }
+  .creator-image-shell {
+    min-height: auto !important;
+    aspect-ratio: 4 / 5;
+  }
+  .creator-image-shell img {
+    min-height: 0 !important;
+    height: 100% !important;
+    object-fit: cover;
+    object-position: center top;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -5821,7 +5849,7 @@
 <div class="creator-authority-hero">
 <div class="creator-media-column">
 <div class="creator-image-shell">
-<img alt="Greg Sheldon, creator of FabProfit System" loading="lazy" src="https://gregsheldon.github.io/fab-profit-system/greg-sheldon-vertical.png"/>
+<img alt="Greg Sheldon, creator of FabProfit System" decoding="async" loading="lazy" src="https://gregsheldon.github.io/fab-profit-system/greg-sheldon-vertical.png"/>
 <div class="creator-image-badge">
 <strong>25+ years</strong>
 <span>Metals, fabrication, estimating, and commercial strategy</span>
