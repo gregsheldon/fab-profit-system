@@ -1041,6 +1041,10 @@
       d.company_name = d.company_name || d.company || d.companyname || d.companyName || d.business_name || d.businessName || d.organization || d.organisation || "";
       d.role = d.role || d.role_or_title || d.roleTitle || d.role_title || d.job_title || d.jobTitle || d.title || d.position || "";
       d.role_or_title = d.role_or_title || d.role;
+      d.lead_tag = d.lead_tag || d.systeme_tag_name || d.tag || d.tags || "fabprofit-calc";
+      d.systeme_tag_name = d.systeme_tag_name || d.lead_tag || "fabprofit-calc";
+      d.systeme_tag_id = d.systeme_tag_id || d.tag_id || d.tagId || "24487668";
+      d.source = d.source || d.lead_source || "fabprofit_baseline_calculator";
       return d;
     }
 
@@ -1161,6 +1165,11 @@
         email: fallback(data.email, "No email entered"),
         company_name: fallback(data.company_name, "your company"),
         role: fallback(data.role || data.role_or_title, "Role not entered"),
+        role_or_title: fallback(data.role_or_title || data.role, "Role not entered"),
+        lead_tag: fallback(data.lead_tag || data.systeme_tag_name || data.tag || data.tags, "fabprofit-calc"),
+        systeme_tag_name: fallback(data.systeme_tag_name || data.lead_tag, "fabprofit-calc"),
+        systeme_tag_id: fallback(data.systeme_tag_id || data.tag_id || data.tagId, "24487668"),
+        source: fallback(data.source || data.lead_source, "fabprofit_baseline_calculator"),
         company_type: fallback(data.company_type, "Fabrication company"),
         biggest_problem: fallback(data.biggest_problem, "Leadership wants a repeatable company standard"),
         annual_quotes: Math.round(annualQuotes),
