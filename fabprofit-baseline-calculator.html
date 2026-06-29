@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#020617" />
+  <title>FabProfit Baseline Efficiency Calculator</title>
+  <meta name="description" content="Run the FabProfit Baseline Efficiency Calculator to see where quote capacity, revision work, and preventable margin leakage may be hiding inside your fabrication estimating process." />
+  <link rel="icon" href="https://gregsheldon.github.io/metalfabexcel/metal-tools-favicon.png" type="image/png" />
+
+  <style>
+    :root {
+      --slate-950:#020617;
+      --slate-900:#0f172a;
+      --slate-800:#1e293b;
+      --slate-700:#334155;
+      --slate-600:#475569;
+      --slate-500:#64748b;
+      --slate-400:#94a3b8;
+      --slate-300:#cbd5e1;
+      --slate-200:#e2e8f0;
+      --slate-100:#f1f5f9;
+      --slate-50:#f8fafc;
+      --orange-700:#c2410c;
+      --orange-600:#ea580c;
+      --orange-500:#f97316;
+      --orange-50:#fff7ed;
+      --green-700:#15803d;
+      --shadow:0 24px 80px rgba(15,23,42,.14);
+      --shadow-soft:0 14px 40px rgba(15,23,42,.08);
+      --line:1px solid rgba(226,232,240,.92);
+    }
+
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--slate-900);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(249,115,22,.18), transparent 34rem),
+        radial-gradient(circle at 96% 16%, rgba(15,23,42,.08), transparent 28rem),
+        linear-gradient(180deg,#ffffff 0%,#f8fafc 44%,#f1f5f9 100%);
+      line-height:1.58;
+    }
+
+    a { color:inherit; text-decoration:none; }
+    .container { width:min(1180px, calc(100% - 32px)); margin:0 auto; }
+
+    .top-strip {
+      background:var(--slate-950);
+      color:#fff;
+      text-align:center;
+      padding:.7rem 1rem;
+      font-size:.9rem;
+      font-weight:850;
+      letter-spacing:-.01em;
+    }
+    .top-strip strong { color:#fed7aa; }
+
+    .simple-header {
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(18px);
+      border-bottom:var(--line);
+    }
+    .header-inner {
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .brand-mark {
+      display:flex;
+      align-items:center;
+      gap:.65rem;
+      font-weight:950;
+      letter-spacing:-.04em;
+      color:var(--slate-950);
+      font-size:1.18rem;
+    }
+    .brand-icon {
+      display:grid;
+      place-items:center;
+      width:42px;
+      height:42px;
+      background:var(--slate-950);
+      color:#fff;
+      border-left:6px solid var(--orange-600);
+      font-size:.88rem;
+      letter-spacing:-.02em;
+    }
+    .header-link {
+      color:var(--slate-600);
+      font-weight:850;
+      font-size:.92rem;
+    }
+    .header-link:hover { color:var(--orange-700); }
+
+    .hero {
+      padding:clamp(3.2rem,7vw,5.5rem) 0 2.25rem;
+    }
+    .hero-card {
+      background:#fff;
+      border:2px solid var(--slate-950);
+      box-shadow:var(--shadow);
+      padding:clamp(1.35rem,4vw,2.75rem);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card:before {
+      content:"";
+      position:absolute;
+      right:-110px;
+      top:-110px;
+      width:280px;
+      height:280px;
+      background:rgba(249,115,22,.16);
+      pointer-events:none;
+    }
+    .hero-card > * { position:relative; z-index:1; }
+    .eyebrow,
+    .baseline-step-tag {
+      display:inline-flex;
+      align-items:center;
+      width:fit-content;
+      background:var(--orange-50);
+      border:1px solid rgba(234,88,12,.24);
+      color:var(--orange-700);
+      padding:.58rem .82rem;
+      font-size:.76rem;
+      font-weight:950;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:1rem;
+    }
+    .baseline-step-tag {
+      background:var(--orange-600);
+      border-color:var(--orange-600);
+      color:#fff;
+      padding:.48rem .7rem;
+    }
+    h1,h2,h3,p { margin-top:0; }
+    h1 {
+      max-width:980px;
+      color:var(--slate-950);
+      font-size:clamp(2.7rem,7vw,5.8rem);
+      line-height:.92;
+      letter-spacing:-.075em;
+      margin-bottom:1rem;
+    }
+    h2 {
+      color:var(--slate-950);
+      font-size:clamp(2rem,4vw,3.35rem);
+      line-height:.98;
+      letter-spacing:-.065em;
+      margin-bottom:.85rem;
+    }
+    h3 {
+      color:var(--slate-950);
+      font-size:1.35rem;
+      line-height:1.08;
+      letter-spacing:-.04em;
+      margin-bottom:.6rem;
+    }
+    p { color:var(--slate-600); font-size:1.04rem; }
+    .hero-lede {
+      max-width:860px;
+      color:var(--slate-700);
+      font-size:clamp(1.12rem,2vw,1.34rem);
+      font-weight:720;
+      margin-bottom:.95rem;
+    }
+    .hero-copy {
+      max-width:940px;
+      display:grid;
+      gap:.35rem;
+    }
+    .hero-hook {
+      margin-top:1.1rem;
+      display:inline-flex;
+      width:fit-content;
+      background:var(--slate-950);
+      color:#fff;
+      border-left:7px solid var(--orange-600);
+      padding:1rem 1.1rem;
+      font-weight:900;
+      line-height:1.35;
+    }
+
+    .btn {
+      border:0;
+      border-radius:0;
+      padding:1rem 1.28rem;
+      font-weight:950;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.45rem;
+      white-space:nowrap;
+      transition:.18s ease;
+      cursor:pointer;
+      font-size:1rem;
+      font-family:inherit;
+      text-align:center;
+    }
+    .btn:hover { transform:translateY(-1px); }
+    .btn-primary {
+      color:#fff;
+      background:linear-gradient(135deg,var(--orange-500),var(--orange-700));
+      box-shadow:0 14px 36px rgba(234,88,12,.30);
+    }
+
+    .baseline-section {
+      padding: 2.25rem 0 clamp(3.5rem,7vw,6rem);
+    }
+    .section-heading.center {
+      max-width:880px;
+      text-align:center;
+      margin:0 auto 1.7rem;
+    }
+    .section-heading.center p {
+      margin-left:auto;
+      margin-right:auto;
+      max-width:760px;
+      font-size:1.08rem;
+    }
+    .baseline-calculator-card {
+      background:#ffffff;
+      border:2px solid var(--slate-950);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .baseline-calculator-layout {
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) 430px;
+      gap:0;
+    }
+    .baseline-calc-main {
+      padding:clamp(1.25rem, 3vw, 2.35rem);
+      border-right:1px solid var(--slate-200);
+    }
+    .baseline-calc-side {
+      padding:clamp(1.25rem, 3vw, 2rem);
+      background:
+        radial-gradient(circle at top right, rgba(249,115,22,.25), transparent 18rem),
+        linear-gradient(135deg, #020617 0%, #0f172a 100%);
+      color:#ffffff;
+    }
+    .baseline-calc-side p,
+    .baseline-calc-side label { color:var(--slate-300); }
+    .baseline-field-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:1rem;
+    }
+    .baseline-subhead {
+      grid-column:1 / -1;
+      margin-top:.65rem;
+      padding:.85rem 1rem;
+      background:var(--slate-950);
+      color:#ffffff;
+      border-left:6px solid var(--orange-600);
+    }
+    .baseline-subhead strong {
+      display:block;
+      color:#ffffff;
+      font-size:1.02rem;
+      line-height:1.15;
+      letter-spacing:-.025em;
+      margin-bottom:.25rem;
+    }
+    .baseline-subhead span {
+      display:block;
+      color:var(--slate-300);
+      font-size:.86rem;
+      font-weight:720;
+      line-height:1.35;
+    }
+    .baseline-field {
+      display:grid;
+      gap:.45rem;
+    }
+    .baseline-field.full { grid-column:1 / -1; }
+    .baseline-field label {
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--slate-600);
+      font-weight:950;
+    }
+    .baseline-field input,
+    .baseline-field select {
+      width:100%;
+      border:1px solid var(--slate-200);
+      background:#ffffff;
+      padding:.95rem 1rem;
+      color:var(--slate-950);
+      outline:none;
+      font-weight:850;
+      border-radius:0;
+      font-family:inherit;
+      min-height:51px;
+    }
+    .baseline-field select {
+      appearance:none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--slate-500) 50%),
+        linear-gradient(135deg, var(--slate-500) 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) calc(50% - 3px),
+        calc(100% - 13px) calc(50% - 3px);
+      background-size:5px 5px, 5px 5px;
+      background-repeat:no-repeat;
+      padding-right:2.25rem;
+    }
+    .baseline-field input:focus,
+    .baseline-field select:focus {
+      border-color:var(--orange-500);
+      box-shadow:0 0 0 4px rgba(249, 115, 22, .14);
+    }
+    .baseline-field small {
+      color:var(--slate-500);
+      font-weight:700;
+      line-height:1.35;
+      font-size:.8rem;
+    }
+    .baseline-field.compact small { font-size:.76rem; }
+    .baseline-note-grid {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:.75rem;
+      margin-top:1.2rem;
+    }
+    .baseline-note-card {
+      background:var(--orange-50);
+      border:1px solid #fed7aa;
+      padding:.95rem;
+      min-height:132px;
+    }
+    .baseline-note-card span {
+      display:inline-grid;
+      place-items:center;
+      width:34px;
+      height:34px;
+      background:var(--orange-600);
+      color:#ffffff;
+      font-weight:950;
+      margin-bottom:.65rem;
+    }
+    .baseline-note-card strong {
+      display:block;
+      color:var(--slate-950);
+      margin-bottom:.35rem;
+      line-height:1.15;
+    }
+    .baseline-note-card small {
+      display:block;
+      color:var(--slate-600);
+      font-weight:700;
+      line-height:1.45;
+    }
+    .baseline-compliance-note {
+      margin-top:1rem;
+      border-left:5px solid var(--orange-600);
+      background:#fff7ed;
+      padding:1rem;
+      color:var(--slate-700);
+      font-weight:760;
+    }
+    .baseline-result-main {
+      background:linear-gradient(135deg, #7f1d1d, #450a0a);
+      border:1px solid rgba(248, 113, 113, .42);
+      padding:1.25rem;
+      margin-bottom:1rem;
+    }
+    .baseline-result-main span,
+    .baseline-mini-result span {
+      display:block;
+      color:#fecaca;
+      font-size:.75rem;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:.35rem;
+    }
+    .baseline-result-main strong {
+      display:block;
+      color:#ffffff;
+      font-size:clamp(2.35rem, 5vw, 3.8rem);
+      line-height:.95;
+      letter-spacing:-.07em;
+    }
+    .baseline-result-main p {
+      margin:.75rem 0 0;
+      color:#fecaca;
+      font-weight:780;
+      line-height:1.45;
+    }
+    .baseline-mini-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:.75rem;
+      margin-bottom:1rem;
+    }
+    .baseline-mini-result {
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      padding:1rem;
+      min-height:118px;
+    }
+    .baseline-mini-result span { color:var(--slate-300); }
+    .baseline-mini-result strong {
+      display:block;
+      color:#ffffff;
+      font-size:1.55rem;
+      line-height:1;
+      letter-spacing:-.05em;
+    }
+    .baseline-live-note {
+      background:rgba(255,255,255,.075);
+      border-left:5px solid var(--orange-600);
+      padding:.95rem;
+      color:var(--slate-300);
+      font-weight:720;
+      font-size:.88rem;
+      line-height:1.45;
+      margin-top:1rem;
+    }
+    .baseline-optin-box {
+      background:rgba(255,255,255,.075);
+      border:1px solid rgba(255,255,255,.14);
+      padding:1rem;
+      margin-top:1rem;
+    }
+    .baseline-optin-box h3 {
+      color:#ffffff;
+      margin-bottom:.55rem;
+    }
+    .baseline-optin-list {
+      display:grid;
+      gap:.55rem;
+      margin:.85rem 0 1rem;
+    }
+    .baseline-optin-list div {
+      display:flex;
+      gap:.55rem;
+      align-items:flex-start;
+      color:var(--slate-200);
+      font-size:.88rem;
+      line-height:1.45;
+      font-weight:750;
+    }
+    .baseline-optin-list span {
+      display:inline-grid;
+      place-items:center;
+      width:22px;
+      height:22px;
+      flex:0 0 22px;
+      background:rgba(249,115,22,.18);
+      border:1px solid rgba(249,115,22,.45);
+      color:#fed7aa;
+      font-size:.78rem;
+      font-weight:950;
+    }
+    .baseline-optin-form {
+      display:grid;
+      gap:.75rem;
+    }
+    .baseline-optin-form input {
+      width:100%;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.08);
+      color:#ffffff;
+      padding:.95rem 1rem;
+      outline:none;
+      font-weight:850;
+      border-radius:0;
+      font-family:inherit;
+    }
+    .baseline-optin-form input::placeholder { color:var(--slate-400); }
+    .baseline-optin-form input:focus {
+      border-color:var(--orange-500);
+      box-shadow:0 0 0 4px rgba(249,115,22,.16);
+    }
+    .baseline-optin-form .btn { width:100%; }
+    .systeme-embed-wrap {
+      margin-top:.75rem;
+    }
+    .systeme-embed-wrap iframe {
+      width:100% !important;
+      max-width:100% !important;
+      border:0 !important;
+    }
+    .systeme-embed-wrap input,
+    .systeme-embed-wrap select,
+    .systeme-embed-wrap textarea {
+      max-width:100% !important;
+      font-family:inherit !important;
+    }
+    .baseline-privacy {
+      color:var(--slate-400);
+      font-size:.78rem;
+      margin:.75rem 0 0;
+      line-height:1.5;
+    }
+    .site-footer {
+      background:var(--slate-950);
+      color:var(--slate-300);
+      text-align:center;
+      padding:2rem 1rem;
+    }
+    .site-footer p {
+      color:var(--slate-300);
+      margin:0 auto;
+      max-width:900px;
+      font-size:.88rem;
+    }
+
+    @media (max-width:1040px) {
+      .baseline-calculator-layout { grid-template-columns:1fr; }
+      .baseline-calc-main { border-right:0; border-bottom:1px solid var(--slate-200); }
+    }
+    @media (max-width:760px) {
+      .container { width:min(100% - 24px, 1180px); }
+      .header-inner { min-height:64px; }
+      .header-link { display:none; }
+      .brand-mark { font-size:1.05rem; }
+      h1 { font-size:clamp(2.55rem, 13vw, 4rem); }
+      .hero { padding-top:2.6rem; }
+      .hero-card { padding:1.25rem; }
+      .hero-hook { width:100%; }
+      .baseline-field-grid,
+      .baseline-note-grid,
+      .baseline-mini-grid { grid-template-columns:1fr; }
+      .baseline-subhead { padding:.8rem; }
+      .baseline-section { padding-top:1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-strip"><strong>Free calculator:</strong> Find estimating leakage before it becomes another bad job.</div>
+
+  <header class="simple-header">
+    <div class="container header-inner">
+      <a class="brand-mark" href="#top" aria-label="FabProfit System home">
+        <span class="brand-icon">FP</span>
+        <span>FabProfit System</span>
+      </a>
+      <a class="header-link" href="#baseline-calculator">Run the Calculator</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Calculator introduction">
+      <div class="container">
+        <div class="hero-card">
+          <div class="eyebrow">Baseline Efficiency Calculator</div>
+          <h1>Find the hidden estimating leakage before it becomes another bad job.</h1>
+          <div class="hero-copy">
+            <p class="hero-lede">Run the numbers in a few minutes. Then opt in to generate a private executive report built from your exact inputs.</p>
+            <p>You already know margin leakage rarely shows up as one dramatic failure. It usually appears as small misses repeated across drawings, labour assumptions, material buy quantities, field access, outsourced work, payment terms, change-order language, and quote handoff.</p>
+            <p>This calculator gives your leadership team a conservative baseline view of where quote capacity, revision work, and preventable margin leakage may be hiding inside your current estimating process.</p>
+            <p class="hero-hook">The goal is simple: see the size of the problem before weak assumptions become jobs, ERP data, schedules, and margin losses.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="baseline-section" id="baseline-calculator">
+      <div class="container">
+        <div class="section-heading center">
+          <div class="eyebrow">Free Baseline Review</div>
+          <h2>Enter your current estimating baseline.</h2>
+          <p>The live calculator will show a conservative baseline. The full report is generated after opt-in and carries your inputs into the report page.</p>
+        </div>
+
+        <div class="baseline-calculator-card">
+          <div class="baseline-calculator-layout">
+            <div class="baseline-calc-main">
+              <span class="baseline-step-tag">Step 1: Enter your current baseline</span>
+              <div class="baseline-field-grid">
+                <div class="baseline-subhead">
+                  <strong>Company size and quote volume</strong>
+                  <span>These numbers establish the scale of revenue, quote activity, win rate, and average quote value.</span>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfRevenue">Annual fabrication revenue</label>
+                  <input autocomplete="off" id="bfRevenue" inputmode="decimal" min="0" step="100000" type="text" value="25000000" />
+                  <small>Annual awarded revenue from fabrication, install, service, or related work.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfQuotedRevenue">Annual quoted value</label>
+                  <input autocomplete="off" id="bfQuotedRevenue" inputmode="decimal" min="0" step="100000" type="text" value="60000000" />
+                  <small>Total value of jobs quoted per year, including won and lost opportunities.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfQuotesMonth">Quotes per month</label>
+                  <input autocomplete="off" id="bfQuotesMonth" inputmode="decimal" min="0" step="1" type="text" value="80" />
+                  <small>Average count of estimates, bids, budget numbers, and formal quotes.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfGrossMargin">Target gross margin %</label>
+                  <input autocomplete="off" id="bfGrossMargin" inputmode="decimal" max="80" min="0" step="0.5" type="text" value="24" />
+                  <small>Used to frame the scale of margin control and pricing discipline.</small>
+                </div>
+
+                <div class="baseline-subhead">
+                  <strong>Estimating workload and revision friction</strong>
+                  <span>These inputs separate normal quote-building effort from review time and avoidable rerun work.</span>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfHoursQuote">Estimator build hours per quote</label>
+                  <input autocomplete="off" id="bfHoursQuote" inputmode="decimal" min="0" step="0.25" type="text" value="4.5" />
+                  <small>Estimator time to build the first workable number. Do not include revision reruns here.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfReviewHoursQuote">Review / coordination hours per quote</label>
+                  <input autocomplete="off" id="bfReviewHoursQuote" inputmode="decimal" min="0" step="0.25" type="text" value="1" />
+                  <small>Manager review, PM input, purchasing checks, sales coordination, or quote approval time.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfEstimatorRate">Loaded estimating cost per hour</label>
+                  <input autocomplete="off" id="bfEstimatorRate" inputmode="decimal" min="0" step="5" type="text" value="115" />
+                  <small>Use a loaded cost with wage, burden, overhead, management, and support.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfRevisionRate">Quotes needing revision %</label>
+                  <input autocomplete="off" id="bfRevisionRate" inputmode="decimal" max="100" min="0" step="1" type="text" value="18" />
+                  <small>Percent of quotes that require a meaningful rerun, reprice, correction, or clarification loop.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfAvgRevisionHours">Average revision hours</label>
+                  <input autocomplete="off" id="bfAvgRevisionHours" inputmode="decimal" min="0" step="0.25" type="text" value="2.5" />
+                  <small>Average extra internal hours each revised quote consumes.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfEstimatorCount">Estimators / quote builders</label>
+                  <input autocomplete="off" id="bfEstimatorCount" inputmode="decimal" min="0" step="1" type="text" value="3" />
+                  <small>Used to estimate capacity pressure and key-person dependency.</small>
+                </div>
+
+                <div class="baseline-subhead">
+                  <strong>Known margin losses and exposure areas</strong>
+                  <span>These questions improve accuracy by grounding the report in actual failure patterns, not just a generic leakage percentage.</span>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfLeakageRate">Base margin leakage %</label>
+                  <input autocomplete="off" id="bfLeakageRate" inputmode="decimal" max="10" min="0" step="0.05" type="text" value="0.75" />
+                  <small>Conservative planning factor for missed scope, underpriced risk, and quote-to-production gaps.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfBadJobsYear">Underpriced jobs per year</label>
+                  <input autocomplete="off" id="bfBadJobsYear" inputmode="decimal" min="0" step="1" type="text" value="3" />
+                  <small>Jobs that look good at award but later show obvious quote, scope, labour, or risk misses.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfAvgBadJobLoss">Average loss per underpriced job</label>
+                  <input autocomplete="off" id="bfAvgBadJobLoss" inputmode="decimal" min="0" step="1000" type="text" value="25000" />
+                  <small>Use margin shortfall, unrecovered hours, missed scope, or avoidable overrun cost.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfUnrecoveredExtras">Unrecovered extras / year</label>
+                  <input autocomplete="off" id="bfUnrecoveredExtras" inputmode="decimal" min="0" step="5000" type="text" value="50000" />
+                  <small>Change orders, standby, scope creep, rework, or extras your company performs but does not recover.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfFieldRevenuePercent">Revenue with field / install %</label>
+                  <input autocomplete="off" id="bfFieldRevenuePercent" inputmode="decimal" max="100" min="0" step="1" type="text" value="35" />
+                  <small>Percent of annual revenue that carries site access, mobilization, safety, travel, or field productivity risk.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfFieldFrictionRate">Field friction exposure %</label>
+                  <input autocomplete="off" id="bfFieldFrictionRate" inputmode="decimal" max="10" min="0" step="0.05" type="text" value="0.5" />
+                  <small>Planning factor applied only to field/install revenue for standby, access, remobilization, and site drag.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfOutsourcedSpend">Annual outsourced / coating spend</label>
+                  <input autocomplete="off" id="bfOutsourcedSpend" inputmode="decimal" min="0" step="50000" type="text" value="1000000" />
+                  <small>Galvanizing, paint, powder coat, machining, detailing, engineering, trucking, or specialty vendors.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfOutsourcedRiskRate">Outsourced risk exposure %</label>
+                  <input autocomplete="off" id="bfOutsourcedRiskRate" inputmode="decimal" max="15" min="0" step="0.05" type="text" value="1" />
+                  <small>Planning factor for missed prep, freight, vendor coordination, inspection, remake risk, and margin.</small>
+                </div>
+
+                <div class="baseline-subhead">
+                  <strong>Process maturity</strong>
+                  <span>These questions adjust the report based on how much quote control already exists inside your company.</span>
+                </div>
+                <div class="baseline-field compact">
+                  <label for="bfQuoteChecklist">Quote release checklist</label>
+                  <select id="bfQuoteChecklist">
+                    <option value="partial">Partial / informal</option>
+                    <option value="yes">Yes / required</option>
+                    <option value="no">No consistent checklist</option>
+                  </select>
+                  <small>Required checklist for scope, risk, margin, assumptions, exclusions, and handoff.</small>
+                </div>
+                <div class="baseline-field compact">
+                  <label for="bfLabourBuckets">Labour bucket standard</label>
+                  <select id="bfLabourBuckets">
+                    <option value="partial">Partial / estimator dependent</option>
+                    <option value="yes">Yes / standardized</option>
+                    <option value="no">No clear standard</option>
+                  </select>
+                  <small>Separate shop, field, setup, movement, control, friction, standby, and fire watch.</small>
+                </div>
+                <div class="baseline-field compact">
+                  <label for="bfMaterialBuyoutStandard">Material buyout standard</label>
+                  <select id="bfMaterialBuyoutStandard">
+                    <option value="partial">Partial / inconsistent</option>
+                    <option value="yes">Yes / standardized</option>
+                    <option value="no">No clear standard</option>
+                  </select>
+                  <small>Actual buy quantity, stock length, waste, drops, freight, coating, and price validity.</small>
+                </div>
+                <div class="baseline-field compact">
+                  <label for="bfRiskRegister">Risk register before quote</label>
+                  <select id="bfRiskRegister">
+                    <option value="partial">Partial / only on big jobs</option>
+                    <option value="yes">Yes / required</option>
+                    <option value="no">No formal risk register</option>
+                  </select>
+                  <small>Known unknowns are priced, qualified, excluded, transferred, reserved, or negotiated.</small>
+                </div>
+                <div class="baseline-field compact">
+                  <label for="bfQuoteLanguageStandard">Quote language standard</label>
+                  <select id="bfQuoteLanguageStandard">
+                    <option value="partial">Partial / varies by estimator</option>
+                    <option value="yes">Yes / standardized</option>
+                    <option value="no">No standard language bank</option>
+                  </select>
+                  <small>Assumptions, exclusions, alternates, validity, premium time, and change-order rules.</small>
+                </div>
+                <div class="baseline-field compact">
+                  <label for="bfPostJobReview">Estimate vs actual review</label>
+                  <select id="bfPostJobReview">
+                    <option value="partial">Partial / occasional</option>
+                    <option value="yes">Yes / routine</option>
+                    <option value="no">No consistent review</option>
+                  </select>
+                  <small>Closed jobs are compared against estimated labour, material, risk, and quote assumptions.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfSystemPrice">FabProfit system investment</label>
+                  <input autocomplete="off" id="bfSystemPrice" inputmode="decimal" min="0" step="1000" type="text" value="19997" />
+                  <small>Default is $19,997. Adjust for the offer or license level being reviewed.</small>
+                </div>
+                <div class="baseline-field">
+                  <label for="bfCompanyType">Company profile</label>
+                  <select id="bfCompanyType">
+                    <option value="Medium / large fabrication company">Medium / large fabrication company</option>
+                    <option value="Private equity portfolio company">Private equity portfolio company</option>
+                    <option value="Multi-location fabrication group">Multi-location fabrication group</option>
+                    <option value="Specialty welding or industrial contractor">Specialty welding or industrial contractor</option>
+                  </select>
+                  <small>Used to personalize the report language.</small>
+                </div>
+                <div class="baseline-field full">
+                  <label for="bfBiggestProblem">Biggest current estimating problem</label>
+                  <select id="bfBiggestProblem">
+                    <option value="Labour hours are too optimistic">Labour hours are too optimistic</option>
+                    <option value="Scope gaps and exclusions are weak">Scope gaps and exclusions are weak</option>
+                    <option value="Field install and access are underpriced">Field install and access are underpriced</option>
+                    <option value="Material buyout, waste, and supplier movement are inconsistent">Material buyout, waste, and supplier movement are inconsistent</option>
+                    <option value="Outsourced work and finish are treated like pass-through cost">Outsourced work and finish are treated like pass-through cost</option>
+                    <option value="Quote revisions and rework consume too much capacity">Quote revisions and rework consume too much capacity</option>
+                    <option value="Leadership wants a repeatable company standard">Leadership wants a repeatable company standard</option>
+                  </select>
+                  <small>This helps show where FabProfit may have the fastest impact inside your estimating process.</small>
+                </div>
+              </div>
+
+              <div class="baseline-note-grid">
+                <div class="baseline-note-card"><span>1</span><strong>Capacity drag</strong><small>Measures estimating labour, review time, and quote revision effort currently absorbed by your company.</small></div>
+                <div class="baseline-note-card"><span>2</span><strong>Margin exposure</strong><small>Models a conservative leakage factor against revenue to frame the cost of weak quote governance.</small></div>
+                <div class="baseline-note-card"><span>3</span><strong>Recoverable value</strong><small>Shows your business case for installing a more repeatable estimating, pricing, and quote-control system.</small></div>
+              </div>
+              <div class="baseline-compliance-note">This is a planning calculator, not a guarantee. Its purpose is to create a baseline conversation around estimating governance, operating discipline, and your business case for FabProfit System.</div>
+            </div>
+
+            <aside class="baseline-calc-side">
+              <span class="baseline-step-tag">Step 2: Review live baseline</span>
+              <div class="baseline-result-main">
+                <span>Annual quote-process exposure</span>
+                <strong id="bfAnnualDrag">$0</strong>
+                <p>Estimated yearly exposure from estimating labour investment, revision effort, known loss patterns, field/outsourced risk, and conservative margin leakage.</p>
+              </div>
+              <div class="baseline-mini-grid">
+                <div class="baseline-mini-result"><span>Annual estimating hours</span><strong id="bfAnnualHours">0</strong></div>
+                <div class="baseline-mini-result"><span>Known loss floor</span><strong id="bfKnownLoss">$0</strong></div>
+                <div class="baseline-mini-result"><span>Maturity score</span><strong id="bfMaturityScore">0%</strong></div>
+                <div class="baseline-mini-result"><span>Recoverable value / year</span><strong id="bfRecoverableValue">$0</strong></div>
+                <div class="baseline-mini-result"><span>3-year net opportunity</span><strong id="bfThreeYearNet">$0</strong></div>
+                <div class="baseline-mini-result"><span>Payback estimate</span><strong id="bfPayback">0 days</strong></div>
+              </div>
+              <div class="baseline-live-note" id="bfLiveNote">The live report will become more accurate as the inputs reflect real known losses, field exposure, outsourced spend, and quote-process maturity.</div>
+              <p id="bfScoreText" style="color:#cbd5e1;font-weight:800;margin-bottom:1rem;">Opportunity score will update here.</p>
+              <div class="baseline-optin-box">
+                <h3>Get the full executive report with your numbers.</h3>
+                <p>The report expands this calculator into a deeper operating review: risk map, ROI model, quote-governance priorities, and how FabProfit System can benefit leadership, estimating, operations, and ownership.</p>
+                <div class="baseline-optin-list">
+                  <div><span>✓</span><div>Private baseline report generated from your exact inputs</div></div>
+                  <div><span>✓</span><div>Executive summary, operating risk map, and implementation priorities</div></div>
+                  <div><span>✓</span><div>Print, save PDF, copy report, or email Greg your numbers</div></div>
+                </div>
+                <div class="systeme-embed-wrap" id="systemeOptinEmbed">
+                  <script id="form-script-tag-24487668" src="https://grsh.systeme.io/public/remote/page/4196480092a59e387e2204237a688e526fad6a06.js"></script>
+                </div>
+                <p class="baseline-privacy">Your report is generated in your browser and passed to the report page. No guarantee is implied; the numbers are a planning baseline for discussion.</p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>FabProfit System provides education, examples, spreadsheets, templates, calculators, and implementation support. Your company remains responsible for reviewing and approving all estimates, quotes, prices, contracts, assumptions, exclusions, taxes, margins, and business decisions.</p>
+  </footer>
+
+  <script>
+    (function () {
+      const REPORT_PAGE = "fabprofit-baseline-efficiency-report.html";
+      const OPTIN_ENDPOINT = "";
+
+      const fields = {
+        revenue: document.getElementById("bfRevenue"),
+        quotedRevenue: document.getElementById("bfQuotedRevenue"),
+        quotesMonth: document.getElementById("bfQuotesMonth"),
+        hoursQuote: document.getElementById("bfHoursQuote"),
+        reviewHoursQuote: document.getElementById("bfReviewHoursQuote"),
+        estimatorRate: document.getElementById("bfEstimatorRate"),
+        revisionRate: document.getElementById("bfRevisionRate"),
+        avgRevisionHours: document.getElementById("bfAvgRevisionHours"),
+        estimatorCount: document.getElementById("bfEstimatorCount"),
+        leakageRate: document.getElementById("bfLeakageRate"),
+        badJobsYear: document.getElementById("bfBadJobsYear"),
+        avgBadJobLoss: document.getElementById("bfAvgBadJobLoss"),
+        unrecoveredExtras: document.getElementById("bfUnrecoveredExtras"),
+        fieldRevenuePercent: document.getElementById("bfFieldRevenuePercent"),
+        fieldFrictionRate: document.getElementById("bfFieldFrictionRate"),
+        outsourcedSpend: document.getElementById("bfOutsourcedSpend"),
+        outsourcedRiskRate: document.getElementById("bfOutsourcedRiskRate"),
+        quoteChecklist: document.getElementById("bfQuoteChecklist"),
+        labourBuckets: document.getElementById("bfLabourBuckets"),
+        materialBuyoutStandard: document.getElementById("bfMaterialBuyoutStandard"),
+        riskRegister: document.getElementById("bfRiskRegister"),
+        quoteLanguageStandard: document.getElementById("bfQuoteLanguageStandard"),
+        postJobReview: document.getElementById("bfPostJobReview"),
+        grossMargin: document.getElementById("bfGrossMargin"),
+        systemPrice: document.getElementById("bfSystemPrice"),
+        companyType: document.getElementById("bfCompanyType"),
+        biggestProblem: document.getElementById("bfBiggestProblem")
+      };
+
+      if (!fields.revenue) return;
+
+      const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+      const num = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+      const pct = value => `${Number(value || 0).toFixed(2).replace(/\.00$/, "")}%`;
+
+      function cleanNumericString(value) {
+        const text = String(value || "").replace(/,/g, "").replace(/[^0-9.]/g, "");
+        const parts = text.split(".");
+        if (parts.length <= 1) return parts[0] || "";
+        return `${parts.shift()}.${parts.join("")}`;
+      }
+
+      function readNumber(el) {
+        const cleaned = cleanNumericString(el && el.value ? el.value : "0");
+        return Math.max(0, Number(cleaned || 0) || 0);
+      }
+
+      function formatNumericString(value) {
+        const cleaned = cleanNumericString(value);
+        if (!cleaned) return "";
+        const hasDecimal = cleaned.includes(".");
+        const hasTrailingDecimal = cleaned.endsWith(".");
+        const parts = cleaned.split(".");
+        let integerPart = parts[0] || "0";
+        const decimalPart = parts.length > 1 ? parts.slice(1).join("") : "";
+        integerPart = integerPart.replace(/^0+(?=\d)/, "");
+        const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (hasDecimal) return `${formattedInteger}.${hasTrailingDecimal ? "" : decimalPart}`;
+        return formattedInteger;
+      }
+
+      function formatNumericInput(el) {
+        if (!el) return;
+        const oldValue = el.value;
+        const oldCursor = typeof el.selectionStart === "number" ? el.selectionStart : oldValue.length;
+        const numericCharsToRight = oldValue.slice(oldCursor).replace(/[^0-9.]/g, "").length;
+        const formatted = formatNumericString(oldValue);
+        el.value = formatted;
+        let newCursor = formatted.length;
+        if (numericCharsToRight > 0) {
+          let seen = 0;
+          for (let i = formatted.length - 1; i >= 0; i--) {
+            if (/[0-9.]/.test(formatted[i])) seen++;
+            if (seen >= numericCharsToRight) {
+              newCursor = i;
+              break;
+            }
+          }
+        }
+        try { el.setSelectionRange(newCursor, newCursor); } catch (error) {}
+      }
+
+      function opportunityLabel(score) {
+        if (score >= 80) return "Very high standardization opportunity";
+        if (score >= 60) return "High standardization opportunity";
+        if (score >= 40) return "Moderate standardization opportunity";
+        return "Focused improvement opportunity";
+      }
+
+      function maturityValue(value) {
+        if (value === "yes") return 1;
+        if (value === "partial") return 0.5;
+        return 0;
+      }
+
+      function safeValue(field, fallbackValue) {
+        return field ? field.value : fallbackValue;
+      }
+
+      function calculateBaseline() {
+        const annualRevenue = readNumber(fields.revenue);
+        const annualQuotedRevenue = readNumber(fields.quotedRevenue);
+        const quotesPerMonth = readNumber(fields.quotesMonth);
+        const hoursPerQuote = readNumber(fields.hoursQuote);
+        const reviewHoursQuote = readNumber(fields.reviewHoursQuote);
+        const estimatorRate = readNumber(fields.estimatorRate);
+        const revisionRate = readNumber(fields.revisionRate);
+        const avgRevisionHours = readNumber(fields.avgRevisionHours);
+        const estimatorCount = Math.max(1, readNumber(fields.estimatorCount) || 1);
+        const leakageRate = readNumber(fields.leakageRate);
+        const badJobsYear = readNumber(fields.badJobsYear);
+        const avgBadJobLoss = readNumber(fields.avgBadJobLoss);
+        const unrecoveredExtras = readNumber(fields.unrecoveredExtras);
+        const fieldRevenuePercent = readNumber(fields.fieldRevenuePercent);
+        const fieldFrictionRate = readNumber(fields.fieldFrictionRate);
+        const outsourcedSpend = readNumber(fields.outsourcedSpend);
+        const outsourcedRiskRate = readNumber(fields.outsourcedRiskRate);
+        const grossMargin = readNumber(fields.grossMargin);
+        const systemPrice = readNumber(fields.systemPrice) || 19997;
+        const companyType = safeValue(fields.companyType, "Medium / large fabrication company");
+        const biggestProblem = safeValue(fields.biggestProblem, "Leadership wants a repeatable company standard");
+
+        const maturityItems = [
+          safeValue(fields.quoteChecklist, "partial"),
+          safeValue(fields.labourBuckets, "partial"),
+          safeValue(fields.materialBuyoutStandard, "partial"),
+          safeValue(fields.riskRegister, "partial"),
+          safeValue(fields.quoteLanguageStandard, "partial"),
+          safeValue(fields.postJobReview, "partial")
+        ];
+
+        const maturityScore = Math.round((maturityItems.reduce((sum, item) => sum + maturityValue(item), 0) / maturityItems.length) * 100);
+        const maturityGap = Math.max(0, 100 - maturityScore);
+        const maturityRiskMultiplier = 1 + (maturityGap / 100) * 0.5;
+
+        const annualQuotes = quotesPerMonth * 12;
+        const quoteBuildHours = annualQuotes * hoursPerQuote;
+        const quoteReviewHours = annualQuotes * reviewHoursQuote;
+        const revisionHours = annualQuotes * (revisionRate / 100) * avgRevisionHours;
+        const annualEstimatingHours = quoteBuildHours + quoteReviewHours + revisionHours;
+
+        const estimatingLaborCost = (quoteBuildHours + quoteReviewHours) * estimatorRate;
+        const revisionCost = revisionHours * estimatorRate;
+        const baseMarginLeakage = annualRevenue * (leakageRate / 100);
+        const knownBadJobLoss = badJobsYear * avgBadJobLoss;
+        const knownLossFloor = knownBadJobLoss + unrecoveredExtras;
+        const fieldRevenue = annualRevenue * (fieldRevenuePercent / 100);
+        const fieldFrictionExposure = fieldRevenue * (fieldFrictionRate / 100);
+        const outsourcedRiskExposure = outsourcedSpend * (outsourcedRiskRate / 100);
+        const modeledMarginExposure = (baseMarginLeakage + fieldFrictionExposure + outsourcedRiskExposure) * maturityRiskMultiplier;
+        const conservativeMarginLeakage = Math.max(modeledMarginExposure, knownLossFloor);
+        const annualBaselineDrag = estimatingLaborCost + revisionCost + conservativeMarginLeakage;
+
+        const efficiencyImprovementRate = Math.min(0.40, Math.max(0.15, 0.15 + (maturityGap / 100) * 0.25));
+        const marginRecoveryRate = Math.min(0.35, Math.max(0.15, 0.15 + (maturityGap / 100) * 0.20));
+        const recoverableLaborCapacity = (estimatingLaborCost + revisionCost) * efficiencyImprovementRate;
+        const recoverableMarginProtection = conservativeMarginLeakage * marginRecoveryRate;
+        const conservativeRecoverableValue = recoverableLaborCapacity + recoverableMarginProtection;
+        const threeYearGrossValue = conservativeRecoverableValue * 3;
+        const threeYearNetOpportunity = threeYearGrossValue - systemPrice;
+        const paybackDays = conservativeRecoverableValue > 0 ? Math.max(1, Math.round((systemPrice / conservativeRecoverableValue) * 365)) : 0;
+        const workdaysReclaimed = (annualEstimatingHours * efficiencyImprovementRate) / 8;
+        const hoursReclaimed = annualEstimatingHours * efficiencyImprovementRate;
+
+        const revenueScore = annualRevenue >= 50000000 ? 18 : annualRevenue >= 15000000 ? 14 : annualRevenue >= 5000000 ? 9 : 5;
+        const quoteScore = annualQuotes >= 1200 ? 16 : annualQuotes >= 600 ? 12 : annualQuotes >= 240 ? 8 : 4;
+        const hourScore = annualEstimatingHours >= 4500 ? 14 : annualEstimatingHours >= 1800 ? 10 : annualEstimatingHours >= 650 ? 6 : 3;
+        const revisionScore = revisionRate >= 25 ? 10 : revisionRate >= 12 ? 7 : revisionRate >= 5 ? 4 : 1;
+        const leakageScore = conservativeMarginLeakage >= 250000 ? 12 : conservativeMarginLeakage >= 75000 ? 8 : conservativeMarginLeakage >= 25000 ? 5 : 2;
+        const maturityScoreContribution = maturityScore <= 35 ? 14 : maturityScore <= 65 ? 9 : 4;
+        const knownLossScore = knownLossFloor >= 150000 ? 8 : knownLossFloor >= 50000 ? 5 : knownLossFloor > 0 ? 3 : 0;
+        const payoffScore = paybackDays && paybackDays <= 60 ? 8 : paybackDays <= 120 ? 6 : paybackDays <= 365 ? 4 : 1;
+        const opportunityScore = Math.min(100, Math.round(revenueScore + quoteScore + hourScore + revisionScore + leakageScore + maturityScoreContribution + knownLossScore + payoffScore));
+
+        const avgQuotedValue = annualQuotes > 0 ? annualQuotedRevenue / annualQuotes : 0;
+        const revenueToQuoteRatio = annualQuotedRevenue > 0 ? annualRevenue / annualQuotedRevenue : 0;
+        const impliedWinRate = revenueToQuoteRatio * 100;
+        const targetGrossProfit = annualRevenue * (grossMargin / 100);
+        const revenuePerEstimator = annualRevenue / estimatorCount;
+        const quotesPerEstimatorPerMonth = estimatorCount > 0 ? quotesPerMonth / estimatorCount : 0;
+
+        return {
+          report_type: "FabProfit Baseline Efficiency Report",
+          generated_at: new Date().toLocaleString(),
+          annual_revenue: annualRevenue,
+          annual_revenue_formatted: money.format(annualRevenue),
+          annual_quoted_revenue: annualQuotedRevenue,
+          annual_quoted_revenue_formatted: money.format(annualQuotedRevenue),
+          quotes_per_month: quotesPerMonth,
+          annual_quotes: Math.round(annualQuotes),
+          average_hours_per_quote: hoursPerQuote,
+          review_hours_per_quote: reviewHoursQuote,
+          average_revision_hours: avgRevisionHours,
+          estimator_count: estimatorCount,
+          loaded_estimating_cost_per_hour: estimatorRate,
+          loaded_estimating_cost_per_hour_formatted: money.format(estimatorRate) + "/hr",
+          revision_rate: revisionRate,
+          revision_rate_formatted: pct(revisionRate),
+          leakage_rate: leakageRate,
+          leakage_rate_formatted: pct(leakageRate),
+          bad_jobs_per_year: badJobsYear,
+          average_bad_job_loss: avgBadJobLoss,
+          average_bad_job_loss_formatted: money.format(avgBadJobLoss),
+          known_bad_job_loss: knownBadJobLoss,
+          known_bad_job_loss_formatted: money.format(knownBadJobLoss),
+          unrecovered_extras: unrecoveredExtras,
+          unrecovered_extras_formatted: money.format(unrecoveredExtras),
+          known_loss_floor: knownLossFloor,
+          known_loss_floor_formatted: money.format(knownLossFloor),
+          field_revenue_percent: fieldRevenuePercent,
+          field_revenue_percent_formatted: pct(fieldRevenuePercent),
+          field_revenue: fieldRevenue,
+          field_revenue_formatted: money.format(fieldRevenue),
+          field_friction_rate: fieldFrictionRate,
+          field_friction_rate_formatted: pct(fieldFrictionRate),
+          field_friction_exposure: fieldFrictionExposure,
+          field_friction_exposure_formatted: money.format(fieldFrictionExposure),
+          outsourced_spend: outsourcedSpend,
+          outsourced_spend_formatted: money.format(outsourcedSpend),
+          outsourced_risk_rate: outsourcedRiskRate,
+          outsourced_risk_rate_formatted: pct(outsourcedRiskRate),
+          outsourced_risk_exposure: outsourcedRiskExposure,
+          outsourced_risk_exposure_formatted: money.format(outsourcedRiskExposure),
+          base_margin_leakage: baseMarginLeakage,
+          base_margin_leakage_formatted: money.format(baseMarginLeakage),
+          modeled_margin_exposure: modeledMarginExposure,
+          modeled_margin_exposure_formatted: money.format(modeledMarginExposure),
+          maturity_score: maturityScore,
+          maturity_score_formatted: `${maturityScore}%`,
+          maturity_gap: maturityGap,
+          quote_checklist: safeValue(fields.quoteChecklist, "partial"),
+          labour_buckets: safeValue(fields.labourBuckets, "partial"),
+          material_buyout_standard: safeValue(fields.materialBuyoutStandard, "partial"),
+          risk_register: safeValue(fields.riskRegister, "partial"),
+          quote_language_standard: safeValue(fields.quoteLanguageStandard, "partial"),
+          post_job_review: safeValue(fields.postJobReview, "partial"),
+          biggest_problem: biggestProblem,
+          target_gross_margin: grossMargin,
+          target_gross_margin_formatted: pct(grossMargin),
+          system_price: systemPrice,
+          system_price_formatted: money.format(systemPrice),
+          company_type: companyType,
+          quote_build_hours: Math.round(quoteBuildHours),
+          quote_review_hours: Math.round(quoteReviewHours),
+          annual_estimating_hours: Math.round(annualEstimatingHours),
+          estimating_labor_cost: estimatingLaborCost,
+          estimating_labor_cost_formatted: money.format(estimatingLaborCost),
+          revision_hours: Math.round(revisionHours),
+          revision_cost: revisionCost,
+          revision_cost_formatted: money.format(revisionCost),
+          conservative_margin_leakage: conservativeMarginLeakage,
+          conservative_margin_leakage_formatted: money.format(conservativeMarginLeakage),
+          annual_baseline_drag: annualBaselineDrag,
+          annual_baseline_drag_formatted: money.format(annualBaselineDrag),
+          conservative_recoverable_value: conservativeRecoverableValue,
+          conservative_recoverable_value_formatted: money.format(conservativeRecoverableValue),
+          recoverable_labor_capacity: recoverableLaborCapacity,
+          recoverable_labor_capacity_formatted: money.format(recoverableLaborCapacity),
+          recoverable_margin_protection: recoverableMarginProtection,
+          recoverable_margin_protection_formatted: money.format(recoverableMarginProtection),
+          efficiency_improvement_rate: efficiencyImprovementRate,
+          efficiency_improvement_rate_formatted: pct(efficiencyImprovementRate * 100),
+          margin_recovery_rate: marginRecoveryRate,
+          margin_recovery_rate_formatted: pct(marginRecoveryRate * 100),
+          three_year_gross_value: threeYearGrossValue,
+          three_year_gross_value_formatted: money.format(threeYearGrossValue),
+          three_year_net_opportunity: threeYearNetOpportunity,
+          three_year_net_opportunity_formatted: money.format(threeYearNetOpportunity),
+          payback_days: paybackDays,
+          hours_reclaimed: Math.round(hoursReclaimed),
+          workdays_reclaimed: Math.round(workdaysReclaimed),
+          average_quoted_value: avgQuotedValue,
+          average_quoted_value_formatted: money.format(avgQuotedValue),
+          implied_win_rate: Math.round(impliedWinRate),
+          implied_win_rate_formatted: pct(impliedWinRate),
+          target_gross_profit: targetGrossProfit,
+          target_gross_profit_formatted: money.format(targetGrossProfit),
+          revenue_per_estimator: revenuePerEstimator,
+          revenue_per_estimator_formatted: money.format(revenuePerEstimator),
+          quotes_per_estimator_per_month: Number(quotesPerEstimatorPerMonth.toFixed(1)),
+          opportunity_score: opportunityScore,
+          opportunity_label: opportunityLabel(opportunityScore)
+        };
+      }
+
+      function updateBaselineDisplay() {
+        const data = calculateBaseline();
+        document.getElementById("bfAnnualDrag").textContent = data.annual_baseline_drag_formatted;
+        document.getElementById("bfAnnualHours").textContent = num.format(data.annual_estimating_hours);
+        document.getElementById("bfKnownLoss").textContent = data.known_loss_floor_formatted;
+        document.getElementById("bfMaturityScore").textContent = data.maturity_score_formatted;
+        document.getElementById("bfRecoverableValue").textContent = data.conservative_recoverable_value_formatted;
+        document.getElementById("bfThreeYearNet").textContent = data.three_year_net_opportunity_formatted;
+        document.getElementById("bfPayback").textContent = data.payback_days ? `${data.payback_days} days` : "Review";
+        document.getElementById("bfScoreText").textContent = `${data.opportunity_label}. Opportunity score: ${data.opportunity_score}/100. This is a conservative baseline, not a guaranteed result.`;
+        const liveNote = document.getElementById("bfLiveNote");
+        if (liveNote) {
+          liveNote.textContent = `This model now includes ${data.annual_quotes} annual quotes, ${data.annual_estimating_hours} estimating hours, ${data.known_loss_floor_formatted} of known loss floor, a ${data.maturity_score_formatted} process maturity score, and ${data.conservative_margin_leakage_formatted} of modeled margin exposure.`;
+        }
+      }
+
+      function encodePayload(payload) {
+        const json = JSON.stringify(payload);
+        const bytes = new TextEncoder().encode(json);
+        let binary = "";
+        bytes.forEach(byte => { binary += String.fromCharCode(byte); });
+        return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+      }
+
+      const numericInputs = [
+        fields.revenue,
+        fields.quotedRevenue,
+        fields.quotesMonth,
+        fields.hoursQuote,
+        fields.reviewHoursQuote,
+        fields.estimatorRate,
+        fields.revisionRate,
+        fields.avgRevisionHours,
+        fields.estimatorCount,
+        fields.leakageRate,
+        fields.badJobsYear,
+        fields.avgBadJobLoss,
+        fields.unrecoveredExtras,
+        fields.fieldRevenuePercent,
+        fields.fieldFrictionRate,
+        fields.outsourcedSpend,
+        fields.outsourcedRiskRate,
+        fields.grossMargin,
+        fields.systemPrice
+      ].filter(Boolean);
+
+      numericInputs.forEach(el => {
+        formatNumericInput(el);
+        el.addEventListener("input", () => {
+          formatNumericInput(el);
+          updateBaselineDisplay();
+        });
+        el.addEventListener("change", () => {
+          formatNumericInput(el);
+          updateBaselineDisplay();
+        });
+        el.addEventListener("blur", () => formatNumericInput(el));
+      });
+
+      [
+        fields.companyType,
+        fields.biggestProblem,
+        fields.quoteChecklist,
+        fields.labourBuckets,
+        fields.materialBuyoutStandard,
+        fields.riskRegister,
+        fields.quoteLanguageStandard,
+        fields.postJobReview
+      ].filter(Boolean).forEach(el => {
+        el.addEventListener("input", updateBaselineDisplay);
+        el.addEventListener("change", updateBaselineDisplay);
+      });
+
+      updateBaselineDisplay();
+
+      function findEmbeddedField(matchers) {
+        const embed = document.getElementById("systemeOptinEmbed");
+        if (!embed) return "";
+        const nodes = Array.from(embed.querySelectorAll("input, textarea, select"));
+        const normalizedMatchers = matchers.map(item => String(item).toLowerCase());
+        const found = nodes.find(node => {
+          const haystack = [
+            node.name,
+            node.id,
+            node.placeholder,
+            node.getAttribute("aria-label"),
+            node.getAttribute("data-testid"),
+            node.closest("label") ? node.closest("label").textContent : ""
+          ].filter(Boolean).join(" ").toLowerCase();
+          return normalizedMatchers.some(item => haystack.includes(item));
+        });
+        return found ? String(found.value || "").trim() : "";
+      }
+
+      function findEmbeddedInputForKey(key) {
+        const embed = document.getElementById("systemeOptinEmbed");
+        if (!embed) return null;
+        const normalizedKey = String(key).toLowerCase().replace(/[^a-z0-9]+/g, "");
+        const nodes = Array.from(embed.querySelectorAll("input, textarea, select"));
+        return nodes.find(node => {
+          const haystack = [
+            node.name,
+            node.id,
+            node.placeholder,
+            node.getAttribute("aria-label"),
+            node.getAttribute("data-testid")
+          ].filter(Boolean).join(" ").toLowerCase().replace(/[^a-z0-9]+/g, "");
+          return haystack.includes(normalizedKey);
+        }) || null;
+      }
+
+      function tryFillSystemeCustomFields() {
+        const data = calculateBaseline();
+        const customFieldMap = {
+          annual_revenue: data.annual_revenue_formatted,
+          annual_quoted_revenue: data.annual_quoted_revenue_formatted,
+          annual_baseline_drag: data.annual_baseline_drag_formatted,
+          known_loss_floor: data.known_loss_floor_formatted,
+          conservative_margin_leakage: data.conservative_margin_leakage_formatted,
+          conservative_recoverable_value: data.conservative_recoverable_value_formatted,
+          three_year_net_opportunity: data.three_year_net_opportunity_formatted,
+          maturity_score: data.maturity_score_formatted,
+          opportunity_score: data.opportunity_score,
+          opportunity_label: data.opportunity_label,
+          biggest_problem: data.biggest_problem,
+          company_type: data.company_type
+        };
+
+        Object.entries(customFieldMap).forEach(([key, value]) => {
+          const field = findEmbeddedInputForKey(key);
+          if (field && !field.value) {
+            field.value = String(value == null ? "" : value);
+            field.dispatchEvent(new Event("input", { bubbles:true }));
+            field.dispatchEvent(new Event("change", { bubbles:true }));
+          }
+        });
+      }
+
+      function persistBaselineReport() {
+        const data = calculateBaseline();
+        data.first_name = findEmbeddedField(["first", "first name", "name", "prenom", "prénom"]);
+        data.email = findEmbeddedField(["email", "e-mail", "mail"]);
+        data.company_name = findEmbeddedField(["company", "business", "organization", "organisation"]);
+        data.role = findEmbeddedField(["role", "title", "position", "job"]);
+        data.lead_source = "FabProfit Baseline Calculator";
+        data.lead_tag = "fabprofit_baseline_report";
+
+        try {
+          sessionStorage.setItem("fabprofit_baseline_report", JSON.stringify(data));
+          localStorage.setItem("fabprofit_baseline_report", JSON.stringify(data));
+        } catch (error) {}
+
+        return data;
+      }
+
+      const systemeEmbed = document.getElementById("systemeOptinEmbed");
+      if (systemeEmbed) {
+        const observer = new MutationObserver(() => tryFillSystemeCustomFields());
+        observer.observe(systemeEmbed, { childList:true, subtree:true });
+        window.setTimeout(tryFillSystemeCustomFields, 750);
+        window.setTimeout(tryFillSystemeCustomFields, 1800);
+        window.setTimeout(tryFillSystemeCustomFields, 3500);
+
+        document.addEventListener("input", event => {
+          if (systemeEmbed.contains(event.target)) {
+            tryFillSystemeCustomFields();
+          }
+        }, true);
+
+        document.addEventListener("submit", event => {
+          if (systemeEmbed.contains(event.target)) {
+            tryFillSystemeCustomFields();
+            persistBaselineReport();
+          }
+        }, true);
+
+        document.addEventListener("click", event => {
+          const target = event.target && event.target.closest ? event.target.closest("button, input[type='submit'], a") : null;
+          if (target && systemeEmbed.contains(target)) {
+            tryFillSystemeCustomFields();
+            persistBaselineReport();
+          }
+        }, true);
+      }
+    })();
+  </script>
+</body>
+</html>
