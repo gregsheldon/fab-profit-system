@@ -975,10 +975,8 @@
                   <input type="text" name="role_or_title" placeholder="Role or title" autocomplete="organization-title" />
                   <button type="submit" class="btn btn-primary">Generate My Baseline Report</button>
                 </form>
-                <div class="systeme-hidden-native" id="systemeOptinEmbed" aria-hidden="true">
-                  <script id="form-script-tag-24487668" src="https://grsh.systeme.io/public/remote/page/4196480092a59e387e2204237a688e526fad6a06.js"></script>
-                </div>
-                <p class="baseline-privacy">Your report is generated in your browser and passed to the report page after the native Systeme.io opt-in submits. No guarantee is implied; the numbers are a planning baseline for discussion.</p>
+                <p id="webhookStatus" class="baseline-privacy" style="margin-top:.75rem;"></p>
+                <p class="baseline-privacy">Your report is generated in your browser, sent to the opt-in webhook, and passed to the report page. No guarantee is implied; the numbers are a planning baseline for discussion.</p>
               </div>
             </aside>
           </div>
@@ -1547,17 +1545,25 @@
 
   <script>
     /*
-      FabProfit visible form bridge.
-      The visitor types into our visible form so the report data is reliable.
-      The hidden native Systeme.io form is still submitted in the background so
-      Systeme.io can create/subscribe the contact and run its own tag automation.
+      FabProfit Google Apps Script webhook bridge.
+      This uses the same pattern as the working AntiERP page:
+      1) collect the visible opt-in fields
+      2) merge them with the calculator/report payload
+      3) save the payload locally for the report page
+      4) POST the opt-in data to Google Apps Script with no-cors
+      5) open the report using #report=<encoded payload>
     */
     (function () {
       const REPORT_PAGE = "fabprofit-baseline-efficiency-report.html";
       const STORAGE_KEYS = ["fabprofit_baseline_report", "fabprofitBaselineReport", "fabprofit_report_data"];
-      const SYSTEME_FALLBACK_ACTION = "https://systeme.io/embedded/41964800/subscription";
+
+      // This is the Google Apps Script webhook pattern from the working AntiERP page.
+      // If that script is tied to the old AntiERP tag/campaign, this is now pointed at your FabProfit Google Apps Script deployment URL.
+      const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby6UHiV_jJ7rlo6pv9IRTzMudjkB65VXx9kh5G6PMeHpgLHfHG_aSkbN21Sz8D8Dok/exec";
+      const WEBHOOK_TAG = "fabprofit-calc";
+
       const visibleForm = document.getElementById("fabprofitVisibleOptin");
-      const nativeWrap = document.getElementById("systemeOptinEmbed");
+      const statusEl = document.getElementById("webhookStatus");
       if (!visibleForm) return;
 
       function readStoredReportData() {
@@ -1604,81 +1610,70 @@
         const merged = {
           ...current,
           ...Object.fromEntries(Object.entries(values).filter(([, value]) => String(value || "").trim() !== "")),
+          source: "fabprofit_baseline_calculator",
           lead_source: "FabProfit Baseline Calculator",
-          lead_tag: "fabprofit-calc",
+          lead_tag: WEBHOOK_TAG,
+          tag: WEBHOOK_TAG,
+          tags: WEBHOOK_TAG,
+          page_url: window.location.href.split("#")[0],
+          report_page: REPORT_PAGE,
           generated_at: new Date().toLocaleString(),
+          submitted_at: new Date().toISOString(),
           saved_at: new Date().toISOString()
         };
         writeReportData(merged);
         return merged;
       }
 
-      function normalize(text) {
-        return String(text || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
-      }
+      function appendPayload(params, data) {
+        const priority = [
+          "first_name", "email", "company_name", "role_or_title", "role",
+          "source", "lead_source", "lead_tag", "tag", "tags", "page_url", "report_page",
+          "annual_revenue", "annual_revenue_formatted",
+          "annual_quoted_revenue", "annual_quoted_revenue_formatted",
+          "quotes_per_month", "annual_quotes", "average_quoted_value", "average_quoted_value_formatted",
+          "annual_baseline_drag", "annual_baseline_drag_formatted",
+          "known_loss_floor", "known_loss_floor_formatted",
+          "conservative_margin_leakage", "conservative_margin_leakage_formatted",
+          "conservative_recoverable_value", "conservative_recoverable_value_formatted",
+          "three_year_net_opportunity", "three_year_net_opportunity_formatted",
+          "maturity_score", "maturity_score_formatted",
+          "opportunity_score", "opportunity_label",
+          "company_type", "biggest_problem",
+          "generated_at", "submitted_at"
+        ];
 
-      function fieldText(input) {
-        const labelText = input.id ? ((document.querySelector(`label[for="${CSS.escape(input.id)}"]`) || {}).textContent || "") : "";
-        return [
-          input.name,
-          input.id,
-          input.placeholder,
-          input.getAttribute("aria-label"),
-          input.getAttribute("data-testid"),
-          input.closest("label") ? input.closest("label").textContent : "",
-          labelText
-        ].filter(Boolean).join(" ");
-      }
-
-      function visibleInputsForNative() {
-        const values = getVisibleValues();
-        return {
-          email: values.email,
-          company_name: values.company_name,
-          company: values.company_name,
-          role_or_title: values.role_or_title,
-          role: values.role_or_title,
-          first_name: values.first_name,
-          firstname: values.first_name
-        };
-      }
-
-      function nativeInputs() {
-        if (!nativeWrap) return [];
-        return Array.from(nativeWrap.querySelectorAll("input, textarea, select"));
-      }
-
-      function findNativeInput(keys) {
-        const normalizedKeys = keys.map(normalize);
-        return nativeInputs().find(input => {
-          const text = normalize(fieldText(input));
-          return normalizedKeys.some(key => text.includes(key));
-        }) || null;
-      }
-
-      function setNativeValue(input, value) {
-        if (!input) return;
-        input.value = String(value || "");
-        input.dispatchEvent(new Event("input", { bubbles: true }));
-        input.dispatchEvent(new Event("change", { bubbles: true }));
-      }
-
-      function fillNativeSystemeForm() {
-        const values = visibleInputsForNative();
-        setNativeValue(findNativeInput(["email", "mail", "e-mail"]), values.email);
-        setNativeValue(findNativeInput(["company_name", "company", "companyname", "business", "organization", "organisation"]), values.company_name);
-        setNativeValue(findNativeInput(["role_or_title", "role", "title", "jobtitle", "position"]), values.role_or_title);
-        setNativeValue(findNativeInput(["first_name", "firstname", "first", "givenname", "name"]), values.first_name);
-
-        // If Systeme.io's embedded HTML uses generated field names, preserve values by order too.
-        const editable = nativeInputs().filter(input => {
-          const type = String(input.getAttribute("type") || "text").toLowerCase();
-          return !["hidden", "submit", "button", "checkbox", "radio"].includes(type);
+        const already = new Set();
+        priority.forEach(key => {
+          if (Object.prototype.hasOwnProperty.call(data, key)) {
+            params.append(key, data[key] == null ? "" : String(data[key]));
+            already.add(key);
+          }
         });
-        const orderedValues = [values.email, values.company_name, values.role_or_title, values.first_name];
-        editable.forEach((input, index) => {
-          if (!String(input.value || "").trim() && orderedValues[index]) setNativeValue(input, orderedValues[index]);
+
+        // Send the rest too, so the Google Apps Script can map custom fields later without another HTML change.
+        Object.keys(data).sort().forEach(key => {
+          if (already.has(key)) return;
+          const value = data[key];
+          if (value == null || typeof value === "object") return;
+          params.append(key, String(value));
         });
+      }
+
+      async function sendOptinToWebhook(data) {
+        if (!WEBHOOK_URL || WEBHOOK_URL.includes("PASTE_")) return;
+        const params = new URLSearchParams();
+        appendPayload(params, data);
+
+        try {
+          await fetch(WEBHOOK_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: params
+          });
+        } catch (error) {
+          console.warn("Google Apps Script opt-in submit failed, but the report flow will continue.", error);
+        }
       }
 
       function encodeForHash(data) {
@@ -1691,54 +1686,9 @@
         }
       }
 
-      function submitToSystemeInBackground() {
-        const values = visibleInputsForNative();
-        fillNativeSystemeForm();
-
-        const iframeName = `systemeSubmitFrame_${Date.now()}`;
-        const iframe = document.createElement("iframe");
-        iframe.name = iframeName;
-        iframe.setAttribute("aria-hidden", "true");
-        iframe.style.cssText = "position:absolute;width:1px;height:1px;left:-9999px;top:-9999px;border:0;opacity:0;";
-        document.body.appendChild(iframe);
-
-        const nativeForm = nativeWrap ? nativeWrap.querySelector("form") : null;
-        if (nativeForm) {
-          try {
-            nativeForm.setAttribute("target", iframeName);
-            if (!nativeForm.getAttribute("method")) nativeForm.setAttribute("method", "post");
-            if (!nativeForm.getAttribute("action")) nativeForm.setAttribute("action", SYSTEME_FALLBACK_ACTION);
-            if (typeof nativeForm.requestSubmit === "function") nativeForm.requestSubmit();
-            else nativeForm.submit();
-            return;
-          } catch (error) {}
-        }
-
-        // Fallback if the native form has not loaded yet.
-        const fallbackForm = document.createElement("form");
-        fallbackForm.method = "post";
-        fallbackForm.action = SYSTEME_FALLBACK_ACTION;
-        fallbackForm.target = iframeName;
-        fallbackForm.style.display = "none";
-        Object.entries({
-          email: values.email,
-          company_name: values.company_name,
-          role_or_title: values.role_or_title,
-          first_name: values.first_name
-        }).forEach(([key, value]) => {
-          const input = document.createElement("input");
-          input.type = "hidden";
-          input.name = key;
-          input.value = String(value || "");
-          fallbackForm.appendChild(input);
-        });
-        document.body.appendChild(fallbackForm);
-        fallbackForm.submit();
-      }
-
       function goToReport(data) {
         const encoded = encodeForHash(data);
-        const url = encoded ? `${REPORT_PAGE}#fpd=${encodeURIComponent(encoded)}` : REPORT_PAGE;
+        const url = encoded ? `${REPORT_PAGE}#report=${encoded}` : REPORT_PAGE;
         window.location.href = url;
       }
 
@@ -1749,29 +1699,24 @@
       visibleForm.addEventListener("input", syncVisibleFormToStorageSoon, true);
       visibleForm.addEventListener("change", syncVisibleFormToStorageSoon, true);
 
-      visibleForm.addEventListener("submit", function (event) {
+      visibleForm.addEventListener("submit", async function (event) {
         event.preventDefault();
         event.stopPropagation();
 
-        const data = mergeAndSave();
-        submitToSystemeInBackground();
+        const values = getVisibleValues();
+        if (!values.first_name || !values.email || !values.company_name) return;
 
+        const data = mergeAndSave();
         const button = visibleForm.querySelector("button[type='submit']");
         if (button) {
           button.disabled = true;
           button.textContent = "Generating Report...";
         }
+        if (statusEl) statusEl.textContent = "Saving your opt-in and opening your private report...";
 
-        window.setTimeout(() => goToReport(data), 950);
+        await sendOptinToWebhook(data);
+        window.setTimeout(() => goToReport(data), 250);
       }, true);
-
-      if (nativeWrap) {
-        const observer = new MutationObserver(() => fillNativeSystemeForm());
-        observer.observe(nativeWrap, { childList: true, subtree: true });
-        window.setTimeout(fillNativeSystemeForm, 500);
-        window.setTimeout(fillNativeSystemeForm, 1500);
-        window.setTimeout(fillNativeSystemeForm, 3500);
-      }
     })();
   </script>
 
