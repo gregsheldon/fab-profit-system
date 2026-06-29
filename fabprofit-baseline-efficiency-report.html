@@ -941,34 +941,128 @@
   <footer class="footer">Greg Sheldon | FabProfit System | Estimating, quoting, pricing, and margin-protection system for fabrication companies</footer>
 
   <script>
-    function decodeReportPayload(encoded) {
-      if (!encoded) return null;
+    function tryJsonParse(text) {
+      if (!text) return null;
       try {
-        const base64 = encoded.replace(/-/g, "+").replace(/_/g, "/");
-        const padded = base64 + "=".repeat((4 - base64.length % 4) % 4);
-        const binary = atob(padded);
-        const bytes = Uint8Array.from(binary, ch => ch.charCodeAt(0));
-        return JSON.parse(new TextDecoder().decode(bytes));
+        const parsed = JSON.parse(text);
+        return parsed && typeof parsed === "object" ? parsed : null;
       } catch (error) {
-        console.warn("Could not read report data from URL.", error);
         return null;
       }
     }
 
-    function getReportData() {
-      const hash = window.location.hash || "";
-      const match = hash.match(/report=([^&]+)/);
-      const fromHash = match ? decodeReportPayload(match[1]) : null;
-      if (fromHash) {
+    function decodeReportPayload(encoded) {
+      if (!encoded) return null;
+
+      const raw = String(encoded || "").trim();
+      const urlDecoded = (() => {
+        try { return decodeURIComponent(raw); } catch (error) { return raw; }
+      })();
+
+      // Supports direct JSON in the URL when testing manually.
+      const directJson = tryJsonParse(urlDecoded) || tryJsonParse(raw);
+      if (directJson) return directJson;
+
+      // Supports the calculator bridge hash format: #fpd=<base64url JSON payload>
+      try {
+        const base64 = urlDecoded.replace(/-/g, "+").replace(/_/g, "/");
+        const padded = base64 + "=".repeat((4 - base64.length % 4) % 4);
+        const binary = atob(padded);
+        const bytes = Uint8Array.from(binary, ch => ch.charCodeAt(0));
+        const decoded = new TextDecoder().decode(bytes);
+        return tryJsonParse(decoded);
+      } catch (error) {}
+
+      // Older fallback: regular base64 encoded JSON string.
+      try {
+        return tryJsonParse(atob(urlDecoded));
+      } catch (error) {}
+
+      console.warn("Could not read report data from URL.");
+      return null;
+    }
+
+    function readStorageJson(key) {
+      const stores = [sessionStorage, localStorage];
+      for (const store of stores) {
         try {
-          sessionStorage.setItem("fabprofit_baseline_report", JSON.stringify(fromHash));
-          localStorage.setItem("fabprofit_baseline_report", JSON.stringify(fromHash));
+          const raw = store.getItem(key);
+          const parsed = tryJsonParse(raw);
+          if (parsed) return parsed;
         } catch (error) {}
-        return fromHash;
       }
-      const raw = sessionStorage.getItem("fabprofit_baseline_report") || localStorage.getItem("fabprofit_baseline_report");
-      if (!raw) return null;
-      try { return JSON.parse(raw); } catch (error) { return null; }
+      return null;
+    }
+
+    function writeReportStorage(data) {
+      if (!data || typeof data !== "object") return;
+      const json = JSON.stringify(data);
+      const keys = [
+        "fabprofit_baseline_report",
+        "fabprofitBaselineReport",
+        "fabprofit_report_data"
+      ];
+      for (const key of keys) {
+        try { sessionStorage.setItem(key, json); } catch (error) {}
+        try { localStorage.setItem(key, json); } catch (error) {}
+      }
+    }
+
+    function getPayloadFromUrl() {
+      const keys = ["fpd", "report", "data", "payload"];
+      const hash = String(window.location.hash || "").replace(/^#/, "");
+      const search = String(window.location.search || "").replace(/^\?/, "");
+      const sources = [hash, search].filter(Boolean);
+
+      for (const source of sources) {
+        const params = new URLSearchParams(source);
+        for (const key of keys) {
+          const value = params.get(key);
+          const decoded = decodeReportPayload(value);
+          if (decoded) return decoded;
+        }
+      }
+
+      // Supports older hash links such as #report=<payload> or #fpd=<payload>
+      for (const key of keys) {
+        const pattern = new RegExp(`${key}=([^&]+)`);
+        const match = hash.match(pattern) || search.match(pattern);
+        const decoded = match ? decodeReportPayload(match[1]) : null;
+        if (decoded) return decoded;
+      }
+
+      return null;
+    }
+
+    function normalizeIncomingAliases(data) {
+      const d = { ...(data || {}) };
+      d.first_name = d.first_name || d.firstname || d.firstName || d.first || d.name || d.full_name || d.fullName || "";
+      d.email = d.email || d.email_address || d.emailAddress || d.emailaddress || d.mail || "";
+      d.company_name = d.company_name || d.company || d.companyname || d.companyName || d.business_name || d.businessName || d.organization || d.organisation || "";
+      d.role = d.role || d.role_or_title || d.roleTitle || d.role_title || d.job_title || d.jobTitle || d.title || d.position || "";
+      d.role_or_title = d.role_or_title || d.role;
+      return d;
+    }
+
+    function getReportData() {
+      const fromUrl = getPayloadFromUrl();
+      if (fromUrl) {
+        const normalized = normalizeIncomingAliases(fromUrl);
+        writeReportStorage(normalized);
+        return normalized;
+      }
+
+      const storageKeys = [
+        "fabprofit_baseline_report",
+        "fabprofitBaselineReport",
+        "fabprofit_report_data"
+      ];
+      for (const key of storageKeys) {
+        const stored = readStorageJson(key);
+        if (stored) return normalizeIncomingAliases(stored);
+      }
+
+      return null;
     }
 
     function fallback(value, fallbackValue) {
@@ -1009,6 +1103,7 @@
     }
 
     function normalizeData(data) {
+      data = normalizeIncomingAliases(data || {});
       const annualRevenue = num(data.annual_revenue);
       const annualQuotedRevenue = num(data.annual_quoted_revenue);
       const annualQuotes = num(data.annual_quotes) || num(data.quotes_per_month) * 12;
@@ -1065,7 +1160,7 @@
         first_name: fallback(data.first_name, "there"),
         email: fallback(data.email, "No email entered"),
         company_name: fallback(data.company_name, "your company"),
-        role: fallback(data.role, "Role not entered"),
+        role: fallback(data.role || data.role_or_title, "Role not entered"),
         company_type: fallback(data.company_type, "Fabrication company"),
         biggest_problem: fallback(data.biggest_problem, "Leadership wants a repeatable company standard"),
         annual_quotes: Math.round(annualQuotes),
