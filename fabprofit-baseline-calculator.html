@@ -649,6 +649,55 @@
       .baseline-subhead { padding:.8rem; }
       .baseline-section { padding-top:1rem; }
     }
+
+    /* Visible FabProfit form + hidden native Systeme.io submitter */
+    .fabprofit-visible-optin {
+      width: 100%;
+      max-width: 100%;
+      margin: .9rem 0 .9rem;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      display: grid;
+      gap: .72rem;
+    }
+    .fabprofit-visible-optin input {
+      width: 100%;
+      min-height: 58px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.085);
+      color: #ffffff;
+      padding: .95rem 1rem;
+      outline: none;
+      border-radius: 0;
+      font-family: inherit;
+      font-weight: 850;
+      font-size: 1rem;
+      box-shadow: none;
+    }
+    .fabprofit-visible-optin input::placeholder { color: #cbd5e1; }
+    .fabprofit-visible-optin input:focus {
+      border-color: var(--orange-500);
+      box-shadow: 0 0 0 4px rgba(249,115,22,.16);
+    }
+    .fabprofit-visible-optin .btn {
+      width: 100%;
+      min-height: 60px;
+      font-size: 1.05rem;
+      white-space: normal;
+    }
+    .systeme-hidden-native {
+      position: absolute !important;
+      left: -99999px !important;
+      top: auto !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
   </style>
 </head>
 <body>
@@ -919,7 +968,14 @@
                   <div><span>✓</span><div>Executive summary, operating risk map, and implementation priorities</div></div>
                   <div><span>✓</span><div>Print, save PDF, copy report, or email Greg your numbers</div></div>
                 </div>
-                <div class="systeme-embed-wrap" id="systemeOptinEmbed">
+                <form class="fabprofit-visible-optin" id="fabprofitVisibleOptin" autocomplete="on">
+                  <input type="text" name="first_name" placeholder="First name" autocomplete="given-name" required />
+                  <input type="email" name="email" placeholder="Email address" autocomplete="email" required />
+                  <input type="text" name="company_name" placeholder="Company name" autocomplete="organization" required />
+                  <input type="text" name="role_or_title" placeholder="Role or title" autocomplete="organization-title" />
+                  <button type="submit" class="btn btn-primary">Generate My Baseline Report</button>
+                </form>
+                <div class="systeme-hidden-native" id="systemeOptinEmbed" aria-hidden="true">
                   <script id="form-script-tag-24487668" src="https://grsh.systeme.io/public/remote/page/4196480092a59e387e2204237a688e526fad6a06.js"></script>
                 </div>
                 <p class="baseline-privacy">Your report is generated in your browser and passed to the report page after the native Systeme.io opt-in submits. No guarantee is implied; the numbers are a planning baseline for discussion.</p>
@@ -1486,62 +1542,83 @@
     })();
   </script>
 
+
+
+
   <script>
     /*
-      FabProfit report bridge
-      This fixes the case where the native Systeme.io embedded form redirects before
-      the parent page captures the opt-in fields. It saves the form fields, submits
-      the Systeme.io form in a hidden iframe, then sends the visitor to the report page.
+      FabProfit visible form bridge.
+      The visitor types into our visible form so the report data is reliable.
+      The hidden native Systeme.io form is still submitted in the background so
+      Systeme.io can create/subscribe the contact and run its own tag automation.
     */
     (function () {
       const REPORT_PAGE = "fabprofit-baseline-efficiency-report.html";
-      const STORAGE_KEY = "fabprofit_baseline_report";
+      const STORAGE_KEYS = ["fabprofit_baseline_report", "fabprofitBaselineReport", "fabprofit_report_data"];
       const SYSTEME_FALLBACK_ACTION = "https://systeme.io/embedded/41964800/subscription";
-      const embed = document.getElementById("systemeOptinEmbed");
-      if (!embed) return;
+      const visibleForm = document.getElementById("fabprofitVisibleOptin");
+      const nativeWrap = document.getElementById("systemeOptinEmbed");
+      if (!visibleForm) return;
 
       function readStoredReportData() {
-        const candidates = [
-          sessionStorage.getItem(STORAGE_KEY),
-          localStorage.getItem(STORAGE_KEY),
-          sessionStorage.getItem("fabprofitBaselineReport"),
-          localStorage.getItem("fabprofitBaselineReport")
-        ].filter(Boolean);
-
-        for (const raw of candidates) {
-          try {
-            const parsed = JSON.parse(raw);
-            if (parsed && typeof parsed === "object") return parsed;
-          } catch (error) {}
+        for (const key of STORAGE_KEYS) {
+          for (const store of [sessionStorage, localStorage]) {
+            try {
+              const raw = store.getItem(key);
+              if (!raw) continue;
+              const parsed = JSON.parse(raw);
+              if (parsed && typeof parsed === "object") return parsed;
+            } catch (error) {}
+          }
         }
         return {};
       }
 
       function writeReportData(data) {
         const json = JSON.stringify(data || {});
-        try { sessionStorage.setItem(STORAGE_KEY, json); } catch (error) {}
-        try { localStorage.setItem(STORAGE_KEY, json); } catch (error) {}
+        for (const key of STORAGE_KEYS) {
+          try { sessionStorage.setItem(key, json); } catch (error) {}
+          try { localStorage.setItem(key, json); } catch (error) {}
+        }
+      }
 
-        // Extra fallback keys in case the report page has older reader code.
-        try { sessionStorage.setItem("fabprofitBaselineReport", json); } catch (error) {}
-        try { localStorage.setItem("fabprofitBaselineReport", json); } catch (error) {}
-        try { sessionStorage.setItem("fabprofit_report_data", json); } catch (error) {}
-        try { localStorage.setItem("fabprofit_report_data", json); } catch (error) {}
+      function getVisibleValues() {
+        const fd = new FormData(visibleForm);
+        const first = String(fd.get("first_name") || "").trim();
+        const email = String(fd.get("email") || "").trim();
+        const company = String(fd.get("company_name") || "").trim();
+        const role = String(fd.get("role_or_title") || "").trim();
+        return {
+          first_name: first,
+          email: email,
+          company_name: company,
+          company: company,
+          role: role,
+          role_or_title: role
+        };
+      }
+
+      function mergeAndSave() {
+        const current = readStoredReportData();
+        const values = getVisibleValues();
+        const merged = {
+          ...current,
+          ...Object.fromEntries(Object.entries(values).filter(([, value]) => String(value || "").trim() !== "")),
+          lead_source: "FabProfit Baseline Calculator",
+          lead_tag: "fabprofit-calc",
+          generated_at: new Date().toLocaleString(),
+          saved_at: new Date().toISOString()
+        };
+        writeReportData(merged);
+        return merged;
       }
 
       function normalize(text) {
         return String(text || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
       }
 
-      function collectInputs() {
-        return Array.from(embed.querySelectorAll("input, textarea, select")).filter(input => {
-          const type = String(input.getAttribute("type") || "").toLowerCase();
-          return !["hidden", "submit", "button", "checkbox", "radio"].includes(type);
-        });
-      }
-
       function fieldText(input) {
-        const labelText = input.id ? (document.querySelector(`label[for="${CSS.escape(input.id)}"]`) || {}).textContent : "";
+        const labelText = input.id ? ((document.querySelector(`label[for="${CSS.escape(input.id)}"]`) || {}).textContent || "") : "";
         return [
           input.name,
           input.id,
@@ -1553,51 +1630,55 @@
         ].filter(Boolean).join(" ");
       }
 
-      function valueByMatcher(matchers, fallbackIndex) {
-        const inputs = collectInputs();
-        const exact = inputs.find(input => {
-          const text = normalize(fieldText(input));
-          return matchers.some(matcher => text.includes(normalize(matcher)));
-        });
-        if (exact) return String(exact.value || "").trim();
-        const fallback = inputs[fallbackIndex];
-        return fallback ? String(fallback.value || "").trim() : "";
-      }
-
-      function collectSystemeFormValues() {
-        const inputs = collectInputs();
-        const byName = {};
-        inputs.forEach(input => {
-          const name = normalize(input.name || input.id || input.placeholder || "");
-          if (name) byName[name] = String(input.value || "").trim();
-        });
-
-        const email = valueByMatcher(["email", "e-mail", "mail"], inputs.findIndex(i => String(i.type || "").toLowerCase() === "email"));
-        const company = valueByMatcher(["companyname", "company", "business", "organization", "organisation"], 1);
-        const role = valueByMatcher(["roleortitle", "role", "title", "position", "jobtitle"], 3);
-        const first = valueByMatcher(["firstname", "first name", "first", "givenname", "prenom", "prénom"], 0);
-
+      function visibleInputsForNative() {
+        const values = getVisibleValues();
         return {
-          first_name: first,
-          email: email,
-          company_name: company,
-          role: role,
-          role_or_title: role
+          email: values.email,
+          company_name: values.company_name,
+          company: values.company_name,
+          role_or_title: values.role_or_title,
+          role: values.role_or_title,
+          first_name: values.first_name,
+          firstname: values.first_name
         };
       }
 
-      function mergeAndSaveFormValues() {
-        const current = readStoredReportData();
-        const formValues = collectSystemeFormValues();
-        const merged = {
-          ...current,
-          ...Object.fromEntries(Object.entries(formValues).filter(([, value]) => value !== "")),
-          lead_source: "FabProfit Baseline Calculator",
-          lead_tag: "fabprofit-calc",
-          saved_at: new Date().toISOString()
-        };
-        writeReportData(merged);
-        return merged;
+      function nativeInputs() {
+        if (!nativeWrap) return [];
+        return Array.from(nativeWrap.querySelectorAll("input, textarea, select"));
+      }
+
+      function findNativeInput(keys) {
+        const normalizedKeys = keys.map(normalize);
+        return nativeInputs().find(input => {
+          const text = normalize(fieldText(input));
+          return normalizedKeys.some(key => text.includes(key));
+        }) || null;
+      }
+
+      function setNativeValue(input, value) {
+        if (!input) return;
+        input.value = String(value || "");
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+
+      function fillNativeSystemeForm() {
+        const values = visibleInputsForNative();
+        setNativeValue(findNativeInput(["email", "mail", "e-mail"]), values.email);
+        setNativeValue(findNativeInput(["company_name", "company", "companyname", "business", "organization", "organisation"]), values.company_name);
+        setNativeValue(findNativeInput(["role_or_title", "role", "title", "jobtitle", "position"]), values.role_or_title);
+        setNativeValue(findNativeInput(["first_name", "firstname", "first", "givenname", "name"]), values.first_name);
+
+        // If Systeme.io's embedded HTML uses generated field names, preserve values by order too.
+        const editable = nativeInputs().filter(input => {
+          const type = String(input.getAttribute("type") || "text").toLowerCase();
+          return !["hidden", "submit", "button", "checkbox", "radio"].includes(type);
+        });
+        const orderedValues = [values.email, values.company_name, values.role_or_title, values.first_name];
+        editable.forEach((input, index) => {
+          if (!String(input.value || "").trim() && orderedValues[index]) setNativeValue(input, orderedValues[index]);
+        });
       }
 
       function encodeForHash(data) {
@@ -1610,90 +1691,87 @@
         }
       }
 
-      function submitFormInHiddenIframe(form) {
-        const action = form.getAttribute("action") || SYSTEME_FALLBACK_ACTION;
-        const method = form.getAttribute("method") || "post";
-        const iframeName = `systemeSubmitFrame_${Date.now()}`;
+      function submitToSystemeInBackground() {
+        const values = visibleInputsForNative();
+        fillNativeSystemeForm();
 
+        const iframeName = `systemeSubmitFrame_${Date.now()}`;
         const iframe = document.createElement("iframe");
         iframe.name = iframeName;
         iframe.setAttribute("aria-hidden", "true");
         iframe.style.cssText = "position:absolute;width:1px;height:1px;left:-9999px;top:-9999px;border:0;opacity:0;";
         document.body.appendChild(iframe);
 
-        const clone = document.createElement("form");
-        clone.method = method;
-        clone.action = action;
-        clone.target = iframeName;
-        clone.style.display = "none";
+        const nativeForm = nativeWrap ? nativeWrap.querySelector("form") : null;
+        if (nativeForm) {
+          try {
+            nativeForm.setAttribute("target", iframeName);
+            if (!nativeForm.getAttribute("method")) nativeForm.setAttribute("method", "post");
+            if (!nativeForm.getAttribute("action")) nativeForm.setAttribute("action", SYSTEME_FALLBACK_ACTION);
+            if (typeof nativeForm.requestSubmit === "function") nativeForm.requestSubmit();
+            else nativeForm.submit();
+            return;
+          } catch (error) {}
+        }
 
-        const formData = new FormData(form);
-        formData.forEach((value, key) => {
+        // Fallback if the native form has not loaded yet.
+        const fallbackForm = document.createElement("form");
+        fallbackForm.method = "post";
+        fallbackForm.action = SYSTEME_FALLBACK_ACTION;
+        fallbackForm.target = iframeName;
+        fallbackForm.style.display = "none";
+        Object.entries({
+          email: values.email,
+          company_name: values.company_name,
+          role_or_title: values.role_or_title,
+          first_name: values.first_name
+        }).forEach(([key, value]) => {
           const input = document.createElement("input");
           input.type = "hidden";
           input.name = key;
-          input.value = String(value == null ? "" : value);
-          clone.appendChild(input);
+          input.value = String(value || "");
+          fallbackForm.appendChild(input);
         });
-
-        document.body.appendChild(clone);
-        clone.submit();
-
-        window.setTimeout(() => {
-          try { clone.remove(); } catch (error) {}
-          try { iframe.remove(); } catch (error) {}
-        }, 10000);
+        document.body.appendChild(fallbackForm);
+        fallbackForm.submit();
       }
 
       function goToReport(data) {
         const encoded = encodeForHash(data);
-        const reportUrl = encoded ? `${REPORT_PAGE}#fpd=${encodeURIComponent(encoded)}` : REPORT_PAGE;
-        window.location.href = reportUrl;
+        const url = encoded ? `${REPORT_PAGE}#fpd=${encodeURIComponent(encoded)}` : REPORT_PAGE;
+        window.location.href = url;
       }
 
-      function attachBridgeToForms() {
-        Array.from(embed.querySelectorAll("form")).forEach(form => {
-          if (form.dataset.fpReportBridgeAttached === "true") return;
-          form.dataset.fpReportBridgeAttached = "true";
-
-          form.addEventListener("submit", event => {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-
-            const data = mergeAndSaveFormValues();
-            submitFormInHiddenIframe(form);
-
-            const submitButton = form.querySelector("button, input[type='submit']");
-            if (submitButton) {
-              submitButton.disabled = true;
-              if (submitButton.tagName.toLowerCase() === "button") submitButton.textContent = "Generating Report...";
-              if (submitButton.tagName.toLowerCase() === "input") submitButton.value = "Generating Report...";
-            }
-
-            window.setTimeout(() => goToReport(data), 900);
-          }, true);
-        });
+      function syncVisibleFormToStorageSoon() {
+        window.setTimeout(mergeAndSave, 0);
       }
 
-      document.addEventListener("input", event => {
-        if (embed.contains(event.target)) mergeAndSaveFormValues();
+      visibleForm.addEventListener("input", syncVisibleFormToStorageSoon, true);
+      visibleForm.addEventListener("change", syncVisibleFormToStorageSoon, true);
+
+      visibleForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const data = mergeAndSave();
+        submitToSystemeInBackground();
+
+        const button = visibleForm.querySelector("button[type='submit']");
+        if (button) {
+          button.disabled = true;
+          button.textContent = "Generating Report...";
+        }
+
+        window.setTimeout(() => goToReport(data), 950);
       }, true);
 
-      document.addEventListener("change", event => {
-        if (embed.contains(event.target)) mergeAndSaveFormValues();
-      }, true);
-
-      document.addEventListener("click", event => {
-        const target = event.target && event.target.closest ? event.target.closest("button, input[type='submit']") : null;
-        if (target && embed.contains(target)) mergeAndSaveFormValues();
-      }, true);
-
-      const observer = new MutationObserver(() => attachBridgeToForms());
-      observer.observe(embed, { childList: true, subtree: true });
-      attachBridgeToForms();
-      window.setTimeout(attachBridgeToForms, 500);
-      window.setTimeout(attachBridgeToForms, 1500);
-      window.setTimeout(attachBridgeToForms, 3500);
+      if (nativeWrap) {
+        const observer = new MutationObserver(() => fillNativeSystemeForm());
+        observer.observe(nativeWrap, { childList: true, subtree: true });
+        window.setTimeout(fillNativeSystemeForm, 500);
+        window.setTimeout(fillNativeSystemeForm, 1500);
+        window.setTimeout(fillNativeSystemeForm, 3500);
+      }
     })();
   </script>
 
