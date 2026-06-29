@@ -484,19 +484,83 @@
       box-shadow:0 0 0 4px rgba(249,115,22,.16);
     }
     .baseline-optin-form .btn { width:100%; }
+    /* Native Systeme.io embedded form styling override.
+       Systeme.io sometimes injects a pink/light default wrapper.
+       These rules force the embedded opt-in to match the FabProfit dark panel. */
     .systeme-embed-wrap {
       margin-top:.75rem;
+      background:rgba(255,255,255,.065) !important;
+      border:1px solid rgba(255,255,255,.14) !important;
+      padding:1rem !important;
+      overflow:hidden;
+    }
+    .systeme-embed-wrap,
+    .systeme-embed-wrap form,
+    .systeme-embed-wrap section,
+    .systeme-embed-wrap article,
+    .systeme-embed-wrap main,
+    .systeme-embed-wrap [class*="form"],
+    .systeme-embed-wrap [class*="Form"],
+    .systeme-embed-wrap [class*="container"],
+    .systeme-embed-wrap [class*="Container"],
+    .systeme-embed-wrap [class*="wrapper"],
+    .systeme-embed-wrap [class*="Wrapper"] {
+      background:transparent !important;
+      box-shadow:none !important;
     }
     .systeme-embed-wrap iframe {
       width:100% !important;
       max-width:100% !important;
       border:0 !important;
+      background:transparent !important;
+    }
+    .systeme-embed-wrap label,
+    .systeme-embed-wrap p,
+    .systeme-embed-wrap span,
+    .systeme-embed-wrap div {
+      color:var(--slate-200) !important;
+      font-family:inherit !important;
     }
     .systeme-embed-wrap input,
     .systeme-embed-wrap select,
     .systeme-embed-wrap textarea {
+      width:100% !important;
       max-width:100% !important;
+      border:1px solid rgba(255,255,255,.18) !important;
+      background:rgba(255,255,255,.085) !important;
+      color:#ffffff !important;
+      padding:.95rem 1rem !important;
+      outline:none !important;
+      border-radius:0 !important;
       font-family:inherit !important;
+      font-weight:850 !important;
+      box-shadow:none !important;
+    }
+    .systeme-embed-wrap input::placeholder,
+    .systeme-embed-wrap textarea::placeholder {
+      color:var(--slate-400) !important;
+      opacity:1 !important;
+    }
+    .systeme-embed-wrap input:focus,
+    .systeme-embed-wrap select:focus,
+    .systeme-embed-wrap textarea:focus {
+      border-color:var(--orange-500) !important;
+      box-shadow:0 0 0 4px rgba(249,115,22,.16) !important;
+    }
+    .systeme-embed-wrap button,
+    .systeme-embed-wrap input[type="submit"],
+    .systeme-embed-wrap a[href*="submit"] {
+      width:100% !important;
+      border:0 !important;
+      border-radius:0 !important;
+      padding:1rem 1.25rem !important;
+      font-family:inherit !important;
+      font-size:1rem !important;
+      font-weight:950 !important;
+      color:#ffffff !important;
+      background:linear-gradient(135deg,var(--orange-500),var(--orange-700)) !important;
+      box-shadow:0 14px 36px rgba(234,88,12,.30) !important;
+      cursor:pointer !important;
     }
     .baseline-privacy {
       color:var(--slate-400);
@@ -1244,7 +1308,48 @@
         }) || null;
       }
 
+      function dePinkSystemeForm() {
+        const embed = document.getElementById("systemeOptinEmbed");
+        if (!embed) return;
+        embed.style.setProperty("background", "rgba(255,255,255,.065)", "important");
+        embed.style.setProperty("border", "1px solid rgba(255,255,255,.14)", "important");
+        embed.style.setProperty("padding", "1rem", "important");
+
+        Array.from(embed.querySelectorAll("form, section, article, main, div")).forEach(node => {
+          node.style.setProperty("background", "transparent", "important");
+          node.style.setProperty("box-shadow", "none", "important");
+          node.style.setProperty("font-family", "inherit", "important");
+        });
+
+        Array.from(embed.querySelectorAll("label, p, span, small")).forEach(node => {
+          node.style.setProperty("color", "#e2e8f0", "important");
+          node.style.setProperty("font-family", "inherit", "important");
+        });
+
+        Array.from(embed.querySelectorAll("input, textarea, select")).forEach(node => {
+          if ((node.getAttribute("type") || "").toLowerCase() === "submit") return;
+          node.style.setProperty("background", "rgba(255,255,255,.085)", "important");
+          node.style.setProperty("border", "1px solid rgba(255,255,255,.18)", "important");
+          node.style.setProperty("color", "#ffffff", "important");
+          node.style.setProperty("border-radius", "0", "important");
+          node.style.setProperty("font-family", "inherit", "important");
+          node.style.setProperty("font-weight", "850", "important");
+          node.style.setProperty("box-shadow", "none", "important");
+        });
+
+        Array.from(embed.querySelectorAll("button, input[type='submit']")).forEach(node => {
+          node.style.setProperty("background", "linear-gradient(135deg,#f97316,#c2410c)", "important");
+          node.style.setProperty("color", "#ffffff", "important");
+          node.style.setProperty("border", "0", "important");
+          node.style.setProperty("border-radius", "0", "important");
+          node.style.setProperty("font-family", "inherit", "important");
+          node.style.setProperty("font-weight", "950", "important");
+          node.style.setProperty("width", "100%", "important");
+        });
+      }
+
       function tryFillSystemeCustomFields() {
+        dePinkSystemeForm();
         const data = calculateBaseline();
         const customFieldMap = {
           annual_revenue: data.annual_revenue_formatted,
@@ -1292,9 +1397,11 @@
       if (systemeEmbed) {
         const observer = new MutationObserver(() => tryFillSystemeCustomFields());
         observer.observe(systemeEmbed, { childList:true, subtree:true });
+        window.setTimeout(tryFillSystemeCustomFields, 250);
         window.setTimeout(tryFillSystemeCustomFields, 750);
         window.setTimeout(tryFillSystemeCustomFields, 1800);
         window.setTimeout(tryFillSystemeCustomFields, 3500);
+        window.setTimeout(tryFillSystemeCustomFields, 6000);
 
         document.addEventListener("input", event => {
           if (systemeEmbed.contains(event.target)) {
