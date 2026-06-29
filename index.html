@@ -6008,6 +6008,7 @@
 </div>
 </div>
 <button class="btn btn-primary" type="submit">Submit Charter Application</button>
+<p class="application-privacy" id="charterApplicationStatus" style="display:none; margin-top:14px; border:1px solid rgba(234,88,12,.35); background:rgba(234,88,12,.10); color:#ffffff; padding:12px 14px; border-radius:14px;">Application received. Thank you — your Charter License application has been submitted. A prefilled email may open so you can keep a copy or send additional details.</p>
 <p class="application-privacy">This does not obligate your company to buy. It starts the fit conversation for one of the 25 Charter spots.</p>
 </form>
 </div>
@@ -6701,12 +6702,18 @@
         event.preventDefault();
 
         const submitButton = form.querySelector('button[type="submit"]');
+        const statusMessage = document.getElementById("charterApplicationStatus");
         const originalButtonText = submitButton ? submitButton.textContent : "";
         const payload = buildCharterPayload();
 
         if (submitButton) {
           submitButton.disabled = true;
           submitButton.textContent = "Submitting Application...";
+        }
+
+        if (statusMessage) {
+          statusMessage.style.display = "none";
+          statusMessage.textContent = "Submitting your Charter License application...";
         }
 
         await sendCharterApplication(payload);
@@ -6732,6 +6739,13 @@
           submitButton.textContent = "Application Submitted";
         }
 
+        if (statusMessage) {
+          statusMessage.textContent = "Application received. Thank you — your Charter License application has been submitted. A prefilled email may open so you can keep a copy or send additional details.";
+          statusMessage.style.display = "block";
+          statusMessage.setAttribute("role", "status");
+          statusMessage.setAttribute("aria-live", "polite");
+        }
+
         setTimeout(function () {
           window.location.href = `mailto:gregwsheldon@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
@@ -6739,7 +6753,7 @@
             submitButton.disabled = false;
             submitButton.textContent = originalButtonText;
           }
-        }, 300);
+        }, 900);
       });
     })();
   </script>
