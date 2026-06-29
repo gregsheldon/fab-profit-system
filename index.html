@@ -6606,26 +6606,140 @@
     (function () {
       const form = document.getElementById("charterApplicationForm");
       if (!form) return;
-      form.addEventListener("submit", function (event) {
+
+      const CHARTER_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbw5zbSuzrOqvXEX5mN5DBvVqtDWSo1_Whh9Gl3QyvnLI1ihvJPX51OEptZEN6ShoJqjAw/exec";
+      const CHARTER_TAG_NAME = "fabprofit-charter-apply";
+      const CHARTER_SHEET_ID = "1MqZjV_OO85hqzDGGB9Kui0TliKjGATYzMT1VT2tqxGc";
+      const CHARTER_SOURCE = "fabprofit-charter-apply";
+
+      function value(id) {
+        return (document.getElementById(id)?.value || "").trim();
+      }
+
+      function getFirstName(fullName) {
+        return String(fullName || "").trim().split(/\s+/)[0] || "";
+      }
+
+      function buildCharterPayload() {
+        const fullName = value("charterName");
+        const email = value("charterEmail");
+        const company = value("charterCompany");
+        const revenue = value("charterRevenue");
+        const estimatingTeamSize = value("charterTeamSize");
+        const licenseInterest = value("charterLicenseInterest");
+        const primaryMarginLeak = value("charterLeak");
+        const internalChampion = value("charterChampion");
+        const submittedAt = new Date().toISOString();
+
+        return {
+          name: fullName,
+          full_name: fullName,
+          first_name: getFirstName(fullName),
+          email: email,
+          company: company,
+          company_name: company,
+          revenue: revenue,
+          revenue_bracket: revenue,
+          estimating_team_size: estimatingTeamSize,
+          license_interest: licenseInterest,
+          primary_margin_leak: primaryMarginLeak,
+          internal_champion: internalChampion,
+          source: CHARTER_SOURCE,
+          lead_source: "FabProfit Charter Application",
+          form_name: "FabProfit Charter License Application",
+          tag: CHARTER_TAG_NAME,
+          lead_tag: CHARTER_TAG_NAME,
+          systeme_tag_name: CHARTER_TAG_NAME,
+          spreadsheet_id: CHARTER_SHEET_ID,
+          page_url: window.location.href.split("#")[0],
+          submitted_at: submittedAt,
+          application_data: {
+            name: fullName,
+            first_name: getFirstName(fullName),
+            email: email,
+            company: company,
+            revenue: revenue,
+            estimating_team_size: estimatingTeamSize,
+            license_interest: licenseInterest,
+            primary_margin_leak: primaryMarginLeak,
+            internal_champion: internalChampion,
+            source: CHARTER_SOURCE,
+            submitted_at: submittedAt
+          }
+        };
+      }
+
+      async function sendCharterApplication(payload) {
+        const body = JSON.stringify(payload);
+
+        try {
+          await fetch(CHARTER_WEBHOOK_URL, {
+            method: "POST",
+            mode: "no-cors",
+            cache: "no-store",
+            keepalive: true,
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: body
+          });
+          return true;
+        } catch (error) {
+          try {
+            if (navigator.sendBeacon) {
+              return navigator.sendBeacon(
+                CHARTER_WEBHOOK_URL,
+                new Blob([body], { type: "text/plain;charset=utf-8" })
+              );
+            }
+          } catch (beaconError) {}
+          return false;
+        }
+      }
+
+      form.addEventListener("submit", async function (event) {
         event.preventDefault();
-        const value = id => (document.getElementById(id)?.value || "").trim();
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton ? submitButton.textContent : "";
+        const payload = buildCharterPayload();
+
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = "Submitting Application...";
+        }
+
+        await sendCharterApplication(payload);
+
         const subject = "FabProfit Charter License Application";
         const body = [
           "FabProfit Charter License Application",
           "",
-          `Name: ${value("charterName")}`,
-          `Email: ${value("charterEmail")}`,
-          `Company: ${value("charterCompany")}`,
-          `Revenue Bracket: ${value("charterRevenue")}`,
-          `Estimating Team Size: ${value("charterTeamSize")}`,
-          `License Interest: ${value("charterLicenseInterest")}`,
+          `Name: ${payload.name}`,
+          `Email: ${payload.email}`,
+          `Company: ${payload.company}`,
+          `Revenue Bracket: ${payload.revenue}`,
+          `Estimating Team Size: ${payload.estimating_team_size}`,
+          `License Interest: ${payload.license_interest}`,
           "",
           "Primary margin leak this quarter:",
-          value("charterLeak"),
+          payload.primary_margin_leak,
           "",
-          `Internal champion within 90 days: ${value("charterChampion")}`
+          `Internal champion within 90 days: ${payload.internal_champion}`
         ].join("\n");
-        window.location.href = `mailto:gregwsheldon@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        if (submitButton) {
+          submitButton.textContent = "Application Submitted";
+        }
+
+        setTimeout(function () {
+          window.location.href = `mailto:gregwsheldon@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+          }
+        }, 300);
       });
     })();
   </script>
