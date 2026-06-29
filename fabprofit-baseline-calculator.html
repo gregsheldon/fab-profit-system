@@ -488,11 +488,20 @@
        Systeme.io sometimes injects a pink/light default wrapper.
        These rules force the embedded opt-in to match the FabProfit dark panel. */
     .systeme-embed-wrap {
-      margin-top:.75rem;
-      background:rgba(255,255,255,.065) !important;
-      border:1px solid rgba(255,255,255,.14) !important;
-      padding:1rem !important;
-      overflow:hidden;
+      width:100% !important;
+      max-width:100% !important;
+      margin:.75rem 0 .75rem !important;
+      background:transparent !important;
+      border:0 !important;
+      padding:0 !important;
+      box-shadow:none !important;
+      overflow:visible;
+    }
+    .systeme-embed-wrap > * {
+      width:100% !important;
+      max-width:100% !important;
+      margin-left:0 !important;
+      margin-right:0 !important;
     }
     .systeme-embed-wrap,
     .systeme-embed-wrap form,
@@ -513,6 +522,17 @@
       max-width:100% !important;
       border:0 !important;
       background:transparent !important;
+      display:block !important;
+      margin:0 !important;
+    }
+    .systeme-embed-wrap form,
+    .systeme-embed-wrap form > *,
+    .systeme-embed-wrap [style*="max-width"],
+    .systeme-embed-wrap [style*="width"] {
+      max-width:100% !important;
+      width:100% !important;
+      margin-left:0 !important;
+      margin-right:0 !important;
     }
     .systeme-embed-wrap label,
     .systeme-embed-wrap p,
