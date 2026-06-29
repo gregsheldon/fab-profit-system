@@ -6127,7 +6127,13 @@
 <script>
     (function () {
       const REPORT_PAGE = "fabprofit-baseline-efficiency-report.html";
-      const OPTIN_ENDPOINT = "";
+      const OPTIN_ENDPOINT = "https://script.google.com/macros/s/AKfycbzeXhbNrMz6wfzPUBPeLP2hhgPFwns0oAh9PzEWzzygdUkPtvIupCJH0_AH9dE2aeM-/exec";
+      const WEBHOOK_DEPLOYMENT_ID = "AKfycbzeXhbNrMz6wfzPUBPeLP2hhgPFwns0oAh9PzEWzzygdUkPtvIupCJH0_AH9dE2aeM-";
+      const WEBHOOK_TAG = "fabprofit-calc";
+      const SYSTEME_TAG_NAME = "fabprofit-calc";
+      const SYSTEME_TAG_ID = "";
+      const SHEET_HEADER_VERSION = "fabprofit-baseline-v2";
+      const STORAGE_KEYS = ["fabprofit_baseline_report", "fabprofitBaselineReport", "fabprofit_report_data"];
 
       const fields = {
         revenue: document.getElementById("bfRevenue"),
@@ -6447,6 +6453,64 @@
         return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
       }
 
+      function writeReportData(data) {
+        const json = JSON.stringify(data || {});
+        STORAGE_KEYS.forEach(key => {
+          try { sessionStorage.setItem(key, json); } catch (error) {}
+          try { localStorage.setItem(key, json); } catch (error) {}
+        });
+      }
+
+      function appendWebhookPayload(params, data) {
+        const priority = [
+          "first_name", "email", "company_name", "company", "role_or_title", "role",
+          "source", "lead_source", "lead_tag", "tag", "tags", "systeme_tag_name", "systeme_tag_id", "webhook_deployment_id", "sheet_header_version", "page_url", "report_page",
+          "annual_revenue", "annual_revenue_formatted",
+          "annual_quoted_revenue", "annual_quoted_revenue_formatted",
+          "quotes_per_month", "annual_quotes", "average_quoted_value", "average_quoted_value_formatted",
+          "annual_baseline_drag", "annual_baseline_drag_formatted",
+          "known_loss_floor", "known_loss_floor_formatted",
+          "conservative_margin_leakage", "conservative_margin_leakage_formatted",
+          "conservative_recoverable_value", "conservative_recoverable_value_formatted",
+          "three_year_net_opportunity", "three_year_net_opportunity_formatted",
+          "maturity_score", "maturity_score_formatted",
+          "opportunity_score", "opportunity_label",
+          "company_type", "biggest_problem",
+          "generated_at", "submitted_at"
+        ];
+
+        const already = new Set();
+        priority.forEach(key => {
+          if (Object.prototype.hasOwnProperty.call(data, key)) {
+            params.append(key, data[key] == null ? "" : String(data[key]));
+            already.add(key);
+          }
+        });
+
+        Object.keys(data).sort().forEach(key => {
+          if (already.has(key)) return;
+          const value = data[key];
+          if (value == null || typeof value === "object") return;
+          params.append(key, String(value));
+        });
+      }
+
+      async function sendOptinToWebhook(data) {
+        if (!OPTIN_ENDPOINT || OPTIN_ENDPOINT.includes("PASTE_")) return;
+        const params = new URLSearchParams();
+        appendWebhookPayload(params, data);
+
+        try {
+          await fetch(OPTIN_ENDPOINT, {
+            method: "POST",
+            mode: "no-cors",
+            body: params
+          });
+        } catch (error) {
+          console.warn("Google Apps Script opt-in submit failed, but the report flow will continue.", error);
+        }
+      }
+
       const numericInputs = [
         fields.revenue,
         fields.quotedRevenue,
@@ -6502,27 +6566,35 @@
       if (form) {
         form.addEventListener("submit", async function (event) {
           event.preventDefault();
+          const firstName = document.getElementById("bfFirstName").value.trim();
+          const email = document.getElementById("bfEmail").value.trim();
+          const companyName = document.getElementById("bfCompany").value.trim();
+          const roleOrTitle = document.getElementById("bfRole").value.trim();
+          const submittedAt = new Date().toISOString();
+
           const data = calculateBaseline();
-          data.first_name = document.getElementById("bfFirstName").value.trim();
-          data.email = document.getElementById("bfEmail").value.trim();
-          data.company_name = document.getElementById("bfCompany").value.trim();
-          data.role = document.getElementById("bfRole").value.trim();
+          data.first_name = firstName;
+          data.email = email;
+          data.company_name = companyName;
+          data.company = companyName;
+          data.role = roleOrTitle;
+          data.role_or_title = roleOrTitle;
+          data.source = "fabprofit_baseline_calculator";
+          data.lead_source = "FabProfit Baseline Calculator";
+          data.lead_tag = WEBHOOK_TAG;
+          data.tag = WEBHOOK_TAG;
+          data.tags = WEBHOOK_TAG;
+          data.systeme_tag_name = SYSTEME_TAG_NAME;
+          data.systeme_tag_id = SYSTEME_TAG_ID;
+          data.webhook_deployment_id = WEBHOOK_DEPLOYMENT_ID;
+          data.sheet_header_version = SHEET_HEADER_VERSION;
+          data.page_url = window.location.href.split("#")[0];
+          data.report_page = REPORT_PAGE;
+          data.submitted_at = submittedAt;
+          data.saved_at = submittedAt;
 
-          try {
-            sessionStorage.setItem("fabprofit_baseline_report", JSON.stringify(data));
-            localStorage.setItem("fabprofit_baseline_report", JSON.stringify(data));
-          } catch (error) {}
-
-          if (OPTIN_ENDPOINT) {
-            try {
-              await fetch(OPTIN_ENDPOINT, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-                mode: "no-cors"
-              });
-            } catch (error) {}
-          }
+          writeReportData(data);
+          await sendOptinToWebhook(data);
 
           const encoded = encodePayload(data);
           window.location.href = `${REPORT_PAGE}#report=${encoded}`;
