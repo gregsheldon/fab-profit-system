@@ -808,6 +808,10 @@
                 </div>
                 <div class="systeme-embed-wrap" id="systemeOptinEmbed">
                   <form class="baseline-optin-form" method="post" action="https://systeme.io/embedded/41964800/subscription">
+                    <input type="hidden" name="lead_source" value="FabProfit Baseline Calculator" />
+                    <input type="hidden" name="lead_tag" value="fabprofit-calc" />
+                    <input type="hidden" name="tag" value="fabprofit-calc" />
+                    <input type="hidden" name="tags" value="fabprofit-calc" />
                     <input type="text" name="first_name" placeholder="First name" autocomplete="given-name" required />
                     <input type="email" name="email" placeholder="Email address" autocomplete="email" required />
                     <input type="text" name="company_name" placeholder="Company name" autocomplete="organization" />
@@ -1266,7 +1270,7 @@
         data.company_name = findEmbeddedField(["company", "business", "organization", "organisation"]);
         data.role = findEmbeddedField(["role", "title", "position", "job"]);
         data.lead_source = "FabProfit Baseline Calculator";
-        data.lead_tag = "fabprofit_baseline_report";
+        data.lead_tag = "fabprofit-calc";
 
         try {
           sessionStorage.setItem("fabprofit_baseline_report", JSON.stringify(data));
