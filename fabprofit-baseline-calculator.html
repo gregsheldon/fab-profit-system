@@ -1485,5 +1485,217 @@
       }
     })();
   </script>
+
+  <script>
+    /*
+      FabProfit report bridge
+      This fixes the case where the native Systeme.io embedded form redirects before
+      the parent page captures the opt-in fields. It saves the form fields, submits
+      the Systeme.io form in a hidden iframe, then sends the visitor to the report page.
+    */
+    (function () {
+      const REPORT_PAGE = "fabprofit-baseline-efficiency-report.html";
+      const STORAGE_KEY = "fabprofit_baseline_report";
+      const SYSTEME_FALLBACK_ACTION = "https://systeme.io/embedded/41964800/subscription";
+      const embed = document.getElementById("systemeOptinEmbed");
+      if (!embed) return;
+
+      function readStoredReportData() {
+        const candidates = [
+          sessionStorage.getItem(STORAGE_KEY),
+          localStorage.getItem(STORAGE_KEY),
+          sessionStorage.getItem("fabprofitBaselineReport"),
+          localStorage.getItem("fabprofitBaselineReport")
+        ].filter(Boolean);
+
+        for (const raw of candidates) {
+          try {
+            const parsed = JSON.parse(raw);
+            if (parsed && typeof parsed === "object") return parsed;
+          } catch (error) {}
+        }
+        return {};
+      }
+
+      function writeReportData(data) {
+        const json = JSON.stringify(data || {});
+        try { sessionStorage.setItem(STORAGE_KEY, json); } catch (error) {}
+        try { localStorage.setItem(STORAGE_KEY, json); } catch (error) {}
+
+        // Extra fallback keys in case the report page has older reader code.
+        try { sessionStorage.setItem("fabprofitBaselineReport", json); } catch (error) {}
+        try { localStorage.setItem("fabprofitBaselineReport", json); } catch (error) {}
+        try { sessionStorage.setItem("fabprofit_report_data", json); } catch (error) {}
+        try { localStorage.setItem("fabprofit_report_data", json); } catch (error) {}
+      }
+
+      function normalize(text) {
+        return String(text || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+      }
+
+      function collectInputs() {
+        return Array.from(embed.querySelectorAll("input, textarea, select")).filter(input => {
+          const type = String(input.getAttribute("type") || "").toLowerCase();
+          return !["hidden", "submit", "button", "checkbox", "radio"].includes(type);
+        });
+      }
+
+      function fieldText(input) {
+        const labelText = input.id ? (document.querySelector(`label[for="${CSS.escape(input.id)}"]`) || {}).textContent : "";
+        return [
+          input.name,
+          input.id,
+          input.placeholder,
+          input.getAttribute("aria-label"),
+          input.getAttribute("data-testid"),
+          input.closest("label") ? input.closest("label").textContent : "",
+          labelText
+        ].filter(Boolean).join(" ");
+      }
+
+      function valueByMatcher(matchers, fallbackIndex) {
+        const inputs = collectInputs();
+        const exact = inputs.find(input => {
+          const text = normalize(fieldText(input));
+          return matchers.some(matcher => text.includes(normalize(matcher)));
+        });
+        if (exact) return String(exact.value || "").trim();
+        const fallback = inputs[fallbackIndex];
+        return fallback ? String(fallback.value || "").trim() : "";
+      }
+
+      function collectSystemeFormValues() {
+        const inputs = collectInputs();
+        const byName = {};
+        inputs.forEach(input => {
+          const name = normalize(input.name || input.id || input.placeholder || "");
+          if (name) byName[name] = String(input.value || "").trim();
+        });
+
+        const email = valueByMatcher(["email", "e-mail", "mail"], inputs.findIndex(i => String(i.type || "").toLowerCase() === "email"));
+        const company = valueByMatcher(["companyname", "company", "business", "organization", "organisation"], 1);
+        const role = valueByMatcher(["roleortitle", "role", "title", "position", "jobtitle"], 3);
+        const first = valueByMatcher(["firstname", "first name", "first", "givenname", "prenom", "prénom"], 0);
+
+        return {
+          first_name: first,
+          email: email,
+          company_name: company,
+          role: role,
+          role_or_title: role
+        };
+      }
+
+      function mergeAndSaveFormValues() {
+        const current = readStoredReportData();
+        const formValues = collectSystemeFormValues();
+        const merged = {
+          ...current,
+          ...Object.fromEntries(Object.entries(formValues).filter(([, value]) => value !== "")),
+          lead_source: "FabProfit Baseline Calculator",
+          lead_tag: "fabprofit-calc",
+          saved_at: new Date().toISOString()
+        };
+        writeReportData(merged);
+        return merged;
+      }
+
+      function encodeForHash(data) {
+        try {
+          const json = JSON.stringify(data || {});
+          const utf8 = encodeURIComponent(json).replace(/%([0-9A-F]{2})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
+          return btoa(utf8).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+        } catch (error) {
+          return "";
+        }
+      }
+
+      function submitFormInHiddenIframe(form) {
+        const action = form.getAttribute("action") || SYSTEME_FALLBACK_ACTION;
+        const method = form.getAttribute("method") || "post";
+        const iframeName = `systemeSubmitFrame_${Date.now()}`;
+
+        const iframe = document.createElement("iframe");
+        iframe.name = iframeName;
+        iframe.setAttribute("aria-hidden", "true");
+        iframe.style.cssText = "position:absolute;width:1px;height:1px;left:-9999px;top:-9999px;border:0;opacity:0;";
+        document.body.appendChild(iframe);
+
+        const clone = document.createElement("form");
+        clone.method = method;
+        clone.action = action;
+        clone.target = iframeName;
+        clone.style.display = "none";
+
+        const formData = new FormData(form);
+        formData.forEach((value, key) => {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = key;
+          input.value = String(value == null ? "" : value);
+          clone.appendChild(input);
+        });
+
+        document.body.appendChild(clone);
+        clone.submit();
+
+        window.setTimeout(() => {
+          try { clone.remove(); } catch (error) {}
+          try { iframe.remove(); } catch (error) {}
+        }, 10000);
+      }
+
+      function goToReport(data) {
+        const encoded = encodeForHash(data);
+        const reportUrl = encoded ? `${REPORT_PAGE}#fpd=${encodeURIComponent(encoded)}` : REPORT_PAGE;
+        window.location.href = reportUrl;
+      }
+
+      function attachBridgeToForms() {
+        Array.from(embed.querySelectorAll("form")).forEach(form => {
+          if (form.dataset.fpReportBridgeAttached === "true") return;
+          form.dataset.fpReportBridgeAttached = "true";
+
+          form.addEventListener("submit", event => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            const data = mergeAndSaveFormValues();
+            submitFormInHiddenIframe(form);
+
+            const submitButton = form.querySelector("button, input[type='submit']");
+            if (submitButton) {
+              submitButton.disabled = true;
+              if (submitButton.tagName.toLowerCase() === "button") submitButton.textContent = "Generating Report...";
+              if (submitButton.tagName.toLowerCase() === "input") submitButton.value = "Generating Report...";
+            }
+
+            window.setTimeout(() => goToReport(data), 900);
+          }, true);
+        });
+      }
+
+      document.addEventListener("input", event => {
+        if (embed.contains(event.target)) mergeAndSaveFormValues();
+      }, true);
+
+      document.addEventListener("change", event => {
+        if (embed.contains(event.target)) mergeAndSaveFormValues();
+      }, true);
+
+      document.addEventListener("click", event => {
+        const target = event.target && event.target.closest ? event.target.closest("button, input[type='submit']") : null;
+        if (target && embed.contains(target)) mergeAndSaveFormValues();
+      }, true);
+
+      const observer = new MutationObserver(() => attachBridgeToForms());
+      observer.observe(embed, { childList: true, subtree: true });
+      attachBridgeToForms();
+      window.setTimeout(attachBridgeToForms, 500);
+      window.setTimeout(attachBridgeToForms, 1500);
+      window.setTimeout(attachBridgeToForms, 3500);
+    })();
+  </script>
+
 </body>
 </html>
