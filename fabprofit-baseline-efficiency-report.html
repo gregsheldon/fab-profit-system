@@ -562,7 +562,7 @@
     <div class="container topbar-inner">
       <div class="brand" id="topbarBrand">FabProfit Company Baseline Report</div>
       <div class="actions">
-        <a class="btn btn-light" href="fabprofit-baseline-calculator-google-webhook.html">Back To Calculator</a>
+        <a class="btn btn-light" id="backBtn" href="https://gregsheldon.github.io/fab-profit-system/">Back</a>
         <button class="btn btn-primary" id="printBtn" type="button">Print / Save PDF</button>
         <button class="btn btn-light" id="copyBtn" type="button">Copy Report</button>
         <a class="btn btn-dark" id="emailGregTop" href="#">Email Greg</a>
@@ -575,8 +575,8 @@
       <div class="missing">
         <div class="eyebrow">Report Not Found</div>
         <h1 style="font-size:2.6rem; max-width:100%;">Run the calculator first.</h1>
-        <p>This page is generated from calculator data stored locally in your browser or passed through the report link. Go back to the FabProfit System calculator, enter your numbers, and generate the report again.</p>
-        <a class="btn btn-primary" href="fabprofit-baseline-calculator-google-webhook.html">Go To Calculator</a>
+        <p>No report is shown until calculator numbers are submitted from the previous page. Go back to the FabProfit System page, enter the company numbers, and generate the report again.</p>
+        <a class="btn btn-primary" id="missingBackBtn" href="https://gregsheldon.github.io/fab-profit-system/">Go Back</a>
       </div>
     </div>
 
@@ -1067,6 +1067,32 @@
       }
 
       return null;
+    }
+
+    function hasRequiredCalculatorNumbers(data) {
+      if (!data || typeof data !== "object") return false;
+
+      const annualRevenue = num(data.annual_revenue);
+      const annualQuotes = num(data.annual_quotes) || (num(data.quotes_per_month) * 12);
+      const annualQuotedRevenue = num(data.annual_quoted_revenue) || (num(data.average_quoted_value) * annualQuotes);
+
+      // The report should never render from a blank object, empty storage record, or default zero values.
+      // It only opens when the previous calculator page supplied real company numbers.
+      return annualRevenue > 0 && annualQuotedRevenue > 0 && annualQuotes > 0;
+    }
+
+    function showMissingReport() {
+      const missing = document.getElementById("missing");
+      const reportPage = document.getElementById("reportPage");
+      if (missing) missing.hidden = false;
+      if (reportPage) reportPage.hidden = true;
+    }
+
+    function showReportPage() {
+      const missing = document.getElementById("missing");
+      const reportPage = document.getElementById("reportPage");
+      if (missing) missing.hidden = true;
+      if (reportPage) reportPage.hidden = false;
     }
 
     function fallback(value, fallbackValue) {
@@ -1653,11 +1679,11 @@
     }
 
     const rawData = getReportData();
-    if (!rawData) {
-      document.getElementById("missing").hidden = false;
+    if (!hasRequiredCalculatorNumbers(rawData)) {
+      showMissingReport();
     } else {
       const data = normalizeData(rawData);
-      document.getElementById("reportPage").hidden = false;
+      showReportPage();
       Object.keys(data).forEach(key => setText(key, data[key]));
       renderInterpretation(data);
       renderDrivers(data);
@@ -1677,6 +1703,67 @@
       if (emailGreg) emailGreg.setAttribute("href", mailto);
       if (emailGregTop) emailGregTop.setAttribute("href", mailto);
     }
+
+    function getReturnUrlFromPage() {
+      const fallbackUrl = "https://gregsheldon.github.io/fab-profit-system/";
+      const currentUrl = new URL(window.location.href);
+
+      function normalizeCandidate(value) {
+        if (!value) return "";
+        try {
+          const decoded = decodeURIComponent(String(value));
+          const candidate = new URL(decoded, window.location.href);
+          if (candidate.href === currentUrl.href) return "";
+          return candidate.href;
+        } catch (error) {
+          return "";
+        }
+      }
+
+      const returnKeys = ["back", "return", "return_to", "returnUrl", "return_url"];
+      const sources = [
+        String(window.location.search || "").replace(/^\?/, ""),
+        String(window.location.hash || "").replace(/^#/, "")
+      ].filter(Boolean);
+
+      for (const source of sources) {
+        const params = new URLSearchParams(source);
+        for (const key of returnKeys) {
+          const value = normalizeCandidate(params.get(key));
+          if (value) return value;
+        }
+      }
+
+      const referrer = normalizeCandidate(document.referrer);
+      return referrer || fallbackUrl;
+    }
+
+    function setupBackButtons() {
+      const backUrl = getReturnUrlFromPage();
+      const backButtons = [
+        document.getElementById("backBtn"),
+        document.getElementById("missingBackBtn")
+      ].filter(Boolean);
+
+      backButtons.forEach((button) => {
+        button.setAttribute("href", backUrl);
+        button.addEventListener("click", (event) => {
+          const canUseBrowserHistory = window.history && window.history.length > 1;
+          if (canUseBrowserHistory) {
+            event.preventDefault();
+            window.history.back();
+            return;
+          }
+
+          if (backUrl) {
+            event.preventDefault();
+            window.location.href = backUrl;
+          }
+        });
+      });
+    }
+
+    setupBackButtons();
 
     const printBtn = document.getElementById("printBtn");
     if (printBtn) printBtn.addEventListener("click", () => window.print());
