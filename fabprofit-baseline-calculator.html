@@ -1559,8 +1559,12 @@
 
       // This is the Google Apps Script webhook pattern from the working AntiERP page.
       // If that script is tied to the old AntiERP tag/campaign, this is now pointed at your FabProfit Google Apps Script deployment URL.
-      const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby6UHiV_jJ7rlo6pv9IRTzMudjkB65VXx9kh5G6PMeHpgLHfHG_aSkbN21Sz8D8Dok/exec";
+      const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyRaNoggqFuUEkxMuYPjrl4wzLT4b7brkYFjQtbBNRM8DmbAvTqNJx4YgF8gHSuX_Gu/exec";
+      const WEBHOOK_DEPLOYMENT_ID = "AKfycbyRaNoggqFuUEkxMuYPjrl4wzLT4b7brkYFjQtbBNRM8DmbAvTqNJx4YgF8gHSuX_Gu";
       const WEBHOOK_TAG = "fabprofit-calc";
+      const SYSTEME_TAG_NAME = "fabprofit-calc";
+      const SYSTEME_TAG_ID = "24487668";
+      const SHEET_HEADER_VERSION = "fabprofit-baseline-v2";
 
       const visibleForm = document.getElementById("fabprofitVisibleOptin");
       const statusEl = document.getElementById("webhookStatus");
@@ -1615,6 +1619,10 @@
           lead_tag: WEBHOOK_TAG,
           tag: WEBHOOK_TAG,
           tags: WEBHOOK_TAG,
+          systeme_tag_name: SYSTEME_TAG_NAME,
+          systeme_tag_id: SYSTEME_TAG_ID,
+          webhook_deployment_id: WEBHOOK_DEPLOYMENT_ID,
+          sheet_header_version: SHEET_HEADER_VERSION,
           page_url: window.location.href.split("#")[0],
           report_page: REPORT_PAGE,
           generated_at: new Date().toLocaleString(),
@@ -1627,8 +1635,8 @@
 
       function appendPayload(params, data) {
         const priority = [
-          "first_name", "email", "company_name", "role_or_title", "role",
-          "source", "lead_source", "lead_tag", "tag", "tags", "page_url", "report_page",
+          "first_name", "email", "company_name", "company", "role_or_title", "role",
+          "source", "lead_source", "lead_tag", "tag", "tags", "systeme_tag_name", "systeme_tag_id", "webhook_deployment_id", "sheet_header_version", "page_url", "report_page",
           "annual_revenue", "annual_revenue_formatted",
           "annual_quoted_revenue", "annual_quoted_revenue_formatted",
           "quotes_per_month", "annual_quotes", "average_quoted_value", "average_quoted_value_formatted",
@@ -1712,7 +1720,7 @@
           button.disabled = true;
           button.textContent = "Generating Report...";
         }
-        if (statusEl) statusEl.textContent = "Saving your opt-in and opening your private report...";
+        if (statusEl) statusEl.textContent = "Saving your opt-in to the FabProfit webhook and opening your private report...";
 
         await sendOptinToWebhook(data);
         window.setTimeout(() => goToReport(data), 250);
