@@ -582,6 +582,35 @@
       box-shadow:0 14px 36px rgba(234,88,12,.30) !important;
       cursor:pointer !important;
     }
+
+    /* Force the native Systeme.io form to sit directly in the opt-in area with no extra card. */
+    .systeme-embed-wrap,
+    .systeme-embed-wrap > div,
+    .systeme-embed-wrap form,
+    .systeme-embed-wrap section,
+    .systeme-embed-wrap article,
+    .systeme-embed-wrap main {
+      width:100% !important;
+      max-width:100% !important;
+      min-width:0 !important;
+      margin-left:0 !important;
+      margin-right:0 !important;
+      background:transparent !important;
+      border:0 !important;
+      outline:0 !important;
+      box-shadow:none !important;
+      padding:0 !important;
+    }
+    .systeme-embed-wrap form {
+      display:grid !important;
+      gap:.65rem !important;
+    }
+    .systeme-embed-wrap div:not(:has(input)):not(:has(button)):not(:has(textarea)):not(:has(select)) {
+      background:transparent !important;
+      border:0 !important;
+      box-shadow:none !important;
+    }
+
     .baseline-privacy {
       color:var(--slate-400);
       font-size:.78rem;
@@ -1331,13 +1360,23 @@
       function dePinkSystemeForm() {
         const embed = document.getElementById("systemeOptinEmbed");
         if (!embed) return;
-        embed.style.setProperty("background", "rgba(255,255,255,.065)", "important");
-        embed.style.setProperty("border", "1px solid rgba(255,255,255,.14)", "important");
-        embed.style.setProperty("padding", "1rem", "important");
+        embed.style.setProperty("background", "transparent", "important");
+        embed.style.setProperty("border", "0", "important");
+        embed.style.setProperty("padding", "0", "important");
+        embed.style.setProperty("box-shadow", "none", "important");
+        embed.style.setProperty("width", "100%", "important");
+        embed.style.setProperty("max-width", "100%", "important");
+        embed.style.setProperty("margin", ".9rem 0 .9rem", "important");
 
         Array.from(embed.querySelectorAll("form, section, article, main, div")).forEach(node => {
           node.style.setProperty("background", "transparent", "important");
+          node.style.setProperty("border", "0", "important");
           node.style.setProperty("box-shadow", "none", "important");
+          node.style.setProperty("padding", "0", "important");
+          node.style.setProperty("margin-left", "0", "important");
+          node.style.setProperty("margin-right", "0", "important");
+          node.style.setProperty("width", "100%", "important");
+          node.style.setProperty("max-width", "100%", "important");
           node.style.setProperty("font-family", "inherit", "important");
         });
 
