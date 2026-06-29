@@ -807,21 +807,9 @@
                   <div><span>✓</span><div>Print, save PDF, copy report, or email Greg your numbers</div></div>
                 </div>
                 <div class="systeme-embed-wrap" id="systemeOptinEmbed">
-                  <form class="baseline-optin-form" method="post" action="https://systeme.io/embedded/41964800/subscription">
-                    <input type="hidden" name="lead_source" value="FabProfit Baseline Calculator" />
-                    <input type="hidden" name="lead_tag" value="fabprofit-calc" />
-                    <input type="hidden" name="tag" value="fabprofit-calc" />
-                    <input type="hidden" name="tags" value="fabprofit-calc" />
-                    <input type="text" name="first_name" placeholder="First name" autocomplete="given-name" required />
-                    <input type="email" name="email" placeholder="Email address" autocomplete="email" required />
-                    <input type="text" name="company_name" placeholder="Company name" autocomplete="organization" />
-                    <input type="text" name="role_or_title" placeholder="Role or title" autocomplete="organization-title" />
-                    <div class="f-row">
-                      <button type="submit" class="btn btn-primary">Get My Full Report</button>
-                    </div>
-                  </form>
+                  <script id="form-script-tag-24487668" src="https://grsh.systeme.io/public/remote/page/4196480092a59e387e2204237a688e526fad6a06.js"></script>
                 </div>
-                <p class="baseline-privacy">Your report is generated in your browser and passed to the report page after the Systeme.io opt-in submits. No guarantee is implied; the numbers are a planning baseline for discussion.</p>
+                <p class="baseline-privacy">Your report is generated in your browser and passed to the report page after the native Systeme.io opt-in submits. No guarantee is implied; the numbers are a planning baseline for discussion.</p>
               </div>
             </aside>
           </div>
@@ -1199,6 +1187,26 @@
       });
 
       updateBaselineDisplay();
+
+      // Save the calculator results continuously so the report page still has the data
+      // even if the embedded Systeme.io form redirects from inside its own script.
+      function safePersistCurrentBaseline() {
+        try {
+          const data = calculateBaseline();
+          data.lead_source = "FabProfit Baseline Calculator";
+          data.lead_tag = "fabprofit-calc";
+          sessionStorage.setItem("fabprofit_baseline_report", JSON.stringify(data));
+          localStorage.setItem("fabprofit_baseline_report", JSON.stringify(data));
+        } catch (error) {}
+      }
+
+      document.addEventListener("input", safePersistCurrentBaseline, true);
+      document.addEventListener("change", safePersistCurrentBaseline, true);
+      window.addEventListener("beforeunload", safePersistCurrentBaseline);
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") safePersistCurrentBaseline();
+      });
+      safePersistCurrentBaseline();
 
       function findEmbeddedField(matchers) {
         const embed = document.getElementById("systemeOptinEmbed");
