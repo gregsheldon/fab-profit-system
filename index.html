@@ -5424,7 +5424,7 @@
 <li>Clearer quote language before customer acceptance</li>
 <li>Stronger handoff from estimating to production, PM, purchasing, and finance</li>
 </ul>
-<a class="btn btn-primary" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20System%20Company%20License%20Inquiry">Discuss Your Estimating Process</a>
+<a class="btn btn-primary" href="#charter-application">Discuss Your Estimating Process</a>
 </div>
 <div class="client-side-note">
 <div class="eyebrow">Plain-English Offer</div>
@@ -5524,7 +5524,7 @@
 <p>FabProfit System is designed for the people inside your company who influence quote quality: estimators, managers, project teams, purchasing, foremen, field leaders, and executives who approve pricing strategy.</p>
 <p>The system gives your team an operating sequence that forces judgment into the quote before the quote becomes your company’s obligation.</p>
 <div class="hero-actions">
-<a class="btn btn-primary" href="mailto:gregwsheldon@gmail.com?subject=FabProfit%20System%20Company%20License%20Inquiry">Discuss Your Estimating Process</a>
+<a class="btn btn-primary" href="#charter-application">Discuss Your Estimating Process</a>
 <a class="btn btn-light" href="#tools">Review The Tool Suite</a>
 </div>
 </div>
@@ -5945,7 +5945,7 @@
 </div>
 <div class="application-form-card">
 <h3>Charter License Application</h3>
-<p>Complete the fields below. Your answers will open a prefilled email to Greg with your application details.</p>
+<p>Complete the fields below. Your application will be submitted for review.</p>
 <form class="application-form" id="charterApplicationForm">
 <div class="application-field-grid">
 <div class="application-field">
@@ -6008,7 +6008,7 @@
 </div>
 </div>
 <button class="btn btn-primary" type="submit">Submit Charter Application</button>
-<p class="application-privacy" id="charterApplicationStatus" style="display:none; margin-top:14px; border:1px solid rgba(234,88,12,.35); background:rgba(234,88,12,.10); color:#ffffff; padding:12px 14px; border-radius:14px;">Application received. Thank you — your Charter License application has been submitted. A prefilled email may open so you can keep a copy or send additional details.</p>
+<p class="application-privacy" id="charterApplicationStatus" style="display:none; margin-top:14px; border:1px solid rgba(234,88,12,.35); background:rgba(234,88,12,.10); color:#ffffff; padding:12px 14px; border-radius:14px;">Application received. Thank you — your Charter License application has been submitted.</p>
 <p class="application-privacy">This does not obligate your company to buy. It starts the fit conversation for one of the 25 Charter spots.</p>
 </form>
 </div>
@@ -6718,42 +6718,18 @@
 
         await sendCharterApplication(payload);
 
-        const subject = "FabProfit Charter License Application";
-        const body = [
-          "FabProfit Charter License Application",
-          "",
-          `Name: ${payload.name}`,
-          `Email: ${payload.email}`,
-          `Company: ${payload.company}`,
-          `Revenue Bracket: ${payload.revenue}`,
-          `Estimating Team Size: ${payload.estimating_team_size}`,
-          `License Interest: ${payload.license_interest}`,
-          "",
-          "Primary margin leak this quarter:",
-          payload.primary_margin_leak,
-          "",
-          `Internal champion within 90 days: ${payload.internal_champion}`
-        ].join("\n");
 
         if (submitButton) {
           submitButton.textContent = "Application Submitted";
         }
 
         if (statusMessage) {
-          statusMessage.textContent = "Application received. Thank you — your Charter License application has been submitted. A prefilled email may open so you can keep a copy or send additional details.";
+          statusMessage.textContent = "Application received. Thank you — your Charter License application has been submitted.";
           statusMessage.style.display = "block";
           statusMessage.setAttribute("role", "status");
           statusMessage.setAttribute("aria-live", "polite");
         }
 
-        setTimeout(function () {
-          window.location.href = `mailto:gregwsheldon@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = originalButtonText;
-          }
-        }, 900);
       });
     })();
   </script>
