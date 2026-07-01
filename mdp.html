@@ -231,6 +231,55 @@
       margin-top:.75rem;
     }
     .article-note strong { color:#fff; }
+    .teaching-box {
+      margin-top:1rem;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.12);
+      border-top:4px solid var(--orange-600);
+      padding:1rem;
+      max-width:780px;
+    }
+    .teaching-box h3 {
+      color:#fff;
+      font-size:1.18rem;
+      margin-bottom:.55rem;
+      letter-spacing:-.035em;
+    }
+    .teaching-box p {
+      color:var(--slate-300);
+      font-size:.95rem;
+      line-height:1.5;
+      margin-bottom:.7rem;
+    }
+    .teaching-list {
+      list-style:none;
+      display:grid;
+      gap:.55rem;
+      margin:0;
+      padding:0;
+    }
+    .teaching-list li {
+      color:var(--slate-200);
+      font-weight:760;
+      font-size:.91rem;
+      line-height:1.42;
+      display:flex;
+      gap:.55rem;
+      align-items:flex-start;
+    }
+    .teaching-list li:before {
+      content:"✓";
+      width:22px;
+      height:22px;
+      flex:0 0 22px;
+      display:grid;
+      place-items:center;
+      background:rgba(249,115,22,.18);
+      border:1px solid rgba(249,115,22,.44);
+      color:#fed7aa;
+      font-size:.76rem;
+      font-weight:950;
+    }
 
     .training-panel {
       background:#fff;
@@ -260,6 +309,14 @@
     }
     .audio-embed-box { display:none; }
     .audio-embed-box.is-visible { display:block; }
+    .audio-embed-box > div {
+      width:100% !important;
+      max-width:600px;
+      margin:0 auto;
+    }
+    .audio-embed-box iframe {
+      width:100% !important;
+    }
     .download-row {
       display:flex;
       flex-wrap:wrap;
@@ -469,6 +526,7 @@
       .modal-copy p,
       p { font-size:.94rem; line-height:1.52; }
       .article-note,
+      .teaching-box,
       .audio-box { padding:.9rem; }
       .download-row { display:grid; grid-template-columns:1fr; }
       .btn { width:100%; padding:.9rem .95rem; }
@@ -489,7 +547,6 @@
         <a aria-label="Back to top" class="brand" href="#top">
           <img alt="Metal Fabrication Power Tools" class="brand-logo" src="https://gregsheldon.github.io/fab-profit-system/fabprofit-logo-tb.png" />
         </a>
-        <button class="btn btn-primary" type="button" data-open-optin>Get Free Access</button>
       </div>
     </header>
 
@@ -503,11 +560,20 @@
                 <h1>The cheap quote is not always the cheap job.</h1>
                 <p class="hero-lede">A practical training for fabrication shops that want to stop being compared only on price and start selling certainty, risk reduction, traceability, fit, delivery, and accountability.</p>
                 <div class="article-note"><strong>Coming from LinkedIn?</strong> This is the free framework that goes with the article. Listen to the audio, then use the PDF worksheet to build your own market dominating position.</div>
+                <div class="teaching-box">
+                  <h3>What this will help you understand</h3>
+                  <p>The cheapest fabrication quote often looks attractive because the buyer only sees the starting price. What they do not always see is the cost of delay, rework, poor documentation, weak material traceability, bad fit-up, unclear accountability, and production downtime.</p>
+                  <ul class="teaching-list">
+                    <li>How to explain why your local quote may be the safer decision, not just the higher number.</li>
+                    <li>How to move the sales conversation away from cheap metal and toward certainty, risk protection, and accountability.</li>
+                    <li>How to start building a market dominating position so your shop becomes harder to compare.</li>
+                  </ul>
+                </div>
               </div>
 
               <div class="training-panel">
                 <h2>Your free training</h2>
-                <p>Enter your name and email to unlock the audio player and download the PDF workbook.</p>
+                <p>After you opt in, the audio player appears here and the PDF button activates. Listen first, then use the workbook to turn the lesson into a clearer position for your shop.</p>
 
                 <div class="audio-box" id="training">
                   <div class="audio-lock-message" id="audioLockMessage">The audio training is locked until the opt-in form is completed.</div>
@@ -516,9 +582,8 @@
 
                 <div class="download-row">
                   <a class="btn btn-primary disabled" href="#" id="pdfDownloadButton" aria-disabled="true">Download the PDF Workbook</a>
-                  <button class="btn btn-light" type="button" data-open-optin>Unlock Access</button>
                 </div>
-                <p class="small-note">The PDF button activates after the opt-in form is submitted.</p>
+                <p class="small-note">The workbook is designed to help you write the reason your shop should be chosen before the buyer reduces the decision to price.</p>
               </div>
             </div>
           </div>
@@ -566,7 +631,7 @@
     const AUDIO_OPTIN_ENDPOINT = "https://script.google.com/macros/s/AKfycby3VDDg2fb9tc9OTjSmnLbcsWy-zGSu3cRfg8272nwYPGOFyai7tvGW8i_ewF5FaljbhQ/exec";
     const AUDIO_TRAINING_TAG = "belt-and-road-to-mdp";
     const PDF_FILE_URL = "https://gregsheldon.github.io/fab-profit-system/MDP-Workbook.pdf";
-    const AUDIO_EMBED_HTML = `<div style="height: 228px; width: 100%;"><iframe src="https://audio.com/embed/audio/1869527637202390?theme=image" style="display:block; border-radius: 1px; border: none; height: 204px; width: 100%;"></iframe><a href='https://audio.com/gregwsheldon' style="text-align: center; display: block; color: #A4ABB6; font-size: 12px; font-family: sans-serif; line-height: 16px; margin-top: 8px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">@gregwsheldon</a></div>`;
+    const AUDIO_EMBED_HTML = `<div style="height: 228px; width: 600px;"><iframe src="https://audio.com/embed/audio/1869527637202390?theme=image" style="display:block; border-radius: 1px; border: none; height: 204px; width: 600px;"></iframe><a href='https://audio.com/gregwsheldon' style="text-align: center; display: block; color: #A4ABB6; font-size: 12px; font-family: sans-serif; line-height: 16px; margin-top: 8px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">@gregwsheldon</a></div>`;
 
     const overlay = document.getElementById("optinOverlay");
     const pageWrap = document.getElementById("pageWrap");
