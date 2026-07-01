@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#020617" />
+  <title>Free Audio + PDF | Become Impossible to Compare</title>
+  <meta name="description" content="Get the free audio training and PDF worksheet that helps metal fabrication and welding businesses stop competing only on price and become harder to compare." />
+  <meta property="og:title" content="Free Audio + PDF | Become Impossible to Compare" />
+  <meta property="og:description" content="For North American metal fabrication and welding companies that want to move the conversation from cheap quotes to risk, certainty, and value." />
+  <meta property="og:image" content="https://gregsheldon.github.io/fab-profit-system/bad-quotes.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/png" href="https://gregsheldon.github.io/metalfabexcel/metal-tools-favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="https://gregsheldon.github.io/metalfabexcel/metal-tools-favicon.png" />
+  <link rel="apple-touch-icon" href="https://gregsheldon.github.io/metalfabexcel/metal-tools-favicon.png" />
+  <style>
+    :root {
+      --slate-950:#020617;
+      --slate-900:#0f172a;
+      --slate-800:#1e293b;
+      --slate-700:#334155;
+      --slate-600:#475569;
+      --slate-500:#64748b;
+      --slate-400:#94a3b8;
+      --slate-300:#cbd5e1;
+      --slate-200:#e2e8f0;
+      --slate-100:#f1f5f9;
+      --slate-50:#f8fafc;
+      --orange-800:#9a3412;
+      --orange-700:#c2410c;
+      --orange-600:#ea580c;
+      --orange-500:#f97316;
+      --orange-100:#ffedd5;
+      --orange-50:#fff7ed;
+      --red-700:#b91c1c;
+      --red-100:#fee2e2;
+      --green-900:#064e3b;
+      --green-800:#166534;
+      --green-700:#15803d;
+      --green-100:#dcfce7;
+      --shadow:0 24px 80px rgba(15,23,42,.14);
+      --shadow-soft:0 14px 40px rgba(15,23,42,.08);
+      --line:1px solid rgba(226,232,240,.92);
+    }
+
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--slate-900);
+      background:
+        radial-gradient(circle at 8% 2%, rgba(249,115,22,.18), transparent 34rem),
+        radial-gradient(circle at 96% 18%, rgba(15,23,42,.08), transparent 28rem),
+        linear-gradient(180deg,#ffffff 0%,#f8fafc 44%,#f1f5f9 100%);
+      line-height:1.58;
+    }
+
+    a { color:inherit; text-decoration:none; }
+    img { max-width:100%; display:block; }
+    .container { width:min(1180px, calc(100% - 32px)); margin:0 auto; }
+
+    .page-wrap {
+      min-height:100vh;
+      transition:filter .22s ease, transform .22s ease;
+    }
+
+    body.optin-open {
+      overflow:hidden;
+    }
+
+    body.optin-open .page-wrap {
+      filter:blur(7px);
+      transform:scale(.995);
+      pointer-events:none;
+      user-select:none;
+    }
+
+    .top-strip {
+      background:var(--slate-950);
+      color:#fff;
+      text-align:center;
+      padding:.62rem 1rem;
+      font-size:.88rem;
+      font-weight:850;
+      letter-spacing:-.01em;
+    }
+    .top-strip strong { color:#fed7aa; }
+
+    .site-header {
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(18px);
+      border-bottom:var(--line);
+    }
+    .header-inner {
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .brand-logo {
+      display:block;
+      height:54px;
+      width:auto;
+      max-width:340px;
+      object-fit:contain;
+    }
+    .nav {
+      display:flex;
+      align-items:center;
+      gap:1.15rem;
+      font-size:.92rem;
+      color:var(--slate-600);
+      font-weight:850;
+    }
+    .nav a:hover { color:var(--slate-950); }
+
+    .btn {
+      border:0;
+      border-radius:0;
+      padding:1rem 1.28rem;
+      font-weight:950;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.45rem;
+      white-space:nowrap;
+      transition:.18s ease;
+      cursor:pointer;
+      font-size:1rem;
+      font-family:inherit;
+      text-align:center;
+    }
+    .btn:hover { transform:translateY(-1px); }
+    .btn-primary {
+      color:#fff;
+      background:linear-gradient(135deg,var(--orange-500),var(--orange-700));
+      box-shadow:0 14px 36px rgba(234,88,12,.30);
+    }
+    .btn-dark {
+      color:#fff;
+      background:var(--slate-950);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 14px 34px rgba(2,6,23,.18);
+    }
+    .btn-light {
+      color:var(--slate-950);
+      background:#fff;
+      border:1px solid var(--slate-200);
+      box-shadow:0 10px 24px rgba(15,23,42,.06);
+    }
+
+    h1,h2,h3,p { margin-top:0; }
+    h1 {
+      font-size:clamp(3rem, 7vw, 6.25rem);
+      line-height:.9;
+      letter-spacing:-.083em;
+      color:var(--slate-950);
+      margin-bottom:1.25rem;
+      max-width:1000px;
+    }
+    h2 {
+      font-size:clamp(2.05rem, 4vw, 3.6rem);
+      line-height:.96;
+      letter-spacing:-.068em;
+      color:var(--slate-950);
+      margin-bottom:.9rem;
+    }
+    h3 {
+      font-size:1.38rem;
+      line-height:1.08;
+      letter-spacing:-.04em;
+      margin-bottom:.6rem;
+      color:var(--slate-950);
+    }
+    p { color:var(--slate-600); font-size:1.02rem; }
+    section { padding:78px 0; }
+
+    .eyebrow {
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      border:1px solid rgba(234,88,12,.24);
+      background:var(--orange-50);
+      color:var(--orange-700);
+      padding:.58rem .82rem;
+      font-size:.78rem;
+      font-weight:950;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:1.15rem;
+    }
+
+    .hero { padding:82px 0 64px; }
+    .hero-grid {
+      display:grid;
+      grid-template-columns:minmax(0,1.06fr) minmax(390px,.94fr);
+      gap:50px;
+      align-items:center;
+    }
+    .hero-lede {
+      font-size:clamp(1.1rem,2vw,1.34rem);
+      max-width:820px;
+      margin-bottom:1.15rem;
+      color:var(--slate-600);
+    }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:.8rem; margin:1.8rem 0 1.35rem; }
+    .micro-proof { display:flex; flex-wrap:wrap; gap:.65rem; margin:1.2rem 0 0; }
+    .micro-pill {
+      background:#fff;
+      border:1px solid var(--slate-200);
+      color:var(--slate-700);
+      padding:.62rem .8rem;
+      font-size:.88rem;
+      font-weight:850;
+      box-shadow:0 8px 22px rgba(15,23,42,.06);
+    }
+
+    .hero-panel {
+      background:
+        radial-gradient(circle at top right, rgba(234,88,12,.24), transparent 280px),
+        linear-gradient(135deg,#020617 0%,#07111f 52%,#0b1220 100%);
+      color:#fff;
+      border:1px solid rgba(249,115,22,.35);
+      box-shadow:0 30px 90px rgba(2,6,23,.28);
+      position:relative;
+      overflow:hidden;
+    }
+    .panel-top {
+      position:relative;
+      z-index:1;
+      padding:1.35rem 1.45rem;
+      border-bottom:1px solid rgba(255,255,255,.1);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:.8rem;
+    }
+    .panel-top strong { color:#fff; font-size:1.08rem; line-height:1.1; }
+    .status-dot { display:inline-flex; align-items:center; gap:.45rem; color:#bbf7d0; font-weight:850; font-size:.84rem; white-space:nowrap; }
+    .status-dot:before { content:""; width:9px; height:9px; background:#22c55e; box-shadow:0 0 0 5px rgba(34,197,94,.12); }
+    .panel-body { position:relative; z-index:1; padding:1.55rem; }
+    .diagnosis-card {
+      background:linear-gradient(135deg,rgba(127,29,29,.76),rgba(234,88,12,.23));
+      border:1px solid rgba(248,113,113,.38);
+      padding:1.35rem;
+      margin-bottom:1rem;
+    }
+    .diagnosis-card span { display:block; color:#fed7aa; font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; font-weight:950; margin-bottom:.4rem; }
+    .diagnosis-card strong { display:block; font-size:clamp(2.1rem,4vw,3.35rem); line-height:.94; letter-spacing:-.07em; color:#fff; margin-bottom:.7rem; }
+    .diagnosis-card p { color:#ffe4e6; font-weight:800; margin-bottom:0; }
+    .panel-checks { display:grid; gap:.75rem; margin-top:1rem; }
+    .panel-check { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.1); padding:1rem; }
+    .panel-check strong { display:block; color:#fff; line-height:1.12; font-size:1.05rem; margin-bottom:.35rem; }
+    .panel-check span { display:block; color:var(--slate-300); font-weight:720; font-size:.92rem; line-height:1.42; }
+
+    .section-heading { max-width:900px; margin-bottom:1.7rem; }
+    .section-heading.center { margin-left:auto; margin-right:auto; text-align:center; }
+    .section-heading p { font-size:1.08rem; }
+
+    .training-section {
+      background:
+        radial-gradient(circle at 12% 8%, rgba(249,115,22,.10), transparent 30rem),
+        linear-gradient(180deg, rgba(255,255,255,.78), rgba(248,250,252,.96));
+    }
+    .training-shell {
+      background:#fff;
+      border:2px solid var(--slate-950);
+      box-shadow:var(--shadow);
+      padding:clamp(1.25rem,3vw,2.1rem);
+      overflow:hidden;
+    }
+    .training-grid {
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(390px,.78fr);
+      gap:1.25rem;
+      align-items:stretch;
+      margin-top:1.25rem;
+    }
+    .audio-card,
+    .download-card {
+      background:#fff;
+      border:1px solid var(--slate-200);
+      border-top:5px solid var(--orange-600);
+      box-shadow:var(--shadow-soft);
+      padding:clamp(1.15rem,2.5vw,1.55rem);
+    }
+    .audio-player-box {
+      margin-top:1rem;
+      padding:1rem;
+      background:var(--slate-950);
+      border-left:8px solid var(--orange-600);
+    }
+    audio { width:100%; display:block; }
+    .audio-embed-lock {
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--slate-200);
+      padding:1rem;
+      font-weight:820;
+      line-height:1.45;
+      text-align:center;
+    }
+    .audio-embed-box { display:none; }
+    .audio-embed-box.is-visible { display:block; }
+    .audio-embed-box iframe {
+      display:block;
+      width:100%;
+      border:0;
+      border-radius:1px;
+    }
+    .audio-embed-box a {
+      text-align:center;
+      display:block;
+      color:#A4ABB6;
+      font-size:12px;
+      font-family:sans-serif;
+      line-height:16px;
+      margin-top:8px;
+      overflow:hidden;
+      white-space:nowrap;
+      text-overflow:ellipsis;
+    }
+    .download-card {
+      background:
+        radial-gradient(circle at top right, rgba(249,115,22,.12), transparent 20rem),
+        linear-gradient(135deg,#ffffff,#f8fafc);
+    }
+    .gift-list {
+      display:grid;
+      gap:.75rem;
+      margin:1rem 0 1.25rem;
+    }
+    .gift-item {
+      display:flex;
+      gap:.75rem;
+      align-items:flex-start;
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+      padding:.9rem;
+      color:var(--slate-800);
+      font-weight:780;
+      line-height:1.4;
+    }
+    .gift-item span {
+      width:26px;
+      height:26px;
+      flex:0 0 26px;
+      display:grid;
+      place-items:center;
+      background:var(--orange-600);
+      color:#fff;
+      font-weight:950;
+    }
+    .unlock-box {
+      margin-top:1rem;
+      background:#f0fdf4;
+      border:1px solid #bbf7d0;
+      border-left:7px solid var(--green-700);
+      padding:1rem;
+      display:none;
+    }
+    .unlock-box.is-visible { display:block; }
+    .unlock-box strong { color:var(--green-900); display:block; margin-bottom:.35rem; }
+    .unlock-box p { margin-bottom:.8rem; color:#166534; font-weight:760; }
+    .unlock-actions { display:flex; flex-wrap:wrap; gap:.65rem; }
+
+    .why-grid {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1rem;
+    }
+    .why-card {
+      background:#fff;
+      border:1px solid var(--slate-200);
+      border-top:5px solid var(--orange-600);
+      box-shadow:var(--shadow-soft);
+      padding:1.15rem;
+      min-height:245px;
+    }
+    .why-card span {
+      display:inline-flex;
+      background:var(--slate-950);
+      color:#fff;
+      font-size:.72rem;
+      text-transform:uppercase;
+      font-weight:950;
+      letter-spacing:.08em;
+      padding:.42rem .62rem;
+      margin-bottom:.85rem;
+    }
+    .why-card p { font-size:.96rem; margin-bottom:0; }
+
+    .cta-band {
+      background:var(--slate-950);
+      color:#fff;
+      padding:clamp(1.4rem,4vw,2.4rem);
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:1.4rem;
+      align-items:center;
+      box-shadow:0 28px 80px rgba(2,6,23,.22);
+      overflow:hidden;
+      position:relative;
+      border-left:8px solid var(--orange-600);
+    }
+    .cta-band h2 { color:#fff; margin-bottom:.55rem; }
+    .cta-band p { color:var(--slate-300); margin-bottom:0; }
+
+    .site-footer { background:var(--slate-950); color:var(--slate-300); text-align:center; padding:2.3rem 1rem; }
+    .site-footer a { color:#fed7aa; font-weight:850; }
+    .footer-links { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin-top:.8rem; }
+
+    .optin-overlay {
+      position:fixed;
+      inset:0;
+      z-index:200;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:1rem;
+      background:rgba(2,6,23,.62);
+      backdrop-filter:blur(8px);
+    }
+    .optin-overlay.is-visible { display:flex; }
+    .optin-modal {
+      width:min(940px, 100%);
+      background:#fff;
+      color:var(--slate-900);
+      border:2px solid var(--orange-600);
+      box-shadow:0 35px 110px rgba(2,6,23,.44);
+      display:grid;
+      grid-template-columns:minmax(0,.96fr) minmax(340px,.74fr);
+      overflow:hidden;
+      position:relative;
+      animation:modalIn .22s ease both;
+    }
+    @keyframes modalIn {
+      from { opacity:0; transform:translateY(18px) scale(.985); }
+      to { opacity:1; transform:translateY(0) scale(1); }
+    }
+    .optin-modal-copy {
+      padding:clamp(1.25rem,3vw,2rem);
+      background:
+        radial-gradient(circle at top right, rgba(249,115,22,.16), transparent 18rem),
+        linear-gradient(135deg,#020617,#0f172a);
+      color:#fff;
+    }
+    .optin-modal-copy h2 {
+      color:#fff;
+      font-size:clamp(2.15rem,5vw,4rem);
+      line-height:.93;
+      letter-spacing:-.07em;
+      margin-bottom:1rem;
+    }
+    .optin-modal-copy p { color:var(--slate-300); font-weight:720; }
+    .optin-bullets {
+      display:grid;
+      gap:.7rem;
+      margin-top:1rem;
+    }
+    .optin-bullet {
+      display:flex;
+      gap:.65rem;
+      align-items:flex-start;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      padding:.9rem;
+      color:var(--slate-200);
+      font-weight:760;
+      line-height:1.4;
+    }
+    .optin-bullet span {
+      width:24px;
+      height:24px;
+      flex:0 0 24px;
+      display:grid;
+      place-items:center;
+      background:var(--orange-600);
+      color:#fff;
+      font-weight:950;
+      font-size:.82rem;
+    }
+    .optin-modal-form-wrap {
+      padding:clamp(1.25rem,3vw,2rem);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .optin-close {
+      position:absolute;
+      top:.75rem;
+      right:.75rem;
+      width:38px;
+      height:38px;
+      border:1px solid rgba(15,23,42,.14);
+      background:#fff;
+      color:var(--slate-950);
+      font-weight:950;
+      cursor:pointer;
+      z-index:2;
+    }
+    .optin-form {
+      display:grid;
+      gap:.75rem;
+      margin-top:.85rem;
+    }
+    .optin-form label {
+      font-size:.75rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--slate-600);
+      font-weight:950;
+      margin-bottom:-.35rem;
+    }
+    .optin-form input {
+      width:100%;
+      border:1px solid var(--slate-200);
+      background:#fff;
+      padding:.95rem 1rem;
+      color:var(--slate-950);
+      outline:none;
+      font-weight:850;
+      border-radius:0;
+      font-family:inherit;
+    }
+    .optin-form input:focus {
+      border-color:var(--orange-500);
+      box-shadow:0 0 0 4px rgba(249,115,22,.14);
+    }
+    .optin-form .btn { width:100%; }
+    .privacy-copy {
+      color:var(--slate-500);
+      font-size:.78rem;
+      line-height:1.5;
+      font-weight:720;
+      margin:.65rem 0 0;
+    }
+    .optin-status {
+      display:none;
+      margin-top:.8rem;
+      padding:.85rem;
+      background:#f0fdf4;
+      border:1px solid #bbf7d0;
+      color:#166534;
+      font-weight:820;
+      line-height:1.4;
+    }
+    .optin-status.is-visible { display:block; }
+    .optin-skip,
+    .optin-close {
+      display:none !important;
+    }
+
+    @media (max-width:1040px) {
+      .hero-grid,
+      .training-grid,
+      .cta-band { grid-template-columns:1fr; }
+      .why-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+
+    @media (max-width:760px) {
+      body { padding-bottom:0; }
+      .container { width:min(100% - 24px, 640px); }
+      .top-strip { padding:.52rem .75rem; font-size:.72rem; line-height:1.32; }
+      .header-inner { min-height:auto; padding:.58rem 0; }
+      .brand-logo { height:34px; max-width:188px; }
+      .nav { display:none; }
+      .site-header .btn { padding:.62rem .72rem; font-size:.72rem; line-height:1.05; }
+      section,.hero { padding-top:46px; padding-bottom:46px; }
+      h1 { font-size:clamp(2.18rem, 11.5vw, 3.05rem); line-height:.96; letter-spacing:-.064em; }
+      h2 { font-size:clamp(1.72rem, 8.7vw, 2.36rem); line-height:1; letter-spacing:-.055em; }
+      p,.hero-lede,.section-heading p { font-size:.96rem; line-height:1.52; }
+      .hero-actions,.unlock-actions { display:grid; grid-template-columns:1fr; gap:.58rem; }
+      .btn { width:100%; padding:.88rem .95rem; font-size:.94rem; line-height:1.16; white-space:normal; }
+      .micro-proof,.why-grid { grid-template-columns:1fr; display:grid; }
+      .hero-panel,.training-shell,.audio-card,.download-card,.why-card { border-width:1px; box-shadow:0 14px 38px rgba(15,23,42,.10); }
+      .panel-top,.panel-body,.training-shell,.audio-card,.download-card,.why-card { padding:1rem; }
+      .cta-band { display:block; padding:1rem; }
+      .cta-band .btn { margin-top:.75rem; }
+      .optin-modal { grid-template-columns:1fr; max-height:92vh; overflow:auto; }
+      .optin-modal-copy,.optin-modal-form-wrap { padding:1rem; }
+      .optin-modal-copy h2 { font-size:clamp(2rem,10vw,3rem); }
+      .optin-close { top:.55rem; right:.55rem; }
+    }
+
+
+    /* Mobile polish for LinkedIn lead magnet page */
+    .brand { display:flex; align-items:center; min-width:0; }
+    .page-wrap { overflow-x:hidden; }
+
+    @media (max-width: 760px) {
+      html { scroll-padding-top: 72px; }
+      body { overflow-x:hidden; }
+      .site-header { box-shadow:0 10px 26px rgba(15,23,42,.08); }
+      .header-inner {
+        display:grid;
+        grid-template-columns:minmax(0, 1fr) auto;
+        align-items:center;
+        gap:.65rem;
+      }
+      .brand-logo {
+        height:38px;
+        max-width:205px;
+      }
+      .site-header .btn {
+        width:auto;
+        max-width:142px;
+        white-space:normal;
+        padding:.64rem .72rem;
+        font-size:.72rem;
+        line-height:1.05;
+        box-shadow:none;
+      }
+      .hero {
+        padding-top:36px;
+        padding-bottom:42px;
+      }
+      .hero-grid,
+      .training-grid {
+        gap:1rem;
+      }
+      .hero-actions {
+        margin:1.1rem 0 .95rem;
+      }
+      .hero-panel {
+        margin-top:.4rem;
+      }
+      .panel-top {
+        padding:.95rem 1rem;
+        align-items:flex-start;
+        flex-direction:column;
+      }
+      .diagnosis-card strong {
+        font-size:clamp(1.75rem, 9vw, 2.35rem);
+        letter-spacing:-.06em;
+      }
+      .panel-check {
+        padding:.9rem;
+      }
+      .training-shell {
+        padding:.95rem;
+      }
+      .audio-card,
+      .download-card {
+        padding:.95rem;
+      }
+      .audio-player-box {
+        padding:.75rem;
+        border-left-width:5px;
+      }
+      .gift-item,
+      .optin-bullet {
+        gap:.62rem;
+        padding:.78rem;
+      }
+      .gift-item div,
+      .optin-bullet div {
+        min-width:0;
+      }
+      .why-card {
+        min-height:auto;
+      }
+      .site-footer {
+        padding:1.8rem 1rem;
+      }
+      .footer-links {
+        gap:.65rem;
+      }
+      .footer-links a {
+        display:inline-flex;
+        padding:.25rem .35rem;
+      }
+      .optin-overlay {
+        align-items:flex-start;
+        padding:.75rem;
+        padding-top:calc(.75rem + env(safe-area-inset-top));
+        overflow:auto;
+      }
+      .optin-modal {
+        width:min(100%, 460px);
+        max-height:none;
+        border-width:1px;
+      }
+      .optin-modal-copy h2 {
+        font-size:clamp(1.9rem, 9.5vw, 2.65rem);
+        line-height:.96;
+        margin-right:2.2rem;
+      }
+      .optin-modal-copy p,
+      .optin-modal-form-wrap p {
+        font-size:.9rem;
+        line-height:1.45;
+      }
+      .optin-bullets {
+        gap:.55rem;
+      }
+      .optin-form {
+        gap:.68rem;
+      }
+      .optin-form input {
+        padding:.86rem .9rem;
+        font-size:16px;
+      }
+      .optin-skip {
+        padding:.4rem 0;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container { width:min(100% - 20px, 640px); }
+      .brand-logo {
+        height:34px;
+        max-width:178px;
+      }
+      .site-header .btn {
+        max-width:126px;
+        padding:.58rem .62rem;
+        font-size:.68rem;
+      }
+      h1 {
+        font-size:clamp(2.02rem, 11.3vw, 2.7rem);
+      }
+      .top-strip {
+        font-size:.68rem;
+      }
+      .optin-overlay {
+        padding-left:.5rem;
+        padding-right:.5rem;
+      }
+      .optin-modal-copy,
+      .optin-modal-form-wrap {
+        padding:.9rem;
+      }
+    }
+
+  </style>
+</head>
+<body class="optin-open">
+  <div class="page-wrap" id="pageWrap">
+    <div class="top-strip"><strong>From the LinkedIn article:</strong> the cheap quote is not always the cheap job. Get the free framework to become harder to compare.</div>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a aria-label="Back to top" class="brand" href="#top">
+          <img alt="FabProfit System" class="brand-logo" src="https://gregsheldon.github.io/fab-profit-system/fabprofit-logo-tb.png" />
+        </a>
+        <nav aria-label="Main navigation" class="nav">
+          <a href="#training">Training</a>
+          <a href="#pdf">PDF</a>
+          <a href="#why">What You'll Learn</a>
+        </nav>
+        <button class="btn btn-primary" type="button" data-open-optin>Get Free Access</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow">Free audio training plus PDF download</div>
+            <h1>Stop competing with cheap fabrication quotes by becoming impossible to compare.</h1>
+            <p class="hero-lede">If a buyer thinks your quote and the cheap offshore quote are the same thing, your real value is invisible.</p>
+            <p>This page is the next step from the article. The article explained why the cheap quote can turn into delay, rework, weak paperwork, unclear material, blown schedules, and production risk. This free audio training shows fabrication owners, welding contractors, estimators, and operators how to turn that reality into a stronger market position.</p>
+            <p><strong>You will get the audio training and a PDF worksheet.</strong> Use it to define who your best customers are, what risk you remove, why your higher price is actually safer, and how to explain that clearly before the buyer reduces you to price.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" type="button" data-open-optin>Send Me the Free Framework</button>
+              <a class="btn btn-light" href="#training">Preview What Is Included</a>
+            </div>
+            <div class="micro-proof">
+              <span class="micro-pill">Built for North American metal shops</span>
+              <span class="micro-pill">Move the conversation from price to risk</span>
+              <span class="micro-pill">Audio training plus practical PDF worksheet</span>
+            </div>
+          </div>
+
+          <aside aria-label="Training diagnosis panel" class="hero-panel">
+            <div class="panel-top"><strong>The Local Advantage</strong><span class="status-dot">Free Access</span></div>
+            <div class="panel-body">
+              <div class="diagnosis-card">
+                <span>The cheap quote trap</span>
+                <strong>If the buyer cannot see the risk, the cheaper number looks smarter.</strong>
+                <p>Your Market Dominating Position helps you show the customer why traceability, fit, documentation, certified work, local support, and accountability are not extras. They are protection.</p>
+              </div>
+              <div class="panel-checks">
+                <div class="panel-check"><strong>A sharper strategic position</strong><span>Choose the customer segment where cheap failure is expensive and your local advantage matters.</span></div>
+                <div class="panel-check"><strong>A stronger primary advantage</strong><span>Clarify the one risk your shop removes better than cheaper, distant, or commodity options.</span></div>
+                <div class="panel-check"><strong>A business model that proves it</strong><span>Back up the promise with speed, field verification, certified welding, documentation, emergency response, quality, or local support.</span></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="training-section" id="training">
+        <div class="container">
+          <div class="training-shell">
+            <div class="section-heading">
+              <div class="eyebrow">The free training</div>
+              <h2>Listen to the audio. Use the PDF to move the conversation from cheap price to safer choice.</h2>
+              <p>This is designed for fabrication and welding businesses that know they cannot build a strong future by racing to the bottom. The goal is to help you turn your real strengths into a clear position customers can understand before they compare you to the cheapest quote.</p>
+            </div>
+
+            <div class="training-grid">
+              <div class="audio-card">
+                <h3>Audio Training</h3>
+                <p>Listen while you drive, walk the shop, review your customer base, or think through why your best customers should trust you when cheap fabrication creates real operational risk.</p>
+                <div class="audio-player-box">
+                  <div class="audio-embed-lock" id="audioLockMessage">Enter your email in the popup to unlock the audio training player.</div>
+                  <div class="audio-embed-box" id="audioEmbedBox" aria-hidden="true"></div>
+                </div>
+                <p class="privacy-copy">The audio player unlocks immediately after the opt-in form is submitted.</p>
+              </div>
+
+              <div class="download-card" id="pdf">
+                <h3>PDF Worksheet</h3>
+                <p>Use the PDF to map out the customer, risk, value, proof, and message that make your shop harder to compare against cheap global or commodity quotes.</p>
+                <div class="gift-list">
+                  <div class="gift-item"><span>1</span><div>Define the customer segment where cheap failure is expensive and your shop becomes the safer choice.</div></div>
+                  <div class="gift-item"><span>2</span><div>Identify the specific risk you remove better than the cheap option.</div></div>
+                  <div class="gift-item"><span>3</span><div>Turn traceability, certified work, fit, documentation, speed, and local accountability into clear differentiation.</div></div>
+                </div>
+                <button class="btn btn-primary" type="button" data-open-optin>Unlock the Free Framework</button>
+              </div>
+            </div>
+
+            <div class="unlock-box" id="unlockBox">
+              <strong>Your free framework is unlocked.</strong>
+              <p>The audio player is now active above. Use the PDF worksheet while you listen and work through your positioning with your team.</p>
+              <div class="unlock-actions">
+                <a class="btn btn-dark" id="openAudioLink" href="#training">Go to Audio Player</a>
+                <a class="btn btn-primary" id="downloadPdfLink" href="market-dominating-position-fab-shops-worksheet.pdf" download>Download PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="why">
+        <div class="container">
+          <div class="section-heading center">
+            <div class="eyebrow">What you will learn</div>
+            <h2>A strong shop needs more than skill. It needs a reason the buyer cannot ignore.</h2>
+            <p>The training walks through practical positioning principles and translates them into metal fabrication, welding, field service, specialty metals, and B2B shop growth. The focus is simple: stop selling steel and start selling certainty.</p>
+          </div>
+          <div class="why-grid">
+            <div class="why-card">
+              <span>01</span>
+              <h3>Why the cheap quote looks attractive</h3>
+              <p>When the buyer cannot see risk, delay, documentation, fit-up, inspection, or accountability, they compare numbers instead of outcomes.</p>
+            </div>
+            <div class="why-card">
+              <span>02</span>
+              <h3>The five-step positioning process</h3>
+              <p>You will work through strategic position, primary advantage, supporting business model, secondary advantages, and your final market position statement.</p>
+            </div>
+            <div class="why-card">
+              <span>03</span>
+              <h3>How to sell certainty</h3>
+              <p>You will see how speed, education, purchase-risk removal, quality, safety, traceability, field support, and documentation can separate your shop from commodity competitors.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="cta-band">
+            <div>
+              <h2>Get the framework behind the article.</h2>
+              <p>Enter your email and the page will unlock the audio training and PDF worksheet immediately. Use it to make your shop harder to compare and easier to trust.</p>
+            </div>
+            <button class="btn btn-primary" type="button" data-open-optin>Get Free Access</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>© <span id="year"></span> FabProfit System. Built from fabrication reality, not classroom theory.</div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="optin-overlay is-visible" id="optinOverlay" aria-hidden="false">
+    <div class="optin-modal" role="dialog" aria-modal="true" aria-labelledby="optinTitle">
+      <div class="optin-modal-copy">
+        <div class="eyebrow">Free access</div>
+        <h2 id="optinTitle">Before you go back to LinkedIn, get the free framework.</h2>
+        <p>This is for fabrication and welding business leaders who know the answer is not to become cheaper. The answer is to become harder to compare.</p>
+        <div class="optin-bullets">
+          <div class="optin-bullet"><span>✓</span><div>Turn the hidden cost of cheap fabrication into a stronger sales message.</div></div>
+          <div class="optin-bullet"><span>✓</span><div>Download the PDF worksheet to define your customer, risk, proof, and position.</div></div>
+          <div class="optin-bullet"><span>✓</span><div>Use it to explain why your higher price can be the safer business decision.</div></div>
+        </div>
+      </div>
+      <div class="optin-modal-form-wrap">
+        <h3>Send me the audio and worksheet</h3>
+        <p>Enter your details and the page will unlock the audio and PDF worksheet immediately.</p>
+        <form class="optin-form" id="audioTrainingOptinForm">
+          <label for="firstName">First name</label>
+          <input id="firstName" name="first_name" autocomplete="given-name" placeholder="First name" required />
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required />
+
+          <button class="btn btn-primary" type="submit" id="optinSubmitButton">Unlock the Free Framework</button>
+        </form>
+        <p class="privacy-copy">No spam. Use this to receive the training and related business-building resources. You can unsubscribe anytime.</p>
+        <div class="optin-status" id="optinStatus">Success. Your audio and PDF worksheet are unlocked below.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const AUDIO_OPTIN_ENDPOINT = "https://script.google.com/macros/s/AKfycbyB27alJnUSwrnNnDJhreFdfAIavarszopuZQeL4XI5Yf8EblS5PprLa_D35lexm6e1eQ/exec"; // Google Apps Script Web App URL.
+    const AUDIO_TRAINING_TAG = "belt-and-road-to-mdp";
+    const PDF_FILE_URL = "market-dominating-position-fab-shops-worksheet.pdf"; // Replace with hosted PDF URL.
+    const AUDIO_EMBED_HTML = `<div style="height: 228px; width: 100%;"><iframe src="https://audio.com/embed/audio/1869527637202390?theme=image" style="display:block; border-radius: 1px; border: none; height: 204px; width: 100%;"></iframe><a href='https://audio.com/gregwsheldon' style="text-align: center; display: block; color: #A4ABB6; font-size: 12px; font-family: sans-serif; line-height: 16px; margin-top: 8px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">@gregwsheldon</a></div>`;
+
+    const overlay = document.getElementById("optinOverlay");
+    const form = document.getElementById("audioTrainingOptinForm");
+    const submitButton = document.getElementById("optinSubmitButton");
+    const optinStatus = document.getElementById("optinStatus");
+    const unlockBox = document.getElementById("unlockBox");
+    const openAudioLink = document.getElementById("openAudioLink");
+    const downloadPdfLink = document.getElementById("downloadPdfLink");
+    const audioEmbedBox = document.getElementById("audioEmbedBox");
+    const audioLockMessage = document.getElementById("audioLockMessage");
+    const yearEl = document.getElementById("year");
+
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+
+    function setAssetLinks() {
+      if (openAudioLink) openAudioLink.href = "#training";
+      if (downloadPdfLink) downloadPdfLink.href = PDF_FILE_URL;
+    }
+
+    function showAudioEmbed() {
+      if (audioEmbedBox && !audioEmbedBox.innerHTML.trim()) {
+        audioEmbedBox.innerHTML = AUDIO_EMBED_HTML;
+      }
+      if (audioEmbedBox) {
+        audioEmbedBox.classList.add("is-visible");
+        audioEmbedBox.setAttribute("aria-hidden", "false");
+      }
+      if (audioLockMessage) audioLockMessage.style.display = "none";
+    }
+
+    function showOptin() {
+      if (!overlay) return;
+      overlay.classList.add("is-visible");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.classList.add("optin-open");
+      const emailInput = document.getElementById("email");
+      setTimeout(function () {
+        if (emailInput) emailInput.focus();
+      }, 120);
+    }
+
+    function hideOptin() {
+      if (!overlay) return;
+      overlay.classList.remove("is-visible");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("optin-open");
+    }
+
+    function unlockTraining() {
+      showAudioEmbed();
+      if (unlockBox) {
+        unlockBox.classList.add("is-visible");
+        unlockBox.scrollIntoView({ behavior:"smooth", block:"center" });
+      }
+    }
+
+    async function sendLead(payload) {
+      if (!AUDIO_OPTIN_ENDPOINT || AUDIO_OPTIN_ENDPOINT.includes("PASTE_YOUR")) {
+        throw new Error("Opt-in endpoint is not configured yet.");
+      }
+
+      const params = new URLSearchParams();
+      Object.keys(payload).forEach(function (key) {
+        params.append(key, payload[key]);
+      });
+
+      await fetch(AUDIO_OPTIN_ENDPOINT, {
+        method:"POST",
+        mode:"no-cors",
+        cache:"no-store",
+        keepalive:true,
+        body:params
+      });
+    }
+
+    function buildPayload() {
+      const firstName = (document.getElementById("firstName")?.value || "").trim();
+      const email = (document.getElementById("email")?.value || "").trim();
+
+      return {
+        first_name:firstName,
+        email:email,
+        source:"belt_and_road_to_mdp",
+        lead_source:"Belt and Road to Market Dominating Position Audio + PDF",
+        form_name:"Belt and Road to MDP Audio Opt-in",
+        tag:AUDIO_TRAINING_TAG,
+        lead_tag:AUDIO_TRAINING_TAG,
+        systeme_tag_name:AUDIO_TRAINING_TAG,
+        page_url:window.location.href,
+        user_agent:navigator.userAgent,
+        submitted_at:new Date().toISOString()
+      };
+    }
+
+    document.querySelectorAll("[data-open-optin]").forEach(function (button) {
+      button.addEventListener("click", showOptin);
+    });
+
+    // The opt-in gate intentionally has no close, skip, click-outside, or Escape-key bypass.
+
+    if (form) {
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const payload = buildPayload();
+
+        if (!payload.email || !payload.email.includes("@")) {
+          alert("Please enter a valid email address.");
+          return;
+        }
+
+        const originalText = submitButton ? submitButton.textContent : "";
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = "Unlocking...";
+        }
+
+        try {
+          await sendLead(payload);
+          localStorage.setItem("belt_and_road_to_mdp_optin", JSON.stringify(payload));
+          if (optinStatus) optinStatus.classList.add("is-visible");
+          if (submitButton) submitButton.textContent = "Unlocked";
+          hideOptin();
+          unlockTraining();
+        } catch (error) {
+          console.error("Opt-in submission failed", error);
+          alert("Something went wrong submitting the form. Please try again.");
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+          }
+        }
+      });
+    }
+
+    setAssetLinks();
+
+    window.addEventListener("load", function () {
+      const existingOptin = localStorage.getItem("belt_and_road_to_mdp_optin");
+      if (existingOptin) {
+        hideOptin();
+        unlockTraining();
+        return;
+      }
+      showOptin();
+    });
+  </script>
+</body>
+</html>
