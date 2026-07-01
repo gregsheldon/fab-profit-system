@@ -10,11 +10,16 @@
   <meta property="og:title" content="The Cheap Quote Is Not Always the Cheap Job" />
   <meta property="og:description" content="Free audio training and PDF workbook for fabrication shops that want to stop competing only on price and become harder to compare." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Metal Fabrication Power Tools" />
+  <meta property="og:locale" content="en_US" />
   <meta property="og:image" content="https://gregsheldon.github.io/fab-profit-system/cheapquotenotalways.png" />
   <meta property="og:image:secure_url" content="https://gregsheldon.github.io/fab-profit-system/cheapquotenotalways.png" />
+  <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="The Cheap Quote Is Not Always the Cheap Job - Free Audio Training and PDF Workbook by Greg Sheldon" />
+  <link rel="image_src" href="https://gregsheldon.github.io/fab-profit-system/cheapquotenotalways.png" />
+  <meta name="thumbnail" content="https://gregsheldon.github.io/fab-profit-system/cheapquotenotalways.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="The Cheap Quote Is Not Always the Cheap Job" />
   <meta name="twitter:description" content="Free audio training and PDF workbook for fabrication shops that want to stop competing only on price." />
@@ -737,6 +742,34 @@
     const PDF_FILE_URL = "https://gregsheldon.github.io/fab-profit-system/MDP-Workbook.pdf";
     const AUDIO_EMBED_HTML = `<div style="height: 228px; width: 100%;"><iframe src="https://audio.com/embed/audio/1869527637202390?theme=light"
     style="display:block; border-radius: 1px; border: none; height: 204px; width: 100%;"></iframe><a href='https://audio.com/gregwsheldon' style="text-align: center; display: block; color: #A4ABB6; font-size: 12px; font-family: sans-serif; line-height: 16px; margin-top: 8px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">@gregwsheldon</a></div>`;
+    const ACCESS_STORAGE_KEY = "belt_and_road_to_mdp_access_unlocked_v1";
+
+    function getStoredAccess() {
+      try {
+        const raw = window.localStorage.getItem(ACCESS_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function hasStoredAccess() {
+      const saved = getStoredAccess();
+      return Boolean(saved && saved.unlocked === true);
+    }
+
+    function rememberAccess(firstName, email) {
+      try {
+        window.localStorage.setItem(ACCESS_STORAGE_KEY, JSON.stringify({
+          unlocked: true,
+          first_name: firstName || "",
+          email: email || "",
+          unlocked_at: new Date().toISOString()
+        }));
+      } catch (error) {
+        // If localStorage is blocked, the page still unlocks for this visit.
+      }
+    }
 
     const overlay = document.getElementById("optinOverlay");
     const pageWrap = document.getElementById("pageWrap");
@@ -757,7 +790,8 @@
       }, 80);
     }
 
-    function unlockTraining() {
+    function unlockTraining(options) {
+      options = options || {};
       if (audioEmbedBox && !audioEmbedBox.innerHTML.trim()) {
         audioEmbedBox.innerHTML = AUDIO_EMBED_HTML;
       }
@@ -778,10 +812,12 @@
       overlay.classList.remove("is-visible");
       document.body.classList.remove("optin-open");
       pageWrap.setAttribute("aria-hidden", "false");
-      setTimeout(function () {
-        const training = document.getElementById("training");
-        if (training) training.scrollIntoView({ behavior: "smooth", block: "center" });
-      }, 120);
+      if (options.scroll !== false) {
+        setTimeout(function () {
+          const training = document.getElementById("training");
+          if (training) training.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 120);
+      }
     }
 
     function isValidEmail(email) {
@@ -865,6 +901,7 @@
 
       try {
         await sendOptin(payload);
+        rememberAccess(firstName, email);
         showStatus("Success. Your audio and PDF workbook are unlocked below.", false);
         submitButton.textContent = "Unlocked";
         setTimeout(unlockTraining, 450);
@@ -876,6 +913,11 @@
     });
 
     window.addEventListener("load", function () {
+      if (hasStoredAccess()) {
+        unlockTraining({ scroll: false });
+        return;
+      }
+
       setTimeout(openOptin, 1000);
     });
   </script>
